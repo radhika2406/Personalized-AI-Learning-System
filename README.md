@@ -152,22 +152,12 @@ personalized-ai-learning-system/
 - Continuous performance improvement through adaptive recommendations.
 - More effective and student-centric education.
 
-## Future Scope
-
-- Voice-based AI learning assistant.
-- Multilingual learning support.
-- Integration with external educational platforms.
-- Advanced knowledge graph-based recommendations.
-- Personalized video and interactive content recommendations.
-- Predictive learning analytics.
-- Gamification, achievements, and learning challenges.
-
 ## Team Members
 
 | Member | Responsibility |
 | Payal Baghel | Frontend Development |
 | Ritesh Singh Mandloi | Backend & Database |
-| Radhika Patil | AI/ML & Personalization |
-| Parth Sharma | Learning Content, Assessment & Testing |
+| Radhika Patil | AI/ML Model Development & Personalization |
+| Parth Sharma | AI Integration, Learning Content Development, Assessment & Testing |
 
 **Personalized AI Learning System — Making Learning Adaptive, Intelligent, and Personal.**
