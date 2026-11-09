@@ -1,0 +1,613 @@
+
+/* ========================================
+   LEARNOVA - BEIGE & BURGUNDY THEME
+======================================== */
+
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 7%;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.logo-icon {
+  color: var(--color-primary);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--color-primary);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.login-btn {
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.get-started-btn {
+  padding: 12px 22px;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: #fffaf5;
+  font-size: 15px;
+  transition: background 0.2s ease;
+}
+
+.get-started-btn:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ========================================
+   HERO SECTION
+======================================== */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  padding: 90px 7%;
+  max-width: 1500px;
+  margin: auto;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-tag {
+  display: inline-block;
+  padding: 9px 15px;
+  margin-bottom: 24px;
+  border-radius: 30px;
+  background: #eadbd4;
+  color: var(--color-primary);
+  font-size: 14px;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin-bottom: 25px;
+  color: var(--color-text);
+}
+
+.hero h1 span {
+  color: var(--color-primary);
+}
+
+.hero-description {
+  max-width: 520px;
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 32px;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: #fffaf5;
+  font-size: 16px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.primary-btn:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  padding: 15px 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.secondary-btn:hover {
+  background: var(--color-surface-light);
+}
+
+/* ========================================
+   DASHBOARD PREVIEW
+======================================== */
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-preview {
+  width: 100%;
+  max-width: 520px;
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: var(--color-surface);
+  box-shadow: 0 20px 60px rgba(70, 45, 25, 0.08);
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.preview-header h3 {
+  font-size: 22px;
+  color: var(--color-text);
+}
+
+.preview-label {
+  padding: 7px 12px;
+  border-radius: 20px;
+  background: #eadbd4;
+  color: var(--color-primary);
+  font-size: 12px;
+}
+
+.progress-card {
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  margin-bottom: 18px;
+}
+
+.progress-card p {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.progress-card h2 {
+  font-size: 30px;
+  color: var(--color-text);
+  margin-bottom: 15px;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 20px;
+  background: #e5d9ca;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 72%;
+  border-radius: 20px;
+  background: var(--color-primary);
+}
+
+.preview-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-background);
+}
+
+.stat-card p {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
+.stat-card h3 {
+  font-size: 25px;
+  color: var(--color-primary);
+}
+
+.recommendation-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #eadbd4;
+}
+
+.recommendation-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: white;
+}
+
+.recommendation-card h4 {
+  font-size: 15px;
+  color: var(--color-text);
+  margin-bottom: 5px;
+}
+
+.recommendation-card p {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   FEATURES SECTION
+======================================== */
+
+.features-section {
+  padding: 85px 7%;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.section-heading {
+  max-width: 650px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.section-heading span {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: var(--color-primary);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.section-heading h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: 18px;
+}
+
+.section-heading p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.feature-card {
+  padding: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-background);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(70, 45, 25, 0.07);
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #eadbd4;
+  color: var(--color-primary);
+  margin-bottom: 22px;
+}
+
+.feature-card h3 {
+  font-size: 21px;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   ABOUT SECTION
+======================================== */
+
+.about-section {
+  padding: 85px 7%;
+  text-align: center;
+}
+
+.about-section h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+.about-section h2 span {
+  color: var(--color-primary);
+}
+
+.about-section p {
+  max-width: 700px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+  padding: 30px 7%;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.footer p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 22px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.footer-links a:hover {
+  color: var(--color-primary);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 1000px) {
+  .hero {
+    gap: 40px;
+    padding: 70px 5%;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 18px 5%;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 60px 5%;
+    text-align: center;
+  }
+
+  .hero-content {
+    margin: auto;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-visual {
+    margin-top: 20px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .features-section,
+  .about-section {
+    padding: 65px 5%;
+  }
+
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 22px;
+  }
+
+  .nav-actions {
+    gap: 12px;
+  }
+
+  .get-started-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .dashboard-preview {
+    padding: 18px;
+  }
+
+  .preview-stats {
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 14px;
+  }
+}
+
+
+.auth-container {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  background: #fffaf5;
+  border: 1px solid #e8d8cf;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(70, 30, 30, 0.08);
+}
+
+.auth-card h1 {
+  color: #682f3c;
+  margin-bottom: 10px;
+}
+
+.auth-card > p {
+  color: #77645f;
+  margin-bottom: 25px;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-card label {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.auth-card input {
+  padding: 12px;
+  border: 1px solid #d8c5bb;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.auth-card button {
+  margin-top: 15px;
+  padding: 13px;
+  background: #682f3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.auth-card button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-error {
+  background: #ffe5e5;
+  color: #a32222;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.auth-footer {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.auth-footer a {
+  color: #682f3c;
+  font-weight: bold;
+}

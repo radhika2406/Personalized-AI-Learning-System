@@ -1,0 +1,68 @@
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: "Times New Roman", Georgia, serif;
+
+  color: #29231f;
+  background: #f5f0e6;
+
+  /* Warm beige theme */
+  --color-background: #f5f0e6;
+  --color-surface: #fffcf6;
+  --color-surface-light: #eee5d8;
+
+  /* Burgundy / red accents */
+  --color-primary: #9e3038;
+  --color-primary-hover: #81252d;
+
+  /* Typography */
+  --color-text: #29231f;
+  --color-text-muted: #746a60;
+
+  /* Borders */
+  --color-border: #e3d8c8;
+
+  /* Layout */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --container-width: 1200px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
