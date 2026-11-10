@@ -13,11 +13,15 @@ from app.routers import topic_mastery
 from app.routers import course_enrollment
 from app.routers import dashboard
 from app.routers import recommendation
+from app.routers import learning_path
 
 app = FastAPI(title="Personalized AI Learning System")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -36,6 +40,7 @@ app.include_router(topic_mastery.router)
 app.include_router(course_enrollment.router)
 app.include_router(dashboard.router)
 app.include_router(recommendation.router)
+app.include_router(learning_path.router)
 
 @app.get("/")
 def root():

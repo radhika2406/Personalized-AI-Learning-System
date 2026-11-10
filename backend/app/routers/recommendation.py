@@ -14,6 +14,7 @@ from app.services.recommendation_service import (
     get_user_recommendations,
     get_recommendation_by_id,
     update_recommendation_status,
+    generate_user_recommendations,
 )
 
 router = APIRouter(
@@ -58,6 +59,21 @@ def list_my_recommendations(
         current_user.id,
     )
 
+@router.post("/generate")
+def generate_recommendations(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    recommendations = generate_user_recommendations(
+        db,
+        current_user.id,
+    )
+
+    return {
+        "message": "Recommendations generated successfully",
+        "generated_count": len(recommendations),
+        "recommendations": recommendations,
+    }
 
 @router.get(
     "/{recommendation_id}",

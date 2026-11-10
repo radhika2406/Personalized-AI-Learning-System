@@ -1,12 +1,35 @@
 import { ArrowRight, BookOpen, Brain, ChartNoAxesCombined } from "lucide-react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./dashboard.jsx";
+import Courses from "./pages/Courses";
+import CourseDetails from "./pages/CourseDetails";
+import LearningMaterials from "./pages/LearningMaterials";
+import Quizzes from "./pages/Quizzes";
+import QuizAttempt from "./pages/QuizAttempt";
+import QuizHistory from "./pages/QuizHistory";
+import Recommendations from "./pages/Recommendations";
+import Profile from "./pages/Profile";
+import LearningPath from "./pages/LearningPath";
 import "./App.css";
 
 function Home() {
-  return (
-    <div className="landing-page">
+  const [theme, setTheme] = useState(() => {
+      return localStorage.getItem("learnova-theme") || "dark";
+    });
+    const toggleTheme = () => {
+      const newTheme = theme === "dark" ? "light" : "dark";
+
+      setTheme(newTheme);
+      localStorage.setItem("learnova-theme", newTheme);
+    };
+    return (
+    <div
+      className="landing-page"
+      data-theme={theme}
+    >
       <nav className="navbar">
         <div className="brand">
           <div className="brand-icon">
@@ -21,6 +44,14 @@ function Home() {
         </div>
 
         <div className="nav-actions">
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            title={theme === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme"}
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
           <Link to="/login" className="login-btn">Log in</Link>
           <Link to="/register" className="signup-btn">
             Get Started <ArrowRight size={16} />
@@ -169,8 +200,34 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/materials" element={<LearningMaterials />} />
+        <Route
+          path="/courses/:courseId"
+          element={<CourseDetails />}
+        />
+        <Route
+          path="/topics/:topicId/materials"
+          element={<LearningMaterials />}
+        />
+        <Route path="/quizzes" element={<Quizzes />} />
+        <Route
+        path="/quizzes/:quizId/attempt"
+        element={<QuizAttempt />}
+        />
+        <Route
+          path="/quiz-history"
+          element={<QuizHistory />}
+        />
+        <Route
+          path="/recommendations"
+          element={<Recommendations />}
+        />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/learning-path" element={<LearningPath />} />
+        </Routes>
+        </BrowserRouter>
   );
 }
 
