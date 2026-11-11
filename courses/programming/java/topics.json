@@ -1,0 +1,258 @@
+[
+  {
+    "topic_id": "basics_syntax",
+    "title": "Java Fundamentals and Syntax",
+    "order": 1,
+    "level": "beginner",
+    "description": "JVM, JRE, JDK architecture, class structure, main method, and comments.",
+    "subtopics": [
+      "JVM vs JRE vs JDK",
+      "public static void main",
+      "System.out.println",
+      "Compilation vs Execution"
+    ],
+    "prerequisites": []
+  },
+  {
+    "topic_id": "data_types",
+    "title": "Primitive Data Types and Variables",
+    "order": 2,
+    "level": "beginner",
+    "description": "8 primitive types, variable declarations, memory sizes, and type casting.",
+    "subtopics": [
+      "byte, short, int, long",
+      "float, double, char, boolean",
+      "Implicit widening",
+      "Explicit narrowing"
+    ],
+    "prerequisites": [
+      "basics_syntax"
+    ]
+  },
+  {
+    "topic_id": "operators",
+    "title": "Operators and Expressions",
+    "order": 3,
+    "level": "beginner",
+    "description": "Arithmetic, relational, bitwise, assignment, and ternary operators.",
+    "subtopics": [
+      "Arithmetic precedence",
+      "Relational comparisons",
+      "Logical AND/OR short-circuit",
+      "Ternary operator"
+    ],
+    "prerequisites": [
+      "data_types"
+    ]
+  },
+  {
+    "topic_id": "conditionals",
+    "title": "If-Else and Switch Statements",
+    "order": 4,
+    "level": "beginner",
+    "description": "Decision-making constructs: if, else if, else, nested if, and switch-case expressions.",
+    "subtopics": [
+      "if-else blocks",
+      "switch statements",
+      "break in switch",
+      "Switch expressions (Java 14+)"
+    ],
+    "prerequisites": [
+      "operators"
+    ]
+  },
+  {
+    "topic_id": "loops",
+    "title": "For, While and Do-While Loops",
+    "order": 5,
+    "level": "beginner",
+    "description": "Repetition constructs: for loop, enhanced for-each, while, and do-while.",
+    "subtopics": [
+      "Classic for loop",
+      "while and do-while differences",
+      "Enhanced for-each loop",
+      "break and continue labels"
+    ],
+    "prerequisites": [
+      "conditionals"
+    ]
+  },
+  {
+    "topic_id": "methods",
+    "title": "Methods and Parameter Passing",
+    "order": 6,
+    "level": "beginner",
+    "description": "Defining methods, return types, pass-by-value semantics, and recursion.",
+    "subtopics": [
+      "Method signatures",
+      "Return values",
+      "Pass-by-value in Java",
+      "Method recursion"
+    ],
+    "prerequisites": [
+      "loops"
+    ]
+  },
+  {
+    "topic_id": "arrays",
+    "title": "Single and Multi-Dimensional Arrays",
+    "order": 7,
+    "level": "beginner",
+    "description": "Fixed-size array allocation, indexing, length property, and 2D matrices.",
+    "subtopics": [
+      "Array declaration & allocation",
+      "Array indexing bounds",
+      "2D jagged arrays",
+      "Arrays utility class"
+    ],
+    "prerequisites": [
+      "methods"
+    ]
+  },
+  {
+    "topic_id": "strings",
+    "title": "String and StringBuilder",
+    "order": 8,
+    "level": "beginner",
+    "description": "String immutability, String Constant Pool, StringBuilder, and StringBuffer.",
+    "subtopics": [
+      "String immutability",
+      "String pool & == vs equals()",
+      "StringBuilder methods",
+      "Common string methods"
+    ],
+    "prerequisites": [
+      "arrays"
+    ]
+  },
+  {
+    "topic_id": "classes_objects",
+    "title": "Classes, Objects and Constructors",
+    "order": 9,
+    "level": "beginner",
+    "description": "Classes as blueprints, heap object instantiation, constructors, and 'this'.",
+    "subtopics": [
+      "Class blueprint",
+      "new operator and Heap memory",
+      "Default vs parameterized constructors",
+      "this keyword"
+    ],
+    "prerequisites": [
+      "methods"
+    ]
+  },
+  {
+    "topic_id": "access_modifiers",
+    "title": "Access Modifiers and Packages",
+    "order": 10,
+    "level": "beginner",
+    "description": "Encapsulation, public, private, protected, package-private, and import statements.",
+    "subtopics": [
+      "private vs public",
+      "protected vs package-private",
+      "Java packages",
+      "Getter and Setter encapsulation"
+    ],
+    "prerequisites": [
+      "classes_objects"
+    ]
+  },
+  {
+    "topic_id": "inheritance",
+    "title": "Inheritance and Super Keyword",
+    "order": 11,
+    "level": "intermediate",
+    "description": "Extending classes, code reuse, IS-A relationship, and super constructor calls.",
+    "subtopics": [
+      "extends keyword",
+      "Single vs multiple inheritance in Java",
+      "super() and super.method()",
+      "Object class hierarchy"
+    ],
+    "prerequisites": [
+      "access_modifiers"
+    ]
+  },
+  {
+    "topic_id": "polymorphism",
+    "title": "Method Overloading and Overriding",
+    "order": 12,
+    "level": "intermediate",
+    "description": "Compile-time polymorphism (overloading) vs runtime polymorphism (overriding, @Override).",
+    "subtopics": [
+      "Method overloading rules",
+      "Method overriding with @Override",
+      "Dynamic method dispatch",
+      "Covariant return types"
+    ],
+    "prerequisites": [
+      "inheritance"
+    ]
+  },
+  {
+    "topic_id": "interfaces_abstract",
+    "title": "Abstract Classes and Interfaces",
+    "order": 13,
+    "level": "intermediate",
+    "description": "Contract programming: abstract classes vs interfaces, default methods, and multiple inheritance of type.",
+    "subtopics": [
+      "abstract class and methods",
+      "interface and implements",
+      "default and static methods in interfaces",
+      "Marker and functional interfaces"
+    ],
+    "prerequisites": [
+      "polymorphism"
+    ]
+  },
+  {
+    "topic_id": "exception_handling",
+    "title": "Try-Catch, Finally and Custom Exceptions",
+    "order": 14,
+    "level": "intermediate",
+    "description": "Checked vs unchecked exceptions, try-catch-finally, try-with-resources, and throw/throws.",
+    "subtopics": [
+      "Checked vs Unchecked hierarchy",
+      "try-catch-finally semantics",
+      "try-with-resources (AutoCloseable)",
+      "Custom Exception classes"
+    ],
+    "prerequisites": [
+      "methods"
+    ]
+  },
+  {
+    "topic_id": "collections_framework",
+    "title": "List, Set, Map and Collections Utility",
+    "order": 15,
+    "level": "intermediate",
+    "description": "Java Collections Framework: ArrayList, LinkedList, HashSet, TreeSet, HashMap, and Generics.",
+    "subtopics": [
+      "List implementations (ArrayList vs LinkedList)",
+      "Set contracts (HashSet, TreeSet)",
+      "Map key-value pairs (HashMap)",
+      "Iterator and Collections utility"
+    ],
+    "prerequisites": [
+      "classes_objects",
+      "interfaces_abstract"
+    ]
+  },
+  {
+    "topic_id": "multithreading_concurrency",
+    "title": "Threads, Synchronization and Concurrency",
+    "order": 16,
+    "level": "advanced",
+    "description": "Thread lifecycle, Runnable vs Thread, synchronized blocks, locks, and thread safety.",
+    "subtopics": [
+      "Thread creation (Thread vs Runnable)",
+      "Thread states (NEW, RUNNABLE, BLOCKED, etc.)",
+      "synchronized keyword & intrinsic locks",
+      "Volatile keyword and deadlocks"
+    ],
+    "prerequisites": [
+      "exception_handling",
+      "collections_framework"
+    ]
+  }
+]

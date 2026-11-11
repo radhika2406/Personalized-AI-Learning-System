@@ -1,0 +1,272 @@
+{
+  "course_id": "operating_systems",
+  "course_title": "Operating Systems",
+  "category": "computer_science",
+  "description": "Core OS architecture: process management, CPU scheduling, synchronization, deadlocks, virtual memory, paging, and storage subsystems.",
+  "prerequisites": [
+    "Computer organization and architecture",
+    "C or C++ programming basics"
+  ],
+  "total_topics": 16,
+  "checkpoints": {
+    "stage_1_easy": 10,
+    "stage_2_medium": 15,
+    "stage_3_hard": 16
+  },
+  "topics": [
+    {
+      "topic_id": "os_functions_types",
+      "title": "Roles of an OS, Batch, Time-Sharing and Real-Time Systems",
+      "order": 1,
+      "difficulty_level": "beginner",
+      "description": "Resource manager, control program, batch systems, multiprogramming, time-sharing, and hard/soft real-time constraints.",
+      "subtopics": [
+        "OS as resource manager & abstract machine",
+        "Batch processing and turnaround time",
+        "Time-sharing multitasking systems",
+        "Hard vs soft real-time operating systems"
+      ],
+      "prerequisites": []
+    },
+    {
+      "topic_id": "system_calls_dual_mode",
+      "title": "User Mode, Kernel Mode and System Call Execution",
+      "order": 2,
+      "difficulty_level": "beginner",
+      "description": "Hardware protection, dual-mode operation (mode bit), trap instructions, and system call invocation sequence.",
+      "subtopics": [
+        "User mode vs Kernel/Supervisor mode",
+        "Privileged instructions and hardware mode bit",
+        "Software interrupts and system call traps",
+        "Parameter passing mechanisms (registers, stack, blocks)"
+      ],
+      "prerequisites": [
+        "os_functions_types"
+      ]
+    },
+    {
+      "topic_id": "process_concept",
+      "title": "Process States, Process Control Block (PCB) and Context Switching",
+      "order": 3,
+      "difficulty_level": "beginner",
+      "description": "Process memory layout (text, data, heap, stack), 5-state process lifecycle, PCB contents, and context switch overhead.",
+      "subtopics": [
+        "Process memory segments",
+        "Process lifecycle (New, Ready, Running, Waiting, Terminated)",
+        "Process Control Block (PCB) fields",
+        "Context switch mechanics and hardware latency"
+      ],
+      "prerequisites": [
+        "system_calls_dual_mode"
+      ]
+    },
+    {
+      "topic_id": "process_scheduling_queues",
+      "title": "Ready Queue, CPU Schedulers and Preemption vs Non-Preemption",
+      "order": 4,
+      "difficulty_level": "beginner",
+      "description": "Scheduling queues (job, ready, device), short/medium/long-term schedulers, and preemptive vs non-preemptive policies.",
+      "subtopics": [
+        "Ready queue and I/O waiting queues",
+        "Long-term vs Short-term CPU schedulers",
+        "Degree of multiprogramming",
+        "Preemptive vs Non-preemptive scheduling criteria"
+      ],
+      "prerequisites": [
+        "process_concept"
+      ]
+    },
+    {
+      "topic_id": "cpu_scheduling_algorithms",
+      "title": "FCFS, SJF, SRTF, Priority and Round Robin",
+      "order": 5,
+      "difficulty_level": "beginner",
+      "description": "Scheduling performance criteria (CPU utilization, throughput, turnaround, waiting, response time), algorithms, and Gantt charts.",
+      "subtopics": [
+        "First-Come First-Served (FCFS) & convoy effect",
+        "Shortest Job First (SJF) and Shortest Remaining Time First (SRTF)",
+        "Round Robin (RR) and time quantum sizing",
+        "Priority scheduling and starvation aging"
+      ],
+      "prerequisites": [
+        "process_scheduling_queues"
+      ]
+    },
+    {
+      "topic_id": "threads_multithreading",
+      "title": "Threads vs Processes, User-Level and Kernel-Level Threads",
+      "order": 6,
+      "difficulty_level": "beginner",
+      "description": "Lightweight processes, shared address space, thread control blocks, user-level vs kernel-level threads, and multithreading models.",
+      "subtopics": [
+        "Threads vs processes (shared memory vs isolated)",
+        "Thread stack and register state",
+        "Many-to-One, One-to-One, Many-to-Many models",
+        "Kernel-level scheduling of threads"
+      ],
+      "prerequisites": [
+        "process_concept"
+      ]
+    },
+    {
+      "topic_id": "interprocess_communication",
+      "title": "Shared Memory, Message Passing, Pipes and Sockets",
+      "order": 7,
+      "difficulty_level": "beginner",
+      "description": "Mechanisms for cooperating processes: shared memory segments, message queues, anonymous/named pipes, and network sockets.",
+      "subtopics": [
+        "Shared memory vs Message passing tradeoffs",
+        "Anonymous and named pipes (FIFOs)",
+        "Direct vs indirect message passing",
+        "Network sockets and RPC basics"
+      ],
+      "prerequisites": [
+        "process_concept"
+      ]
+    },
+    {
+      "topic_id": "process_synchronization_basics",
+      "title": "Critical Section Problem, Race Conditions and Mutual Exclusion",
+      "order": 8,
+      "difficulty_level": "beginner",
+      "description": "Race conditions, critical section criteria (mutual exclusion, progress, bounded waiting), and Peterson's algorithm.",
+      "subtopics": [
+        "Race condition definitions",
+        "Critical section three requirements",
+        "Disabling hardware interrupts limitations",
+        "Peterson's software solution for two processes"
+      ],
+      "prerequisites": [
+        "threads_multithreading"
+      ]
+    },
+    {
+      "topic_id": "semaphores_and_mutex",
+      "title": "Counting Semaphores, Binary Semaphores and Mutex Locks",
+      "order": 9,
+      "difficulty_level": "beginner",
+      "description": "Hardware atomic instructions (TestAndSet, CompareAndSwap), mutex locks, wait() / signal() operations on counting semaphores.",
+      "subtopics": [
+        "Atomic hardware primitives (Test-and-Set)",
+        "Mutex lock acquisition and release",
+        "Counting vs Binary semaphores",
+        "Busy waiting (spinlocks) vs blocking queues"
+      ],
+      "prerequisites": [
+        "process_synchronization_basics"
+      ]
+    },
+    {
+      "topic_id": "classic_sync_problems",
+      "title": "Producer-Consumer, Dining Philosophers and Readers-Writers",
+      "order": 10,
+      "difficulty_level": "beginner",
+      "description": "Classical synchronization benchmarks: bounded buffer producer-consumer, readers-writers priority, and dining philosophers deadlock.",
+      "subtopics": [
+        "Bounded-Buffer Producer-Consumer with semaphores",
+        "First and second Readers-Writers problem",
+        "Dining Philosophers resource allocation",
+        "Monitors and condition variables"
+      ],
+      "prerequisites": [
+        "semaphores_and_mutex"
+      ]
+    },
+    {
+      "topic_id": "deadlock_conditions_prevention",
+      "title": "Coffman Conditions, Prevention and Deadlock Avoidance",
+      "order": 11,
+      "difficulty_level": "intermediate",
+      "description": "Four necessary Coffman conditions for deadlock, deadlock prevention strategies, and resource allocation graphs.",
+      "subtopics": [
+        "Mutual exclusion, Hold & Wait, No Preemption, Circular Wait",
+        "Invalidating Coffman conditions for prevention",
+        "Resource Allocation Graph (RAG) cycle rules",
+        "Resource ordering protocol"
+      ],
+      "prerequisites": [
+        "classic_sync_problems"
+      ]
+    },
+    {
+      "topic_id": "bankers_algorithm_recovery",
+      "title": "Resource Allocation Graphs, Banker's Algorithm and Recovery",
+      "order": 12,
+      "difficulty_level": "intermediate",
+      "description": "Deadlock avoidance: safe states, Dijkstra's Banker's algorithm (Allocation, Max, Available, Need matrices), and recovery actions.",
+      "subtopics": [
+        "Safe vs unsafe system states",
+        "Banker's Safety Algorithm step-by-step",
+        "Resource-Request Algorithm",
+        "Deadlock recovery (process termination & preemption rollback)"
+      ],
+      "prerequisites": [
+        "deadlock_conditions_prevention"
+      ]
+    },
+    {
+      "topic_id": "memory_management_swapping",
+      "title": "Logical vs Physical Address Space, Contiguous Allocation and Swapping",
+      "order": 13,
+      "difficulty_level": "intermediate",
+      "description": "MMU address translation, base and limit registers, contiguous allocation (First-Fit, Best-Fit, Worst-Fit), and fragmentation.",
+      "subtopics": [
+        "Logical (virtual) vs Physical address spaces",
+        "Memory Management Unit (MMU) relocation register",
+        "Internal vs External fragmentation",
+        "Compaction and memory swapping"
+      ],
+      "prerequisites": [
+        "process_concept"
+      ]
+    },
+    {
+      "topic_id": "paging_segmentation",
+      "title": "Paging Architecture, Page Tables, TLB and Segmentation",
+      "order": 14,
+      "difficulty_level": "intermediate",
+      "description": "Fixed-size frames and pages, page table lookup, Translation Lookaside Buffer (TLB) hit ratios, and segmentation.",
+      "subtopics": [
+        "Pages, frames, and page offset calculations",
+        "Page table base register and lookup cost",
+        "Translation Lookaside Buffer (TLB) caching",
+        "Effective Memory Access Time (EMAT)"
+      ],
+      "prerequisites": [
+        "memory_management_swapping"
+      ]
+    },
+    {
+      "topic_id": "virtual_memory_page_replacement",
+      "title": "Demand Paging, Page Faults, FIFO, LRU and Optimal Algorithms",
+      "order": 15,
+      "difficulty_level": "intermediate",
+      "description": "Demand paging, page fault handling service cycle, Belady's anomaly, FIFO, LRU, Optimal (OPT), and thrashing.",
+      "subtopics": [
+        "Demand paging and valid-invalid bit",
+        "Page fault interrupt handling sequence",
+        "Page replacement algorithms (FIFO, LRU, Optimal)",
+        "Belady's anomaly on FIFO and Thrashing"
+      ],
+      "prerequisites": [
+        "paging_segmentation"
+      ]
+    },
+    {
+      "topic_id": "file_systems_disk_scheduling",
+      "title": "File Allocation Methods, Directory Structures and FCFS, SSTF, SCAN, C-SCAN",
+      "order": 16,
+      "difficulty_level": "advanced",
+      "description": "File system implementation: inodes, contiguous/linked/indexed allocation, and disk arm scheduling algorithms.",
+      "subtopics": [
+        "UNIX inode structure and indirect blocks",
+        "Contiguous, linked, and indexed file allocation",
+        "Disk geometry (tracks, sectors, cylinders)",
+        "Disk scheduling: FCFS, SSTF, SCAN (Elevator), C-SCAN"
+      ],
+      "prerequisites": [
+        "virtual_memory_page_replacement"
+      ]
+    }
+  ]
+}

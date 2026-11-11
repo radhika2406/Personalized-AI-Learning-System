@@ -1,0 +1,37 @@
+question_id,course,topic_id,difficulty,question,option_a,option_b,option_c,option_d,correct,explanation
+variables_q1,python,variables,easy,Which of these is a valid variable name in Python?,2name,my-name,my_name,class,c,"Names can use letters, digits and underscores, but cannot start with a digit, contain a hyphen or be a keyword."
+variables_q2,python,variables,easy,What is the data type of x when x = 3.5?,int,str,bool,float,d,A number with a decimal point is a float.
+variables_q3,python,variables,easy,What does print(type('5')) show?,<class 'int'>,<class 'str'>,<class 'float'>,<class 'bool'>,b,Anything inside quotes is a string even if it looks like a number.
+variables_q4,python,variables,medium,"After x = 5, then y = x, then x = 10, what does print(y) show?",10,15,5,Error,c,"y copied the value 5 when it was assigned, so changing x later does not change y."
+variables_q5,python,variables,medium,What does print('3' + '4') show?,7,34,3 4,Error,b,"+ joins two strings together, so '3' + '4' gives '34'."
+variables_q6,python,variables,hard,"After a, b = 1, 2 and then a, b = b, a, what does print(a, b) show?",1 2,1 1,2 2,2 1,d,"Python works out the right side first, then assigns, so the two values swap."
+conditions_q1,python,conditions,easy,Which operator checks whether two values are equal?,=,==,:=,=>,b,"= stores a value in a variable, while == compares two values."
+conditions_q2,python,conditions,easy,"If x = 5, what does print(x > 3) show?",False,5,True,Error,c,"5 is greater than 3, so the comparison gives True."
+conditions_q3,python,conditions,easy,"Which keyword means 'otherwise, if this other condition is true' in Python?",else if,elseif,otherwise,elif,d,Python uses elif for an extra condition between if and else.
+conditions_q4,python,conditions,medium,What does print(not (5 > 3)) show?,True,False,5,Error,b,"5 > 3 is True, and not flips True to False."
+conditions_q5,python,conditions,medium,"If x = 10, which condition is True?",x < 5,x != 10,x > 20,x == 10,d,"x is exactly 10, so only x == 10 is True."
+conditions_q6,python,conditions,hard,What does print(0 or 'hi') show?,0,hi,True,False,b,"or returns the first truthy value, and 0 is falsy, so it returns 'hi'."
+loops_q1,python,loops,easy,How many times does the body of for i in range(3) run?,2,3,4,Infinite,b,"range(3) gives 0, 1 and 2, which is three values."
+loops_q2,python,loops,easy,Which keyword stops a loop immediately?,stop,exit,break,continue,c,break leaves the loop at once.
+loops_q3,python,loops,easy,"What does print(list(range(1, 4))) show?","[1, 2, 3, 4]","[1, 2, 3]","[0, 1, 2, 3]","[1, 4]",b,"range(1, 4) starts at 1 and stops before 4."
+loops_q4,python,loops,medium,"total = 0, then for i in range(1, 5): total += i runs. What is total at the end?",10,15,6,4,a,"The loop adds 1 + 2 + 3 + 4, which is 10."
+loops_q5,python,loops,medium,What does the continue keyword do inside a loop?,Ends the whole loop,Skips the rest of this round and starts the next one,Restarts the loop from the first item,Exits the program,b,continue skips to the next round of the loop without leaving it.
+loops_q6,python,loops,hard,"What does print(list(range(10, 0, -3))) show?","[10, 7, 4, 1]","[10, 7, 4]","[7, 4, 1]","[10, 7, 4, 1, 0]",a,"It starts at 10 and steps down by 3 until it would reach 0 or below: 10, 7, 4, 1."
+functions_q1,python,functions,easy,Which keyword is used to define a function in Python?,def,function,fun,define,a,"In Python, functions are defined using the def keyword."
+functions_q2,python,functions,easy,What does a Python function return by default if it has no return statement?,0,False,None,empty string,c,"If a function does not specify a return value, Python automatically returns None."
+functions_q3,python,functions,easy,How do you call a function named greet?,call greet(),greet[],run greet,greet(),d,A function is called by writing its name followed by parentheses.
+functions_q4,python,functions,medium,"def add(a, b=5): return a + b. What does print(add(3)) show?",3,8,5,Error,b,"Since b has a default value of 5, add(3) computes 3 + 5, which equals 8."
+functions_q5,python,functions,medium,"def square(n): return n * n. What does print(square(4) + 1) show?",17,16,9,Error,a,"square(4) returns 16, and 16 + 1 is 17."
+functions_q6,python,functions,hard,"x = 10; def change(): x = 20; change(); print(x). What is printed?",20,None,10,Error,c,"Assigning x = 20 inside change creates a local variable, leaving the global x unchanged at 10."
+lists_q1,python,lists,easy,Which method adds an item to the end of a list?,insert(),append(),add(),push(),b,The append() method adds a single element to the end of an existing list.
+lists_q2,python,lists,easy,"Given numbers = [10, 20, 30], what does print(numbers[0]) show?",20,30,Error,10,d,"Python lists use zero-based indexing, so index 0 is the first item (10)."
+lists_q3,python,lists,easy,What function returns the number of items in a list?,len(),size(),count(),length(),a,The len() function returns the total count of items in a sequence.
+lists_q4,python,lists,medium,"Given nums = [1, 2, 3, 4, 5], what does print(nums[1:4]) show?","[1, 2, 3]","[2, 3, 4, 5]","[2, 3, 4]","[2, 3]",c,"Slicing nums[1:4] starts at index 1 and stops before index 4, giving [2, 3, 4]."
+lists_q5,python,lists,medium,"items = ['a', 'b']; items.pop(); print(items). What is printed?","['b']","['a']","[]",Error,b,"pop() removes and returns the last item from the list, leaving ['a']."
+lists_q6,python,lists,hard,"a = [1, 2]; b = a; b.append(3); print(len(a)). What does this print?",2,1,Error,3,d,"b = a makes b refer to the same list in memory as a, so modifying b also changes a."
+dictionaries_q1,python,dictionaries,easy,Which brackets are used to create a dictionary in Python?,(),[],{},<>,c,Curly brackets {} are used to create dictionaries with key-value pairs.
+dictionaries_q2,python,dictionaries,easy,"d = {'name': 'Alice', 'age': 20}. How do you access the value of 'name'?",d['name'],d('name'),d.name,d[0],a,"Dictionary values are accessed by indexing with the key inside square brackets: d['name']."
+dictionaries_q3,python,dictionaries,easy,Which dictionary method returns all the keys as a view?,items(),values(),all_keys(),keys(),d,The keys() method returns a view of all keys present in the dictionary.
+dictionaries_q4,python,dictionaries,medium,"d = {'a': 1}; val = d.get('b', 0); print(val). What is printed?",1,0,None,KeyError,b,"get('b', 0) returns the default value 0 because 'b' is not in the dictionary."
+dictionaries_q5,python,dictionaries,medium,"d = {'x': 10}; d['x'] = 20; print(len(d)). What does this print?",1,2,20,Error,a,"Assigning to an existing key updates its value without adding a new key, so the length stays 1."
+dictionaries_q6,python,dictionaries,hard,"d = {'a': 1, 'b': 2}; print(list(d.keys())[0] in d). What does this print?",False,1,True,Error,c,"list(d.keys())[0] is 'a', and checking 'a' in d checks if 'a' is a key in d, which is True."

@@ -1,0 +1,273 @@
+{
+  "course_id": "dbms",
+  "course_title": "Database Management Systems",
+  "category": "computer_science",
+  "description": "Complete relational database theory, ER modeling, SQL, normalization (1NF-BCNF), ACID transactions, concurrency, and indexing.",
+  "prerequisites": [
+    "Basic discrete mathematics",
+    "Data structures fundamentals"
+  ],
+  "total_topics": 16,
+  "checkpoints": {
+    "stage_1_easy": 10,
+    "stage_2_medium": 15,
+    "stage_3_hard": 16
+  },
+  "topics": [
+    {
+      "topic_id": "dbms_fundamentals",
+      "title": "Database Systems vs File Systems, 3-Schema Architecture",
+      "order": 1,
+      "difficulty_level": "beginner",
+      "description": "Advantages of DBMS over traditional file processing, physical/logical data independence, and ANSI/SPARC 3-schema architecture.",
+      "subtopics": [
+        "Redundancy and inconsistency in file systems",
+        "Internal, Conceptual, and External schema levels",
+        "Logical and Physical data independence",
+        "DBMS components and users"
+      ],
+      "prerequisites": []
+    },
+    {
+      "topic_id": "data_models",
+      "title": "Data Models (Relational, Hierarchical, Network, NoSQL)",
+      "order": 2,
+      "difficulty_level": "beginner",
+      "description": "Evolution of data models: hierarchical tree, network graph, relational tables, and NoSQL categories.",
+      "subtopics": [
+        "Hierarchical parent-child model",
+        "Network CODASYL model",
+        "Relational tabular model",
+        "NoSQL (Document, Key-Value, Columnar, Graph)"
+      ],
+      "prerequisites": [
+        "dbms_fundamentals"
+      ]
+    },
+    {
+      "topic_id": "er_modeling",
+      "title": "Entities, Attributes, Relationships and Cardinality",
+      "order": 3,
+      "difficulty_level": "beginner",
+      "description": "Entity-Relationship diagrams, strong/weak entities, key attributes, composite/multivalued attributes, and cardinality ratios.",
+      "subtopics": [
+        "Entity sets and attributes",
+        "Weak entities and identifying relationships",
+        "Cardinality ratios (1:1, 1:N, M:N)",
+        "ER diagram to relational table mapping"
+      ],
+      "prerequisites": [
+        "data_models"
+      ]
+    },
+    {
+      "topic_id": "relational_model_keys",
+      "title": "Candidate, Primary, Super, Alternate and Foreign Keys",
+      "order": 4,
+      "difficulty_level": "beginner",
+      "description": "Relational keys taxonomy: super keys, minimal candidate keys, primary keys, alternate keys, and foreign key references.",
+      "subtopics": [
+        "Super key definition",
+        "Candidate key minimality",
+        "Primary key selection",
+        "Foreign keys and referential constraints"
+      ],
+      "prerequisites": [
+        "er_modeling"
+      ]
+    },
+    {
+      "topic_id": "relational_integrity_rules",
+      "title": "Entity Integrity, Referential Integrity and Domain Constraints",
+      "order": 5,
+      "difficulty_level": "beginner",
+      "description": "Integrity constraints: Entity integrity (no null PKs), Referential integrity (valid FK references or null), domain constraints, and check constraints.",
+      "subtopics": [
+        "Entity integrity rule",
+        "Referential integrity rule",
+        "ON DELETE CASCADE / SET NULL / RESTRICT",
+        "Domain and user-defined constraints"
+      ],
+      "prerequisites": [
+        "relational_model_keys"
+      ]
+    },
+    {
+      "topic_id": "relational_algebra",
+      "title": "Select, Project, Union, Set Difference, Joins",
+      "order": 6,
+      "difficulty_level": "beginner",
+      "description": "Procedural query language: Selection (sigma), Projection (pi), Cartesian product, Set operations, and Joins.",
+      "subtopics": [
+        "Selection (sigma) and Projection (pi)",
+        "Set operations (Union, Intersection, Difference)",
+        "Cartesian product vs Natural Join",
+        "Conditional Theta join"
+      ],
+      "prerequisites": [
+        "relational_integrity_rules"
+      ]
+    },
+    {
+      "topic_id": "sql_ddl",
+      "title": "CREATE, ALTER, DROP, TRUNCATE and Constraints",
+      "order": 7,
+      "difficulty_level": "beginner",
+      "description": "Data Definition Language (DDL): creating tables, altering column definitions, dropping/truncating tables, and enforcing constraints.",
+      "subtopics": [
+        "CREATE TABLE with constraints",
+        "PRIMARY KEY and FOREIGN KEY DDL",
+        "ALTER TABLE add/drop columns",
+        "DROP TABLE vs TRUNCATE TABLE"
+      ],
+      "prerequisites": [
+        "relational_integrity_rules"
+      ]
+    },
+    {
+      "topic_id": "sql_dml_basic",
+      "title": "INSERT, UPDATE, DELETE and Basic SELECT Queries",
+      "order": 8,
+      "difficulty_level": "beginner",
+      "description": "Data Manipulation Language (DML): row insertion, conditional updates, deletions, and basic SELECT projections.",
+      "subtopics": [
+        "INSERT INTO syntax",
+        "UPDATE with WHERE clauses",
+        "DELETE vs TRUNCATE differences",
+        "SELECT DISTINCT and ORDER BY"
+      ],
+      "prerequisites": [
+        "sql_ddl"
+      ]
+    },
+    {
+      "topic_id": "sql_aggregates_grouping",
+      "title": "GROUP BY, HAVING, COUNT, SUM, AVG, MIN, MAX",
+      "order": 9,
+      "difficulty_level": "beginner",
+      "description": "Aggregate functions, grouping rows with GROUP BY, and filtering grouped results using HAVING.",
+      "subtopics": [
+        "Aggregate functions (COUNT, SUM, AVG, MIN, MAX)",
+        "GROUP BY single and multiple columns",
+        "WHERE clause vs HAVING clause",
+        "Handling NULL values in aggregates"
+      ],
+      "prerequisites": [
+        "sql_dml_basic"
+      ]
+    },
+    {
+      "topic_id": "sql_joins",
+      "title": "INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN and Self Joins",
+      "order": 10,
+      "difficulty_level": "beginner",
+      "description": "Combining tables in SQL: inner joins, left/right outer joins, full outer joins, cross joins, and self joins.",
+      "subtopics": [
+        "INNER JOIN matching logic",
+        "LEFT (OUTER) JOIN semantics",
+        "RIGHT and FULL OUTER JOINs",
+        "Self join on single table hierarchy"
+      ],
+      "prerequisites": [
+        "sql_aggregates_grouping"
+      ]
+    },
+    {
+      "topic_id": "sql_subqueries_views",
+      "title": "Correlated Subqueries, Nested Queries and Views",
+      "order": 11,
+      "difficulty_level": "intermediate",
+      "description": "Subqueries in WHERE/FROM, correlated subqueries with EXISTS/IN, and virtual views.",
+      "subtopics": [
+        "Scalar vs table subqueries",
+        "Correlated subqueries (row-by-row)",
+        "IN vs EXISTS performance",
+        "CREATE VIEW and updatable views"
+      ],
+      "prerequisites": [
+        "sql_joins"
+      ]
+    },
+    {
+      "topic_id": "normalization_1nf_2nf_3nf",
+      "title": "Functional Dependencies, 1NF, 2NF and 3NF",
+      "order": 12,
+      "difficulty_level": "intermediate",
+      "description": "Anomalies (insert/update/delete), Armstrong's axioms, 1NF (atomic attributes), 2NF (no partial dependency), 3NF (no transitive dependency).",
+      "subtopics": [
+        "Insertion, deletion, update anomalies",
+        "Functional Dependencies (FDs)",
+        "First Normal Form (1NF) atomicity",
+        "Second Normal Form (2NF) and Third Normal Form (3NF)"
+      ],
+      "prerequisites": [
+        "relational_algebra",
+        "relational_model_keys"
+      ]
+    },
+    {
+      "topic_id": "bcnf_higher_normal_forms",
+      "title": "Boyce-Codd Normal Form, Multivalued Dependencies and 4NF",
+      "order": 13,
+      "difficulty_level": "intermediate",
+      "description": "Strict BCNF (every determinant is a candidate key), 3NF vs BCNF comparison, multivalued dependencies, and 4NF.",
+      "subtopics": [
+        "BCNF condition: X -> Y implies X is super key",
+        "Lossless decomposition vs Dependency preservation",
+        "Multivalued dependencies (MVDs)",
+        "Fourth Normal Form (4NF)"
+      ],
+      "prerequisites": [
+        "normalization_1nf_2nf_3nf"
+      ]
+    },
+    {
+      "topic_id": "transaction_acid_properties",
+      "title": "Atomicity, Consistency, Isolation and Durability",
+      "order": 14,
+      "difficulty_level": "intermediate",
+      "description": "Transaction states (active, committed, aborted), ACID properties, and write-ahead logging (WAL).",
+      "subtopics": [
+        "Atomicity (all-or-nothing)",
+        "Consistency preservation",
+        "Isolation and concurrency anomalies",
+        "Durability and Write-Ahead Logging (WAL)"
+      ],
+      "prerequisites": [
+        "sql_dml_basic"
+      ]
+    },
+    {
+      "topic_id": "concurrency_control",
+      "title": "Locking Protocols, 2PL, Deadlocks and Timestamp Ordering",
+      "order": 15,
+      "difficulty_level": "intermediate",
+      "description": "Serializability (conflict vs view), Two-Phase Locking (2PL), rigorous 2PL, deadlock detection/prevention, and isolation levels.",
+      "subtopics": [
+        "Conflict serializability and precedence graphs",
+        "Shared (S) vs Exclusive (X) locks",
+        "Strict Two-Phase Locking (Strict 2PL)",
+        "Deadlock wait-for graphs and recovery"
+      ],
+      "prerequisites": [
+        "transaction_acid_properties"
+      ]
+    },
+    {
+      "topic_id": "indexing_and_b_trees",
+      "title": "Primary, Secondary, Clustered Indexing and B/B+ Trees",
+      "order": 16,
+      "difficulty_level": "advanced",
+      "description": "Disk storage mechanics, clustered vs non-clustered indexes, dense vs sparse indexes, and B/B+ Tree node structures.",
+      "subtopics": [
+        "Disk block I/O cost",
+        "Clustered index (orders physical table rows)",
+        "Secondary non-clustered index pointers",
+        "B+ Tree structure (data leaves with linked list pointers)"
+      ],
+      "prerequisites": [
+        "concurrency_control"
+      ]
+    }
+  ]
+}

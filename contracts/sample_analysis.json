@@ -1,0 +1,18 @@
+{
+  "learner_id": "S101",
+  "course": "python",
+  "goal": "Learn Python programming",
+  "level": "beginner",
+  "daily_minutes": 60,
+  "mastery": {
+    "variables": 90,
+    "conditions": null,
+    "loops": 33,
+    "functions": 30,
+    "lists": 50,
+    "dictionaries": null
+  },
+  "weak_topics": ["loops", "functions"],
+  "strong_topics": ["variables"],
+  "not_assessed": ["conditions", "dictionaries"]
+}
