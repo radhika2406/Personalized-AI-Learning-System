@@ -13,19 +13,14 @@ import QuizHistory from "./pages/QuizHistory";
 import Recommendations from "./pages/Recommendations";
 import Profile from "./pages/Profile";
 import LearningPath from "./pages/LearningPath";
+import { ThemeProvider, useTheme } from "./ThemeContext";
+import LearnovaIntro from "./components/intro/LearnovaIntro";
 import "./App.css";
 
-function Home() {
-  const [theme, setTheme] = useState(() => {
-      return localStorage.getItem("learnova-theme") || "dark";
-    });
-    const toggleTheme = () => {
-      const newTheme = theme === "dark" ? "light" : "dark";
-
-      setTheme(newTheme);
-      localStorage.setItem("learnova-theme", newTheme);
-    };
+function Home({ showIntro, onIntroComplete }) {
+  const { theme, toggleTheme } = useTheme();
     return (
+  <>
     <div
       className="landing-page"
       data-theme={theme}
@@ -100,7 +95,7 @@ function Home() {
                 <p className="preview-label">YOUR LEARNING OVERVIEW</p>
                 <h3>Welcome back, learner 👋</h3>
               </div>
-              <div className="preview-avatar">L</div>
+              <Brain size={22} />
             </div>
 
             <div className="preview-stats">
@@ -175,7 +170,12 @@ function Home() {
       <footer className="footer" id="about">
         <p>Learnova — Your personal learning journey.</p>
       </footer>
-    </div>
+     </div>
+
+    {showIntro && (
+      <LearnovaIntro onComplete={onIntroComplete} />
+    )}
+  </>
   );
 }
 
@@ -194,10 +194,25 @@ function LoginPlaceholder() {
 }
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+  };
+
   return (
-    <BrowserRouter>
+    <ThemeProvider>
+       <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={
+            <Home
+                showIntro={showIntro}
+                onIntroComplete={handleIntroComplete}
+            />
+           }
+        />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -227,7 +242,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/learning-path" element={<LearningPath />} />
         </Routes>
-        </BrowserRouter>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

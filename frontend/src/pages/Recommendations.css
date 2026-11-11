@@ -1,0 +1,438 @@
+
+/* =========================================
+   LEARNOVA - RECOMMENDATIONS
+   Dark: Navy / Purple / Indigo
+   Light: Wine / Burgundy / Blush
+========================================= */
+
+.recommendations-page {
+  width: 100%;
+  margin-top: 24px;
+  color: var(--color-text);
+}
+
+/* Generate button */
+.recommendations-generate-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 48px;
+  padding: 13px 23px;
+  margin-bottom: 26px;
+
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-hover)
+  );
+
+  border: none;
+  border-radius: 12px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(124, 58, 237, 0.18);
+  transition: all 0.25s ease;
+}
+
+.recommendations-generate-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 10px 23px rgba(124, 58, 237, 0.25);
+}
+
+.recommendations-generate-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Recommendation list */
+.recommendations-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* Individual card */
+.recommendation-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 25px;
+
+  overflow: hidden;
+
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 19px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+
+  animation: recommendationEnter 0.45s ease both;
+}
+
+.recommendation-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+}
+
+.recommendation-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  box-shadow: 0 13px 30px rgba(0, 0, 0, 0.10);
+}
+
+@keyframes recommendationEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card heading */
+.recommendation-card h3 {
+  margin: 0 0 17px;
+  padding-right: 8px;
+
+  color: var(--color-text);
+  font-size: 19px;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+/* Card information */
+.recommendation-card p {
+  margin: 7px 0;
+
+  color: var(--color-text-muted);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.recommendation-card p strong {
+  color: var(--color-text);
+  font-weight: 650;
+}
+
+/* Description */
+.recommendation-card .recommendation-description {
+  margin: 10px 0 14px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* Status and type row */
+.recommendation-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin-top: 13px;
+}
+
+.recommendation-type,
+.recommendation-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 29px;
+  padding: 6px 11px;
+
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.2px;
+  text-transform: capitalize;
+}
+
+.recommendation-type {
+  color: var(--color-primary);
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border);
+}
+
+/* Status colors */
+.recommendation-status.status-pending {
+  color: #d69b38;
+  background: rgba(214, 155, 56, 0.12);
+  border: 1px solid rgba(214, 155, 56, 0.22);
+}
+
+.recommendation-status.status-accepted {
+  color: #36b98b;
+  background: rgba(54, 185, 139, 0.12);
+  border: 1px solid rgba(54, 185, 139, 0.22);
+}
+
+.recommendation-status.status-completed {
+  color: #36b98b;
+  background: rgba(54, 185, 139, 0.12);
+  border: 1px solid rgba(54, 185, 139, 0.22);
+}
+
+.recommendation-status.status-dismissed {
+  color: #e17a86;
+  background: rgba(225, 122, 134, 0.12);
+  border: 1px solid rgba(225, 122, 134, 0.22);
+}
+
+/* Card actions */
+.recommendation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.recommendation-actions button {
+  min-height: 39px;
+  padding: 10px 16px;
+
+  border-radius: 9px;
+  border: 1px solid transparent;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.recommendation-actions button:hover {
+  transform: translateY(-2px);
+}
+
+.recommendation-accept-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #269c75, #16845f);
+}
+
+.recommendation-accept-button:hover {
+  box-shadow: 0 5px 14px rgba(38, 156, 117, 0.22);
+}
+
+.recommendation-dismiss-button {
+  color: var(--color-text-muted);
+  background: var(--color-surface-light);
+  border-color: var(--color-border) !important;
+}
+
+.recommendation-dismiss-button:hover {
+  color: #e17a86;
+  border-color: #e17a86 !important;
+}
+
+.recommendation-complete-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #269c75, #16845f);
+}
+
+.recommendation-actions button:focus-visible,
+.recommendations-generate-button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Loading state */
+.recommendations-loading {
+  padding: 25px;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+/* Empty state */
+.recommendations-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 240px;
+  padding: 35px 25px;
+
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: 20px;
+}
+
+.recommendations-empty h3 {
+  margin: 0 0 10px;
+  color: var(--color-text);
+  font-size: 20px;
+}
+
+.recommendations-empty p {
+  max-width: 420px;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Error state */
+.recommendations-error {
+  margin: 0 0 20px;
+  padding: 14px 17px;
+
+  color: #e17a86;
+  background: rgba(220, 53, 69, 0.08);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  border-radius: 11px;
+
+  font-size: 13px;
+}
+
+/* =========================================
+   LIGHT THEME - WINE / BURGUNDY
+========================================= */
+
+html[data-theme="light"] .recommendation-card {
+  box-shadow: 0 8px 24px rgba(91, 20, 45, 0.045);
+}
+
+html[data-theme="light"] .recommendation-card::before {
+  background: linear-gradient(
+    90deg,
+    #7f1d3a,
+    #a83255,
+    #d58ba0
+  );
+}
+
+html[data-theme="light"] .recommendation-card:hover {
+  border-color: #a83255;
+  box-shadow: 0 13px 28px rgba(127, 29, 58, 0.09);
+}
+
+html[data-theme="light"] .recommendations-generate-button {
+  background: linear-gradient(135deg, #a83255, #7f1d3a);
+  box-shadow: 0 7px 18px rgba(127, 29, 58, 0.16);
+}
+
+html[data-theme="light"] .recommendations-generate-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b83d63, #68152f);
+}
+
+html[data-theme="light"] .recommendation-type {
+  color: #7f1d3a;
+  background: #f9e9ee;
+  border-color: #ead5dd;
+}
+
+html[data-theme="light"] .recommendations-empty {
+  background: #ffffff;
+  border-color: #e8d5dc;
+}
+
+html[data-theme="light"] .recommendations-error {
+  color: #a1263e;
+  background: #fff1f3;
+  border-color: #f0cbd4;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+  .recommendations-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .recommendations-page {
+    margin-top: 18px;
+  }
+
+  .recommendations-generate-button {
+    width: 100%;
+  }
+
+  .recommendation-card {
+    padding: 21px 18px;
+  }
+
+  .recommendation-card h3 {
+    font-size: 17px;
+  }
+
+  .recommendation-actions {
+    flex-direction: column;
+  }
+
+  .recommendation-actions button {
+    width: 100%;
+  }
+}
+
+/* =========================================
+   DARK THEME - RECOMMENDATION CARD FIX
+========================================= */
+
+html[data-theme="dark"] .recommendations-page .recommendation-card {
+  background: #101529 !important;
+  background-color: #101529 !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+html[data-theme="dark"] .recommendations-page .recommendation-card h3 {
+  color: #f8fafc !important;
+}
+
+html[data-theme="dark"] .recommendations-page .recommendation-card p {
+  color: #a5aec5 !important;
+}
+
+html[data-theme="dark"] .recommendations-page .recommendation-card p strong {
+  color: #f8fafc !important;
+}
+
+html[data-theme="dark"] .recommendations-page .recommendation-type {
+  background: #191f38 !important;
+  color: #a78bfa !important;
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+html[data-theme="dark"] .recommendations-page .recommendation-card:hover {
+  border-color: #8b5cf6;
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.12);
+}

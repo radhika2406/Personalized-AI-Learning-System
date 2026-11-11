@@ -1,38 +1,42 @@
-/* LEARNOVA THEME COLORS */
+/* LEARNOVA GLOBAL THEME*/
 
-.landing-page {
+:root,
+[data-theme="dark"] {
   --color-background: #080b18;
   --color-surface: #101529;
   --color-surface-light: #191f38;
+
   --color-primary: #8b5cf6;
   --color-primary-hover: #7c3aed;
   --color-accent: #22d3ee;
+
   --color-text: #f8fafc;
   --color-text-muted: #a5aec5;
   --color-border: rgba(148, 163, 184, 0.16);
+}
 
+
+[data-theme="light"] {
+  --color-background: #f8f9ff;
+  --color-surface: #ffffff;
+  --color-surface-light: #f1efff;
+
+  --color-primary: #7053d6;
+  --color-primary-hover: #5b3fc4;
+  --color-accent: #9277e5;
+
+  --color-text: #211d35;
+  --color-text-muted: #68627d;
+  --color-border: #e5e0f5;
+}
+/* Landing page consumes the global theme */
+.landing-page {
   position: relative;
   isolation: isolate;
   overflow-x: hidden;
   background: var(--color-background);
   color: var(--color-text);
   transition: background 0.3s ease, color 0.3s ease;
-}
-
-/* WHITE & WINE RED THEME */
-
-.landing-page[data-theme="light"] {
-  --color-background: #ffffff;
-  --color-surface: #ffffff;
-  --color-surface-light: #f8f1f3;
-
-  --color-primary: #7f1d3a;
-  --color-primary-hover: #5e142b;
-  --color-accent: #a83255;
-
-  --color-text: #21161a;
-  --color-text-muted: #6b5860;
-  --color-border: #e8d5dc;
 }
 
 #root {
@@ -130,59 +134,6 @@
   box-shadow: 0 8px 30px rgba(124, 58, 237, 0.45);
 }
 
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 26px;
-  font-weight: bold;
-  color: var(--color-primary);
-}
-
-.logo-icon {
-  color: var(--color-primary);
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nav-links a {
-  font-size: 16px;
-  color: var(--color-text-muted);
-  transition: color 0.2s ease;
-}
-
-.nav-links a:hover {
-  color: var(--color-primary);
-}
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.login-btn {
-  color: var(--color-text);
-  font-size: 16px;
-}
-
-.get-started-btn {
-  padding: 12px 22px;
-  border-radius: 8px;
-  background: var(--color-primary);
-  color: #fffaf5;
-  font-size: 15px;
-  transition: background 0.2s ease;
-}
-
-.get-started-btn:hover {
-  background: var(--color-primary-hover);
-}
 
 /* HERO SECTION */
 .landing-page .hero {
@@ -2093,4 +2044,149 @@
 /* Shared text */
 .auth-modern .auth-brand {
   color: var(--auth-text);
+}
+
+/* ========================================
+   LANDING PAGE — VISUAL POLISH
+======================================== */
+
+.landing-page .hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.landing-page .hero::before {
+  content: "";
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  top: 0;
+  right: -120px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.16),
+    transparent 70%
+  );
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.landing-page .hero h1 {
+  line-height: 1.08;
+  letter-spacing: -2.5px;
+}
+
+.landing-page .hero h1 span {
+  background: linear-gradient(
+    120deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -color: transparent;
+  color: transparent;
+}
+
+.landing-page .hero-preview {
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.18),
+    0 0 0 1px var(--color-border);
+  transition: transform 0.35s ease,
+              box-shadow 0.35s ease;
+}
+
+.landing-page .hero-preview:hover {
+  transform: translateY(-5px);
+}
+
+.landing-page .primary-button,
+.landing-page .signup-btn {
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease,
+              background 0.25s ease;
+}
+
+.landing-page .primary-button:hover,
+.landing-page .signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.3);
+}
+
+.landing-page .feature-card {
+  height: 100%;
+  transition: transform 0.3s ease,
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.landing-page .feature-card:hover {
+  transform: translateY(-6px);
+}
+
+.landing-page a:focus-visible,
+.landing-page button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page *,
+  .landing-page *::before,
+  .landing-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Light theme: Learning Overview label */
+.landing-page[data-theme="light"] .preview-label {
+  color: #7f1d3a;
+}
+
+/* Theme-aware learning overview */
+.dashboard-main {
+  background: var(--color-background);
+  color: var(--color-text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dashboard-main .dashboard-section-heading h2,
+.dashboard-main .overview-details strong,
+.dashboard-main .overview-item strong,
+.dashboard-main .my-courses-section h2 {
+  color: var(--color-text);
+}
+
+.dashboard-main .dashboard-section-heading p,
+.dashboard-main .overview-details span,
+.dashboard-main .my-course-card p,
+.dashboard-main .course-code {
+  color: var(--color-text-muted);
+}
+
+.dashboard-main .overview-card,
+.dashboard-main .my-course-card {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.dashboard-main .overview-item strong,
+.dashboard-main .overview-details strong {
+  color: var(--color-primary);
+}
+
+/* Mastery progress track */
+.dashboard-main .mastery-progress-track {
+  background: var(--color-border);
+}
+
+.dashboard-main .mastery-progress-fill {
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
 }

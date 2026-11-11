@@ -1,6 +1,8 @@
+
 import { useEffect, useState } from "react";
 import DashboardLayout from "../components/DashboardLayout";
 import api from "../services/api";
+import "./Recommendations.css";
 
 function Recommendations() {
   const [recommendations, setRecommendations] = useState([]);
@@ -10,30 +12,38 @@ function Recommendations() {
   const [error, setError] = useState("");
 
   const fetchRecommendations = async () => {
-  try {
-    const [recommendationsResponse, coursesResponse] =
-      await Promise.all([
-        api.get("/recommendations/me"),
-        api.get("/courses/"),
-      ]);
+    try {
+      const [recommendationsResponse, coursesResponse] =
+        await Promise.all([
+          api.get("/recommendations/me"),
+          api.get("/courses/"),
+        ]);
 
       setRecommendations(recommendationsResponse.data);
       setCourses(coursesResponse.data);
       setError("");
     } catch (err) {
-      setError("Failed to load recommendations.");
+      setError(
+        err.response?.data?.detail ||
+          "Failed to load recommendations."
+      );
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
   const generateRecommendations = async () => {
     try {
       setGenerating(true);
+      setError("");
+
       await api.post("/recommendations/generate");
       await fetchRecommendations();
     } catch (err) {
-      setError("Failed to generate recommendations.");
+      setError(
+        err.response?.data?.detail ||
+          "Failed to generate recommendations."
+      );
     } finally {
       setGenerating(false);
     }
@@ -41,12 +51,18 @@ function Recommendations() {
 
   const updateStatus = async (id, status) => {
     try {
+      setError("");
+
       await api.patch(`/recommendations/${id}/status`, {
         status,
       });
+
       await fetchRecommendations();
     } catch (err) {
-      setError("Failed to update recommendation.");
+      setError(
+        err.response?.data?.detail ||
+          "Failed to update recommendation."
+      );
     }
   };
 
@@ -60,56 +76,130 @@ function Recommendations() {
       subtitle="Personalized suggestions to improve your learning."
     >
       <div className="recommendations-page">
+
+        {/* Generate recommendations */}
         <button
+          className="recommendations-generate-button"
           onClick={generateRecommendations}
           disabled={generating}
         >
+          <span>{generating ? "⏳" : "✦"}</span>
           {generating
-            ? "Generating..."
+            ? "Generating Recommendations..."
             : "Generate Recommendations"}
         </button>
 
-        {error && <p>{error}</p>}
+        {/* Error */}
+        {error && (
+          <p className="recommendations-error" role="alert">
+            {error}
+          </p>
+        )}
 
+        {/* Loading */}
         {loading ? (
-          <p>Loading recommendations...</p>
+          <div className="recommendations-loading">
+            Loading your recommendations...
+          </div>
         ) : recommendations.length === 0 ? (
-          <p>No recommendations yet. Click Generate Recommendations.</p>
+
+          /* Empty state */
+          <div className="recommendations-empty">
+            <h3>No Recommendations Yet</h3>
+            <p>
+              Your personalized learning suggestions will
+              appear here. Click Generate Recommendations
+              to get started.
+            </p>
+          </div>
+
         ) : (
-          recommendations.map((item) => (
-            <div key={item.id} className="recommendation-card">
-              <h3>{item.title}</h3>
-              <p>
-                <strong>Course:</strong>{" "}
-                {courses.find((course) => course.id === item.course_id)?.title
-                  || "Course unavailable"}
-              </p>
-              <p>{item.description}</p>
 
-              {item.reason && <p><strong>Reason:</strong> {item.reason}</p>}
+          /* Recommendations list */
+          <div className="recommendations-list">
+            {recommendations.map((item) => {
+              const course = courses.find(
+                (course) => course.id === item.course_id
+              );
 
-              <p><strong>Type:</strong> {item.recommendation_type}</p>
-              <p><strong>Status:</strong> {item.status}</p>
+              const status = String(
+                item.status || "pending"
+              ).toLowerCase();
 
-              {item.status === "pending" && (
-                <>
-                  <button onClick={() => updateStatus(item.id, "accepted")}>
-                    Accept
-                  </button>
+              return (
+                <article
+                  key={item.id}
+                  className="recommendation-card"
+                >
+                  <h3>{item.title}</h3>
 
-                  <button onClick={() => updateStatus(item.id, "dismissed")}>
-                    Dismiss
-                  </button>
-                </>
-              )}
+                  <p>
+                    <strong>Course:</strong>{" "}
+                    {course?.title || "Course unavailable"}
+                  </p>
 
-              {item.status === "accepted" && (
-                <button onClick={() => updateStatus(item.id, "completed")}>
-                  Mark Completed
-                </button>
-              )}
-            </div>
-          ))
+                  <p className="recommendation-description">
+                    {item.description}
+                  </p>
+
+                  {item.reason && (
+                    <p>
+                      <strong>Why this is recommended:</strong>{" "}
+                      {item.reason}
+                    </p>
+                  )}
+
+                  <div className="recommendation-meta">
+                    <span className="recommendation-type">
+                      {item.recommendation_type}
+                    </span>
+
+                    <span
+                      className={`recommendation-status status-${status}`}
+                    >
+                      {item.status}
+                    </span>
+                  </div>
+
+                  {/* Recommendation actions */}
+                  {status === "pending" && (
+                    <div className="recommendation-actions">
+                      <button
+                        className="recommendation-accept-button"
+                        onClick={() =>
+                          updateStatus(item.id, "accepted")
+                        }
+                      >
+                        Accept
+                      </button>
+
+                      <button
+                        className="recommendation-dismiss-button"
+                        onClick={() =>
+                          updateStatus(item.id, "dismissed")
+                        }
+                      >
+                        Dismiss
+                      </button>
+                    </div>
+                  )}
+
+                  {status === "accepted" && (
+                    <div className="recommendation-actions">
+                      <button
+                        className="recommendation-complete-button"
+                        onClick={() =>
+                          updateStatus(item.id, "completed")
+                        }
+                      >
+                        Mark as Completed
+                      </button>
+                    </div>
+                  )}
+                </article>
+              );
+            })}
+          </div>
         )}
       </div>
     </DashboardLayout>

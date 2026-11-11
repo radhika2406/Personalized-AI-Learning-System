@@ -1,90 +1,543 @@
+
+/* =========================================
+   LEARNOVA - PERSONALIZED LEARNING PATH
+   Dark: Navy / Purple / Indigo
+   Light: Wine / Burgundy / Blush
+========================================= */
+
+.learning-path-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 24px auto;
+  color: var(--color-text);
+}
+
+/* Course selector */
+.learning-path-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+
+  padding: 21px 24px;
+  margin-bottom: 22px;
+
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 17px;
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.05);
+}
+
+.learning-path-selector label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.learning-path-selector select {
+  min-width: 240px;
+  max-width: 100%;
+  min-height: 43px;
+  padding: 10px 14px;
+
+  color: var(--color-text);
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.learning-path-selector select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(
+    in srgb,
+    var(--color-primary) 13%,
+    transparent
+  );
+}
+
+.learning-path-selector select option {
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+/* Overall progress */
 .course-progress {
-  margin: 24px 0;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
+  position: relative;
+  padding: 25px 27px;
+  margin: 0 0 30px;
+
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.course-progress::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+}
+
+.course-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.course-progress h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.course-progress-percentage {
+  color: var(--color-primary);
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.course-progress p {
+  margin: 12px 0 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
 }
 
 .progress-bar {
   width: 100%;
-  height: 12px;
-  background: #e5e7eb;
+  height: 11px;
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border);
   border-radius: 20px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: #e63946;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  border-radius: 20px;
+  transition: width 0.45s ease;
+}
+
+/* Journey heading */
+.learning-path-section-heading {
+  margin: 0 0 20px;
+}
+
+.learning-path-section-heading h2 {
+  margin: 0 0 6px;
+  color: var(--color-text);
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.learning-path-section-heading p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+/* Topic timeline */
+.learning-path-list {
+  position: relative;
+  display: grid;
+  gap: 20px;
+}
+
+/* Individual topic */
+.learning-path-topic {
+  position: relative;
+  min-width: 0;
+  padding: 23px 25px;
+
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 17px;
+
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.045);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.learning-path-topic:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+}
+
+/* Topic heading */
+.topic-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.topic-status-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.topic-heading h3 {
+  flex: 1;
+  min-width: 130px;
+  margin: 0;
+
+  color: var(--color-text);
+  font-size: 17px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.topic-status-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 12px;
+  border-radius: 30px;
+
+  font-size: 11px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+/* Completed topic */
+.topic-heading.completed .topic-status-icon {
+  color: #36b98b;
+  background: rgba(54, 185, 139, 0.13);
+}
+
+.topic-heading.completed .topic-status-label {
+  color: #36b98b;
+  background: rgba(54, 185, 139, 0.12);
+  border: 1px solid rgba(54, 185, 139, 0.22);
+}
+
+/* Current topic */
+.topic-heading.current .topic-status-icon {
+  color: var(--color-primary);
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border);
+}
+
+.topic-heading.current .topic-status-label {
+  color: var(--color-primary);
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border);
+}
+
+/* Upcoming topic */
+.topic-heading.upcoming .topic-status-icon {
+  color: var(--color-text-muted);
+  background: var(--color-surface-light);
+}
+
+.topic-heading.upcoming .topic-status-label {
+  color: var(--color-text-muted);
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border);
+}
+
+/* Topic progress */
+.topic-progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  margin: 15px 0 9px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.topic-progress-info strong {
+  color: var(--color-text);
+}
+
+.topic-progress-bar {
+  width: 100%;
+  height: 7px;
+
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.topic-progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
   border-radius: 20px;
   transition: width 0.4s ease;
 }
 
-
-.learning-path-topic {
-  margin: 18px 0;
-  padding: 20px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-}
-
-.topic-heading {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.topic-heading h3 {
-  margin: 0;
-  flex: 1;
-}
-
-.topic-status-icon {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-weight: bold;
-}
-
-.topic-heading.completed .topic-status-icon {
-  background: #dcfce7;
-  color: #15803d;
-}
-
-.topic-heading.current .topic-status-icon {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-.topic-heading.upcoming .topic-status-icon {
-  background: #f3f4f6;
-  color: #6b7280;
-}
-
-.topic-status-label {
+/* Materials */
+.topic-materials-heading {
+  margin: 22px 0 12px;
+  color: var(--color-text);
   font-size: 13px;
-  padding: 5px 10px;
-  border-radius: 20px;
+  font-weight: 750;
+}
+
+.learning-path-material {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 13px 14px;
+  margin-top: 9px;
+
+  background: var(--color-surface-light);
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+}
+
+.learning-path-material-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.material-status-dot {
+  width: 9px;
+  height: 9px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+
+.learning-path-material.completed .material-status-dot {
+  background: #36b98b;
+}
+
+.learning-path-material-info span:last-child {
+  color: var(--color-text);
+  font-size: 13px;
   font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
-.topic-heading.completed .topic-status-label {
-  background: #dcfce7;
-  color: #15803d;
+.material-status-text {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  text-transform: capitalize;
 }
 
-.topic-heading.current .topic-status-label {
-  background: #fee2e2;
-  color: #dc2626;
+/* Material buttons */
+.learning-path-material-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
-.topic-heading.upcoming .topic-status-label {
-  background: #f3f4f6;
-  color: #6b7280;
+.learning-path-material-actions button {
+  min-height: 34px;
+  padding: 8px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
+.learning-path-material-actions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.learning-path-open-button {
+  color: var(--color-primary);
+  background: var(--color-surface);
+  border-color: var(--color-border) !important;
+}
+
+.learning-path-complete-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #269c75, #16845f);
+}
+
+.learning-path-material-actions button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* General states */
+.learning-path-loading,
+.learning-path-empty,
+.learning-path-error {
+  padding: 23px;
+  margin: 18px 0;
+
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.learning-path-loading,
+.learning-path-empty {
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.learning-path-empty h3 {
+  margin: 0 0 7px;
+  color: var(--color-text);
+}
+
+.learning-path-empty p {
+  margin: 0;
+}
+
+.learning-path-error {
+  color: #e17a86;
+  background: rgba(220, 53, 69, 0.08);
+  border: 1px solid rgba(220, 53, 69, 0.20);
+}
+
+/* Light theme */
+html[data-theme="light"] .learning-path-selector,
+html[data-theme="light"] .course-progress,
+html[data-theme="light"] .learning-path-topic {
+  box-shadow: 0 7px 22px rgba(91, 20, 45, 0.045);
+}
+
+html[data-theme="light"] .course-progress::before {
+  background: linear-gradient(90deg, #7f1d3a, #a83255, #d58ba0);
+}
+
+html[data-theme="light"] .progress-fill,
+html[data-theme="light"] .topic-progress-fill {
+  background: linear-gradient(90deg, #7f1d3a, #a83255, #d58ba0);
+}
+
+html[data-theme="light"] .course-progress-percentage {
+  color: #7f1d3a;
+}
+
+html[data-theme="light"] .learning-path-topic:hover {
+  border-color: #a83255;
+}
+
+html[data-theme="light"] .topic-heading.current .topic-status-icon,
+html[data-theme="light"] .topic-heading.current .topic-status-label {
+  color: #7f1d3a;
+  background: #f9e9ee;
+  border-color: #ead5dd;
+}
+
+html[data-theme="light"] .learning-path-open-button {
+  color: #7f1d3a;
+  background: #ffffff;
+  border-color: #ead5dd !important;
+}
+
+html[data-theme="light"] .learning-path-selector select {
+  background: #fcf6f8;
+  border-color: #ead5dd;
+}
+
+html[data-theme="light"] .learning-path-selector select option {
+  color: #21161a;
+  background: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .learning-path-selector {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 19px;
+  }
+
+  .learning-path-selector select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .course-progress {
+    padding: 21px 19px;
+  }
+
+  .learning-path-topic {
+    padding: 20px 17px;
+  }
+
+  .topic-heading {
+    align-items: flex-start;
+  }
+
+  .topic-status-label {
+    margin-left: 49px;
+  }
+
+  .learning-path-material {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .learning-path-material-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .learning-path-material-actions button {
+    flex: 1;
+  }
+
+  .course-progress-percentage {
+    font-size: 22px;
+  }
+}
+

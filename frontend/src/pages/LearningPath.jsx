@@ -10,17 +10,19 @@ function LearningPath() {
   const [selectedCourse, setSelectedCourse] = useState("");
   const [path, setPath] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [coursesLoading, setCoursesLoading] = useState(true);
+  const [updatingMaterial, setUpdatingMaterial] = useState(null);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const totalMaterials = path.reduce(
-    (sum, topic) => sum + topic.total_materials,
+    (sum, topic) => sum + Number(topic.total_materials || 0),
     0
   );
 
   const completedMaterials = path.reduce(
-    (sum, topic) => sum + topic.completed_materials,
+    (sum, topic) => sum + Number(topic.completed_materials || 0),
     0
   );
 
@@ -29,38 +31,29 @@ function LearningPath() {
       ? Math.round((completedMaterials / totalMaterials) * 100)
       : 0;
 
-  // Mark a material as completed
-  const markMaterialCompleted = async (materialId) => {
-    try {
-      await api.put(`/learning-progress/material/${materialId}`, {
-        status: "completed",
-      });
-
-      const response = await api.get(
-        `/learning-path/course/${selectedCourse}`
-      );
-
-      setPath(response.data.learning_path);
-    } catch (error) {
-      console.error("Failed to complete material:", error);
-      alert("Failed to update material progress.");
-    }
-  };
-
   // Fetch enrolled courses
   useEffect(() => {
     const fetchCourses = async () => {
       try {
+        setError("");
+
         const response = await api.get("/enrollments/me");
         const enrolledCourses = response.data;
 
         setCourses(enrolledCourses);
 
         if (enrolledCourses.length > 0) {
-          setSelectedCourse(String(enrolledCourses[0].course_id));
+          setSelectedCourse(
+            String(enrolledCourses[0].course_id)
+          );
         }
       } catch (err) {
-        setError("Failed to load enrolled courses.");
+        setError(
+          err.response?.data?.detail ||
+            "Failed to load enrolled courses."
+        );
+      } finally {
+        setCoursesLoading(false);
       }
     };
 
@@ -69,7 +62,12 @@ function LearningPath() {
 
   // Fetch learning path
   useEffect(() => {
-    if (!selectedCourse) return;
+    if (!selectedCourse) {
+      setPath([]);
+      return;
+    }
+
+    let isMounted = true;
 
     const fetchPath = async () => {
       try {
@@ -80,20 +78,56 @@ function LearningPath() {
           `/learning-path/course/${selectedCourse}`
         );
 
-        setPath(response.data.learning_path);
+        if (isMounted) {
+          setPath(response.data.learning_path || []);
+        }
       } catch (err) {
-        setPath([]);
-        setError(
-          err.response?.data?.detail ||
-            "Failed to load learning path."
-        );
+        if (isMounted) {
+          setPath([]);
+          setError(
+            err.response?.data?.detail ||
+              "Failed to load learning path."
+          );
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchPath();
+
+    return () => {
+      isMounted = false;
+    };
   }, [selectedCourse]);
+
+  // Mark material as completed
+  const markMaterialCompleted = async (materialId) => {
+    try {
+      setUpdatingMaterial(materialId);
+      setError("");
+
+      await api.put(
+        `/learning-progress/material/${materialId}`,
+        { status: "completed" }
+      );
+
+      const response = await api.get(
+        `/learning-path/course/${selectedCourse}`
+      );
+
+      setPath(response.data.learning_path || []);
+    } catch (err) {
+      setError(
+        err.response?.data?.detail ||
+          "Failed to update material progress."
+      );
+    } finally {
+      setUpdatingMaterial(null);
+    }
+  };
 
   return (
     <DashboardLayout
@@ -101,117 +135,271 @@ function LearningPath() {
       subtitle="Follow your learning journey topic by topic."
     >
       <div className="learning-path-page">
-        <label>Select Course</label>
 
-        <select
-          value={selectedCourse}
-          onChange={(e) => setSelectedCourse(e.target.value)}
-        >
-          {courses.map((course) => (
-            <option
-              key={course.course_id}
-              value={course.course_id}
+        {/* Course selector */}
+        <section className="learning-path-selector">
+          <div>
+            <label htmlFor="learning-course">
+              Select Course
+            </label>
+
+            <select
+              id="learning-course"
+              value={selectedCourse}
+              onChange={(event) =>
+                setSelectedCourse(event.target.value)
+              }
+              disabled={coursesLoading || courses.length === 0}
             >
-              {course.course_title ||
-                course.title ||
-                `Course ${course.course_id}`}
-            </option>
-          ))}
-        </select>
+              {courses.map((course) => (
+                <option
+                  key={course.course_id}
+                  value={course.course_id}
+                >
+                  {course.course_title ||
+                    course.title ||
+                    `Course ${course.course_id}`}
+                </option>
+              ))}
+            </select>
+          </div>
+        </section>
 
-        {loading && <p>Loading learning path...</p>}
-        {error && <p>{error}</p>}
-
-        {!loading && path.length > 0 && (
-          <div className="course-progress">
-            <h3>Overall Course Progress</h3>
-
-            <p>
-              {completedMaterials} / {totalMaterials} materials completed
-            </p>
-
-            <div className="progress-bar">
-              <div
-                className="progress-fill"
-                style={{ width: `${courseProgress}%` }}
-              />
-            </div>
-
-            <p>{courseProgress}% Completed</p>
+        {/* Loading */}
+        {(coursesLoading || loading) && (
+          <div className="learning-path-loading">
+            Loading your learning journey...
           </div>
         )}
 
-        {!loading &&
-          path.map((topic) => (
-            <div
-              className="learning-path-topic"
-              key={topic.topic_id}
-            >
-              <div className={`topic-heading ${topic.status}`}>
-                <span className="topic-status-icon">
-                  {topic.status === "completed"
-                    ? "✓"
-                    : topic.status === "current"
-                    ? "●"
-                    : "○"}
-                </span>
+        {/* Error */}
+        {error && (
+          <p className="learning-path-error" role="alert">
+            {error}
+          </p>
+        )}
 
-                <h3>
-                  {topic.sequence_number}. {topic.topic_title}
-                </h3>
+        {/* No enrolled courses */}
+        {!coursesLoading &&
+          courses.length === 0 &&
+          !error && (
+            <div className="learning-path-empty">
+              <h3>No Enrolled Courses</h3>
+              <p>
+                Enroll in a course to view your personalized
+                learning journey here.
+              </p>
+            </div>
+          )}
 
-                <span className="topic-status-label">
-                  {topic.status === "completed"
-                    ? "Completed"
-                    : topic.status === "current"
-                    ? "Current Topic"
-                    : "Upcoming"}
-                </span>
+        {/* Course progress and topic list */}
+        {!coursesLoading &&
+          !loading &&
+          selectedCourse &&
+          !error &&
+          path.length > 0 && (
+            <>
+              <section className="course-progress">
+                <div className="course-progress-header">
+                  <h3>Overall Course Progress</h3>
+
+                  <span className="course-progress-percentage">
+                    {courseProgress}%
+                  </span>
+                </div>
+
+                <div className="progress-bar">
+                  <div
+                    className="progress-fill"
+                    style={{
+                      width: `${courseProgress}%`,
+                    }}
+                  />
+                </div>
+
+                <p>
+                  {completedMaterials} of {totalMaterials}{" "}
+                  learning materials completed
+                </p>
+              </section>
+
+              <div className="learning-path-section-heading">
+                <h2>Your Learning Journey</h2>
+                <p>
+                  Follow the topics in sequence and complete
+                  the learning materials to make progress.
+                </p>
               </div>
 
-              <p>Status: {topic.status}</p>
+              <div className="learning-path-list">
+                {path.map((topic) => {
+                  const status = String(
+                    topic.status || "upcoming"
+                  ).toLowerCase();
 
-              <p>
-                Progress: {topic.completed_materials}/
-                {topic.total_materials} materials completed (
-                {topic.completion_percentage}%)
-              </p>
+                  const topicMaterials =
+                    topic.materials || [];
 
-              {topic.materials.map((material) => (
-                <div key={material.material_id}>
-                  <span>
-                    {material.title} — {material.status}
-                  </span>
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      navigate(
-                        `/topics/${topic.topic_id}/materials`
-                      )
-                    }
-                  >
-                    Open Materials
-                  </button>
-
-                  {material.status !== "completed" && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        markMaterialCompleted(material.material_id)
-                      }
+                  return (
+                    <article
+                      className="learning-path-topic"
+                      key={topic.topic_id}
                     >
-                      Mark Completed
-                    </button>
-                  )}
+                      {/* Topic heading */}
+                      <div className={`topic-heading ${status}`}>
+                        <span className="topic-status-icon">
+                          {status === "completed"
+                            ? "✓"
+                            : status === "current"
+                            ? "●"
+                            : "○"}
+                        </span>
 
-                  {material.status === "completed" && (
-                    <span> ✓ Completed</span>
-                  )}
-                </div>
-              ))}
+                        <h3>
+                          {topic.sequence_number}.{" "}
+                          {topic.topic_title}
+                        </h3>
+
+                        <span className="topic-status-label">
+                          {status === "completed"
+                            ? "Completed"
+                            : status === "current"
+                            ? "Current Topic"
+                            : "Upcoming"}
+                        </span>
+                      </div>
+
+                      {/* Topic progress */}
+                      <div className="topic-progress-info">
+                        <span>
+                          Materials completed:{" "}
+                          <strong>
+                            {topic.completed_materials}/
+                            {topic.total_materials}
+                          </strong>
+                        </span>
+
+                        <strong>
+                          {topic.completion_percentage || 0}%
+                        </strong>
+                      </div>
+
+                      <div className="topic-progress-bar">
+                        <div
+                          className="topic-progress-fill"
+                          style={{
+                            width: `${Math.min(
+                              100,
+                              Math.max(
+                                0,
+                                Number(
+                                  topic.completion_percentage || 0
+                                )
+                              )
+                            )}%`,
+                          }}
+                        />
+                      </div>
+
+                      {/* Learning materials */}
+                      <h4 className="topic-materials-heading">
+                        Learning Materials
+                      </h4>
+
+                      {topicMaterials.length === 0 ? (
+                        <p className="material-status-text">
+                          No learning materials available.
+                        </p>
+                      ) : (
+                        topicMaterials.map((material) => {
+                          const isCompleted =
+                            material.status === "completed";
+
+                          const isUpdating =
+                            updatingMaterial ===
+                            material.material_id;
+
+                          return (
+                            <div
+                              key={material.material_id}
+                              className={`learning-path-material ${
+                                isCompleted ? "completed" : ""
+                              }`}
+                            >
+                              <div className="learning-path-material-info">
+                                <span className="material-status-dot" />
+
+                                <div>
+                                  <span>
+                                    {material.title}
+                                  </span>
+
+                                  <small className="material-status-text">
+                                    {isCompleted
+                                      ? "Completed"
+                                      : material.status?.replaceAll(
+                                          "_",
+                                          " "
+                                        ) || "Not started"}
+                                  </small>
+                                </div>
+                              </div>
+
+                              <div className="learning-path-material-actions">
+                                <button
+                                  type="button"
+                                  className="learning-path-open-button"
+                                  onClick={() =>
+                                    navigate(
+                                      `/topics/${topic.topic_id}/materials`
+                                    )
+                                  }
+                                >
+                                  Open Materials
+                                </button>
+
+                                {!isCompleted && (
+                                  <button
+                                    type="button"
+                                    className="learning-path-complete-button"
+                                    disabled={isUpdating}
+                                    onClick={() =>
+                                      markMaterialCompleted(
+                                        material.material_id
+                                      )
+                                    }
+                                  >
+                                    {isUpdating
+                                      ? "Updating..."
+                                      : "Mark Completed"}
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </article>
+                  );
+                })}
+              </div>
+            </>
+          )}
+
+        {/* No learning path */}
+        {!coursesLoading &&
+          !loading &&
+          selectedCourse &&
+          !error &&
+          path.length === 0 && (
+            <div className="learning-path-empty">
+              <h3>No Learning Path Available</h3>
+              <p>
+                There are no topics available for this course
+                yet. Please check again later.
+              </p>
             </div>
-          ))}
+          )}
       </div>
     </DashboardLayout>
   );

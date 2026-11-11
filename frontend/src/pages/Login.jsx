@@ -41,8 +41,6 @@ function Login() {
       const response = await api.post("/auth/login", formData);
 
       localStorage.setItem("token", response.data.access_token);
-
-      alert("Login successful!");
       navigate("/dashboard");
     } catch (err) {
       const message = err.response?.data?.detail;
