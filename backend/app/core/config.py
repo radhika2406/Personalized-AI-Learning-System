@@ -28,3 +28,5 @@ BREVO_SENDER_NAME = os.getenv("BREVO_SENDER_NAME", "Learnova")
 
 if not BREVO_SENDER_EMAIL:
     raise ValueError("BREVO_SENDER_EMAIL is missing from .env")
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")

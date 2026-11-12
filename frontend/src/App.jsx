@@ -91,12 +91,16 @@ function Home({ showIntro, onIntroComplete }) {
           </div>
 
           <div className="hero-preview">
-            <div className="preview-header">
-              <div>
-                <p className="preview-label">YOUR LEARNING OVERVIEW</p>
-                <h3>Welcome back, learner 👋</h3>
+
+          <div className="preview-header">
+            <div className="preview-heading">
+              <p className="preview-label">YOUR LEARNING OVERVIEW</p>
+              <h3>Welcome back, learner 👋</h3>
+            </div>
+
+              <div className="hero-preview-logo">
+                <Brain size={26} />
               </div>
-              <Brain size={22} />
             </div>
 
             <div className="preview-stats">

@@ -8,6 +8,7 @@ from app.core.config import (
     BREVO_API_KEY,
     BREVO_SENDER_EMAIL,
     BREVO_SENDER_NAME,
+    FRONTEND_URL,
 )
 
 logger = logging.getLogger(__name__)
@@ -85,16 +86,16 @@ def send_welcome_email(email: str, full_name: str) -> bool:
                     </p>
                 </div>
 
-                <p style="text-align:center; margin:30px 0;">
-                    <a href="http://localhost:5173/dashboard"
-                       style="background:#7044c5; color:white;
-                              padding:14px 28px;
-                              text-decoration:none;
-                              border-radius:8px;
-                              font-weight:bold;">
-                        Start Learning
+         <p style="text-align:center; margin:30px 0;">
+                    <a href="{FRONTEND_URL}/dashboard"
+                    style="background:#7044c5; color:white;
+                    padding:14px 28px;
+                    text-decoration:none;
+                    border-radius:8px;
+                    font-weight:bold;">
+                    Start Learning
                     </a>
-                </p>
+                    </p>
 
                 <p>
                     Your future starts with one step.

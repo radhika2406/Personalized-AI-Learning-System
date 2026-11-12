@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import {
@@ -20,6 +19,7 @@ import "./DashboardLayout.css";
 import { useTheme } from "../ThemeContext";
 import api from "../services/api";
 import GlobalSearch from "./GlobalSearch";
+import Logo from "./Logo";
 
 function DashboardLayout({ title, subtitle, children }) {
   const navigate = useNavigate();
@@ -193,7 +193,10 @@ function DashboardLayout({ title, subtitle, children }) {
   );
 
   return (
-    <div className="dashboard-layout">
+    <div
+      className="dashboard-layout"
+      data-theme={theme}
+    >
 
       {sidebarOpen && (
         <button
@@ -204,6 +207,7 @@ function DashboardLayout({ title, subtitle, children }) {
         />
       )}
 
+
       <aside
         id="dashboard-sidebar"
         className={`dashboard-sidebar ${
@@ -211,20 +215,17 @@ function DashboardLayout({ title, subtitle, children }) {
         }`}
       >
         <div className="sidebar-top">
-          <div className="sidebar-brand">
-            <span className="brand-icon">L</span>
-            <span>Learnova</span>
-          </div>
-
-          <button
-            type="button"
-            className="sidebar-close-button"
-            onClick={closeSidebar}
-            aria-label="Close navigation menu"
-          >
-            <X size={22} />
-          </button>
+          <Logo />
         </div>
+
+        <button
+          type="button"
+          className="sidebar-close-button"
+          onClick={closeSidebar}
+          aria-label="Close navigation menu"
+        >
+          <X size={22} />
+        </button>
 
         <p className="sidebar-label">MENU</p>
 
@@ -272,9 +273,8 @@ function DashboardLayout({ title, subtitle, children }) {
             <Menu size={23} />
           </button>
 
-          <div className="mobile-brand">
-            <span className="brand-icon">L</span>
-            <span>Learnova</span>
+         <div className="mobile-brand">
+            <Logo />
           </div>
 
           <div className="mobile-profile-area">

@@ -2223,3 +2223,43 @@
 .google-login-section button {
   max-width: 100%;
 }
+/* Learning overview header */
+.preview-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.preview-heading {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Brain logo */
+.hero-preview-logo {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* Dark theme */
+.landing-page[data-theme="dark"] .hero-preview-logo {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7955ed, #16b9d5);
+  box-shadow: 0 0 22px rgba(112, 68, 197, 0.3);
+}
+
+/* Light theme */
+.landing-page[data-theme="light"] .hero-preview-logo {
+  color: #ffffff;
+  background: linear-gradient(135deg, #722b45, #a64d69);
+  box-shadow: 0 0 18px rgba(114, 43, 69, 0.2);
+}
