@@ -11,8 +11,8 @@ Tests to verify:
 
 import unittest
 
-from assessment.question_bank.loader import load_all_questions
-from assessment.question_bank.validator import (
+from assessment.question_management.loader import load_all_questions
+from assessment.question_management.validator import (
     validate_course,
     validate_all_courses,
     validate_question,

@@ -1,3 +1,4 @@
+'''
 """
 exam_manager.py
 
@@ -10,7 +11,7 @@ Enforces strict progression (no skipping stages) and records attempt results.
 
 from typing import Dict, List, Optional, Any
 from ai_engine.common.course_config import get_course, get_course_checkpoints
-from assessment.question_bank.loader import (
+from assessment.question_management.loader import (
     load_course_topics,
     load_course_questions,
     load_course_syllabus,
@@ -225,4 +226,380 @@ def record_exam_attempt(
         "questions": [q.get("question_id") if isinstance(q, dict) else q for q in questions.values()],
         "answers": answers,
         "details": eval_result["breakdown"]
+    }
+'''
+
+"""
+exam_manager.py
+
+Manages the three-stage examination system
+for all registered courses.
+
+Stage 1: Easy examination
+Stage 2: Medium examination
+Stage 3: Hard examination
+
+Course topics and checkpoints are loaded dynamically.
+"""
+
+from typing import Dict, List, Optional, Any
+
+from ai_engine.common.course_config import (
+    get_course,
+    get_course_checkpoints,
+)
+
+from assessment.question_management.loader import (
+    load_course_topics,
+    load_course_questions,
+    load_course_syllabus,
+)
+
+from assessment.scoring.evaluator import evaluate_answers
+
+
+STAGE_1 = "stage_1_easy"
+STAGE_2 = "stage_2_medium"
+STAGE_3 = "stage_3_hard"
+
+
+STAGE_METADATA = {
+    STAGE_1: {
+        "name": "Stage 1: Easy Examination",
+        "difficulty": "easy",
+        "checkpoint_key": "stage_1_easy_exam",
+        "default_topics_required": 10,
+        "previous_stage": None,
+        "description": (
+            "Evaluates the student's basic understanding "
+            "across foundational topics."
+        ),
+    },
+    STAGE_2: {
+        "name": "Stage 2: Medium Examination",
+        "difficulty": "medium",
+        "checkpoint_key": "stage_2_medium_exam",
+        "default_topics_required": 15,
+        "previous_stage": STAGE_1,
+        "description": (
+            "Evaluates conceptual understanding and "
+            "practical application."
+        ),
+    },
+    STAGE_3: {
+        "name": "Stage 3: Hard Examination",
+        "difficulty": "hard",
+        "checkpoint_key": "stage_3_hard_exam",
+        "default_topics_required": 16,
+        "previous_stage": STAGE_2,
+        "description": (
+            "Evaluates advanced understanding, edge cases, "
+            "and problem-solving ability."
+        ),
+    },
+}
+
+
+def _validate_course(course_id: str) -> Dict[str, Any]:
+    """Validate and return the selected course."""
+    course = get_course(course_id)
+
+    if not course:
+        raise ValueError(f"Unknown course: {course_id}")
+
+    return course
+
+
+def get_checkpoints_for_course(course_id: str) -> Dict[str, int]:
+    """
+    Get examination checkpoints from the selected course syllabus.
+
+    Falls back to course_config.py if the syllabus does not
+    contain checkpoint values.
+    """
+
+    _validate_course(course_id)
+
+    syllabus = load_course_syllabus(course_id)
+    syllabus_checkpoints = syllabus.get("checkpoints", {})
+
+    default_checkpoints = get_course_checkpoints(course_id)
+
+    result = {}
+
+    for stage in STAGE_METADATA.values():
+        key = stage["checkpoint_key"]
+
+        result[key] = syllabus_checkpoints.get(
+            key,
+            default_checkpoints.get(
+                key,
+                stage["default_topics_required"]
+            )
+        )
+
+    return result
+
+
+def is_stage_unlocked(
+    course_id: str,
+    stage: str,
+    completed_topic_ids: List[str],
+    exam_history: Optional[List[Dict[str, Any]]] = None
+) -> Dict[str, Any]:
+    """
+    Check whether an examination stage is unlocked.
+
+    A learner must complete the required number of topics.
+    The previous examination stage must also be passed.
+    """
+
+    _validate_course(course_id)
+
+    if stage not in STAGE_METADATA:
+        raise ValueError(
+            f"Unknown exam stage '{stage}'. "
+            f"Valid stages: {list(STAGE_METADATA)}"
+        )
+
+    if not isinstance(completed_topic_ids, list):
+        raise ValueError("completed_topic_ids must be a list")
+
+    course_topics = load_course_topics(course_id)
+
+    valid_topic_ids = {
+        topic.get("id") or topic.get("topic_id")
+        for topic in course_topics
+    }
+
+    unknown_topics = set(completed_topic_ids) - valid_topic_ids
+
+    if unknown_topics:
+        raise ValueError(
+            f"Unknown completed topics for {course_id}: "
+            f"{sorted(unknown_topics)}"
+        )
+
+    meta = STAGE_METADATA[stage]
+    checkpoints = get_checkpoints_for_course(course_id)
+
+    required_count = checkpoints[meta["checkpoint_key"]]
+
+    completed_count = len(set(completed_topic_ids))
+    exam_history = exam_history or []
+
+    # Check prerequisite examination
+    previous_stage = meta["previous_stage"]
+
+    if previous_stage is not None:
+        previous_stage_passed = any(
+            record.get("stage") == previous_stage
+            and record.get("completion_status") == "passed"
+            for record in exam_history
+        )
+
+        if not previous_stage_passed:
+            previous_name = STAGE_METADATA[previous_stage]["name"]
+
+            return {
+                "unlocked": False,
+                "stage": stage,
+                "reason": (
+                    f"Prerequisite {previous_name} must be passed "
+                    f"before unlocking {meta['name']}."
+                ),
+                "topics_completed": completed_count,
+                "topics_required": required_count,
+            }
+
+    # Check topic completion requirement
+    if completed_count < required_count:
+        return {
+            "unlocked": False,
+            "stage": stage,
+            "reason": (
+                f"Requires completing at least {required_count} topics "
+                f"(current: {completed_count})."
+            ),
+            "topics_completed": completed_count,
+            "topics_required": required_count,
+        }
+
+    return {
+        "unlocked": True,
+        "stage": stage,
+        "reason": f"{meta['name']} is unlocked.",
+        "topics_completed": completed_count,
+        "topics_required": required_count,
+    }
+
+
+def generate_stage_exam(
+    course_id: str,
+    stage: str,
+    completed_topic_ids: List[str],
+    exam_history: Optional[List[Dict[str, Any]]] = None,
+    num_questions: Optional[int] = None
+) -> Dict[str, Any]:
+    """
+    Generate an examination for the selected course and stage.
+    """
+
+    course = _validate_course(course_id)
+
+    if stage not in STAGE_METADATA:
+        raise ValueError(f"Invalid examination stage: {stage}")
+
+    if num_questions is not None:
+        if (
+            isinstance(num_questions, bool)
+            or not isinstance(num_questions, int)
+            or num_questions < 1
+        ):
+            raise ValueError(
+                "num_questions must be a positive whole number or None"
+            )
+
+    unlock_status = is_stage_unlocked(
+        course_id,
+        stage,
+        completed_topic_ids,
+        exam_history
+    )
+
+    if not unlock_status["unlocked"]:
+        raise ValueError(
+            f"Cannot generate examination: {unlock_status['reason']}"
+        )
+
+    meta = STAGE_METADATA[stage]
+    target_difficulty = meta["difficulty"]
+
+    topics = load_course_topics(course_id)
+    all_questions = load_course_questions(course_id)
+
+    # Sort the selected course's topics by their syllabus order
+    sorted_topics = sorted(
+        topics,
+        key=lambda topic: topic.get("order", 0)
+    )
+
+    checkpoints = get_checkpoints_for_course(course_id)
+    required_count = checkpoints[meta["checkpoint_key"]]
+
+    eligible_topics = sorted_topics[:required_count]
+
+    eligible_topic_ids = {
+        topic.get("id") or topic.get("topic_id")
+        for topic in eligible_topics
+    }
+
+    # Select questions matching both topic and difficulty
+    stage_questions = []
+
+    for question in all_questions.values():
+        question_topic = (
+            question.get("topic")
+            or question.get("topic_id")
+        )
+
+        question_difficulty = (
+            question.get("difficulty", "").strip().lower()
+        )
+
+        if (
+            question_topic in eligible_topic_ids
+            and question_difficulty == target_difficulty
+        ):
+            stage_questions.append(question)
+
+    if num_questions is not None:
+        stage_questions = stage_questions[:num_questions]
+
+    if not stage_questions:
+        raise ValueError(
+            f"No {target_difficulty} questions available "
+            f"for course '{course_id}' and stage '{stage}'."
+        )
+
+    return {
+        "exam_title": f"{course['name']} - {meta['name']}",
+        "course_id": course_id,
+        "stage": stage,
+        "difficulty": target_difficulty,
+        "total_questions": len(stage_questions),
+        "questions": stage_questions,
+    }
+
+
+def record_exam_attempt(
+    learner_id: str,
+    course_id: str,
+    stage: str,
+    answers: Dict[str, Any],
+    questions: Dict[str, Dict[str, Any]],
+    attempt_number: int = 1,
+    passing_score: int = 60
+) -> Dict[str, Any]:
+    """
+    Evaluate and record an examination attempt for any course.
+    """
+
+    _validate_course(course_id)
+
+    if not isinstance(learner_id, str) or not learner_id.strip():
+        raise ValueError("learner_id is required.")
+
+    if stage not in STAGE_METADATA:
+        raise ValueError(f"Invalid exam stage: {stage}")
+
+    if (
+        isinstance(attempt_number, bool)
+        or not isinstance(attempt_number, int)
+        or attempt_number < 1
+    ):
+        raise ValueError(
+            "attempt_number must be a whole number of 1 or greater."
+        )
+
+    if (
+        isinstance(passing_score, bool)
+        or not isinstance(passing_score, (int, float))
+        or not 0 <= passing_score <= 100
+    ):
+        raise ValueError("passing_score must be between 0 and 100.")
+
+    if not isinstance(questions, dict) or not questions:
+        raise ValueError("questions must be a non-empty dictionary.")
+
+    evaluation = evaluate_answers(answers, questions)
+
+    score_pct = evaluation["score_pct"]
+
+    completion_status = (
+        "passed"
+        if score_pct >= passing_score
+        else "failed"
+    )
+
+    difficulty = STAGE_METADATA[stage]["difficulty"]
+
+    return {
+        "exam_id": (
+            f"{learner_id}_{course_id}_{stage}_att_{attempt_number}"
+        ),
+        "learner_id": learner_id,
+        "course_id": course_id,
+        "stage": stage,
+        "difficulty": difficulty,
+        "attempt_number": attempt_number,
+        "passing_score": passing_score,
+        "score": score_pct,
+        "completion_status": completion_status,
+        "correct_count": evaluation["correct_count"],
+        "total_questions": evaluation["total_questions"],
+        "wrong_question_ids": evaluation["wrong_question_ids"],
+        "questions": list(questions.keys()),
+        "answers": answers,
+        "details": evaluation["breakdown"],
     }

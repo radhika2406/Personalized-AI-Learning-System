@@ -20,7 +20,7 @@ from assessment.scoring.exam_manager import (
     generate_stage_exam,
     record_exam_attempt,
 )
-from assessment.question_bank.loader import load_course_topics, load_course_questions
+from assessment.question_management.loader import load_course_topics, load_course_questions
 
 
 class TestExamUnlockingAndProgression(unittest.TestCase):

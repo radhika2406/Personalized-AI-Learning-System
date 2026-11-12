@@ -22,7 +22,7 @@ from ai_engine.common.course_config import (
     get_courses_by_category,
     get_course_checkpoints,
 )
-from assessment.question_bank.loader import (
+from assessment.question_management.loader import (
     load_course_syllabus,
     load_course_topics,
     load_course_questions,

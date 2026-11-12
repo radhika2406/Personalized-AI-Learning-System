@@ -7,7 +7,7 @@ and absence of duplicates across all 12 courses.
 
 from typing import Dict, List, Tuple, Any, Optional
 from ai_engine.common.course_config import COURSES, list_courses
-from assessment.question_bank.loader import (
+from assessment.question_management.loader import (
     load_course_syllabus,
     load_course_topics,
     load_course_questions,
