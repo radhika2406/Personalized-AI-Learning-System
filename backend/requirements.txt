@@ -4,3 +4,5 @@ psycopg[binary]
 python-dotenv
 alembic
 PyJWT
+google-auth==2.62.2
+httpx

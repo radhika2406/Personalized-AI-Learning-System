@@ -25,12 +25,15 @@ def create_user(db: Session, user_data: UserCreate) -> User:
 
     return new_user
 
+
 def authenticate_user(db: Session, email: str, password: str):
     user = db.query(User).filter(User.email == email).first()
 
-    if not user:
+    # Check whether the user exists and has a password.
+    if not user or not user.password_hash:
         return None
 
+    # Verify the entered password.
     if not verify_password(password, user.password_hash):
         return None
 

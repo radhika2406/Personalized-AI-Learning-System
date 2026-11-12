@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import LearningPath from "./pages/LearningPath";
 import { ThemeProvider, useTheme } from "./ThemeContext";
 import LearnovaIntro from "./components/intro/LearnovaIntro";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
 function Home({ showIntro, onIntroComplete }) {
@@ -203,45 +204,44 @@ function App() {
   return (
     <ThemeProvider>
        <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
+
+        <Routes>
+          {/* Public routes */}
+          <Route
+            path="/"
+            element={
+              <Home
                 showIntro={showIntro}
                 onIntroComplete={handleIntroComplete}
+              />
+            }
+          />
+
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Protected routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/:courseId" element={<CourseDetails />} />
+            <Route path="/materials" element={<LearningMaterials />} />
+            <Route
+              path="/topics/:topicId/materials"
+              element={<LearningMaterials />}
             />
-           }
-        />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/materials" element={<LearningMaterials />} />
-        <Route
-          path="/courses/:courseId"
-          element={<CourseDetails />}
-        />
-        <Route
-          path="/topics/:topicId/materials"
-          element={<LearningMaterials />}
-        />
-        <Route path="/quizzes" element={<Quizzes />} />
-        <Route
-        path="/quizzes/:quizId/attempt"
-        element={<QuizAttempt />}
-        />
-        <Route
-          path="/quiz-history"
-          element={<QuizHistory />}
-        />
-        <Route
-          path="/recommendations"
-          element={<Recommendations />}
-        />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/learning-path" element={<LearningPath />} />
+            <Route path="/quizzes" element={<Quizzes />} />
+            <Route
+              path="/quizzes/:quizId/attempt"
+              element={<QuizAttempt />}
+            />
+            <Route path="/quiz-history" element={<QuizHistory />} />
+            <Route path="/recommendations" element={<Recommendations />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/learning-path" element={<LearningPath />} />
+          </Route>
         </Routes>
+
       </BrowserRouter>
     </ThemeProvider>
   );

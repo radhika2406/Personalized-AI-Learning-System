@@ -2190,3 +2190,36 @@
     var(--color-accent)
   );
 }
+.google-login-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 22px 0;
+}
+
+.google-login-section > div {
+  width: 100%;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--text-secondary, #999);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.25;
+}
+
+.google-login-section button {
+  max-width: 100%;
+}

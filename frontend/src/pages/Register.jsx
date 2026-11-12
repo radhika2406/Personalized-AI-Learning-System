@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin } from "@react-oauth/google";
 import { Brain, ArrowRight, Sun, Moon } from "lucide-react";
 import api from "../services/api";
 
@@ -24,6 +25,7 @@ function Register() {
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -32,6 +34,7 @@ function Register() {
     });
   };
 
+  // Normal email and password registration
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -52,6 +55,36 @@ function Register() {
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Google registration
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setError("");
+    setGoogleLoading(true);
+
+    try {
+      const response = await api.post("/auth/google", {
+        credential: credentialResponse.credential,
+      });
+
+      localStorage.setItem("token", response.data.access_token);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error(
+        "Google registration error:",
+        err.response?.data || err.message
+      );
+
+      const message = err.response?.data?.detail;
+
+      setError(
+        typeof message === "string"
+          ? message
+          : "Google registration failed. Please try again."
+      );
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -84,6 +117,32 @@ function Register() {
 
         {error && <div className="auth-error">{error}</div>}
 
+        {/* Google Registration */}
+        <div className="google-login-section">
+          {googleLoading ? (
+            <p>Creating your account...</p>
+          ) : (
+
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() =>
+              setError("Google registration was unsuccessful. Please try again.")
+            }
+            theme={theme === "dark" ? "filled_blue" : "outline"}
+            text="signup_with"
+            shape="pill"
+            size="large"
+            width="350"
+          />
+
+          )}
+        </div>
+
+        <div className="auth-divider">
+          <span>OR REGISTER WITH EMAIL</span>
+        </div>
+
+        {/* Normal Registration Form */}
         <form onSubmit={handleSubmit} className="auth-form-modern">
           <label htmlFor="full_name">Full Name</label>
           <input
@@ -119,9 +178,17 @@ function Register() {
             required
           />
 
-          <button type="submit" className="auth-submit-modern" disabled={loading}>
-            {loading ? "Creating Account..." : (
-              <>Create Account <ArrowRight size={17} /></>
+          <button
+            type="submit"
+            className="auth-submit-modern"
+            disabled={loading}
+          >
+            {loading ? (
+              "Creating Account..."
+            ) : (
+              <>
+                Create Account <ArrowRight size={17} />
+              </>
             )}
           </button>
         </form>
@@ -130,7 +197,9 @@ function Register() {
           Already have an account? <Link to="/login">Login</Link>
         </p>
 
-        <Link to="/" className="auth-back-home">← Back to Home</Link>
+        <Link to="/" className="auth-back-home">
+          ← Back to Home
+        </Link>
       </div>
     </div>
   );

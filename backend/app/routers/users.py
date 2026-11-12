@@ -4,6 +4,7 @@ from app.core.security import get_current_user
 from app.models.user import User
 from app.db.database import get_db
 from app.schemas.user import UserCreate, UserResponse
+from app.services.email_service import send_welcome_email
 from app.services.user_service import create_user
 
 router = APIRouter(
@@ -17,12 +18,26 @@ router = APIRouter(
     response_model=UserResponse,
     status_code=status.HTTP_201_CREATED,
 )
+
+@router.post(
+    "/register",
+    response_model=UserResponse,
+    status_code=status.HTTP_201_CREATED,
+)
 def register_user(
     user_data: UserCreate,
     db: Session = Depends(get_db),
 ):
     try:
+        # Create and save the new user first.
         user = create_user(db, user_data)
+
+        # Send welcome email only after successful registration.
+        send_welcome_email(
+            email=user.email,
+            full_name=user.full_name,
+        )
+
         return user
 
     except ValueError as error:
@@ -30,6 +45,7 @@ def register_user(
             status_code=status.HTTP_409_CONFLICT,
             detail=str(error),
         )
+
     
 @router.get("/me", response_model=UserResponse)
 def get_my_profile(
