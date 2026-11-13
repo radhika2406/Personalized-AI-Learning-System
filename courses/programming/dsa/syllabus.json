@@ -1,0 +1,277 @@
+{
+  "course_id": "dsa",
+  "course_title": "Data Structures and Algorithms",
+  "category": "programming",
+  "description": "Mastery of essential data structures, algorithmic design patterns, and complexity analysis.",
+  "prerequisites": [
+    "Proficiency in at least one programming language (Python/Java/C++)"
+  ],
+  "total_topics": 16,
+  "checkpoints": {
+    "stage_1_easy": 10,
+    "stage_2_medium": 15,
+    "stage_3_hard": 16
+  },
+  "topics": [
+    {
+      "topic_id": "asymptotic_analysis",
+      "title": "Time and Space Complexity, Big-O Notation",
+      "order": 1,
+      "difficulty_level": "beginner",
+      "description": "Big-O, Big-Omega, Big-Theta, growth of functions, best/average/worst case analysis.",
+      "subtopics": [
+        "Big-O upper bound",
+        "Omega and Theta bounds",
+        "Constant, logarithmic, linear, quadratic growth",
+        "Space complexity"
+      ],
+      "prerequisites": []
+    },
+    {
+      "topic_id": "arrays",
+      "title": "Array Operations and Searching",
+      "order": 2,
+      "difficulty_level": "beginner",
+      "description": "Contiguous memory layout, insertion, deletion, rotation, and prefix sums.",
+      "subtopics": [
+        "Memory address calculation",
+        "Array insertion & deletion bounds",
+        "Two-pointer technique",
+        "Prefix sum array"
+      ],
+      "prerequisites": [
+        "asymptotic_analysis"
+      ]
+    },
+    {
+      "topic_id": "linear_binary_search",
+      "title": "Linear and Binary Search Algorithms",
+      "order": 3,
+      "difficulty_level": "beginner",
+      "description": "Sequential scanning vs binary search on sorted sequences, search space reduction.",
+      "subtopics": [
+        "Linear search O(n)",
+        "Binary search iterative & recursive",
+        "Lower bound and upper bound",
+        "Binary search on answers"
+      ],
+      "prerequisites": [
+        "arrays"
+      ]
+    },
+    {
+      "topic_id": "bubble_selection_insertion_sort",
+      "title": "Elementary Sorting Algorithms",
+      "order": 4,
+      "difficulty_level": "beginner",
+      "description": "Bubble sort, selection sort, insertion sort: mechanics, stability, and complexities.",
+      "subtopics": [
+        "Bubble sort optimizations",
+        "Selection sort minimum selection",
+        "Insertion sort online sorting",
+        "Sorting stability"
+      ],
+      "prerequisites": [
+        "arrays"
+      ]
+    },
+    {
+      "topic_id": "singly_linked_lists",
+      "title": "Singly Linked List Construction and Operations",
+      "order": 5,
+      "difficulty_level": "beginner",
+      "description": "Node pointers, dynamic memory, head pointer, traversal, insertion, and deletion.",
+      "subtopics": [
+        "Node structure",
+        "Head/Tail pointer maintenance",
+        "Insertion at head, middle, tail",
+        "Reversing a linked list"
+      ],
+      "prerequisites": [
+        "asymptotic_analysis"
+      ]
+    },
+    {
+      "topic_id": "doubly_circular_linked_lists",
+      "title": "Doubly and Circular Linked Lists",
+      "order": 6,
+      "difficulty_level": "beginner",
+      "description": "Bidirectional links, circular tail-to-head links, and sentinel dummy nodes.",
+      "subtopics": [
+        "Prev and Next pointers",
+        "Circular list termination condition",
+        "Sentinel nodes",
+        "DLL node deletion in O(1)"
+      ],
+      "prerequisites": [
+        "singly_linked_lists"
+      ]
+    },
+    {
+      "topic_id": "stacks",
+      "title": "Stack ADT, Infix/Postfix and Applications",
+      "order": 7,
+      "difficulty_level": "beginner",
+      "description": "LIFO policy, push/pop/peek operations, parenthesis matching, and expression evaluation.",
+      "subtopics": [
+        "Array vs Linked list stack implementation",
+        "Balanced parenthesis validation",
+        "Infix to Postfix conversion",
+        "Monotonic stack"
+      ],
+      "prerequisites": [
+        "arrays",
+        "singly_linked_lists"
+      ]
+    },
+    {
+      "topic_id": "queues",
+      "title": "Linear Queue, Circular Queue and Deque",
+      "order": 8,
+      "difficulty_level": "beginner",
+      "description": "FIFO policy, front/rear pointers, circular buffer wrap-around, and double-ended queues.",
+      "subtopics": [
+        "Queue enqueue and dequeue",
+        "Circular queue modulo arithmetic",
+        "Deque operations",
+        "Queue using two stacks"
+      ],
+      "prerequisites": [
+        "stacks"
+      ]
+    },
+    {
+      "topic_id": "recursion_backtracking",
+      "title": "Recursion Principles and Backtracking",
+      "order": 9,
+      "difficulty_level": "beginner",
+      "description": "Call stack frames, base cases, recursion tree, subsets, permutations, and pruning.",
+      "subtopics": [
+        "Call stack mechanics",
+        "Base cases and recurrence",
+        "Backtracking state restoration",
+        "N-Queens & Sudoku"
+      ],
+      "prerequisites": [
+        "stacks"
+      ]
+    },
+    {
+      "topic_id": "divide_and_conquer",
+      "title": "Merge Sort and Quick Sort",
+      "order": 10,
+      "difficulty_level": "beginner",
+      "description": "Divide-and-conquer paradigm, Master Theorem, merge procedure, and partitioning schemes.",
+      "subtopics": [
+        "Merge sort O(n log n)",
+        "Quick sort Lomuto vs Hoare partition",
+        "Master theorem recurrence analysis",
+        "Worst-case Quick sort prevention"
+      ],
+      "prerequisites": [
+        "recursion_backtracking",
+        "bubble_selection_insertion_sort"
+      ]
+    },
+    {
+      "topic_id": "binary_trees",
+      "title": "Binary Trees and Tree Traversals",
+      "order": 11,
+      "difficulty_level": "intermediate",
+      "description": "Hierarchical structures, root, depth, height, pre/in/post-order traversals, and BFS level-order.",
+      "subtopics": [
+        "Tree terminology (height, depth, leaf)",
+        "Inorder, preorder, postorder traversals",
+        "Level-order traversal using queue",
+        "Calculating tree height and diameter"
+      ],
+      "prerequisites": [
+        "queues",
+        "recursion_backtracking"
+      ]
+    },
+    {
+      "topic_id": "binary_search_trees",
+      "title": "BST Insertion, Deletion and Validation",
+      "order": 12,
+      "difficulty_level": "intermediate",
+      "description": "BST property, search, in-order predecessor/successor, deletion cases, and balancing overview.",
+      "subtopics": [
+        "BST ordering property",
+        "Search and insertion O(h)",
+        "Deletion (0, 1, 2 children)",
+        "Validating BST range constraints"
+      ],
+      "prerequisites": [
+        "binary_trees"
+      ]
+    },
+    {
+      "topic_id": "heaps_priority_queues",
+      "title": "Min/Max Heaps and Heap Sort",
+      "order": 13,
+      "difficulty_level": "intermediate",
+      "description": "Complete binary trees in array representation, heapify up/down, priority queue ADT, and heap sort.",
+      "subtopics": [
+        "Array index mapping (2i+1, 2i+2)",
+        "Heapify procedure O(log n)",
+        "Build heap O(n)",
+        "Heap Sort algorithm"
+      ],
+      "prerequisites": [
+        "binary_trees"
+      ]
+    },
+    {
+      "topic_id": "hashing_hash_tables",
+      "title": "Hash Functions, Collision Resolution",
+      "order": 14,
+      "difficulty_level": "intermediate",
+      "description": "Direct addressing, hash functions, separate chaining, open addressing (linear, quadratic, double hashing).",
+      "subtopics": [
+        "Hash function properties",
+        "Separate chaining with linked lists",
+        "Open addressing probing techniques",
+        "Load factor and rehashing"
+      ],
+      "prerequisites": [
+        "arrays",
+        "singly_linked_lists"
+      ]
+    },
+    {
+      "topic_id": "graph_representations_traversals",
+      "title": "Adjacency Matrix/List, BFS and DFS",
+      "order": 15,
+      "difficulty_level": "intermediate",
+      "description": "Vertices, edges, directed/undirected, adjacency matrix vs list, BFS shortest path, and DFS cycle detection.",
+      "subtopics": [
+        "Adjacency matrix vs Adjacency list",
+        "Breadth-First Search (BFS) with queue",
+        "Depth-First Search (DFS) with recursion",
+        "Cycle detection in graphs"
+      ],
+      "prerequisites": [
+        "queues",
+        "stacks",
+        "recursion_backtracking"
+      ]
+    },
+    {
+      "topic_id": "dynamic_programming",
+      "title": "Memoization, Tabulation and Classic DP Problems",
+      "order": 16,
+      "difficulty_level": "advanced",
+      "description": "Overlapping subproblems, optimal substructure, top-down memoization vs bottom-up tabulation.",
+      "subtopics": [
+        "Memoization vs Tabulation",
+        "1D DP: Fibonacci and Climbing Stairs",
+        "0/1 Knapsack problem",
+        "Longest Common Subsequence (LCS)"
+      ],
+      "prerequisites": [
+        "recursion_backtracking"
+      ]
+    }
+  ]
+}

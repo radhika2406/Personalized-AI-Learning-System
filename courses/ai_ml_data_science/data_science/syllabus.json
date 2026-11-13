@@ -1,0 +1,273 @@
+{
+  "course_id": "data_science",
+  "course_title": "Data Science",
+  "category": "ai_ml_data_science",
+  "description": "Full data science lifecycle from data wrangling with NumPy and Pandas to exploratory analysis, statistics, and visualization.",
+  "prerequisites": [
+    "Basic Python programming",
+    "Introductory mathematics"
+  ],
+  "total_topics": 16,
+  "checkpoints": {
+    "stage_1_easy": 10,
+    "stage_2_medium": 15,
+    "stage_3_hard": 16
+  },
+  "topics": [
+    {
+      "topic_id": "data_science_lifecycle",
+      "title": "Data Science Workflow, Problem Formulation and Tools",
+      "order": 1,
+      "difficulty_level": "beginner",
+      "description": "CRISP-DM framework, problem framing, business metrics, hypothesis generation, and project lifecycle.",
+      "subtopics": [
+        "Business understanding & question framing",
+        "Data collection & ingestion",
+        "Iterative cycle (acquire, clean, model, deploy)",
+        "Jupyter notebooks and development environment"
+      ],
+      "prerequisites": []
+    },
+    {
+      "topic_id": "numpy_arrays",
+      "title": "NumPy Arrays, Indexing, Slicing and Vectorization",
+      "order": 2,
+      "difficulty_level": "beginner",
+      "description": "N-dimensional arrays (ndarray), memory layout, indexing, slicing, and vectorization vs Python loops.",
+      "subtopics": [
+        "np.ndarray creation and shape",
+        "Data types (dtypes)",
+        "Multi-dimensional indexing and slicing",
+        "Vectorized speed advantages"
+      ],
+      "prerequisites": [
+        "data_science_lifecycle"
+      ]
+    },
+    {
+      "topic_id": "numpy_operations",
+      "title": "Broadcasting, Mathematical Functions and Linear Algebra",
+      "order": 3,
+      "difficulty_level": "beginner",
+      "description": "NumPy broadcasting rules, universal functions (ufuncs), matrix multiplication, and random sampling.",
+      "subtopics": [
+        "Broadcasting compatibility rules",
+        "Element-wise universal functions",
+        "np.dot, @ operator, np.linalg",
+        "np.random distributions and seeds"
+      ],
+      "prerequisites": [
+        "numpy_arrays"
+      ]
+    },
+    {
+      "topic_id": "pandas_series_dataframes",
+      "title": "Pandas Series, DataFrame Creation and Indexing",
+      "order": 4,
+      "difficulty_level": "beginner",
+      "description": "Tabular structures in Pandas: Series 1D, DataFrame 2D, reading CSVs/Excel, and index alignment.",
+      "subtopics": [
+        "pd.Series and index labels",
+        "pd.DataFrame columns and indices",
+        "pd.read_csv() and I/O functions",
+        "head(), info(), describe() exploration"
+      ],
+      "prerequisites": [
+        "numpy_operations"
+      ]
+    },
+    {
+      "topic_id": "pandas_filtering_selection",
+      "title": "Data Selection, Filtering and Boolean Masking",
+      "order": 5,
+      "difficulty_level": "beginner",
+      "description": "Label-based indexing (.loc), position-based indexing (.iloc), boolean masking, and query() syntax.",
+      "subtopics": [
+        ".loc[] label access",
+        ".iloc[] integer position access",
+        "Boolean conditional filtering",
+        "isin() and query() filtering"
+      ],
+      "prerequisites": [
+        "pandas_series_dataframes"
+      ]
+    },
+    {
+      "topic_id": "handling_missing_data",
+      "title": "Dropna, Fillna, Interpolation and Missingness Analysis",
+      "order": 6,
+      "difficulty_level": "beginner",
+      "description": "Identifying nulls (isna, notna), dropping records (dropna), forward/backward fill, and interpolation.",
+      "subtopics": [
+        "isna() and isnull() detection",
+        "dropna() axis and thresh",
+        "fillna() with constants, mean, median",
+        "Time series interpolate()"
+      ],
+      "prerequisites": [
+        "pandas_filtering_selection"
+      ]
+    },
+    {
+      "topic_id": "data_cleaning_transformation",
+      "title": "Duplicates, Type Casting and String Methods",
+      "order": 7,
+      "difficulty_level": "beginner",
+      "description": "Removing duplicate rows, astype() casting, vectorized string operations (.str), and map/apply transforms.",
+      "subtopics": [
+        "drop_duplicates()",
+        "astype() type conversion",
+        ".str accessor (split, replace, contains)",
+        "apply() and applymap()"
+      ],
+      "prerequisites": [
+        "handling_missing_data"
+      ]
+    },
+    {
+      "topic_id": "data_aggregation_groupby",
+      "title": "GroupBy Operations, Aggregation and Pivot Tables",
+      "order": 8,
+      "difficulty_level": "beginner",
+      "description": "Split-Apply-Combine paradigm: groupby, aggregate functions, pivot_table(), and crosstab().",
+      "subtopics": [
+        "Split-Apply-Combine workflow",
+        "agg(['mean', 'std']) multi-aggregation",
+        "pivot_table() multidimensional reshaping",
+        "pd.crosstab() contingency tables"
+      ],
+      "prerequisites": [
+        "data_cleaning_transformation"
+      ]
+    },
+    {
+      "topic_id": "merging_and_joining",
+      "title": "Concat, Merge, Join and Reshaping Data",
+      "order": 9,
+      "difficulty_level": "beginner",
+      "description": "Combining DataFrames: concatenation along axes, SQL-style merges (inner, outer, left, right), and melt().",
+      "subtopics": [
+        "pd.concat() axis=0 and axis=1",
+        "pd.merge() keys and join types",
+        "DataFrame.join() on index",
+        "Wide to long reshaping with pd.melt()"
+      ],
+      "prerequisites": [
+        "data_aggregation_groupby"
+      ]
+    },
+    {
+      "topic_id": "exploratory_data_analysis",
+      "title": "Summary Statistics, Outlier Detection and EDA",
+      "order": 10,
+      "difficulty_level": "beginner",
+      "description": "Univariate, bivariate, and multivariate analysis; distribution shapes; identifying anomalies.",
+      "subtopics": [
+        "Univariate distributions & skewness",
+        "Bivariate scatter and cross-tab analysis",
+        "Boxplot outlier detection",
+        "Correlation matrix heatmap inspection"
+      ],
+      "prerequisites": [
+        "merging_and_joining"
+      ]
+    },
+    {
+      "topic_id": "data_visualization_matplotlib",
+      "title": "Line, Bar, Scatter Plots and Subplots",
+      "order": 11,
+      "difficulty_level": "intermediate",
+      "description": "Figure and Axes hierarchy in Matplotlib, line plots, bar charts, histograms, and multi-panel figures.",
+      "subtopics": [
+        "plt.subplots() object-oriented interface",
+        "Line plots, bar charts, histograms",
+        "Axis titles, labels, legends, grids",
+        "Saving figures (dpi, format)"
+      ],
+      "prerequisites": [
+        "exploratory_data_analysis"
+      ]
+    },
+    {
+      "topic_id": "data_visualization_seaborn",
+      "title": "Heatmaps, Boxplots, Violin Plots and Pairplots",
+      "order": 12,
+      "difficulty_level": "intermediate",
+      "description": "High-level statistical visualization: color palettes, boxplots, violinplots, pairplots, and regplot.",
+      "subtopics": [
+        "Seaborn themes and color palettes",
+        "sns.heatmap() with annotations",
+        "sns.boxplot() and sns.violinplot()",
+        "sns.pairplot() multivariate relationships"
+      ],
+      "prerequisites": [
+        "data_visualization_matplotlib"
+      ]
+    },
+    {
+      "topic_id": "descriptive_statistics",
+      "title": "Mean, Median, Mode, Variance and Standard Deviation",
+      "order": 13,
+      "difficulty_level": "intermediate",
+      "description": "Measures of central tendency, dispersion, percentiles, interquartile range, skewness, and kurtosis.",
+      "subtopics": [
+        "Mean, median, and mode comparisons",
+        "Variance and standard deviation",
+        "Percentiles and quartiles",
+        "Skewness and kurtosis interpretation"
+      ],
+      "prerequisites": [
+        "exploratory_data_analysis"
+      ]
+    },
+    {
+      "topic_id": "inferential_statistics",
+      "title": "Hypothesis Testing, P-values, Z-test and T-test",
+      "order": 14,
+      "difficulty_level": "intermediate",
+      "description": "Null/Alternative hypotheses, significance level (alpha), p-values, one/two-sample t-tests, and Chi-square tests.",
+      "subtopics": [
+        "Null hypothesis H0 vs Alternative H1",
+        "p-value interpretation and alpha threshold",
+        "One-sample, two-sample, paired t-tests",
+        "Chi-Square test for independence"
+      ],
+      "prerequisites": [
+        "descriptive_statistics"
+      ]
+    },
+    {
+      "topic_id": "correlation_covariance",
+      "title": "Pearson, Spearman Correlation and Covariance Matrices",
+      "order": 15,
+      "difficulty_level": "intermediate",
+      "description": "Direction and strength of relationships: covariance, Pearson linear correlation, Spearman rank correlation.",
+      "subtopics": [
+        "Covariance definition and scale sensitivity",
+        "Pearson correlation coefficient r (-1 to +1)",
+        "Spearman rank correlation for monotonic non-linear relations",
+        "Correlation vs causation fallacies"
+      ],
+      "prerequisites": [
+        "inferential_statistics"
+      ]
+    },
+    {
+      "topic_id": "feature_scaling_transformation",
+      "title": "StandardScaler, MinMaxScaler, Log and Box-Cox Transforms",
+      "order": 16,
+      "difficulty_level": "advanced",
+      "description": "Transforming feature distributions: standard scaling, min-max normalization, logarithmic and power transforms.",
+      "subtopics": [
+        "Standardization (Z-score)",
+        "Min-Max normalization",
+        "Log transformation np.log1p() for heavy tails",
+        "Box-Cox and Yeo-Johnson power transformations"
+      ],
+      "prerequisites": [
+        "correlation_covariance",
+        "data_preprocessing"
+      ]
+    }
+  ]
+}

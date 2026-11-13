@@ -1,0 +1,259 @@
+[
+  {
+    "topic_id": "biological_vs_artificial",
+    "title": "Biological Inspiration and Artificial Neuron Model",
+    "order": 1,
+    "level": "beginner",
+    "description": "Biological soma, dendrites, axon, and synapses mapped to weights, summation, and activation functions.",
+    "subtopics": [
+      "Biological neuron anatomy",
+      "Action potential and firing rate",
+      "Synaptic plasticity",
+      "Artificial neuron abstraction"
+    ],
+    "prerequisites": []
+  },
+  {
+    "topic_id": "mathematical_foundations",
+    "title": "Vectors, Matrices, Dot Products and Derivatives",
+    "order": 2,
+    "level": "beginner",
+    "description": "Vector spaces, dot products as projections, matrix transformations, partial derivatives, and gradients.",
+    "subtopics": [
+      "Vector dot products",
+      "Matrix multiplication properties",
+      "Partial derivatives and gradient vector",
+      "Jacobian and Hessian matrices"
+    ],
+    "prerequisites": [
+      "biological_vs_artificial"
+    ]
+  },
+  {
+    "topic_id": "mcculloch_pitts_hebbian",
+    "title": "McCulloch-Pitts Neuron and Hebbian Learning",
+    "order": 3,
+    "level": "beginner",
+    "description": "First computational neuron model (1943), threshold logic, and Donald Hebb's associative learning rule.",
+    "subtopics": [
+      "McCulloch-Pitts binary inputs/threshold",
+      "Implementing AND, OR, NOT gates",
+      "Hebb's postulate: neurons that fire together wire together",
+      "Mathematical Hebbian weight update rule"
+    ],
+    "prerequisites": [
+      "mathematical_foundations"
+    ]
+  },
+  {
+    "topic_id": "rosenblatt_perceptron",
+    "title": "Perceptron Convergence Theorem and Limitations",
+    "order": 4,
+    "level": "beginner",
+    "description": "Frank Rosenblatt's perceptron (1958), error-driven weight update, margin of separation, and Novikoff theorem.",
+    "subtopics": [
+      "Perceptron update rule",
+      "Geometric interpretation of decision hyperplanes",
+      "Novikoff's theorem upper bound on mistakes",
+      "Linearly separable convergence"
+    ],
+    "prerequisites": [
+      "mcculloch_pitts_hebbian"
+    ]
+  },
+  {
+    "topic_id": "linear_separability_xor",
+    "title": "Linear Separability and the XOR Problem",
+    "order": 5,
+    "level": "beginner",
+    "description": "Hyperplane separation criteria, XOR logic truth table geometry, and necessity of multilayer networks.",
+    "subtopics": [
+      "Definition of linear separability in R^n",
+      "Geometric visualization of XOR points",
+      "Minsky & Papert algebraic proof",
+      "Hidden representation remapping"
+    ],
+    "prerequisites": [
+      "rosenblatt_perceptron"
+    ]
+  },
+  {
+    "topic_id": "activation_dynamics",
+    "title": "Non-linear Activation Functions and Saturation",
+    "order": 6,
+    "level": "beginner",
+    "description": "Sigmoid, Tanh, ReLU, ELU, SELU, Swish, GELU: asymptotic behavior, zero-centered outputs, and gradient saturation.",
+    "subtopics": [
+      "Why zero-centered activations (Tanh) accelerate learning",
+      "Sigmoid saturation regions",
+      "ReLU non-saturating gradients",
+      "Smooth activations: GELU and Swish"
+    ],
+    "prerequisites": [
+      "mathematical_foundations"
+    ]
+  },
+  {
+    "topic_id": "forward_pass_mechanics",
+    "title": "Layer-by-Layer Matrix Multiplications and Biases",
+    "order": 7,
+    "level": "beginner",
+    "description": "Batch tensor representations, linear affine transformations, broadcasting biases, and layer caching.",
+    "subtopics": [
+      "Batch tensor dimensions (B, D_in)",
+      "Affine transformation Z = XW + b",
+      "Activation application A = g(Z)",
+      "Intermediate cache management"
+    ],
+    "prerequisites": [
+      "activation_dynamics"
+    ]
+  },
+  {
+    "topic_id": "error_surfaces_loss",
+    "title": "Convexity, Non-Convex Error Surfaces and Minima",
+    "order": 8,
+    "level": "beginner",
+    "description": "Loss landscapes: convexity vs non-convexity, local minima, plateaus, ravines, and high-dimensional saddle points.",
+    "subtopics": [
+      "Convex optimization guarantees",
+      "Non-convex neural landscapes",
+      "Local minima vs global minima",
+      "High-dimensional saddle points and escaping ravines"
+    ],
+    "prerequisites": [
+      "forward_pass_mechanics"
+    ]
+  },
+  {
+    "topic_id": "calculus_of_backpropagation",
+    "title": "Jacobians, Gradients and Computational Graphs",
+    "order": 9,
+    "level": "beginner",
+    "description": "Chain rule over matrix tensors, vector-Jacobian products, calculating dL/dW and dL/db, and reverse accumulation.",
+    "subtopics": [
+      "Multivariable chain rule",
+      "Vector-Jacobian product (VJP)",
+      "Matrix calculus for layer derivatives",
+      "Automatic differentiation graph execution"
+    ],
+    "prerequisites": [
+      "mathematical_foundations",
+      "error_surfaces_loss"
+    ]
+  },
+  {
+    "topic_id": "learning_dynamics",
+    "title": "Epochs, Batches, Iterations and Convergence Criteria",
+    "order": 10,
+    "level": "beginner",
+    "description": "Training loops: mini-batch selection, epoch definitions, gradient noise, learning rate scheduling, and convergence diagnostics.",
+    "subtopics": [
+      "Epoch vs Batch vs Iteration",
+      "Stochastic gradient noise dynamics",
+      "Learning rate decay schedules",
+      "Training loss vs validation loss curves"
+    ],
+    "prerequisites": [
+      "calculus_of_backpropagation"
+    ]
+  },
+  {
+    "topic_id": "weight_initialization_schemes",
+    "title": "Zero, Random, Xavier/Glorot and He Initialization",
+    "order": 11,
+    "level": "intermediate",
+    "description": "Variance propagation analysis, breaking symmetry, Xavier normal/uniform, and He Kaiming initialization.",
+    "subtopics": [
+      "Symmetry breaking proof",
+      "Variance preservation through linear layers",
+      "Xavier/Glorot formula for symmetric activations",
+      "He/Kaiming formula for rectified activations"
+    ],
+    "prerequisites": [
+      "learning_dynamics"
+    ]
+  },
+  {
+    "topic_id": "second_order_optimizers",
+    "title": "Newton-Raphson, Conjugate Gradient and L-BFGS Concepts",
+    "order": 12,
+    "level": "intermediate",
+    "description": "Curvature information: Hessian matrix, Newton's method, Quasi-Newton approximations (BFGS, L-BFGS), and scalability limits.",
+    "subtopics": [
+      "Hessian matrix of second derivatives",
+      "Newton-Raphson update step",
+      "O(N^2) memory and O(N^3) inversion bottlenecks",
+      "L-BFGS two-loop recursion"
+    ],
+    "prerequisites": [
+      "calculus_of_backpropagation"
+    ]
+  },
+  {
+    "topic_id": "autoencoders_basics",
+    "title": "Encoder-Decoder Architecture and Dimensionality Reduction",
+    "order": 13,
+    "level": "intermediate",
+    "description": "Unsupervised feature learning, bottleneck compression, reconstruction loss, undercomplete vs overcomplete autoencoders.",
+    "subtopics": [
+      "Encoder and Decoder networks",
+      "Latent bottleneck code z",
+      "Reconstruction loss (MSE/BCE)",
+      "Relationship between Linear Autoencoders and PCA"
+    ],
+    "prerequisites": [
+      "forward_pass_mechanics",
+      "error_surfaces_loss"
+    ]
+  },
+  {
+    "topic_id": "radial_basis_functions",
+    "title": "RBF Networks and Gaussian Kernels",
+    "order": 14,
+    "level": "intermediate",
+    "description": "Radial Basis Function (RBF) networks, Gaussian receptive fields, center selection, and local vs global representations.",
+    "subtopics": [
+      "Radial basis function definition phi(||x - c||)",
+      "Gaussian kernel activation",
+      "Hidden layer centers and widths",
+      "Two-stage training: clustering centers + linear regression"
+    ],
+    "prerequisites": [
+      "activation_dynamics"
+    ]
+  },
+  {
+    "topic_id": "hopfield_networks_boltzmann",
+    "title": "Hopfield Networks, Energy Functions and Boltzmann Machines",
+    "order": 15,
+    "level": "intermediate",
+    "description": "Recurrent associative memory, Lyapunov energy functions, spurious states, and stochastic Boltzmann machines.",
+    "subtopics": [
+      "Discrete Hopfield Network architecture",
+      "Symmetric weights and zero diagonals (w_ij = w_ji, w_ii = 0)",
+      "Lyapunov energy function minimization",
+      "Restricted Boltzmann Machines (RBM)"
+    ],
+    "prerequisites": [
+      "mcculloch_pitts_hebbian"
+    ]
+  },
+  {
+    "topic_id": "attention_and_transformers",
+    "title": "Self-Attention Mechanism, Query-Key-Value and Transformer Intro",
+    "order": 16,
+    "level": "advanced",
+    "description": "Dot-product attention, Query, Key, Value matrices, multi-head attention, and transformer self-attention blocks.",
+    "subtopics": [
+      "Query, Key, Value conceptual role",
+      "Scaled Dot-Product Attention: Softmax(QK^T / sqrt(d_k)) * V",
+      "Multi-Head Attention parallel projections",
+      "Self-attention computational complexity O(n^2)"
+    ],
+    "prerequisites": [
+      "forward_pass_mechanics",
+      "weight_initialization_schemes"
+    ]
+  }
+]

@@ -1,0 +1,258 @@
+[
+  {
+    "topic_id": "basics_syntax",
+    "title": "C++ Fundamentals and I/O Streams",
+    "order": 1,
+    "level": "beginner",
+    "description": "Structure of a C++ program, preprocessor directives, iostream, std::cin, and std::cout.",
+    "subtopics": [
+      "#include directives",
+      "main() function return code",
+      "std::cout and std::cin",
+      "Namespaces and std::"
+    ],
+    "prerequisites": []
+  },
+  {
+    "topic_id": "data_types_variables",
+    "title": "Primitive Types, Variables and Constants",
+    "order": 2,
+    "level": "beginner",
+    "description": "Standard data types, sizeof operator, const qualifiers, and auto type deduction.",
+    "subtopics": [
+      "Integral and floating types",
+      "char and bool",
+      "const and constexpr",
+      "auto keyword"
+    ],
+    "prerequisites": [
+      "basics_syntax"
+    ]
+  },
+  {
+    "topic_id": "operators_expressions",
+    "title": "Arithmetic, Relational and Bitwise Operators",
+    "order": 3,
+    "level": "beginner",
+    "description": "Arithmetic precedence, bitwise masking, shift operators, and ternary expressions.",
+    "subtopics": [
+      "Arithmetic and modulus",
+      "Bitwise &, |, ^, ~",
+      "Left and right bit shifts",
+      "Compound assignment"
+    ],
+    "prerequisites": [
+      "data_types_variables"
+    ]
+  },
+  {
+    "topic_id": "conditionals",
+    "title": "If-Else and Switch Control",
+    "order": 4,
+    "level": "beginner",
+    "description": "Branching with if-else, nested conditionals, and switch-case statements.",
+    "subtopics": [
+      "if-else blocks",
+      "switch and case labels",
+      "break and default",
+      "Variable declaration inside if"
+    ],
+    "prerequisites": [
+      "operators_expressions"
+    ]
+  },
+  {
+    "topic_id": "loops",
+    "title": "While, Do-While and For Loops",
+    "order": 5,
+    "level": "beginner",
+    "description": "Repetition constructs: for loop, range-based for, while, and do-while loops.",
+    "subtopics": [
+      "for loops",
+      "range-based for loops",
+      "while vs do-while",
+      "break and continue"
+    ],
+    "prerequisites": [
+      "conditionals"
+    ]
+  },
+  {
+    "topic_id": "functions",
+    "title": "Functions, Pass by Value and Reference",
+    "order": 6,
+    "level": "beginner",
+    "description": "Function declaration vs definition, default arguments, inline functions, and parameter passing.",
+    "subtopics": [
+      "Pass by value",
+      "Pass by reference (&)",
+      "Pass by const reference",
+      "inline functions"
+    ],
+    "prerequisites": [
+      "loops"
+    ]
+  },
+  {
+    "topic_id": "arrays_strings",
+    "title": "Arrays and C-Style Strings / std::string",
+    "order": 7,
+    "level": "beginner",
+    "description": "Fixed-size arrays, null-terminated char arrays, and the modern std::string class.",
+    "subtopics": [
+      "C-style arrays and indexing",
+      "Null-terminated char arrays",
+      "std::string operations",
+      "std::array wrapper"
+    ],
+    "prerequisites": [
+      "functions"
+    ]
+  },
+  {
+    "topic_id": "pointers",
+    "title": "Pointer Fundamentals and Pointer Arithmetic",
+    "order": 8,
+    "level": "beginner",
+    "description": "Address-of operator (&), dereference operator (*), pointer arithmetic, and nullptr.",
+    "subtopics": [
+      "Memory addresses and pointer types",
+      "Dereferencing (*ptr)",
+      "Pointer arithmetic",
+      "nullptr vs NULL"
+    ],
+    "prerequisites": [
+      "arrays_strings"
+    ]
+  },
+  {
+    "topic_id": "references",
+    "title": "References and Memory Addresses",
+    "order": 9,
+    "level": "beginner",
+    "description": "Lvalue references, aliasing, const references, and comparison with pointers.",
+    "subtopics": [
+      "Reference declaration (int&)",
+      "References as aliases",
+      "Pointers vs References",
+      "Const references in function parameters"
+    ],
+    "prerequisites": [
+      "pointers"
+    ]
+  },
+  {
+    "topic_id": "dynamic_memory",
+    "title": "Dynamic Allocation with new and delete",
+    "order": 10,
+    "level": "beginner",
+    "description": "Heap allocation using new and new[], deallocation with delete and delete[], and memory leaks.",
+    "subtopics": [
+      "new and delete operators",
+      "new[] and delete[] for arrays",
+      "Dangling pointers",
+      "Memory leak detection"
+    ],
+    "prerequisites": [
+      "pointers",
+      "references"
+    ]
+  },
+  {
+    "topic_id": "classes_objects",
+    "title": "Classes, Constructors and Destructors",
+    "order": 11,
+    "level": "intermediate",
+    "description": "Encapsulation, public/private access, constructor initializer lists, and RAII destructors.",
+    "subtopics": [
+      "class vs struct in C++",
+      "Constructors & member initializer lists",
+      "Destructors (~Class)",
+      "Resource Acquisition Is Initialization (RAII)"
+    ],
+    "prerequisites": [
+      "dynamic_memory"
+    ]
+  },
+  {
+    "topic_id": "operator_overloading",
+    "title": "Operator Overloading and Friend Functions",
+    "order": 12,
+    "level": "intermediate",
+    "description": "Customizing operator semantics (+, -, <<, ==) and friend classes/functions.",
+    "subtopics": [
+      "Operator member functions",
+      "friend keyword",
+      "Overloading stream operators (<<, >>)",
+      "Copy assignment operator (operator=)"
+    ],
+    "prerequisites": [
+      "classes_objects"
+    ]
+  },
+  {
+    "topic_id": "inheritance",
+    "title": "Single, Multiple and Virtual Inheritance",
+    "order": 13,
+    "level": "intermediate",
+    "description": "Public/private inheritance, multiple base classes, and solving diamond inheritance with virtual base classes.",
+    "subtopics": [
+      "public, protected, private inheritance",
+      "Base class constructor ordering",
+      "Multiple inheritance",
+      "Virtual base classes"
+    ],
+    "prerequisites": [
+      "classes_objects"
+    ]
+  },
+  {
+    "topic_id": "polymorphism_virtual",
+    "title": "Virtual Functions and Abstract Classes",
+    "order": 14,
+    "level": "intermediate",
+    "description": "Runtime polymorphism with virtual functions, vtable mechanics, and pure virtual functions (= 0).",
+    "subtopics": [
+      "virtual keyword",
+      "vtable and vptr",
+      "Pure virtual functions (= 0)",
+      "Virtual destructors"
+    ],
+    "prerequisites": [
+      "inheritance"
+    ]
+  },
+  {
+    "topic_id": "stl_containers",
+    "title": "Vectors, Lists, Maps and Iterators",
+    "order": 15,
+    "level": "intermediate",
+    "description": "Standard Template Library: std::vector, std::list, std::map, std::unordered_map, and iterators.",
+    "subtopics": [
+      "std::vector dynamics",
+      "Sequence vs Associative containers",
+      "Iterators and range loops",
+      "Algorithms (std::sort, std::find)"
+    ],
+    "prerequisites": [
+      "classes_objects"
+    ]
+  },
+  {
+    "topic_id": "templates_exception",
+    "title": "Templates and Exception Handling",
+    "order": 16,
+    "level": "advanced",
+    "description": "Generic programming with function and class templates, try/catch/throw, and smart pointers.",
+    "subtopics": [
+      "Function templates",
+      "Class templates",
+      "Exception handling (try, catch, throw)",
+      "Smart pointers (unique_ptr, shared_ptr)"
+    ],
+    "prerequisites": [
+      "polymorphism_virtual",
+      "stl_containers"
+    ]
+  }
+]

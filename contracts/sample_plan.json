@@ -1,0 +1,9 @@
+{
+  "learner_id": "S101",
+  "recommended_topics": [
+    {"topic": "loops", "activity": "revise", "minutes": 25},
+    {"topic": "functions", "activity": "relearn", "minutes": 35}
+  ],
+  "total_minutes": 60,
+  "reason": "Loops is at 33% and functions at 30%, so we revise loops first."
+}

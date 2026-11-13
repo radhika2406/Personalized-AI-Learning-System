@@ -1,0 +1,257 @@
+[
+  {
+    "topic_id": "networking_fundamentals",
+    "title": "Network Topologies, LAN, MAN, WAN and Transmission Media",
+    "order": 1,
+    "level": "beginner",
+    "description": "Star, bus, ring, mesh topologies; LAN vs WAN scopes; guided (twisted pair, coax, fiber) vs unguided media.",
+    "subtopics": [
+      "Network topologies (Mesh, Star, Bus, Ring)",
+      "LAN, MAN, WAN geographical classifications",
+      "Guided transmission media (UTP, STP, Fiber Optic)",
+      "Unguided wireless transmission (Radio, Microwave, Infrared)"
+    ],
+    "prerequisites": []
+  },
+  {
+    "topic_id": "osi_model_layers",
+    "title": "7 Layers of OSI Model and Encapsulation/Decapsulation",
+    "order": 2,
+    "level": "beginner",
+    "description": "ISO/OSI reference model: Physical, Data Link, Network, Transport, Session, Presentation, Application; header encapsulation.",
+    "subtopics": [
+      "7 layers and their primary responsibilities",
+      "Data encapsulation and decapsulation process",
+      "Protocol Data Units (Bits, Frames, Packets, Segments)",
+      "Service Access Points (SAPs) and peer-to-peer communication"
+    ],
+    "prerequisites": [
+      "networking_fundamentals"
+    ]
+  },
+  {
+    "topic_id": "tcp_ip_suite",
+    "title": "TCP/IP Architecture and Comparison with OSI Model",
+    "order": 3,
+    "level": "beginner",
+    "description": "4-layer DoD TCP/IP model (Network Access, Internet, Transport, Application) and architectural differences from OSI.",
+    "subtopics": [
+      "TCP/IP 4-layer vs 5-layer models",
+      "Mapping TCP/IP to OSI layers",
+      "Core protocols overview (IP, TCP, UDP, ARP, ICMP)",
+      "Philosophy of the end-to-end principle"
+    ],
+    "prerequisites": [
+      "osi_model_layers"
+    ]
+  },
+  {
+    "topic_id": "physical_layer_encoding",
+    "title": "Signals, Bandwidth, Latency, Nyquist and Shannon Theorems",
+    "order": 4,
+    "level": "beginner",
+    "description": "Analog vs digital transmission, propagation delay, transmission delay, Nyquist noiseless limit, and Shannon noisy channel capacity.",
+    "subtopics": [
+      "Analog vs digital signals",
+      "Bandwidth, throughput, and latency components",
+      "Nyquist Bit Rate formula C = 2B log2(V)",
+      "Shannon Capacity theorem C = B log2(1 + SNR)"
+    ],
+    "prerequisites": [
+      "networking_fundamentals"
+    ]
+  },
+  {
+    "topic_id": "data_link_framing_error",
+    "title": "Framing Methods, Parity, Checksum and CRC",
+    "order": 5,
+    "level": "beginner",
+    "description": "Bit/byte stuffing, framing boundaries, error detection: parity checks, internet checksum, and Cyclic Redundancy Check (CRC).",
+    "subtopics": [
+      "Character count and byte/bit stuffing",
+      "Simple and 2D parity checks",
+      "Internet Checksum 16-bit one's complement",
+      "Cyclic Redundancy Check (CRC) polynomial division"
+    ],
+    "prerequisites": [
+      "osi_model_layers"
+    ]
+  },
+  {
+    "topic_id": "flow_and_error_control",
+    "title": "Stop-and-Wait, Go-Back-N and Selective Repeat ARQ",
+    "order": 6,
+    "level": "beginner",
+    "description": "Sliding window protocol, Stop-and-Wait ARQ, Go-Back-N (cumulative ACKs), and Selective Repeat (individual ACKs).",
+    "subtopics": [
+      "Stop-and-Wait efficiency and timeouts",
+      "Sliding window concept and bandwidth-delay product",
+      "Go-Back-N window sizes and retransmission",
+      "Selective Repeat buffers and independent acknowledgments"
+    ],
+    "prerequisites": [
+      "data_link_framing_error"
+    ]
+  },
+  {
+    "topic_id": "mac_protocols",
+    "title": "ALOHA, CSMA/CD, CSMA/CA and Ethernet Standards",
+    "order": 7,
+    "level": "beginner",
+    "description": "Multiple Access Control: Pure/Slotted ALOHA, Carrier Sense Multiple Access (CSMA), CSMA/CD (Ethernet), CSMA/CA (Wi-Fi), and MAC addresses.",
+    "subtopics": [
+      "Pure ALOHA vs Slotted ALOHA maximum efficiency",
+      "CSMA 1-persistent, p-persistent, non-persistent",
+      "CSMA/CD collision detection and binary exponential backoff",
+      "CSMA/CA RTS/CTS in IEEE 802.11 Wi-Fi"
+    ],
+    "prerequisites": [
+      "data_link_framing_error"
+    ]
+  },
+  {
+    "topic_id": "network_layer_ip_addressing",
+    "title": "IPv4 Addressing, Subnetting, CIDR and Address Classes",
+    "order": 8,
+    "level": "beginner",
+    "description": "32-bit IPv4 structure, Classful addressing (A, B, C, D, E), Classless Inter-Domain Routing (CIDR), and subnet masks.",
+    "subtopics": [
+      "IPv4 32-bit dotted-decimal notation",
+      "Classful addressing boundaries and network/host bits",
+      "Subnetting and custom subnet masks",
+      "CIDR slash notation (e.g. /24) and route summarization"
+    ],
+    "prerequisites": [
+      "tcp_ip_suite"
+    ]
+  },
+  {
+    "topic_id": "ipv6_fundamentals",
+    "title": "IPv6 Format, Dual-Stack and IPv4 vs IPv6 Comparison",
+    "order": 9,
+    "level": "beginner",
+    "description": "128-bit IPv6 addressing, hexadecimal representation, address simplification rules, unicast/multicast/anycast, and transition strategies.",
+    "subtopics": [
+      "128-bit address structure and notation",
+      "Omission of leading zeros and :: zero compression",
+      "Unicast, Multicast, Anycast (absence of broadcast)",
+      "Dual-Stack and tunneling transition mechanisms"
+    ],
+    "prerequisites": [
+      "network_layer_ip_addressing"
+    ]
+  },
+  {
+    "topic_id": "routing_algorithms",
+    "title": "Distance Vector Routing, Link State Routing and RIP/OSPF",
+    "order": 10,
+    "level": "beginner",
+    "description": "Shortest path routing: Bellman-Ford (Distance Vector), Count-to-Infinity problem, Dijkstra's algorithm (Link State), and intra/inter-AS routing.",
+    "subtopics": [
+      "Static vs dynamic routing",
+      "Distance Vector (Bellman-Ford) & Count-to-Infinity",
+      "Split horizon and poison reverse",
+      "Link State (Dijkstra's) and OSPF flooding"
+    ],
+    "prerequisites": [
+      "network_layer_ip_addressing"
+    ]
+  },
+  {
+    "topic_id": "network_devices_protocols",
+    "title": "Routers, Switches, Bridges, ARP, RARP and ICMP",
+    "order": 11,
+    "level": "intermediate",
+    "description": "Interconnecting hardware: Hubs (L1), Switches (L2), Routers (L3); Address Resolution Protocol (ARP), and Internet Control Message Protocol (ICMP).",
+    "subtopics": [
+      "Hubs vs Switches vs Routers",
+      "Switch MAC address learning and forwarding tables",
+      "ARP address translation (IP to MAC)",
+      "ICMP error reporting, ping, and traceroute"
+    ],
+    "prerequisites": [
+      "mac_protocols",
+      "routing_algorithms"
+    ]
+  },
+  {
+    "topic_id": "transport_layer_udp",
+    "title": "UDP Header, Connectionless Service and Use Cases",
+    "order": 12,
+    "level": "intermediate",
+    "description": "User Datagram Protocol (UDP): 8-byte header, connectionless lightweight delivery, checksum, and real-time streaming/VoIP applications.",
+    "subtopics": [
+      "UDP 8-byte header format",
+      "Connectionless best-effort delivery",
+      "Port numbers and multiplexing",
+      "UDP applications (DNS, DHCP, VoIP, Gaming)"
+    ],
+    "prerequisites": [
+      "tcp_ip_suite"
+    ]
+  },
+  {
+    "topic_id": "transport_layer_tcp",
+    "title": "TCP Segment, 3-Way Handshake, Connection Teardown and Reliability",
+    "order": 13,
+    "level": "intermediate",
+    "description": "Transmission Control Protocol (TCP): byte-stream orientation, sequence/ACK numbers, 3-way handshake (SYN, SYN-ACK, ACK), 4-way teardown, and timers.",
+    "subtopics": [
+      "TCP 20-byte base header and flags",
+      "Three-way handshake connection establishment",
+      "Four-way handshake connection termination (FIN/ACK)",
+      "TIME_WAIT state purpose"
+    ],
+    "prerequisites": [
+      "transport_layer_udp"
+    ]
+  },
+  {
+    "topic_id": "tcp_flow_congestion_control",
+    "title": "Sliding Window, AIMD, Slow Start, Congestion Avoidance and Fast Recovery",
+    "order": 14,
+    "level": "intermediate",
+    "description": "Receiver-advertised flow control (rwnd) vs network congestion control (cwnd), Slow Start, Congestion Avoidance (AIMD), Fast Retransmit.",
+    "subtopics": [
+      "Flow control via receiver window (rwnd)",
+      "Slow Start exponential growth phase",
+      "Additive Increase Multiplicative Decrease (AIMD)",
+      "Fast Retransmit (3 duplicate ACKs) and Fast Recovery"
+    ],
+    "prerequisites": [
+      "transport_layer_tcp"
+    ]
+  },
+  {
+    "topic_id": "application_layer_dns_dhcp",
+    "title": "DNS Hierarchy, Record Types and DHCP DORA Process",
+    "order": 15,
+    "level": "intermediate",
+    "description": "Domain Name System: root, TLD, authoritative servers, recursive/iterative queries; DHCP 4-step DORA process.",
+    "subtopics": [
+      "Hierarchical DNS namespace",
+      "DNS record types (A, AAAA, CNAME, MX, NS)",
+      "Iterative vs recursive DNS resolution",
+      "DHCP DORA (Discover, Offer, Request, Acknowledge)"
+    ],
+    "prerequisites": [
+      "transport_layer_udp"
+    ]
+  },
+  {
+    "topic_id": "network_security_protocols",
+    "title": "HTTP/HTTPS, SSL/TLS, Symmetric/Asymmetric Encryption, Firewalls",
+    "order": 16,
+    "level": "advanced",
+    "description": "Application protocols: HTTP request/response, HTTPS with SSL/TLS handshake, symmetric vs asymmetric cryptography, and firewalls.",
+    "subtopics": [
+      "HTTP 1.1 vs HTTP/2 vs HTTP/3",
+      "Symmetric (AES) vs Asymmetric (RSA/ECC) encryption",
+      "TLS cryptographic handshake and digital certificates",
+      "Packet-filtering vs stateful inspection firewalls"
+    ],
+    "prerequisites": [
+      "application_layer_dns_dhcp"
+    ]
+  }
+]
