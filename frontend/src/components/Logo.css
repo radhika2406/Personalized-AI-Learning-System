@@ -1,9 +1,16 @@
 
+/* =========================================
+   LEARNOVA LOGO — BASE STYLING
+========================================= */
+
 .learnova-logo {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
 }
 
 .learnova-logo-icon {
@@ -24,44 +31,54 @@
   transition: color 0.3s ease;
 }
 
-/* DARK THEME */
-.dashboard-layout[data-theme="dark"] .learnova-logo-icon {
+.learnova-logo:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 5px;
+  border-radius: 8px;
+}
+
+/* =========================================
+   DARK THEME
+========================================= */
+
+.dashboard-layout[data-theme="dark"] .learnova-logo-icon,
+.public-category-layout[data-theme="dark"] .learnova-logo-icon,
+.public-course-layout[data-theme="dark"] .learnova-logo-icon {
   color: #ffffff;
   background: linear-gradient(135deg, #7955ed, #16b9d5);
   box-shadow: 0 0 22px rgba(112, 68, 197, 0.3);
 }
 
-.dashboard-layout[data-theme="dark"] .learnova-logo-text {
+.dashboard-layout[data-theme="dark"] .learnova-logo-text,
+.public-category-layout[data-theme="dark"] .learnova-logo-text,
+.public-course-layout[data-theme="dark"] .learnova-logo-text {
   color: #ffffff;
 }
 
-/* LIGHT THEME */
-.dashboard-layout[data-theme="light"] .learnova-logo-icon {
+/* =========================================
+   LIGHT THEME
+========================================= */
+
+.dashboard-layout[data-theme="light"] .learnova-logo-icon,
+.public-category-layout[data-theme="light"] .learnova-logo-icon,
+.public-course-layout[data-theme="light"] .learnova-logo-icon {
   color: #ffffff;
   background: linear-gradient(135deg, #722b45, #a64d69);
   box-shadow: 0 0 18px rgba(114, 43, 69, 0.2);
 }
 
-.dashboard-layout[data-theme="light"] .learnova-logo-text {
+.dashboard-layout[data-theme="light"] .learnova-logo-text,
+.public-category-layout[data-theme="light"] .learnova-logo-text,
+.public-course-layout[data-theme="light"] .learnova-logo-text {
   color: #722b45;
 }
-/* Hide brand name only on mobile sidebar */
+
+/* =========================================
+   MOBILE SIDEBAR
+========================================= */
+
 @media (max-width: 768px) {
   .dashboard-sidebar .learnova-logo-text {
     display: none;
   }
-}
-
-
-/* Make the Learnova brand clickable */
-.learnova-logo {
-  text-decoration: none;
-  cursor: pointer;
-  color: inherit;
-}
-
-.learnova-logo:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 5px;
-  border-radius: 8px;
 }

@@ -15,6 +15,7 @@ import QuizHistory from "./pages/QuizHistory";
 import Recommendations from "./pages/Recommendations";
 import Profile from "./pages/Profile";
 import LearningPath from "./pages/LearningPath";
+import CategoryCourses from "./pages/CategoryCourses";
 
 import { ThemeProvider } from "./ThemeContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -47,6 +48,10 @@ function App() {
 
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/categories/:categoryCode"
+            element={<CategoryCourses />}
+          />
           <Route path="/courses/:courseId" element={<CourseDetails />} />
 
           {/* Protected routes */}

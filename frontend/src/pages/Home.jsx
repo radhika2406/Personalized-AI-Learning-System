@@ -13,6 +13,8 @@ import {
   Sun,
   Target,
   X,
+  Code2,
+  Network,
 } from "lucide-react";
 
 import { useTheme } from "../ThemeContext";
@@ -42,6 +44,29 @@ const handleLogout = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isLoggedIn = Boolean(account);
+  const categories = [
+    {
+       code: "ai_ml_data_science",
+       title: "AI, ML & Data Science",
+       description: "Explore artificial intelligence, machine learning, deep learning, and data science.",
+       icon: Brain,
+       image: "/images/aiml.png",
+    },
+    {
+       code: "computer_science",
+       title: "Computer Science",
+       description: "Build strong foundations in databases, operating systems, networks, and computer science.",
+       icon: Network,
+       image: "/images/cs.png",
+    },
+    {
+      code: "programming",
+      title: "Programming",
+      description: "Develop programming skills through Python, Java, C++, and data structures.",
+      icon: Code2,
+      image: "/images/programing.png",
+    },
+  ];
 
   useEffect(() => {
     let active = true;
@@ -394,18 +419,59 @@ const handleLogout = () => {
                       </Link>
                     </div>
                   ) : (
-                    <div className="home-course-grid">
-                      {myCourses.slice(0, 3).map((course) => (
-                        <article className="home-course-card" key={course.id}>
-                          <span>{course.course_code || "COURSE"}</span>
-                          <h3>{course.title}</h3>
-                          <p>{course.description || "Explore this course."}</p>
-                          <Link to={`/courses/${course.id}`}>
-                            Open Course <ArrowRight size={16} />
-                          </Link>
-                        </article>
-                      ))}
+                    
+                    <div className="home-course-grid category-card-grid">
+                    {categories.map((category) => {
+                    const Icon = category.icon;
+
+                    const courseCount = courses.filter(
+                    (course) =>
+                    course.category?.category_code === category.code
+                    ).length;
+
+                    return (
+                    <Link
+                    to={`/categories/${category.code}`}
+                    className="home-course-card category-card"
+                    key={category.code}
+                    >
+                    
+                    <p style={{ color: "red" }}>
+                    Image path: {category.image}
+                    </p>
+                    <div className="category-card-image">
+                    <img
+                    src={category.image}
+                    alt={category.title}
+                    />
+                    <div className="category-image-overlay" />
+                    <div className="category-card-icon">
+                    <Icon size={23} />
                     </div>
+                    </div>
+
+                    <div className="category-card-content">
+                    <span className="category-card-label">
+                    LEARNING CATEGORY
+                    </span>
+
+                    <h3>{category.title}</h3>
+
+                    <p>{category.description}</p>
+
+                    <div className="category-card-footer">
+                    <span>{courseCount} Courses Available</span>
+                    <span className="category-explore">
+                    Explore Category
+                    <ArrowRight size={17} />
+                    </span>
+                    </div>
+                    </div>
+                    </Link>
+                    );
+                    })}
+                    </div>
+
                   )}
 
                   <Link to="/dashboard" className="home-dashboard-link">
@@ -416,36 +482,71 @@ const handleLogout = () => {
             </section>
           )}
 
-          {!isLoggedIn && (
-            <section className="home-courses-section" id="courses">
-              <div className="home-section-heading">
-                <span>EXPLORE AND DISCOVER</span>
-                <h2>Find your next learning experience</h2>
-                <p>Explore courses available on Learnova.</p>
-              </div>
+         
+                    {!isLoggedIn && (
+                    <section className="home-courses-section" id="courses">
+                    <div className="home-section-heading">
+                    <span>EXPLORE AND DISCOVER</span>
+                    <h2>Find Your Learning Path</h2>
+                    <p>
+                    Choose your learning domain and explore courses designed
+                    to help you grow.
+                    </p>
+                    </div>
 
-              {courses.length === 0 ? (
-                <p className="home-state">Courses will appear here when available.</p>
-              ) : (
-                <div className="home-course-grid">
-                  {courses.slice(0, 3).map((course) => (
-                    <article className="home-course-card" key={course.id}>
-                      <span>{course.course_code || "COURSE"}</span>
-                      <h3>{course.title}</h3>
-                      <p>{course.description || "Explore this course."}</p>
-                      <Link
-                    to={`/courses/${course.id}`}
-                    className="YOUR_EXISTING_BUTTON_CLASS"
+                    <div className="home-course-grid category-card-grid">
+                    {categories.map((category) => {
+                    const Icon = category.icon;
+
+                    const courseCount = courses.filter(
+                    (course) =>
+                    course.category?.category_code === category.code
+                    ).length;
+
+                    return (
+                    <Link
+                    to={`/categories/${category.code}`}
+                    className="home-course-card category-card"
+                    key={category.code}
                     >
-                    Explore Course
+                    <div className="category-card-image">
+                    <img
+                    src={category.image}
+                    alt={category.title}
+                    />
+
+                    <div className="category-image-overlay" />
+
+                    <div className="category-card-icon">
+                    <Icon size={23} />
+                    </div>
+                    </div>
+
+                    <div className="category-card-content">
+                    <span className="category-card-label">
+                    LEARNING CATEGORY
+                    </span>
+
+                    <h3>{category.title}</h3>
+
+                    <p>{category.description}</p>
+
+                    <div className="category-card-footer">
+                    <span>{courseCount} Courses Available</span>
+
+                    <span className="category-explore">
+                    Explore Category
                     <ArrowRight size={17} />
+                    </span>
+                    </div>
+                    </div>
                     </Link>
-                    </article>
-                  ))}
-                </div>
-              )}
-            </section>
-          )}
+                    );
+                    })}
+                    </div>
+                    </section>
+                    )}
+
 
           <section className="home-features-section" id="features">
             <div className="home-section-heading">

@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
 from sqlalchemy import String, Text, DateTime, ForeignKey, JSON
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
 
@@ -31,6 +31,8 @@ class Course(Base):
         ForeignKey("categories.id"),
         nullable=True,
     )
+
+    category = relationship("Category", back_populates="courses")
 
     prerequisites: Mapped[list | None] = mapped_column(
         JSON,
