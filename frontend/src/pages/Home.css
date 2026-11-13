@@ -1239,3 +1239,9 @@
     font-size: 13px;
   }
 }
+
+/* Improve homepage text rendering */
+.home-hero-frame {
+  transform: none;
+  transform-style: flat;
+}

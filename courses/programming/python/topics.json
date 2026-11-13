@@ -1,0 +1,261 @@
+[
+  {
+    "topic_id": "variables",
+    "title": "Variables and Data Types",
+    "order": 1,
+    "level": "beginner",
+    "description": "Declaration, naming rules, standard types (int, float, bool, str).",
+    "subtopics": [
+      "Variable assignment",
+      "Dynamic typing",
+      "Type casting",
+      "Standard data types"
+    ],
+    "prerequisites": []
+  },
+  {
+    "topic_id": "conditions",
+    "title": "Conditional Statements",
+    "order": 2,
+    "level": "beginner",
+    "description": "Branching execution with if, elif, else, and logical expressions.",
+    "subtopics": [
+      "if-elif-else syntax",
+      "Boolean operators",
+      "Short-circuit evaluation",
+      "Nested conditions"
+    ],
+    "prerequisites": [
+      "variables"
+    ]
+  },
+  {
+    "topic_id": "loops",
+    "title": "Loops and Iteration",
+    "order": 3,
+    "level": "beginner",
+    "description": "Repetitive execution with for and while loops, break, and continue.",
+    "subtopics": [
+      "for loops with range()",
+      "while loops",
+      "break and continue",
+      "else clause with loops"
+    ],
+    "prerequisites": [
+      "conditions"
+    ]
+  },
+  {
+    "topic_id": "functions",
+    "title": "Functions and Scope",
+    "order": 4,
+    "level": "beginner",
+    "description": "Defining reusable blocks of code, parameters, return values, and variable scope.",
+    "subtopics": [
+      "def statement",
+      "Parameters and arguments",
+      "Default values",
+      "Local vs global scope"
+    ],
+    "prerequisites": [
+      "variables",
+      "loops"
+    ]
+  },
+  {
+    "topic_id": "lists",
+    "title": "Lists and List Operations",
+    "order": 5,
+    "level": "beginner",
+    "description": "Ordered mutable sequences, indexing, slicing, and common list methods.",
+    "subtopics": [
+      "List creation and indexing",
+      "Slicing syntax",
+      "append, extend, pop, remove",
+      "List mutation vs reassignment"
+    ],
+    "prerequisites": [
+      "variables",
+      "loops"
+    ]
+  },
+  {
+    "topic_id": "dictionaries",
+    "title": "Dictionaries and Key-Value Pairs",
+    "order": 6,
+    "level": "beginner",
+    "description": "Hash maps in Python: key-value storage, lookup performance, and dictionary methods.",
+    "subtopics": [
+      "Dict syntax",
+      "Key access and get()",
+      "keys(), values(), items()",
+      "Dictionary mutation"
+    ],
+    "prerequisites": [
+      "variables"
+    ]
+  },
+  {
+    "topic_id": "tuples_and_sets",
+    "title": "Tuples and Sets",
+    "order": 7,
+    "level": "beginner",
+    "description": "Immutable sequences (tuples) and unique collections (sets) with set algebra.",
+    "subtopics": [
+      "Tuple immutability",
+      "Packing and unpacking",
+      "Set uniqueness",
+      "Union, intersection, difference"
+    ],
+    "prerequisites": [
+      "lists"
+    ]
+  },
+  {
+    "topic_id": "strings",
+    "title": "String Manipulation and Formatting",
+    "order": 8,
+    "level": "beginner",
+    "description": "String methods, immutability, slicing, format(), and f-strings.",
+    "subtopics": [
+      "String methods (split, join, strip)",
+      "F-strings formatting",
+      "Escape characters",
+      "String slicing"
+    ],
+    "prerequisites": [
+      "variables"
+    ]
+  },
+  {
+    "topic_id": "file_handling",
+    "title": "File Input and Output",
+    "order": 9,
+    "level": "beginner",
+    "description": "Reading and writing files safely using context managers.",
+    "subtopics": [
+      "open() function",
+      "Reading lines vs whole file",
+      "Writing and appending",
+      "with open() context manager"
+    ],
+    "prerequisites": [
+      "strings"
+    ]
+  },
+  {
+    "topic_id": "exception_handling",
+    "title": "Exceptions and Error Handling",
+    "order": 10,
+    "level": "beginner",
+    "description": "Catching runtime errors gracefully with try, except, else, and finally.",
+    "subtopics": [
+      "try-except blocks",
+      "Catching specific exceptions",
+      "finally and cleanup",
+      "raise statement"
+    ],
+    "prerequisites": [
+      "functions"
+    ]
+  },
+  {
+    "topic_id": "oop_classes",
+    "title": "Classes, Objects and Encapsulation",
+    "order": 11,
+    "level": "intermediate",
+    "description": "Object-oriented principles: classes, constructors, methods, and attribute access.",
+    "subtopics": [
+      "class definition",
+      "__init__ constructor",
+      "self parameter",
+      "Instance vs class attributes"
+    ],
+    "prerequisites": [
+      "functions"
+    ]
+  },
+  {
+    "topic_id": "inheritance_polymorphism",
+    "title": "Inheritance and Polymorphism",
+    "order": 12,
+    "level": "intermediate",
+    "description": "Reusing behavior via subclassing, method overriding, and super().",
+    "subtopics": [
+      "Single and multiple inheritance",
+      "super() usage",
+      "Method overriding",
+      "Method Resolution Order (MRO)"
+    ],
+    "prerequisites": [
+      "oop_classes"
+    ]
+  },
+  {
+    "topic_id": "modules_and_packages",
+    "title": "Modules, Packages and Imports",
+    "order": 13,
+    "level": "intermediate",
+    "description": "Code organization: importing modules, packages, __name__, and sys.path.",
+    "subtopics": [
+      "import and from-import",
+      "__name__ == '__main__'",
+      "__init__.py role",
+      "Standard library modules"
+    ],
+    "prerequisites": [
+      "functions"
+    ]
+  },
+  {
+    "topic_id": "comprehensions",
+    "title": "List, Dict and Set Comprehensions",
+    "order": 14,
+    "level": "intermediate",
+    "description": "Concise, idiomatic syntax for building collections from iterables.",
+    "subtopics": [
+      "List comprehensions with filtering",
+      "Dict comprehensions",
+      "Set comprehensions",
+      "Nested comprehensions"
+    ],
+    "prerequisites": [
+      "lists",
+      "dictionaries"
+    ]
+  },
+  {
+    "topic_id": "iterators_and_generators",
+    "title": "Iterators and Generators",
+    "order": 15,
+    "level": "intermediate",
+    "description": "Memory-efficient iteration using iterator protocols and generator functions.",
+    "subtopics": [
+      "iter() and next()",
+      "yield keyword",
+      "Generator expressions",
+      "StopIteration handling"
+    ],
+    "prerequisites": [
+      "functions",
+      "loops"
+    ]
+  },
+  {
+    "topic_id": "decorators_and_closures",
+    "title": "Decorators, Closures and Advanced Python",
+    "order": 16,
+    "level": "advanced",
+    "description": "First-class functions, lexical closures, decorators, and functools.wraps.",
+    "subtopics": [
+      "Lexical closures",
+      "Decorator syntax (@decorator)",
+      "Decorators with arguments",
+      "functools.wraps preservation"
+    ],
+    "prerequisites": [
+      "functions",
+      "oop_classes"
+    ]
+  }
+]

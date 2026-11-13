@@ -1,3 +1,4 @@
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
@@ -7,6 +8,7 @@ from app.schemas.quiz_attempt import (
     QuizSubmission,
     QuizResultResponse,
     QuizAttemptResponse,
+    QuizAttemptReviewResponse,
 )
 from app.services import quiz_attempt_service
 
@@ -36,19 +38,24 @@ def submit_quiz(
         )
     except ValueError as error:
         raise HTTPException(
-            status_code=400,
+            status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(error),
         )
 
     if not attempt:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Quiz not found",
         )
 
     percentage = round(
         (attempt.score / attempt.total_questions) * 100,
         2,
+    )
+
+    review = quiz_attempt_service.build_attempt_review(
+        db=db,
+        attempt=attempt,
     )
 
     return QuizResultResponse(
@@ -58,6 +65,7 @@ def submit_quiz(
         total_questions=attempt.total_questions,
         percentage=percentage,
         submitted_at=attempt.submitted_at,
+        review=review,
     )
 
 
@@ -69,6 +77,45 @@ def get_my_quiz_attempts(
     return quiz_attempt_service.get_attempts_by_user(
         db=db,
         user_id=current_user.id,
+    )
+
+
+@router.get(
+    "/{attempt_id}/review",
+    response_model=QuizAttemptReviewResponse,
+)
+def get_quiz_attempt_review(
+    attempt_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    result = quiz_attempt_service.get_attempt_review(
+        db=db,
+        attempt_id=attempt_id,
+        user_id=current_user.id,
+    )
+
+    if not result:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Quiz attempt not found",
+        )
+
+    attempt = result["attempt"]
+
+    percentage = round(
+        (attempt.score / attempt.total_questions) * 100,
+        2,
+    )
+
+    return QuizAttemptReviewResponse(
+        attempt_id=attempt.id,
+        quiz_id=attempt.quiz_id,
+        score=attempt.score,
+        total_questions=attempt.total_questions,
+        percentage=percentage,
+        submitted_at=attempt.submitted_at,
+        review=result["review"],
     )
 
 
@@ -86,7 +133,7 @@ def get_my_quiz_attempt(
 
     if not attempt:
         raise HTTPException(
-            status_code=404,
+            status_code=status.HTTP_404_NOT_FOUND,
             detail="Quiz attempt not found",
         )
 

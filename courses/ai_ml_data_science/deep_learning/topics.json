@@ -1,0 +1,256 @@
+[
+  {
+    "topic_id": "dl_intro_history",
+    "title": "Introduction to Deep Learning and Historical Milestones",
+    "order": 1,
+    "level": "beginner",
+    "description": "Biological inspiration, AI winters, modern resurgence, compute power (GPUs), and big data drivers.",
+    "subtopics": [
+      "Neuron biology vs artificial units",
+      "Historical timeline (Rosenblatt, Minsky, Hinton)",
+      "Shallow vs deep representations",
+      "GPU acceleration in deep learning"
+    ],
+    "prerequisites": []
+  },
+  {
+    "topic_id": "perceptrons",
+    "title": "Artificial Neurons and the Single-Layer Perceptron",
+    "order": 2,
+    "level": "beginner",
+    "description": "McCulloch-Pitts, linear threshold units, Rosenblatt perceptron rule, and linear separability.",
+    "subtopics": [
+      "Inputs, weights, bias and net input",
+      "Step activation function",
+      "Perceptron learning algorithm",
+      "XOR non-linear limitation"
+    ],
+    "prerequisites": [
+      "dl_intro_history"
+    ]
+  },
+  {
+    "topic_id": "activation_functions",
+    "title": "Sigmoid, Tanh, ReLU, Leaky ReLU and Softmax",
+    "order": 3,
+    "level": "beginner",
+    "description": "Nonlinear mappings: vanishing gradient in Sigmoid/Tanh, ReLU advantages, dying ReLU, and Softmax output.",
+    "subtopics": [
+      "Why non-linear activations are required",
+      "Sigmoid and Tanh saturation",
+      "ReLU: advantages and dying ReLU",
+      "Softmax for multi-class probability outputs"
+    ],
+    "prerequisites": [
+      "perceptrons"
+    ]
+  },
+  {
+    "topic_id": "feedforward_networks",
+    "title": "Multilayer Perceptrons and Forward Propagation",
+    "order": 4,
+    "level": "beginner",
+    "description": "Input, hidden, and output layers; matrix representation; forward pass computation.",
+    "subtopics": [
+      "Hidden layer concept",
+      "Layer-by-layer forward propagation",
+      "Matrix notation: Z = WX + B",
+      "Universal Approximation Theorem"
+    ],
+    "prerequisites": [
+      "activation_functions"
+    ]
+  },
+  {
+    "topic_id": "loss_functions",
+    "title": "MSE, Cross-Entropy and Binary Cross-Entropy",
+    "order": 5,
+    "level": "beginner",
+    "description": "Quantifying discrepancy between prediction and target: regression losses vs classification losses.",
+    "subtopics": [
+      "Mean Squared Error (L2 loss)",
+      "Binary Cross-Entropy (BCE)",
+      "Categorical Cross-Entropy",
+      "Relationship between Maximum Likelihood and loss"
+    ],
+    "prerequisites": [
+      "feedforward_networks"
+    ]
+  },
+  {
+    "topic_id": "gradient_descent",
+    "title": "Batch, Stochastic and Mini-Batch Gradient Descent",
+    "order": 6,
+    "level": "beginner",
+    "description": "First-order optimization: Batch GD, Stochastic GD (SGD), and Mini-Batch compromises.",
+    "subtopics": [
+      "Batch Gradient Descent (full dataset)",
+      "Stochastic Gradient Descent (SGD)",
+      "Mini-batch Gradient Descent",
+      "Learning rate scheduling"
+    ],
+    "prerequisites": [
+      "loss_functions"
+    ]
+  },
+  {
+    "topic_id": "backpropagation",
+    "title": "The Chain Rule and Error Backpropagation",
+    "order": 7,
+    "level": "beginner",
+    "description": "Computing exact analytical gradients through multi-layer computational graphs via chain rule.",
+    "subtopics": [
+      "Calculus chain rule review",
+      "Computational graphs & forward/backward trace",
+      "Layer gradient updates dL/dW and dL/db",
+      "Reusing intermediate activations"
+    ],
+    "prerequisites": [
+      "gradient_descent"
+    ]
+  },
+  {
+    "topic_id": "optimizers",
+    "title": "Momentum, RMSprop, Adam and Learning Rate Schedules",
+    "order": 8,
+    "level": "beginner",
+    "description": "Accelerating convergence: momentum, adaptive learning rates (Adagrad, RMSprop, Adam).",
+    "subtopics": [
+      "Momentum and dampening oscillations",
+      "RMSprop adaptive second-moment scaling",
+      "Adam (Adaptive Moment Estimation)",
+      "Cosine annealing and warm-up schedules"
+    ],
+    "prerequisites": [
+      "backpropagation"
+    ]
+  },
+  {
+    "topic_id": "vanishing_exploding_gradients",
+    "title": "Gradient Issues and Weight Initialization",
+    "order": 9,
+    "level": "beginner",
+    "description": "Numerical stability in deep models: vanishing/exploding gradients, Xavier/Glorot, and He initialization.",
+    "subtopics": [
+      "Vanishing gradient mathematical cause",
+      "Exploding gradient and gradient clipping",
+      "Xavier/Glorot initialization for Tanh",
+      "He (Kaiming) initialization for ReLU"
+    ],
+    "prerequisites": [
+      "optimizers"
+    ]
+  },
+  {
+    "topic_id": "regularization_dropout",
+    "title": "L1/L2 Regularization, Dropout and Early Stopping",
+    "order": 10,
+    "level": "beginner",
+    "description": "Preventing overfitting: weight decay (L2), dropout random neuron deactivation, and early stopping.",
+    "subtopics": [
+      "L2 weight decay penalty",
+      "Dropout mechanism (training vs inference)",
+      "Inverted dropout scaling",
+      "Early stopping via validation tracking"
+    ],
+    "prerequisites": [
+      "optimizers"
+    ]
+  },
+  {
+    "topic_id": "batch_normalization",
+    "title": "Batch Normalization and Internal Covariate Shift",
+    "order": 11,
+    "level": "intermediate",
+    "description": "Normalizing layer inputs per mini-batch: running mean/variance, gamma scale, and beta shift.",
+    "subtopics": [
+      "Internal covariate shift concept",
+      "Mini-batch mean and variance calculation",
+      "Learnable gamma and beta parameters",
+      "Batch normalization at inference time"
+    ],
+    "prerequisites": [
+      "regularization_dropout"
+    ]
+  },
+  {
+    "topic_id": "cnn_basics",
+    "title": "Convolutional Layers, Kernels, Padding and Stride",
+    "order": 12,
+    "level": "intermediate",
+    "description": "Spatial feature extractors: 2D convolution, filter kernels, valid vs same padding, and stride steps.",
+    "subtopics": [
+      "Convolution operation on 2D images",
+      "Feature maps and receptive fields",
+      "Padding (valid vs same)",
+      "Stride and output dimension formula"
+    ],
+    "prerequisites": [
+      "feedforward_networks"
+    ]
+  },
+  {
+    "topic_id": "cnn_pooling_architectures",
+    "title": "Pooling Layers and Classic CNN Architectures",
+    "order": 13,
+    "level": "intermediate",
+    "description": "Spatial downsampling with Max/Average pooling, LeNet, AlexNet, VGG, and ResNet skip connections.",
+    "subtopics": [
+      "Max Pooling vs Average Pooling",
+      "Translation invariance",
+      "VGG 3x3 filter stacking",
+      "ResNet residual blocks and identity shortcuts"
+    ],
+    "prerequisites": [
+      "cnn_basics"
+    ]
+  },
+  {
+    "topic_id": "rnn_basics",
+    "title": "Recurrent Neural Networks and Sequence Processing",
+    "order": 14,
+    "level": "intermediate",
+    "description": "Sequential modeling: recurrent loops, hidden state persistence, Backpropagation Through Time (BPTT).",
+    "subtopics": [
+      "Sequential data representation",
+      "Hidden state update h_t = tanh(W_hh * h_t-1 + W_xh * x_t)",
+      "Backpropagation Through Time (BPTT)",
+      "Long-term dependency decay"
+    ],
+    "prerequisites": [
+      "backpropagation"
+    ]
+  },
+  {
+    "topic_id": "lstm_and_gru",
+    "title": "Long Short-Term Memory and Gated Recurrent Units",
+    "order": 15,
+    "level": "intermediate",
+    "description": "Gated architectures: forget gate, input gate, cell state, output gate (LSTM), and reset/update gates (GRU).",
+    "subtopics": [
+      "Constant error carousel in cell state",
+      "LSTM forget, input, and output gates",
+      "GRU update and reset gates",
+      "LSTM vs GRU parameter tradeoffs"
+    ],
+    "prerequisites": [
+      "rnn_basics"
+    ]
+  },
+  {
+    "topic_id": "transfer_learning_finetuning",
+    "title": "Pretrained Models, Feature Extraction and Fine-Tuning",
+    "order": 16,
+    "level": "advanced",
+    "description": "Leveraging ImageNet models, freezing base layers, training custom classification heads, and gradual unfreezing.",
+    "subtopics": [
+      "Inductive transfer learning",
+      "Feature extraction with frozen weights",
+      "Fine-tuning top convolutional layers",
+      "Differential learning rates"
+    ],
+    "prerequisites": [
+      "cnn_pooling_architectures"
+    ]
+  }
+]

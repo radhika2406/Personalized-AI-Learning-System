@@ -1,0 +1,210 @@
+[
+    {
+        "id": "oop_paradigms",
+        "name": "Introduction to OOP Paradigms",
+        "order": 1,
+        "difficulty_stage": "beginner",
+        "description": "Fundamental concepts distinguishing procedural programming from object-oriented programming.",
+        "subtopics": [
+            "Procedural vs OOP",
+            "Entities and attributes",
+            "Benefits of OOP",
+            "Message passing"
+        ]
+    },
+    {
+        "id": "classes_and_objects",
+        "name": "Classes, Objects, and Instantiation",
+        "order": 2,
+        "difficulty_stage": "beginner",
+        "description": "Understanding blueprints (classes) and concrete instances (objects).",
+        "subtopics": [
+            "Class definition",
+            "Instantiating objects",
+            "Instance attributes",
+            "Object identity vs equality"
+        ]
+    },
+    {
+        "id": "encapsulation_data_hiding",
+        "name": "Encapsulation and Data Hiding",
+        "order": 3,
+        "difficulty_stage": "beginner",
+        "description": "Bundling data with methods and restricting direct access using access specifiers.",
+        "subtopics": [
+            "Public, private, and protected",
+            "Getters and setters",
+            "Information hiding",
+            "Encapsulation benefits"
+        ]
+    },
+    {
+        "id": "constructors_destructors",
+        "name": "Constructors and Destructors",
+        "order": 4,
+        "difficulty_stage": "beginner",
+        "description": "Lifecycle methods for object initialization and resource cleanup.",
+        "subtopics": [
+            "Default constructors",
+            "Parameterized constructors",
+            "Copy constructors",
+            "Destructors and finalizers"
+        ]
+    },
+    {
+        "id": "inheritance_concepts",
+        "name": "Inheritance Concepts",
+        "order": 5,
+        "difficulty_stage": "beginner",
+        "description": "Mechanisms for deriving new classes from existing classes to enable code reusability.",
+        "subtopics": [
+            "Base and derived classes",
+            "Is-a relationship",
+            "super/base keyword",
+            "Protected members in inheritance"
+        ]
+    },
+    {
+        "id": "inheritance_types",
+        "name": "Types of Inheritance",
+        "order": 6,
+        "difficulty_stage": "beginner",
+        "description": "Single, multilevel, hierarchical, multiple, and hybrid inheritance patterns.",
+        "subtopics": [
+            "Single inheritance",
+            "Multilevel inheritance",
+            "Multiple inheritance and diamond problem",
+            "Virtual base classes"
+        ]
+    },
+    {
+        "id": "polymorphism_overview",
+        "name": "Polymorphism Overview",
+        "order": 7,
+        "difficulty_stage": "beginner",
+        "description": "The ability of different objects to respond to the same message in distinct ways.",
+        "subtopics": [
+            "Static vs dynamic polymorphism",
+            "Early vs late binding",
+            "Function signatures",
+            "Polymorphic references"
+        ]
+    },
+    {
+        "id": "method_overloading",
+        "name": "Method and Operator Overloading",
+        "order": 8,
+        "difficulty_stage": "beginner",
+        "description": "Compile-time polymorphism through varying parameter lists or operator semantics.",
+        "subtopics": [
+            "Method signature differences",
+            "Type conversion in overloading",
+            "Operator overloading",
+            "Limitations of overloading"
+        ]
+    },
+    {
+        "id": "method_overriding",
+        "name": "Method Overriding and Dynamic Dispatch",
+        "order": 9,
+        "difficulty_stage": "beginner",
+        "description": "Runtime polymorphism allowing a derived class to provide a specific implementation of a base method.",
+        "subtopics": [
+            "Virtual methods",
+            "Virtual table (vtable)",
+            "Dynamic method resolution",
+            "override annotations"
+        ]
+    },
+    {
+        "id": "abstraction_abstract_classes",
+        "name": "Abstraction and Abstract Classes",
+        "order": 10,
+        "difficulty_stage": "beginner",
+        "description": "Hiding implementation details while exposing essential interfaces using abstract classes.",
+        "subtopics": [
+            "Abstract classes",
+            "Pure virtual / abstract methods",
+            "Partial implementation",
+            "Instantiation constraints"
+        ]
+    },
+    {
+        "id": "interfaces_protocols",
+        "name": "Interfaces and Protocols",
+        "order": 11,
+        "difficulty_stage": "intermediate",
+        "description": "Full contract-based abstraction specifying method declarations without implementation.",
+        "subtopics": [
+            "Interface declaration",
+            "Multiple interface implementation",
+            "Default methods in interfaces",
+            "Protocols"
+        ]
+    },
+    {
+        "id": "composition_vs_inheritance",
+        "name": "Composition, Aggregation, and Association",
+        "order": 12,
+        "difficulty_stage": "intermediate",
+        "description": "Building complex systems through object relationships and favor composition over inheritance.",
+        "subtopics": [
+            "Has-a relationship",
+            "Aggregation vs composition lifecycle",
+            "Delegation pattern",
+            "Favoring composition"
+        ]
+    },
+    {
+        "id": "static_and_class_members",
+        "name": "Static and Class Members",
+        "order": 13,
+        "difficulty_stage": "intermediate",
+        "description": "Class-level attributes, methods, and memory allocation independent of instances.",
+        "subtopics": [
+            "Static variables",
+            "Static methods and utility classes",
+            "Static initialization blocks",
+            "Class methods vs static methods"
+        ]
+    },
+    {
+        "id": "solid_principles_s_o_l",
+        "name": "SOLID Principles: Single Responsibility, Open/Closed, Liskov",
+        "order": 14,
+        "difficulty_stage": "intermediate",
+        "description": "Core software design principles for robust, maintainable object-oriented architectures.",
+        "subtopics": [
+            "Single Responsibility Principle (SRP)",
+            "Open/Closed Principle (OCP)",
+            "Liskov Substitution Principle (LSP)",
+            "Refactoring anti-patterns"
+        ]
+    },
+    {
+        "id": "solid_principles_i_d",
+        "name": "SOLID Principles: Interface Segregation and Dependency Inversion",
+        "order": 15,
+        "difficulty_stage": "intermediate",
+        "description": "Principles focused on decoupling interfaces and inverting high-level to low-level dependencies.",
+        "subtopics": [
+            "Interface Segregation Principle (ISP)",
+            "Dependency Inversion Principle (DIP)",
+            "Dependency injection",
+            "Inversion of Control (IoC)"
+        ]
+    },
+    {
+        "id": "design_patterns_intro",
+        "name": "Introduction to Design Patterns",
+        "order": 16,
+        "difficulty_stage": "advanced",
+        "description": "Classic reusable solutions to common software design problems in OOP.",
+        "subtopics": [
+            "Creational patterns (Singleton, Factory)",
+            "Structural patterns (Adapter, Decorator)",
+            "Behavioral patterns (Observer, Strategy)",
+            "Anti-patterns"
+        ]
+    }
+]

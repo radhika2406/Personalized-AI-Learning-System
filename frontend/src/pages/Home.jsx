@@ -282,11 +282,17 @@ const handleLogout = () => {
 
                 <div className="home-hero-art">
                   <div className="home-art-glow" />
-                  <img
-                    src="/images/learnova-hero.png"
-                    alt="Iridescent 3D spiral representing personalized learning"
+
+                    <img
+                    src={
+                    theme === "light"
+                    ? "/images/learnova-hero-light.png"
+                    : "/images/learnova-hero.png"
+                    }
+                    alt="Learnova personalized learning visual"
                     className="home-spiral-image"
-                  />
+                    />
+
                 </div>
               </div>
 

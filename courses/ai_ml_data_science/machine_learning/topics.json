@@ -1,0 +1,260 @@
+[
+  {
+    "topic_id": "ml_fundamentals",
+    "title": "Supervised, Unsupervised and Reinforcement Learning",
+    "order": 1,
+    "level": "beginner",
+    "description": "Taxonomy of ML paradigms, labeled vs unlabeled data, reward signals, and application domains.",
+    "subtopics": [
+      "Supervised learning (classification & regression)",
+      "Unsupervised clustering and association",
+      "Reinforcement learning agent-environment loops",
+      "Features and target labels"
+    ],
+    "prerequisites": []
+  },
+  {
+    "topic_id": "data_preprocessing",
+    "title": "Handling Missing Data, Imputation and Scaling",
+    "order": 2,
+    "level": "beginner",
+    "description": "Cleaning data pipelines: mean/median imputation, handling outliers, standardization, and min-max normalization.",
+    "subtopics": [
+      "MCAR, MAR, MNAR missing mechanisms",
+      "Mean, median, and mode imputation",
+      "MinMaxScaler vs StandardScaler",
+      "Outlier detection using IQR and Z-scores"
+    ],
+    "prerequisites": [
+      "ml_fundamentals"
+    ]
+  },
+  {
+    "topic_id": "feature_engineering",
+    "title": "Feature Encoding, Selection and Extraction",
+    "order": 3,
+    "level": "beginner",
+    "description": "One-hot encoding, label encoding, filter/wrapper selection methods, and polynomial features.",
+    "subtopics": [
+      "One-Hot Encoding vs Ordinal/Label Encoding",
+      "Curse of dimensionality in encoding",
+      "Correlation filters",
+      "Recursive feature elimination (RFE)"
+    ],
+    "prerequisites": [
+      "data_preprocessing"
+    ]
+  },
+  {
+    "topic_id": "train_test_split",
+    "title": "Training, Validation and Test Splits, Cross-Validation",
+    "order": 4,
+    "level": "beginner",
+    "description": "Splitting datasets, data leakage prevention, k-fold cross-validation, and stratified sampling.",
+    "subtopics": [
+      "Holdout validation (train/val/test)",
+      "Data leakage pitfalls",
+      "K-Fold cross-validation",
+      "Stratified K-Fold for imbalanced data"
+    ],
+    "prerequisites": [
+      "feature_engineering"
+    ]
+  },
+  {
+    "topic_id": "linear_regression",
+    "title": "Simple and Multiple Linear Regression, Cost Functions",
+    "order": 5,
+    "level": "beginner",
+    "description": "Ordinary Least Squares, hypothesis function, Mean Squared Error (MSE), and gradient descent updates.",
+    "subtopics": [
+      "Hypothesis representation y = wx + b",
+      "Mean Squared Error cost function",
+      "Ordinary Least Squares normal equation",
+      "Multiple regression assumptions"
+    ],
+    "prerequisites": [
+      "train_test_split"
+    ]
+  },
+  {
+    "topic_id": "logistic_regression",
+    "title": "Binary Classification and Sigmoid Function",
+    "order": 6,
+    "level": "beginner",
+    "description": "Logistic function, log-odds, binary cross-entropy loss, and decision boundary thresholding.",
+    "subtopics": [
+      "Sigmoid function mapping to probabilities",
+      "Log-loss (Binary Cross-Entropy)",
+      "Decision threshold tuning",
+      "Multiclass One-vs-Rest (OvR)"
+    ],
+    "prerequisites": [
+      "linear_regression"
+    ]
+  },
+  {
+    "topic_id": "knn",
+    "title": "K-Nearest Neighbors Algorithm and Distance Metrics",
+    "order": 7,
+    "level": "beginner",
+    "description": "Lazy learning, non-parametric classification/regression, Euclidean, Manhattan, and Minkowski distance.",
+    "subtopics": [
+      "Non-parametric lazy learner",
+      "Euclidean vs Manhattan distance",
+      "Choosing optimal k value",
+      "Sensitivity to feature scaling"
+    ],
+    "prerequisites": [
+      "data_preprocessing"
+    ]
+  },
+  {
+    "topic_id": "decision_trees",
+    "title": "Decision Trees, Entropy and Information Gain",
+    "order": 8,
+    "level": "beginner",
+    "description": "Recursive binary splitting, CART, ID3, Shannon Entropy, Gini Impurity, and tree pruning.",
+    "subtopics": [
+      "Gini Impurity vs Entropy",
+      "Information Gain calculation",
+      "Max depth and min samples split",
+      "Cost-complexity tree pruning"
+    ],
+    "prerequisites": [
+      "train_test_split"
+    ]
+  },
+  {
+    "topic_id": "model_evaluation_metrics",
+    "title": "Precision, Recall, F1-Score and ROC-AUC",
+    "order": 9,
+    "level": "beginner",
+    "description": "Confusion matrix, Accuracy paradox, Precision-Recall tradeoff, ROC curves, and AUC score.",
+    "subtopics": [
+      "True/False Positives and Negatives",
+      "Precision vs Recall tradeoff",
+      "F1-Score harmonic mean",
+      "ROC Curve and AUC interpretation"
+    ],
+    "prerequisites": [
+      "logistic_regression"
+    ]
+  },
+  {
+    "topic_id": "bias_variance_tradeoff",
+    "title": "Overfitting, Underfitting and Regularization",
+    "order": 10,
+    "level": "beginner",
+    "description": "Model generalization, high bias vs high variance, L1 Lasso, and L2 Ridge regularization.",
+    "subtopics": [
+      "Underfitting (high bias)",
+      "Overfitting (high variance)",
+      "L1 Lasso (feature sparsity)",
+      "L2 Ridge (weight shrinkage)"
+    ],
+    "prerequisites": [
+      "linear_regression",
+      "model_evaluation_metrics"
+    ]
+  },
+  {
+    "topic_id": "support_vector_machines",
+    "title": "SVM, Hyperplanes and Kernel Trick",
+    "order": 11,
+    "level": "intermediate",
+    "description": "Maximum margin classifiers, support vectors, slack variables, and RBF/polynomial kernel functions.",
+    "subtopics": [
+      "Separating hyperplanes & margin maximization",
+      "Soft-margin SVM and C parameter",
+      "Kernel trick mapping to higher dimensions",
+      "RBF kernel and gamma parameter"
+    ],
+    "prerequisites": [
+      "bias_variance_tradeoff"
+    ]
+  },
+  {
+    "topic_id": "naive_bayes",
+    "title": "Bayes Theorem and Naive Bayes Classifiers",
+    "order": 12,
+    "level": "intermediate",
+    "description": "Conditional probability, Bayes rule, conditional independence assumption, Gaussian, and Multinomial NB.",
+    "subtopics": [
+      "Prior, likelihood, posterior probabilities",
+      "Naive conditional independence assumption",
+      "Laplace smoothing",
+      "Multinomial NB for text classification"
+    ],
+    "prerequisites": [
+      "model_evaluation_metrics"
+    ]
+  },
+  {
+    "topic_id": "ensemble_random_forest",
+    "title": "Bagging, Bootstrap Aggregating and Random Forests",
+    "order": 13,
+    "level": "intermediate",
+    "description": "Ensemble learning, bootstrap sampling, variance reduction, random feature subspace, and OOB error.",
+    "subtopics": [
+      "Bootstrap aggregation (Bagging)",
+      "Random Forest random feature selection",
+      "Out-of-Bag (OOB) validation",
+      "Feature importance calculation"
+    ],
+    "prerequisites": [
+      "decision_trees",
+      "bias_variance_tradeoff"
+    ]
+  },
+  {
+    "topic_id": "boosting_algorithms",
+    "title": "AdaBoost, Gradient Boosting and XGBoost",
+    "order": 14,
+    "level": "intermediate",
+    "description": "Sequential ensemble learning, sample reweighting (AdaBoost), residual fitting, and gradient boosted trees.",
+    "subtopics": [
+      "AdaBoost exponential loss reweighting",
+      "Gradient Boosting pseudo-residuals",
+      "Learning rate shrinkage",
+      "XGBoost second-order Taylor expansion"
+    ],
+    "prerequisites": [
+      "ensemble_random_forest"
+    ]
+  },
+  {
+    "topic_id": "k_means_clustering",
+    "title": "K-Means Clustering and Elbow Method",
+    "order": 15,
+    "level": "intermediate",
+    "description": "Unsupervised partitioning, centroid initialization (K-Means++), WCSS inertia, and silhouette analysis.",
+    "subtopics": [
+      "K-Means iterative centroid optimization",
+      "Within-Cluster Sum of Squares (WCSS)",
+      "Elbow method for k selection",
+      "Silhouette score evaluation"
+    ],
+    "prerequisites": [
+      "knn",
+      "data_preprocessing"
+    ]
+  },
+  {
+    "topic_id": "pca_dimensionality_reduction",
+    "title": "Principal Component Analysis and Dimensionality Reduction",
+    "order": 16,
+    "level": "advanced",
+    "description": "Unsupervised feature extraction, covariance matrix decomposition, eigenvectors, eigenvalues, and explained variance.",
+    "subtopics": [
+      "Data centering and standardization",
+      "Covariance matrix computation",
+      "Eigenvalues and principal components",
+      "Explained variance ratio scree plot"
+    ],
+    "prerequisites": [
+      "k_means_clustering",
+      "bias_variance_tradeoff"
+    ]
+  }
+]
