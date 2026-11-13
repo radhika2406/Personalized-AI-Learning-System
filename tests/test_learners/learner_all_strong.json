@@ -1,0 +1,12 @@
+{
+  "learner_id": "learner_all_strong",
+  "daily_minutes": 60,
+  "topics": {
+    "variables": { "score": 92, "mastery_level": "strong" },
+    "data_types": { "score": 88, "mastery_level": "strong" },
+    "conditions": { "score": 95, "mastery_level": "strong" },
+    "loops": { "score": 90, "mastery_level": "strong" },
+    "functions": { "score": 86, "mastery_level": "strong" },
+    "lists": { "score": 94, "mastery_level": "strong" }
+  }
+}

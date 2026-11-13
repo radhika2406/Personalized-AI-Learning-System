@@ -1,0 +1,12 @@
+{
+  "learner_id": "learner_prereq_gap",
+  "daily_minutes": 60,
+  "topics": {
+    "variables": { "score": 85, "mastery_level": "strong" },
+    "data_types": { "score": 85, "mastery_level": "strong" },
+    "conditions": { "score": null, "mastery_level": "not assessed" },
+    "loops": { "score": 33, "mastery_level": "weak" },
+    "functions": { "score": null, "mastery_level": "not assessed" },
+    "lists": { "score": null, "mastery_level": "not assessed" }
+  }
+}
