@@ -13,6 +13,7 @@ from app.services.email_service import send_welcome_email
 from app.schemas.user import LoginRequest, TokenResponse, GoogleLoginRequest
 from app.services.user_service import authenticate_user
 
+import logging
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -47,10 +48,11 @@ def login(
     return {
         "access_token": access_token,
         "token_type": "bearer",
+        "is_new_user": False,
     }
 
 
-# Google login
+# Google login and registration
 @router.post("/google", response_model=TokenResponse)
 def google_login(
     credentials: GoogleLoginRequest,
@@ -68,7 +70,6 @@ def google_login(
             detail="Invalid or expired Google token",
         )
 
-    # Verify that Google has verified the email address.
     if not google_user.get("email_verified"):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -85,7 +86,9 @@ def google_login(
             detail="Required Google account information is missing",
         )
 
-    # First, look for an existing Google-linked account.
+    is_new_user = False
+
+    # Check for an existing Google-linked account.
     user = (
         db.query(User)
         .filter(User.google_id == google_id)
@@ -100,7 +103,7 @@ def google_login(
             )
 
     else:
-        # Check whether this email already has a password account.
+        # Check for an existing email/password account.
         existing_user = (
             db.query(User)
             .filter(User.email == email)
@@ -114,13 +117,13 @@ def google_login(
                     detail="Inactive user",
                 )
 
-            # Link the verified Google identity to the existing account.
             if existing_user.google_id and existing_user.google_id != google_id:
                 raise HTTPException(
                     status_code=status.HTTP_409_CONFLICT,
                     detail="This email is already linked to another Google account.",
                 )
 
+            # Link Google to the existing account.
             existing_user.google_id = google_id
 
             try:
@@ -135,44 +138,45 @@ def google_login(
 
             user = existing_user
 
-
         else:
-    # Create a new Google-only account.
-          user = User(
-            full_name=full_name[:100],
-            email=email,
-            google_id=google_id,
-            password_hash=None,
-            is_active=True,
-           )
+            # Create a genuinely new Google account.
+            user = User(
+                full_name=full_name[:100],
+                email=email,
+                google_id=google_id,
+                password_hash=None,
+                is_active=True,
+            )
 
-    db.add(user)
+            db.add(user)
 
-    try:
-        db.commit()
-        db.refresh(user)
+            try:
+                db.commit()
+                db.refresh(user)
+                is_new_user = True
+            except Exception:
+                db.rollback()
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail="Unable to create your Google account.",
+                )
 
-    except Exception:
-        db.rollback()
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Unable to create your Google account.",
-        )
+    # Send welcome email only when a new account is created.
+    if is_new_user:
+        try:
+            send_welcome_email(
+                email=user.email,
+                full_name=user.full_name,
+            )
+        except Exception:
+            logging.exception(
+                "Unexpected error while sending Google welcome email."
+            )
 
-    # Send welcome email only to newly registered Google users.
-    try:
-        send_welcome_email(
-            email=user.email,
-            full_name=user.full_name,
-        )
-    except Exception:
-        import logging
-        logging.exception("Unexpected error while sending Google welcome email.")
-
-    # Use the existing Learnova JWT authentication system.
     access_token = create_access_token(user.id)
 
     return {
         "access_token": access_token,
         "token_type": "bearer",
+        "is_new_user": is_new_user,
     }

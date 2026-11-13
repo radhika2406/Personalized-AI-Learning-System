@@ -21,6 +21,17 @@ class LoginRequest(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
+    is_new_user: bool = False
 
 class GoogleLoginRequest(BaseModel):
     credential: str = Field(min_length=1)
+
+
+class RegistrationResponse(BaseModel):
+    id: int
+    full_name: str
+    email: EmailStr
+    is_active: bool
+    access_token: str
+    token_type: str = "bearer"
+    is_new_user: bool = True

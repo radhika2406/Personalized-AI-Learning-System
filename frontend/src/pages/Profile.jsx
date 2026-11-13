@@ -1,10 +1,13 @@
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 import DashboardLayout from "../components/DashboardLayout";
 import api from "../services/api";
 import "./Profile.css";
 
 function Profile() {
+  const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [savedProfile, setSavedProfile] = useState(null);
   const [account, setAccount] = useState(null);
@@ -39,14 +42,7 @@ function Profile() {
         profileData = profileResponse.data;
       } catch (err) {
         if (err.response?.status === 404) {
-          profileData = {
-            learner_category: "college_student",
-            current_level: "beginner",
-            daily_study_minutes: 60,
-            learning_goal: "",
-            interests: "",
-            course_id: coursesResponse.data[0]?.id || "",
-          };
+          profileData = null;
         } else {
           throw err;
         }
@@ -195,7 +191,37 @@ function Profile() {
               </p>
             )}
 
-            {!isEditing ? (
+            {!profile ? (
+                <section className="profile-panel profile-incomplete">
+                  <div className="profile-panel-header">
+                    <div className="profile-panel-icon">
+                      <Sparkles size={22} />
+                    </div>
+
+                    <div>
+                      <h3>Complete Your Learning Profile</h3>
+                      <p>Your personalized learning journey starts here.</p>
+                    </div>
+                  </div>
+
+                  <div className="profile-incomplete-content">
+                    <p>
+                      You haven't set up your learning preferences yet.
+                      Tell Learnova about your interests, goals, current
+                      knowledge, and study routine so we can create a
+                      learning experience tailored to your needs.
+                    </p>
+
+                    <button
+                      type="button"
+                      className="profile-edit-button"
+                      onClick={() => navigate("/onboarding/preferences")}
+                    >
+                      Complete My Learning Profile
+                    </button>
+                  </div>
+                </section>
+              ) : !isEditing ? (
               /* Profile view */
               <div className="profile-content-grid">
 
@@ -246,73 +272,134 @@ function Profile() {
                     </div>
                   </div>
 
+
                   <div className="profile-info-list">
-                    <div className="profile-info-item">
-                      <span className="profile-info-label">
-                        Learner Category
-                      </span>
-                      <span className="profile-info-value">
-                        {profile.learner_category?.replaceAll(
-                          "_",
-                          " "
+
+                    {/* 01 - About You */}
+                    <div className="profile-preference-group">
+                      <h4 className="profile-preference-group-title">
+                        01. ABOUT YOU
+                      </h4>
+
+                      <div className="profile-info-list">
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Learner Category</span>
+                          <span className="profile-info-value">
+                            {profile.learner_category || "Not specified"}
+                          </span>
+                        </div>
+
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Education Level</span>
+                          <span className="profile-info-value">
+                            {profile.education_level || "Not specified"}
+                          </span>
+                        </div>
+
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Current Knowledge</span>
+                          <span className="profile-info-value">
+                            {profile.current_level || "Not specified"}
+                          </span>
+                        </div>
+
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Daily Study Time</span>
+                          <span className="profile-info-value">
+                            {profile.daily_study_custom ||
+                              `${profile.daily_study_minutes} minutes`}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 02 - Goals and Interests */}
+                    <div className="profile-preference-group">
+                      <h4 className="profile-preference-group-title">
+                        02. GOALS & INTERESTS
+                      </h4>
+
+                      <div className="profile-info-list">
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Learning Goals</span>
+                          <span className="profile-info-value">
+                            {profile.learning_goals?.join(", ") ||
+                              profile.learning_goal ||
+                              "Not specified"}
+                          </span>
+                        </div>
+
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Interests</span>
+                          <span className="profile-info-value">
+                            {profile.interest_topics?.join(", ") ||
+                              profile.interests ||
+                              "Not specified"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 03 - Study Preferences */}
+                    <div className="profile-preference-group">
+                      <h4 className="profile-preference-group-title">
+                        03. STUDY PREFERENCES
+                      </h4>
+
+                      <div className="profile-info-list">
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Learning Methods</span>
+                          <span className="profile-info-value">
+                            {profile.learning_styles?.join(", ") || "Not specified"}
+                          </span>
+                        </div>
+
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Preferred Study Days</span>
+                          <span className="profile-info-value">
+                            {profile.preferred_study_days?.join(", ") || "Not specified"}
+                          </span>
+                        </div>
+
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Study Schedule</span>
+                          <span className="profile-info-value">
+                            {profile.preferred_study_schedule || "Not specified"}
+                          </span>
+                        </div>
+
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Selected Course</span>
+                          <span className="profile-info-value">
+                            {selectedCourse?.title || "Not selected"}
+                          </span>
+                        </div>
+
+                        {profile.course_custom && (
+                          <div className="profile-info-item">
+                            <span className="profile-info-label">Additional Course</span>
+                            <span className="profile-info-value">
+                              {profile.course_custom}
+                            </span>
+                          </div>
                         )}
-                      </span>
+
+                        <div className="profile-info-item">
+                          <span className="profile-info-label">Learning Target</span>
+                          <span className="profile-info-value">
+                            {profile.learning_target || "Not specified"}
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="profile-info-item">
-                      <span className="profile-info-label">
-                        Current Level
-                      </span>
-                      <span className="profile-info-value">
-                        {profile.current_level}
-                      </span>
-                    </div>
-
-                    <div className="profile-info-item">
-                      <span className="profile-info-label">
-                        Daily Study Time
-                      </span>
-                      <span className="profile-info-value">
-                        {profile.daily_study_minutes} minutes
-                      </span>
-                    </div>
-
-                    <div className="profile-info-item">
-                      <span className="profile-info-label">
-                        Learning Goal
-                      </span>
-                      <span className="profile-info-value">
-                        {profile.learning_goal || "Not specified"}
-                      </span>
-                    </div>
-
-                    <div className="profile-info-item">
-                      <span className="profile-info-label">
-                        Interests
-                      </span>
-                      <span className="profile-info-value">
-                        {profile.interests || "Not specified"}
-                      </span>
-                    </div>
-
-                    <div className="profile-info-item">
-                      <span className="profile-info-label">
-                        Selected Course
-                      </span>
-                      <span className="profile-info-value">
-                        {selectedCourse?.title || "Not selected"}
-                      </span>
-                    </div>
                   </div>
+
 
                   <button
                     type="button"
                     className="profile-edit-button"
-                    onClick={() => {
-                      setMessage("");
-                      setError("");
-                      setIsEditing(true);
-                    }}
+                    onClick={() => navigate("/onboarding/preferences")}
                   >
                     Edit Learning Profile
                   </button>
