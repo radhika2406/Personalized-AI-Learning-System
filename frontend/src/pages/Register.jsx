@@ -35,14 +35,18 @@ function Register() {
   };
 
   // Normal email and password registration
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      await api.post("/users/register", formData);
-      navigate("/login");
+      const response = await api.post("/users/register", formData);
+
+      localStorage.setItem("token", response.data.access_token);
+
+      navigate("/onboarding");
     } catch (err) {
       console.error("Registration error:", err.response?.data || err.message);
 
@@ -58,6 +62,7 @@ function Register() {
     }
   };
 
+
   // Google registration
   const handleGoogleSuccess = async (credentialResponse) => {
     setError("");
@@ -69,7 +74,10 @@ function Register() {
       });
 
       localStorage.setItem("token", response.data.access_token);
-      navigate("/dashboard");
+      navigate(
+        response.data.is_new_user ? "/onboarding" : "/",
+        { replace: true }
+      );
     } catch (err) {
       console.error(
         "Google registration error:",

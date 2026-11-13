@@ -1,3 +1,4 @@
+
 from datetime import datetime, timezone
 
 from sqlalchemy import (
@@ -52,6 +53,21 @@ class Question(Base):
     correct_option: Mapped[str] = mapped_column(
         String(1),
         nullable=False
+    )
+
+    source_question_id: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True
+    )
+
+    difficulty_level: Mapped[str | None] = mapped_column(
+        String(30),
+        nullable=True
+    )
+
+    explanation: Mapped[str | None] = mapped_column(
+        Text,
+        nullable=True
     )
 
     created_at: Mapped[datetime] = mapped_column(

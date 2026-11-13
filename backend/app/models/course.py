@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
-from sqlalchemy import String, Text, DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Text, DateTime, ForeignKey, JSON
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.database import Base
 
@@ -27,6 +27,22 @@ class Course(Base):
         nullable=True,
     )
 
+    category_id: Mapped[int | None] = mapped_column(
+        ForeignKey("categories.id"),
+        nullable=True,
+    )
+
+    category = relationship("Category", back_populates="courses")
+
+    prerequisites: Mapped[list | None] = mapped_column(
+        JSON,
+        nullable=True,
+    )
+
+    checkpoints: Mapped[dict | None] = mapped_column(
+        JSON,
+        nullable=True,
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),

@@ -1,7 +1,9 @@
+
 from datetime import datetime, timezone
-from app.services import topic_mastery_service
+
 from sqlalchemy.orm import Session
 
+from app.services import topic_mastery_service
 from app.models.quiz import Quiz
 from app.models.question import Question
 from app.models.quiz_attempt import QuizAttempt
@@ -9,7 +11,6 @@ from app.models.quiz_answer import QuizAnswer
 
 
 def submit_quiz(db: Session, user_id: int, quiz_id: int, submission):
-    # Check whether the quiz exists
     quiz = db.query(Quiz).filter(
         Quiz.id == quiz_id
     ).first()
@@ -17,7 +18,6 @@ def submit_quiz(db: Session, user_id: int, quiz_id: int, submission):
     if not quiz:
         return None
 
-    # Get all questions belonging to this quiz
     questions = db.query(Question).filter(
         Question.quiz_id == quiz_id
     ).all()
@@ -25,22 +25,22 @@ def submit_quiz(db: Session, user_id: int, quiz_id: int, submission):
     if not questions:
         raise ValueError("This quiz has no questions")
 
-    # Prevent duplicate answers for the same question
-    question_ids = [answer.question_id for answer in submission.answers]
+    question_map = {
+        question.id: question for question in questions
+    }
 
-    if len(question_ids) != len(set(question_ids)):
+    submitted_ids = [
+        answer.question_id for answer in submission.answers
+    ]
+
+    if len(submitted_ids) != len(set(submitted_ids)):
         raise ValueError("Duplicate question answers are not allowed")
 
-    # Validate submitted question IDs
-    question_map = {question.id: question for question in questions}
+    if set(submitted_ids) != set(question_map.keys()):
+        raise ValueError(
+            "You must submit an answer for every question in this quiz"
+        )
 
-    for answer in submission.answers:
-        if answer.question_id not in question_map:
-            raise ValueError(
-                "A submitted question does not belong to this quiz"
-            )
-
-    # Create the quiz attempt
     attempt = QuizAttempt(
         user_id=user_id,
         quiz_id=quiz_id,
@@ -53,41 +53,82 @@ def submit_quiz(db: Session, user_id: int, quiz_id: int, submission):
 
     score = 0
 
-    # Save submitted answers and calculate score
     for answer in submission.answers:
         question = question_map[answer.question_id]
 
         if answer.selected_option == question.correct_option:
             score += 1
 
-        quiz_answer = QuizAnswer(
-            attempt_id=attempt.id,
-            question_id=answer.question_id,
-            selected_option=answer.selected_option,
+        db.add(
+            QuizAnswer(
+                attempt_id=attempt.id,
+                question_id=answer.question_id,
+                selected_option=answer.selected_option,
+            )
         )
 
-        db.add(quiz_answer)
-
-    # Update attempt result
-        attempt.score = score
+    attempt.score = score
     attempt.submitted_at = datetime.now(timezone.utc)
 
-    db.commit()
-    db.refresh(attempt)
+    try:
+        db.commit()
+        db.refresh(attempt)
 
-    quiz_percentage = round(
-        (attempt.score / attempt.total_questions) * 100,
-        2
-    )
+        quiz_percentage = round(
+            (attempt.score / attempt.total_questions) * 100,
+            2,
+        )
 
-    topic_mastery_service.update_topic_mastery(
-        db=db,
-        user_id=user_id,
-        topic_id=quiz.topic_id,
-        quiz_percentage=quiz_percentage
-    )
+        topic_mastery_service.update_topic_mastery(
+            db=db,
+            user_id=user_id,
+            topic_id=quiz.topic_id,
+            quiz_percentage=quiz_percentage,
+        )
+
+    except Exception:
+        db.rollback()
+        raise
 
     return attempt
+
+
+def build_attempt_review(db: Session, attempt: QuizAttempt):
+    answers = db.query(QuizAnswer).filter(
+        QuizAnswer.attempt_id == attempt.id
+    ).all()
+
+    questions = {
+        question.id: question
+        for question in db.query(Question).filter(
+            Question.quiz_id == attempt.quiz_id
+        ).all()
+    }
+
+    review = []
+
+    for answer in answers:
+        question = questions.get(answer.question_id)
+
+        if not question:
+            continue
+
+        review.append({
+            "question_id": question.id,
+            "question_text": question.question_text,
+            "option_a": question.option_a,
+            "option_b": question.option_b,
+            "option_c": question.option_c,
+            "option_d": question.option_d,
+            "selected_option": answer.selected_option,
+            "correct_option": question.correct_option,
+            "is_correct": (
+                answer.selected_option == question.correct_option
+            ),
+            "explanation": question.explanation,
+        })
+
+    return review
 
 
 def get_attempt_by_id(db: Session, attempt_id: int, user_id: int):
@@ -101,3 +142,19 @@ def get_attempts_by_user(db: Session, user_id: int):
     return db.query(QuizAttempt).filter(
         QuizAttempt.user_id == user_id
     ).order_by(QuizAttempt.started_at.desc()).all()
+
+
+def get_attempt_review(db: Session, attempt_id: int, user_id: int):
+    attempt = get_attempt_by_id(
+        db=db,
+        attempt_id=attempt_id,
+        user_id=user_id,
+    )
+
+    if not attempt:
+        return None
+
+    return {
+        "attempt": attempt,
+        "review": build_attempt_review(db, attempt),
+    }

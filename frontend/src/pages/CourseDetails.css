@@ -615,3 +615,164 @@ html[data-theme="light"] .course-details-empty-icon {
     animation: none;
   }
 }
+/* ==========================================
+   PUBLIC COURSE DETAILS
+========================================== */
+
+.public-course-layout {
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.public-course-header {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 6%;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.public-course-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.public-course-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.public-course-login,
+.public-course-register {
+  padding: 10px 17px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.public-course-login {
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.public-course-register {
+  color: #ffffff;
+  background: #7053d6;
+  border: 1px solid #7053d6;
+}
+
+.public-course-login:hover,
+.public-course-register:hover {
+  transform: translateY(-2px);
+}
+
+.public-course-content {
+  width: min(1200px, 92%);
+  margin: 35px auto;
+}
+
+/* Course action buttons */
+
+.course-details-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.course-enroll-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 11px 18px;
+  border: 1px solid #9277e5;
+  border-radius: 10px;
+  background: linear-gradient(110deg, #7053d6, #9277e5);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-enroll-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(112, 83, 214, 0.25);
+}
+
+.course-enroll-button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.course-topic-description {
+  margin: -8px 0 17px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* Public topic cards */
+
+.course-topic-preview {
+  cursor: pointer;
+}
+
+/* Light theme */
+
+html[data-theme="light"] .public-course-header {
+  background: #fffafb;
+  border-color: #ead6dd;
+}
+
+html[data-theme="light"] .public-course-login {
+  border-color: #ead6dd;
+  color: #7f1d3a;
+  background: #ffffff;
+}
+
+html[data-theme="light"] .public-course-register {
+  background: #7f1d3a;
+  border-color: #7f1d3a;
+}
+
+html[data-theme="light"] .course-enroll-button {
+  background: linear-gradient(110deg, #7f1d3a, #a83255);
+  border-color: #a83255;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .public-course-header {
+    padding: 12px 4%;
+  }
+
+  .public-course-header-actions {
+    gap: 7px;
+  }
+
+  .public-course-login,
+  .public-course-register {
+    padding: 9px 11px;
+    font-size: 11px;
+  }
+
+  .public-course-content {
+    width: 92%;
+    margin: 22px auto;
+  }
+
+  .course-details-actions {
+    align-items: stretch;
+  }
+}
