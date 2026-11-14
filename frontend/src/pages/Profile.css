@@ -87,9 +87,16 @@
 /* Main grid */
 .profile-content-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   gap: 22px;
+}
+
+/* Arrange details evenly inside each card */
+.profile-info-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
 /* Profile panels */
@@ -415,6 +422,11 @@ html[data-theme="light"] .profile-form-group select option {
 }
 
 @media (max-width: 600px) {
+
+  .profile-info-list {
+    grid-template-columns: 1fr;
+  }
+
   .profile-page {
     margin-top: 18px;
   }
@@ -456,4 +468,32 @@ html[data-theme="light"] .profile-form-group select option {
   .profile-form-actions button {
     width: 100%;
   }
+}
+
+/* Organized learning preference groups */
+
+.profile-preference-group {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.profile-preference-group-title {
+  margin: 0;
+  padding-bottom: 10px;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.profile-preference-group .profile-info-list {
+  margin: 0;
+}
+
+html[data-theme="light"] .profile-preference-group-title {
+  color: #8f2447;
 }

@@ -69,7 +69,7 @@ class TestAdaptiveLearning(unittest.TestCase):
         result = adapt_plan(before, after)
         changes = result["changes"]
 
-        # Variables activity should change from 'assess first' to 'revise'
+        # Variables activity should change from 'assess first' to 'practice'
         self.assertTrue(any("Topic 'variables' activity changed from 'assess first' to 'practice'" in c for c in changes))
 
     def test_case_3_quiz_makes_topic_worse(self):

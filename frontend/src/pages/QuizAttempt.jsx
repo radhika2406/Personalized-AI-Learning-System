@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../services/api";
@@ -101,6 +102,17 @@ function QuizAttempt() {
   }
 
   if (result) {
+    const getOptionText = (question, option) => {
+      const optionMap = {
+        A: question.option_a,
+        B: question.option_b,
+        C: question.option_c,
+        D: question.option_d,
+      };
+
+      return optionMap[option] || "Not available";
+    };
+
     return (
       <DashboardLayout
         title="Quiz Result"
@@ -108,6 +120,7 @@ function QuizAttempt() {
       >
         <div className="quiz-result-card">
           <div className="quiz-result-icon">🎉</div>
+
           <h2>{quiz.title}</h2>
 
           <div className="quiz-result-score">
@@ -134,6 +147,110 @@ function QuizAttempt() {
             Back to Quizzes
           </button>
         </div>
+
+        <section className="quiz-review-section">
+          <div className="quiz-review-heading">
+            <div>
+              <h2>Answer Review</h2>
+              <p>
+                Review your answers and understand the correct
+                solutions.
+              </p>
+            </div>
+
+            <span className="quiz-review-count">
+              {result.review?.length || 0} Questions
+            </span>
+          </div>
+
+          {result.review?.length > 0 ? (
+            <div className="quiz-review-list">
+              {result.review.map((item, index) => (
+                <article
+                  className={`quiz-review-card ${
+                    item.is_correct
+                      ? "review-correct"
+                      : "review-incorrect"
+                  }`}
+                  key={item.question_id}
+                >
+                  <div className="quiz-review-card-header">
+                    <span className="quiz-review-number">
+                      Question {index + 1}
+                    </span>
+
+                    <span
+                      className={`quiz-review-status ${
+                        item.is_correct
+                          ? "status-correct"
+                          : "status-incorrect"
+                      }`}
+                    >
+                      {item.is_correct
+                        ? "✓ Correct"
+                        : "✕ Incorrect"}
+                    </span>
+                  </div>
+
+                  <h3>{item.question_text}</h3>
+
+                  <div className="quiz-review-options">
+                    {["A", "B", "C", "D"].map((option) => {
+                      const isSelected =
+                        item.selected_option === option;
+
+                      const isCorrect =
+                        item.correct_option === option;
+
+                      let optionClass = "quiz-review-option";
+
+                      if (isCorrect) {
+                        optionClass += " correct-answer";
+                      } else if (isSelected) {
+                        optionClass += " wrong-answer";
+                      }
+
+                      return (
+                        <div
+                          className={optionClass}
+                          key={option}
+                        >
+                          <span className="quiz-review-letter">
+                            {option}
+                          </span>
+
+                          <span className="quiz-review-option-text">
+                            {getOptionText(item, option)}
+                          </span>
+
+                          <span className="quiz-review-label">
+                            {isCorrect
+                              ? "Correct answer"
+                              : isSelected
+                                ? "Your answer"
+                                : ""}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div className="quiz-review-explanation">
+                    <strong>Explanation</strong>
+                    <p>
+                      {item.explanation ||
+                        "No explanation is available for this question."}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="quiz-review-empty">
+              No answer review is available for this submission.
+            </p>
+          )}
+        </section>
       </DashboardLayout>
     );
   }

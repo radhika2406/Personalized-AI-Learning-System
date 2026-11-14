@@ -1,0 +1,329 @@
+.onboarding-welcome {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 105px 20px 45px;
+  overflow-y: auto;
+}
+
+/* Brand */
+
+.onboarding-welcome .auth-brand {
+  text-decoration: none;
+  cursor: default;
+}
+
+/* Main card */
+
+.onboarding-welcome-card {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 48px 52px;
+  text-align: center;
+  border: 1px solid var(--auth-border);
+  border-radius: 30px;
+  background: var(--auth-card);
+  backdrop-filter: blur(26px);
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  animation: onboardingAppear 0.7s ease both;
+}
+
+@keyframes onboardingAppear {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icon */
+
+.onboarding-icon {
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  border-radius: 24px;
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #6366f1,
+    #0891b2
+  );
+  box-shadow: 0 12px 35px rgba(124, 58, 237, 0.3);
+}
+
+/* Heading */
+
+.onboarding-eyebrow {
+  margin: 0 0 14px;
+  color: #67e8f9;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+.onboarding-welcome-card h1 {
+  margin: 0 auto;
+  max-width: 550px;
+  color: #c4b5fd;
+  font-size: clamp(28px, 4vw, 39px);
+  font-weight: 850;
+  line-height: 1.2;
+  letter-spacing: -1.4px;
+}
+
+/* Description */
+
+.onboarding-description {
+  max-width: 570px;
+  margin: 20px auto 0;
+  color: #a5b4d4;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* Benefits */
+
+.onboarding-benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 30px 0 22px;
+}
+
+.onboarding-benefit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 105px;
+  padding: 15px 10px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 17px;
+  background: rgba(124, 58, 237, 0.07);
+  color: #c4b5fd;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.onboarding-benefit svg {
+  color: #a78bfa;
+}
+
+.onboarding-benefit:hover {
+  transform: translateY(-4px);
+  border-color: #8b5cf6;
+  background: rgba(124, 58, 237, 0.13);
+}
+
+/* Estimated time */
+
+.onboarding-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 25px 0;
+  color: #a5b4d4;
+  font-size: 13px;
+}
+
+.onboarding-time svg {
+  color: #67e8f9;
+}
+
+/* Primary button */
+
+.onboarding-primary-button {
+  width: 100%;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(
+    110deg,
+    #7c3aed,
+    #6366f1 55%,
+    #0891b2
+  );
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 9px 28px rgba(99, 102, 241, 0.25);
+  transition: all 0.25s ease;
+}
+
+.onboarding-primary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 35px rgba(124, 58, 237, 0.35);
+  filter: brightness(1.1);
+}
+
+/* Skip button */
+
+.onboarding-skip-button {
+  display: block;
+  margin: 17px auto 0;
+  padding: 10px 18px;
+  border: none;
+  background: transparent;
+  color: #a5b4d4;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.onboarding-skip-button:hover {
+  color: #c4b5fd;
+  text-decoration: underline;
+}
+
+/* Footer */
+
+.onboarding-footer {
+  max-width: 480px;
+  margin: 25px auto 0;
+  color: #818ba8;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   LIGHT THEME — WINE / BURGUNDY
+========================================= */
+
+.onboarding-welcome[data-theme="light"] .onboarding-welcome-card {
+  box-shadow:
+    0 30px 90px rgba(127, 29, 58, 0.09),
+    0 8px 30px rgba(190, 24, 93, 0.04);
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-icon {
+  background: linear-gradient(
+    135deg,
+    #7f1d3a,
+    #a83255
+  );
+  box-shadow: 0 12px 30px rgba(127, 29, 58, 0.18);
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-eyebrow {
+  color: #a83255;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-welcome-card h1 {
+  color: #7f1d3a;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-description {
+  color: #806674;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-benefit {
+  color: #7f1d3a;
+  background: #fbf4f6;
+  border-color: #ead5dc;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-benefit svg {
+  color: #a83255;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-benefit:hover {
+  background: #f8eaf0;
+  border-color: #a83255;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-time {
+  color: #806674;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-time svg {
+  color: #a83255;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-primary-button {
+  background: linear-gradient(
+    110deg,
+    #7f1d3a,
+    #a83255
+  );
+  box-shadow: 0 9px 28px rgba(127, 29, 58, 0.18);
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-primary-button:hover {
+  box-shadow: 0 14px 35px rgba(127, 29, 58, 0.25);
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-skip-button {
+  color: #806674;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-skip-button:hover {
+  color: #7f1d3a;
+}
+
+.onboarding-welcome[data-theme="light"] .onboarding-footer {
+  color: #947b86;
+}
+
+/* Responsive */
+
+@media (max-width: 650px) {
+  .onboarding-welcome {
+    padding: 100px 16px 30px;
+  }
+
+  .onboarding-welcome-card {
+    padding: 35px 23px;
+    border-radius: 23px;
+  }
+
+  .onboarding-benefits {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .onboarding-benefit {
+    flex-direction: row;
+    min-height: 58px;
+    justify-content: flex-start;
+    padding: 12px 18px;
+  }
+
+  .onboarding-welcome-card h1 {
+    font-size: 29px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .onboarding-welcome-card {
+    animation: none;
+  }
+
+  .onboarding-welcome-card *,
+  .onboarding-welcome-card *::before,
+  .onboarding-welcome-card *::after {
+    transition: none !important;
+  }
+}

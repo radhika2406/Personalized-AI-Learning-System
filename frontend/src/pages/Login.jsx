@@ -8,7 +8,11 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/dashboard";
+  const enrollmentRedirect =
+  location.state?.enrollmentIntent &&
+  location.state?.from?.pathname
+    ? location.state.from.pathname
+    : "/";
 
   const [theme, setTheme] = useState(
     () => localStorage.getItem("learnova-theme") || "dark"
@@ -45,7 +49,8 @@ function Login() {
       const response = await api.post("/auth/login", formData);
 
       localStorage.setItem("token", response.data.access_token);
-      navigate(from, { replace: true });
+
+      navigate(enrollmentRedirect, { replace: true });
     } catch (err) {
       const message = err.response?.data?.detail;
 
@@ -69,7 +74,12 @@ function Login() {
       });
 
       localStorage.setItem("token", response.data.access_token);
-      navigate(from, { replace: true });
+     navigate(
+        response.data.is_new_user
+          ? "/onboarding"
+          : enrollmentRedirect,
+        { replace: true }
+      );
     } catch (err) {
       const message = err.response?.data?.detail;
 
