@@ -1,12 +1,11 @@
-
 /* =========================================
    LEANOVA HOMEPAGE — DESIGN SYSTEM
 ========================================= */
 
 .home-page {
-  --home-bg: #08091b;
-  --home-surface: #11132b;
-  --home-surface-2: #191a39;
+  --home-bg: #000000;
+  --home-surface: #151329;
+  --home-surface-2: #1C1938;
   --home-text: #f8f7ff;
   --home-muted: #a5a5c2;
   --home-primary: #9875ff;
@@ -14,41 +13,14 @@
   --home-accent: #db7dff;
   --home-border: rgba(190, 174, 255, 0.16);
   --home-card: rgba(20, 21, 48, 0.78);
-
   min-height: 100vh;
   overflow: hidden;
   position: relative;
   isolation: isolate;
   color: var(--home-text);
-  background:
-    radial-gradient(ellipse at 15% 8%, rgba(105, 65, 215, 0.25), transparent 38%),
-    radial-gradient(ellipse at 85% 28%, rgba(50, 79, 207, 0.22), transparent 40%),
-    linear-gradient(135deg, #08091b 0%, #10102b 48%, #11152f 100%);
+  background: #000000;
   font-family: Inter, "Segoe UI", sans-serif;
   transition: background 0.35s ease, color 0.35s ease;
-}
-.home-page {
-  --home-bg: #0B0A18;
-  --home-surface: #151329;
-  --home-surface-2: #1C1938;
-
-  background:
-    radial-gradient(
-      ellipse at 15% 8%,
-      rgba(105, 65, 215, 0.20),
-      transparent 38%
-    ),
-    radial-gradient(
-      ellipse at 85% 28%,
-      rgba(50, 79, 207, 0.16),
-      transparent 40%
-    ),
-    linear-gradient(
-      135deg,
-      #0B0A18 0%,
-      #100F23 50%,
-      #15132C 100%
-    );
 }
 
 .home-page::before {
@@ -57,9 +29,7 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image:
-    linear-gradient(rgba(172, 157, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(172, 157, 255, 0.035) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(172, 157, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(172, 157, 255, 0.035) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: linear-gradient(to bottom, black, transparent 88%);
 }
@@ -76,30 +46,6 @@
   background: rgba(99, 74, 235, 0.12);
   filter: blur(100px);
   pointer-events: none;
-}
-
-.home-page[data-theme="light"] {
-  --home-bg: #fff8fa;
-  --home-surface: #fff0f3;
-  --home-surface-2: #f8e6ec;
-  --home-text: #321b2b;
-  --home-muted: #765c6c;
-  --home-primary: #9b365d;
-  --home-secondary: #743d70;
-  --home-accent: #bd6385;
-  --home-border: rgba(129, 49, 82, 0.15);
-  --home-card: rgba(255, 248, 250, 0.86);
-
-  background:
-    radial-gradient(ellipse at 12% 8%, rgba(193, 105, 142, 0.20), transparent 38%),
-    radial-gradient(ellipse at 85% 30%, rgba(135, 79, 133, 0.15), transparent 40%),
-    linear-gradient(135deg, #fff8fa 0%, #f8edf2 50%, #f5e8ef 100%);
-}
-
-.home-page[data-theme="light"]::before {
-  background-image:
-    linear-gradient(rgba(129, 49, 82, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(129, 49, 82, 0.045) 1px, transparent 1px);
 }
 
 /* =========================================
@@ -238,31 +184,6 @@
   position: relative;
 }
 
-.home-hero-frame {
-  position: relative;
-  padding: 48px 6.5% 35px;
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid rgba(185, 169, 255, 0.23);
-  background:
-    linear-gradient(135deg, rgba(25, 25, 57, 0.97), rgba(12, 16, 42, 0.98));
-  box-shadow:
-    0 35px 100px rgba(0, 0, 0, 0.42),
-    0 0 80px rgba(102, 79, 235, 0.15),
-    inset 0 1px rgba(255, 255, 255, 0.09);
-  transform: rotateX(1deg) rotateY(-1deg);
-  transform-style: preserve-3d;
-}
-
-.home-page[data-theme="light"] .home-hero-frame {
-  background: linear-gradient(135deg, #fff5f7, #f2e4ed);
-  border-color: rgba(133, 49, 84, 0.20);
-  box-shadow:
-    0 35px 90px rgba(104, 48, 76, 0.16),
-    0 0 65px rgba(167, 89, 133, 0.12),
-    inset 0 1px white;
-}
-
 .home-window-controls {
   position: absolute;
   top: 19px;
@@ -337,12 +258,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
-
-.home-page[data-theme="light"] .home-hero-content h1 span {
-  background: linear-gradient(100deg, #9e365e, #795078, #bd6484);
-  -webkit-background-clip: text;
-  background-clip: text;
 }
 
 .home-hero-description {
@@ -438,12 +353,6 @@
   border-radius: 12px;
 }
 
-.home-page[data-theme="light"] .home-highlight-icon {
-  color: #923c61;
-  background: rgba(158, 55, 94, 0.08);
-  border-color: rgba(158, 55, 94, 0.18);
-}
-
 .home-highlight strong {
   display: block;
   font-size: 12px;
@@ -459,19 +368,6 @@
 /* =========================================
    SHARED SECTION STYLING
 ========================================= */
-
-.home-courses-section,
-.home-features-section,
-.home-how-section,
-.home-personal-section {
-  width: min(1250px, 88%);
-  margin: 0 auto 110px;
-}
-
-.home-section-heading {
-  text-align: center;
-  margin-bottom: 42px;
-}
 
 .home-section-heading > span {
   color: var(--home-primary);
@@ -503,25 +399,6 @@
   gap: 23px;
 }
 
-.home-feature-card {
-  padding: 32px 27px;
-  border: 1px solid var(--home-border);
-  border-radius: 17px;
-  background: var(--home-card);
-  backdrop-filter: blur(15px);
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.home-feature-card:hover {
-  transform: translateY(-7px);
-  border-color: var(--home-primary);
-}
-
-.home-feature-card > svg {
-  color: var(--home-primary);
-  margin-bottom: 23px;
-}
-
 .home-feature-card h3 {
   color: var(--home-text);
   font-size: 17px;
@@ -537,29 +414,6 @@
 /* =========================================
    COURSES
 ========================================= */
-
-.home-course-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.home-course-card {
-  padding: 26px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--home-border);
-  border-radius: 16px;
-  background: var(--home-card);
-  backdrop-filter: blur(14px);
-  min-width: 0;
-  transition: 0.3s ease;
-}
-
-.home-course-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--home-primary);
-}
 
 .home-course-card > span {
   color: var(--home-primary);
@@ -600,14 +454,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-}
-
-.home-steps-grid article {
-  text-align: center;
-  padding: 29px 20px;
-  border: 1px solid var(--home-border);
-  border-radius: 16px;
-  background: var(--home-card);
 }
 
 .home-steps-grid article > strong {
@@ -715,52 +561,17 @@
    FOOTER
 ========================================= */
 
-.home-footer {
-  width: min(1420px, 90%);
-  min-height: 105px;
-  margin: auto;
-  border-top: 1px solid var(--home-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.home-footer .home-brand {
-  font-size: 20px;
-}
-
-.home-footer .home-brand-icon {
-  width: 35px;
-  height: 35px;
-}
-
-.home-footer p {
-  color: var(--home-muted);
-  font-size: 12px;
-}
-
 /* =========================================
    ANIMATIONS
 ========================================= */
 
+/* Restore the floating animation used by the homepage hero artwork */
 @keyframes homeFloat {
   0%, 100% {
     transform: translateY(0) rotate(-2deg);
   }
   50% {
     transform: translateY(-13px) rotate(2deg);
-  }
-}
-
-@keyframes homeEnter {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -983,30 +794,11 @@
   --home-accent: #bd7185;
   --home-border: rgba(116, 42, 68, 0.16);
   --home-card: rgba(255, 251, 249, 0.92);
-
-  background:
-    radial-gradient(
-      ellipse at 12% 8%,
-      rgba(151, 62, 91, 0.10),
-      transparent 38%
-    ),
-    radial-gradient(
-      ellipse at 85% 30%,
-      rgba(186, 119, 132, 0.09),
-      transparent 40%
-    ),
-    linear-gradient(
-      135deg,
-      #fbf7f5 0%,
-      #f8efed 52%,
-      #f3e8e7 100%
-    );
+  background: radial-gradient( ellipse at 12% 8%, rgba(151, 62, 91, 0.10), transparent 38% ), radial-gradient( ellipse at 85% 30%, rgba(186, 119, 132, 0.09), transparent 40% ), linear-gradient( 135deg, #fbf7f5 0%, #f8efed 52%, #f3e8e7 100% );
 }
 
 .home-page[data-theme="light"]::before {
-  background-image:
-    linear-gradient(rgba(116, 42, 68, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(116, 42, 68, 0.035) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(116, 42, 68, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(116, 42, 68, 0.035) 1px, transparent 1px);
 }
 
 .home-page[data-theme="light"]::after {
@@ -1014,6 +806,7 @@
 }
 
 /* Header buttons — replace purple with wine */
+
 .home-page[data-theme="light"] .home-signup-button,
 .home-page[data-theme="light"] .home-primary-button {
   background: linear-gradient(110deg, #8e3453, #68263f);
@@ -1027,6 +820,7 @@
 }
 
 /* Secondary button */
+
 .home-page[data-theme="light"] .home-secondary-button {
   color: #762b48;
   border-color: rgba(132, 45, 75, 0.22);
@@ -1039,22 +833,16 @@
 }
 
 /* Theme toggle */
+
 .home-page[data-theme="light"] .home-theme-toggle:hover {
   border-color: #842d4b;
   color: #842d4b;
 }
 
 /* Hero frame */
-.home-page[data-theme="light"] .home-hero-frame {
-  background: linear-gradient(135deg, #fffaf8, #f5eae9);
-  border-color: rgba(132, 45, 75, 0.18);
-  box-shadow:
-    0 30px 85px rgba(85, 37, 54, 0.11),
-    0 0 55px rgba(151, 62, 91, 0.07),
-    inset 0 1px white;
-}
 
 /* Hero highlighted words */
+
 .home-page[data-theme="light"] .home-hero-content h1 span {
   background: linear-gradient(100deg, #852c4b, #a64d68, #c07888);
   -webkit-background-clip: text;
@@ -1062,12 +850,14 @@
 }
 
 /* Keep the ribbon image unchanged; only refine its surrounding glow */
+
 .home-page[data-theme="light"] .home-art-glow {
   background: linear-gradient(120deg, #a94e70, #d18b9b, #e7b9a8);
   opacity: 0.13;
 }
 
 /* Feature and highlight accents */
+
 .home-page[data-theme="light"] .home-highlight-icon {
   color: #842d4b;
   background: rgba(132, 45, 75, 0.07);
@@ -1075,6 +865,7 @@
 }
 
 /* How-it-works numbers */
+
 .home-page[data-theme="light"] .home-steps-grid article > strong {
   background: linear-gradient(120deg, #842d4b, #bd7185);
   -webkit-background-clip: text;
@@ -1082,6 +873,7 @@
 }
 
 /* Browser window dots */
+
 .home-page[data-theme="light"] .home-window-controls span {
   background: #8e3453;
 }
@@ -1095,6 +887,7 @@
 }
 
 /* Light theme — Learnova brand logo */
+
 .home-page[data-theme="light"] .home-brand-icon {
   background: linear-gradient(135deg, #963b59, #68263f);
   color: #ffffff;
@@ -1105,34 +898,10 @@
    HOMEPAGE FOOTER — CENTERED BRANDING
    ========================================= */
 
-.home-footer {
-  min-height: 170px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 15px;
-  padding: 30px 20px;
-}
-
-.home-footer .home-brand {
-  justify-content: center;
-  gap: 13px;
-  font-size: 27px;
-  letter-spacing: -1px;
-}
-
 .home-footer .home-brand-icon {
   width: 48px;
   height: 48px;
   border-radius: 15px;
-}
-
-.home-footer p {
-  font-size: 14px;
-  line-height: 1.7;
-  margin: 0;
-  text-align: center;
 }
 
 /* =========================================
@@ -1140,35 +909,46 @@
    ========================================= */
 
 /* More balanced section spacing */
+
 .home-courses-section,
 .home-features-section,
 .home-how-section,
 .home-personal-section {
+  width: min(1250px, 88%);
+  margin: 0 auto 110px;
   margin-bottom: 85px;
 }
 
 /* Refined feature cards */
+
 .home-feature-card {
-  border-radius: 20px;
   padding: 35px 30px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+  border: 1px solid var(--home-border);
+  border-radius: 20px;
+  background: var(--home-card);
+  backdrop-filter: blur(15px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .home-feature-card:hover {
   transform: translateY(-6px);
+  border-color: var(--home-primary);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.13);
 }
 
 .home-feature-card > svg {
+  color: var(--home-primary);
+  margin-bottom: 23px;
   width: 29px;
   height: 29px;
 }
 
 /* Course cards — center a single available course */
+
 .home-course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
   justify-content: center;
 }
 
@@ -1178,23 +958,31 @@
 }
 
 .home-course-card {
-  border-radius: 20px;
   padding: 30px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--home-border);
+  border-radius: 20px;
+  background: var(--home-card);
+  backdrop-filter: blur(14px);
+  min-width: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .home-course-card:hover {
   transform: translateY(-6px);
+  border-color: var(--home-primary);
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.13);
 }
 
 /* More refined how-it-works cards */
+
 .home-steps-grid article {
-  border-radius: 20px;
+  text-align: center;
   padding: 35px 22px;
+  border: 1px solid var(--home-border);
+  border-radius: 20px;
+  background: var(--home-card);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -1204,7 +992,9 @@
 }
 
 /* Better spacing between section headings and cards */
+
 .home-section-heading {
+  text-align: center;
   margin-bottom: 48px;
 }
 
@@ -1228,29 +1018,41 @@
 }
 
 /* Minimal centered homepage footer */
+
 .home-footer {
+  width: min(1420px, 90%);
   min-height: 110px;
-  flex-direction: column;
-  justify-content: center;
+  margin: auto;
+  border-top: 1px solid var(--home-border);
+  display: flex;
   align-items: center;
-  padding: 25px 20px;
-  text-align: center;
+  justify-content: center;
   gap: 0;
+  flex-direction: column;
+  text-align: center;
+  padding: 25px 20px;
 }
 
 /* Hide repeated brand logo and name */
+
 .home-footer .home-brand {
+  font-size: 27px;
+  justify-content: center;
+  gap: 13px;
+  letter-spacing: -1px;
   display: none;
 }
 
 /* Center and emphasize the tagline */
+
 .home-footer p {
-  margin: 0;
+  color: var(--home-muted);
   font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+  text-align: center;
   font-weight: 500;
   letter-spacing: 0.3px;
-  text-align: center;
-  color: var(--home-muted);
 }
 
 @media (max-width: 760px) {
@@ -1264,28 +1066,20 @@
 }
 
 /* Improve homepage text rendering */
+
 .home-hero-frame {
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(25, 24, 57, 0.68),
-      rgba(14, 17, 43, 0.58)
-    );
-
-  border: 1px solid rgba(185, 166, 255, 0.22);
+  padding: 48px 6.5% 35px;
   border-radius: 25px;
-
+  overflow: hidden;
+  border: 1px solid rgba(185, 166, 255, 0.22);
+  background: linear-gradient( 135deg, rgba(25, 24, 57, 0.68), rgba(14, 17, 43, 0.58) );
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.24), 0 0 55px rgba(112, 78, 220, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.16);
+  transform: rotateX(1deg) rotateY(-1deg);
+  transform-style: preserve-3d;
+  isolation: isolate;
   backdrop-filter: blur(28px) saturate(155%);
   -webkit-backdrop-filter: blur(28px) saturate(155%);
-
-  box-shadow:
-    0 30px 90px rgba(0, 0, 0, 0.24),
-    0 0 55px rgba(112, 78, 220, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.16);
 }
 
 /* Faint background artwork */
@@ -1298,68 +1092,21 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 78% 28%,
-      rgba(112, 82, 230, 0.13),
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse at 90% 65%,
-      rgba(65, 105, 240, 0.09),
-      transparent 38%
-    ),
-    radial-gradient(
-      ellipse at 58% 85%,
-      rgba(211, 93, 220, 0.055),
-      transparent 35%
-    );
-
+  background: radial-gradient( ellipse at 78% 28%, rgba(112, 82, 230, 0.13), transparent 42% ), radial-gradient( ellipse at 90% 65%, rgba(65, 105, 240, 0.09), transparent 38% ), radial-gradient( ellipse at 58% 85%, rgba(211, 93, 220, 0.055), transparent 35% );
   filter: blur(22px);
 }
 
 /* Light theme — subtle blush and mauve shading */
 
-.home-page[data-theme="light"] .home-hero-frame::before {
-  background:
-    radial-gradient(
-      ellipse at 78% 28%,
-      rgba(166, 79, 125, 0.09),
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse at 90% 65%,
-      rgba(133, 91, 145, 0.07),
-      transparent 38%
-    ),
-    radial-gradient(
-      ellipse at 58% 85%,
-      rgba(205, 130, 157, 0.045),
-      transparent 35%
-    );
-
-  filter: blur(22px);
-}
-
-
 /* Soft glass reflection */
+
 .home-hero-frame::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.09),
-      transparent 28%,
-      transparent 72%,
-      rgba(151, 116, 255, 0.07)
-    );
-
+  background: linear-gradient( 135deg, rgba(255, 255, 255, 0.09), transparent 28%, transparent 72%, rgba(151, 116, 255, 0.07) );
   border-radius: inherit;
 }
 
@@ -1368,44 +1115,22 @@
 ========================================= */
 
 .home-page[data-theme="light"] .home-hero-frame {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 249, 250, 0.78),
-      rgba(248, 235, 241, 0.70)
-    );
-
+  background: linear-gradient( 135deg, rgba(255, 249, 250, 0.78), rgba(248, 235, 241, 0.70) );
   border-color: rgba(142, 49, 94, 0.20);
-
+  box-shadow: 0 30px 85px rgba(85, 37, 54, 0.12), 0 0 55px rgba(151, 62, 91, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(28px) saturate(140%);
   -webkit-backdrop-filter: blur(28px) saturate(140%);
-
-  box-shadow:
-    0 30px 85px rgba(85, 37, 54, 0.12),
-    0 0 55px rgba(151, 62, 91, 0.08),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
 .home-page[data-theme="light"] .home-hero-frame::before {
-  background-image:
-    linear-gradient(
-      115deg,
-      rgba(255, 247, 249, 0.78),
-      rgba(250, 237, 242, 0.62)
-    ),
-    url("/images/learnova-hero.png");
-
+  background: radial-gradient( ellipse at 78% 28%, rgba(166, 79, 125, 0.09), transparent 42% ), radial-gradient( ellipse at 90% 65%, rgba(133, 91, 145, 0.07), transparent 38% ), radial-gradient( ellipse at 58% 85%, rgba(205, 130, 157, 0.045), transparent 35% );
+  filter: blur(22px);
+  background-image: linear-gradient( 115deg, rgba(255, 247, 249, 0.78), rgba(250, 237, 242, 0.62) ), url("/images/learnova-hero.png");
   opacity: 0.25;
 }
 
 .home-page[data-theme="light"] .home-hero-frame::after {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.55),
-      transparent 35%,
-      rgba(174, 91, 126, 0.04)
-    );
+  background: linear-gradient( 135deg, rgba(255, 255, 255, 0.55), transparent 35%, rgba(174, 91, 126, 0.04) );
 }
 
 /* =================================
@@ -1422,7 +1147,6 @@
   text-decoration: none;
   cursor: pointer;
 }
-
 
 .category-card-image {
   position: relative;
@@ -1454,11 +1178,7 @@
 .category-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(8, 9, 27, 0.55),
-    transparent 65%
-  );
+  background: linear-gradient( to top, rgba(8, 9, 27, 0.55), transparent 65% );
 }
 
 .category-card-icon {
@@ -1534,69 +1254,19 @@
   }
 }
 
-
 /* ============================================
    LEARNOVA HOMEPAGE — MIDNIGHT DARK THEME
    Midnight Black + Pure White + Golden Yellow
    ============================================ */
 
-.home-page:not([data-theme="light"]) {
-  --home-bg: #0B0A18;
-  --home-surface: #141414;
-  --home-surface-2: #1C1C1C;
-  --home-text: #FFFFFF;
-  --home-muted: #B8B8C2;
-  --home-primary: #FFC400;
-  --home-secondary: #E6AD00;
-  --home-accent: #FFC400;
-  --home-border: rgba(255, 255, 255, 0.10);
-  --home-card: rgba(23, 23, 23, 0.88);
-
-  color: var(--home-text);
-
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(255, 255, 255, 0.035),
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse at 85% 35%,
-      rgba(255, 196, 0, 0.035),
-      transparent 38%
-    ),
-    #0B0A18;
-}
-
 /* Subtle background grid */
-.home-page:not([data-theme="light"])::before {
-  background-image:
-    linear-gradient(
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.018) 1px,
-      transparent 1px
-    );
-}
 
 /* Ambient background glow */
-.home-page:not([data-theme="light"])::after {
-  background: rgba(255, 196, 0, 0.045);
-}
 
 /* Navigation */
+
 .home-page:not([data-theme="light"]) .home-navbar {
   border-color: rgba(255, 255, 255, 0.09);
-}
-
-.home-page:not([data-theme="light"]) .home-brand-icon {
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 0 18px rgba(255, 255, 255, 0.04);
 }
 
 .home-page:not([data-theme="light"]) .home-nav-links a:hover {
@@ -1609,49 +1279,28 @@
 }
 
 /* Primary action buttons */
+
 .home-page:not([data-theme="light"]) .home-signup-button,
 .home-page:not([data-theme="light"]) .home-primary-button {
-  color: #0B0A18;
+  color: #000000;
   background: #FFC400;
   border: 1px solid #FFC400;
-
-  box-shadow:
-    0 5px 20px rgba(255, 196, 0, 0.12);
-
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
+  box-shadow: 0 5px 20px rgba(255, 196, 0, 0.12);
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .home-page:not([data-theme="light"]) .home-signup-button:hover,
 .home-page:not([data-theme="light"]) .home-primary-button:hover {
-  color: #0B0A18;
+  color: #000000;
   background: #E6AD00;
   border-color: #E6AD00;
-
-  box-shadow:
-    0 8px 28px rgba(255, 196, 0, 0.22);
+  box-shadow: 0 8px 28px rgba(255, 196, 0, 0.22);
 }
 
 /* Hero frame */
-.home-page:not([data-theme="light"]) .home-hero-frame {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(23, 23, 23, 0.97),
-      rgba(11, 10, 24, 0.98)
-    );
-
-  border-color: rgba(255, 255, 255, 0.12);
-
-  box-shadow:
-    0 35px 100px rgba(0, 0, 0, 0.42),
-    0 0 55px rgba(255, 196, 0, 0.035),
-    inset 0 1px rgba(255, 255, 255, 0.07);
-}
 
 /* Browser window details */
+
 .home-page:not([data-theme="light"]) .home-window-controls span,
 .home-page:not([data-theme="light"]) .home-window-controls span:nth-child(2),
 .home-page:not([data-theme="light"]) .home-window-controls span:nth-child(3) {
@@ -1659,6 +1308,7 @@
 }
 
 /* Hero badge */
+
 .home-page:not([data-theme="light"]) .home-hero-badge {
   color: #FFFFFF;
   background: rgba(255, 255, 255, 0.045);
@@ -1666,6 +1316,7 @@
 }
 
 /* Hero heading */
+
 .home-page:not([data-theme="light"]) .home-hero-content h1 {
   color: #FFFFFF;
 }
@@ -1677,11 +1328,13 @@
 }
 
 /* Hero supporting text */
+
 .home-page:not([data-theme="light"]) .home-hero-description {
   color: #B8B8C2;
 }
 
 /* Secondary action */
+
 .home-page:not([data-theme="light"]) .home-secondary-button {
   color: #FFFFFF;
   background: rgba(255, 255, 255, 0.035);
@@ -1695,22 +1348,9 @@
 }
 
 /* Hero artwork glow */
-.home-page:not([data-theme="light"]) .home-art-glow {
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.12),
-    rgba(255, 196, 0, 0.30)
-  );
-  opacity: 0.12;
-}
-
-.home-page:not([data-theme="light"]) .home-spiral-image {
-  filter: drop-shadow(
-    0 25px 40px rgba(0, 0, 0, 0.30)
-  );
-}
 
 /* Hero highlights */
+
 .home-page:not([data-theme="light"]) .home-highlight-icon {
   color: #FFFFFF;
   background: rgba(255, 255, 255, 0.055);
@@ -1718,6 +1358,7 @@
 }
 
 /* Section headings */
+
 .home-page:not([data-theme="light"]) .home-section-heading > span {
   color: #FFC400;
 }
@@ -1731,40 +1372,21 @@
 }
 
 /* Feature cards */
+
 .home-page:not([data-theme="light"]) .home-feature-card {
   background: #141414;
   border-color: rgba(255, 255, 255, 0.09);
 }
 
-.home-page:not([data-theme="light"]) .home-feature-card:hover {
-  border-color: rgba(255, 196, 0, 0.38);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
-}
-
-.home-page:not([data-theme="light"]) .home-feature-card > svg {
-  color: #FFC400;
-}
-
 /* Category cards */
+
 .home-page:not([data-theme="light"]) .category-card {
   background: #141414;
   border-color: rgba(255, 255, 255, 0.10);
 }
 
-.home-page:not([data-theme="light"]) .category-card:hover {
-  border-color: rgba(255, 196, 0, 0.40);
-}
-
 .home-page:not([data-theme="light"]) .category-image-overlay {
-  background: linear-gradient(
-    to top,
-    rgba(11, 10, 24, 0.48),
-    transparent 65%
-  );
-}
-
-.home-page:not([data-theme="light"]) .category-card-label {
-  color: #FFC400;
+  background: linear-gradient( to top, rgba(11, 10, 24, 0.48), transparent 65% );
 }
 
 .home-page:not([data-theme="light"]) .category-card-content h3 {
@@ -1775,32 +1397,21 @@
   color: #B8B8C2;
 }
 
-.home-page:not([data-theme="light"]) .category-explore {
-  color: #FFC400;
-}
-
 /* Course card hover */
+
 .home-page:not([data-theme="light"]) .home-course-card:hover {
   border-color: rgba(255, 196, 0, 0.38);
 }
 
 /* How it works */
+
 .home-page:not([data-theme="light"]) .home-steps-grid article {
   background: #141414;
   border-color: rgba(255, 255, 255, 0.09);
 }
 
-.home-page:not([data-theme="light"]) .home-steps-grid article:hover {
-  border-color: rgba(255, 196, 0, 0.38);
-}
-
-.home-page:not([data-theme="light"]) .home-steps-grid article > strong {
-  background: none;
-  color: #FFC400;
-  -webkit-text-fill-color: #FFC400;
-}
-
 /* Statistics */
+
 .home-page:not([data-theme="light"]) .home-stat-card {
   background: #141414;
   border-color: rgba(255, 255, 255, 0.09);
@@ -1815,6 +1426,7 @@
 }
 
 /* Empty state and dashboard link */
+
 .home-page:not([data-theme="light"]) .home-empty-state > svg {
   color: #FFC400;
 }
@@ -1824,6 +1436,7 @@
 }
 
 /* Footer */
+
 .home-page:not([data-theme="light"]) .home-footer {
   border-color: rgba(255, 255, 255, 0.09);
 }
@@ -1833,6 +1446,7 @@
 }
 
 /* Keep yellow highlights restrained on hover */
+
 .home-page:not([data-theme="light"]) .home-course-card a:hover,
 .home-page:not([data-theme="light"]) .home-dashboard-link:hover {
   color: #E6AD00;
@@ -1844,6 +1458,7 @@
    ============================================ */
 
 /* Category labels and links */
+
 .home-page:not([data-theme="light"]) .category-card-label {
   color: #FFFFFF;
 }
@@ -1857,16 +1472,20 @@
 }
 
 /* Feature section icons */
+
 .home-page:not([data-theme="light"]) .home-feature-card > svg {
   color: #FFFFFF;
 }
 
 /* Feature card hover */
+
 .home-page:not([data-theme="light"]) .home-feature-card:hover {
   border-color: rgba(255, 255, 255, 0.20);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
 }
 
 /* Journey section step numbers */
+
 .home-page:not([data-theme="light"]) .home-steps-grid article > strong {
   background: none;
   color: #FFFFFF;
@@ -1874,11 +1493,13 @@
 }
 
 /* Journey card hover */
+
 .home-page:not([data-theme="light"]) .home-steps-grid article:hover {
   border-color: rgba(255, 255, 255, 0.20);
 }
 
 /* Subtle neutral hover for category links */
+
 .home-page:not([data-theme="light"]) .category-explore:hover {
   color: #D1D1D8;
 }
@@ -1889,55 +1510,62 @@
    ============================================ */
 
 .home-page:not([data-theme="light"]) {
-  background:
-    radial-gradient(
-      ellipse at 18% 30%,
-      rgba(255, 255, 255, 0.035),
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse at 78% 38%,
-      rgba(255, 196, 0, 0.045),
-      transparent 35%
-    ),
-    #0B0A18;
+  --home-bg: #000000;
+  --home-surface: #141414;
+  --home-surface-2: #1C1C1C;
+  --home-text: #FFFFFF;
+  --home-muted: #B8B8C2;
+  --home-primary: #FFC400;
+  --home-secondary: #E6AD00;
+  --home-accent: #FFC400;
+  --home-border: rgba(255, 255, 255, 0.10);
+  --home-card: rgba(23, 23, 23, 0.88);
+  color: var(--home-text);
+  background: #000000;
 }
 
 /* Remove the homepage grid */
+
 .home-page:not([data-theme="light"])::before {
   background-image: none;
 }
 
 /* Remove the old ambient overlay */
+
 .home-page:not([data-theme="light"])::after {
   display: none;
 }
 
 /* Remove the outer browser-window card */
+
 .home-page:not([data-theme="light"]) .home-hero-frame {
   background: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: none;
   border: none;
   border-radius: 0;
-  box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 
 /* Remove browser window dots */
+
 .home-page:not([data-theme="light"]) .home-window-controls {
   display: none;
 }
 
 /* Keep the hero artwork clean */
+
 .home-page:not([data-theme="light"]) .home-art-glow {
+  background: linear-gradient( 120deg, rgba(255, 255, 255, 0.12), rgba(255, 196, 0, 0.30) );
   opacity: 0.08;
 }
 
 /* Neutral divider below hero content */
+
 .home-page:not([data-theme="light"]) .home-hero-frame hr {
   border-color: rgba(255, 255, 255, 0.12);
 }
-
 
 /* =========================================
    LEARNOVA — FINAL HERO ALIGNMENT
@@ -1972,6 +1600,7 @@
 }
 
 .home-page:not([data-theme="light"]) .home-spiral-image {
+  filter: drop-shadow( 0 25px 40px rgba(0, 0, 0, 0.30) );
   width: 100%;
   max-width: 490px;
   height: auto;
@@ -1979,6 +1608,7 @@
 }
 
 /* Three equally spaced feature items */
+
 .home-page:not([data-theme="light"]) .home-hero-highlights {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2038,7 +1668,9 @@
     justify-content: flex-start;
   }
 }
+
 /* Golden Learnova logo — dark theme */
+
 .home-page:not([data-theme="light"]) .home-brand-icon {
   color: #FFC400;
   background: rgba(255, 196, 0, 0.07);
