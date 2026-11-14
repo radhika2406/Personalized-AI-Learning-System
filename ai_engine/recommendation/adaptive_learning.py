@@ -1,152 +1,161 @@
 
-"""Adaptive learning engine.
-
-Updates personalized study plans when new learner performance data
-is received and reports meaningful changes.
+"""Dynamically adapts the personalized study plan when new learner
+performance data is received and tracks changes.
 """
 
 from typing import Any
 
-from ai_engine.recommendation.study_planner import build_plan
-from ai_engine.recommendation.topic_recommender import (
-    recommend_topics,
-    load_topics_metadata,
-)
 from ai_engine.recommendation.adapter import normalize_analysis
-from ai_engine.recommendation.config import (
-    get_mastery_level,
-    LEVEL_GOOD,
-    LEVEL_STRONG,
-)
+from ai_engine.recommendation.study_planner import build_plan
+
+
+def _get_recommendations(plan: dict[str, Any]) -> list[dict[str, Any]]:
+    """Safely extract recommended topics from a study plan."""
+    recommendations = plan.get("recommended_topics", [])
+
+    if not isinstance(recommendations, list):
+        return []
+
+    return recommendations
+
+
+def _get_topic_id(item: dict[str, Any]) -> str | None:
+    """Support the topic keys used by recommendation outputs."""
+    return item.get("topic_id") or item.get("topic")
+
+
+def _get_activity(item: dict[str, Any]) -> str | None:
+    """Extract the recommended activity."""
+    return item.get("activity")
+
+
+def _get_score(learner: Any, topic_id: str) -> float | None:
+    """Get a learner's mastery score for a topic."""
+    return learner.topic_scores.get(topic_id)
+
+
+def _activity_map(plan: dict[str, Any]) -> dict[str, str | None]:
+    """Create a topic-to-activity mapping from a study plan."""
+    result = {}
+
+    for item in _get_recommendations(plan):
+        if not isinstance(item, dict):
+            continue
+
+        topic_id = _get_topic_id(item)
+
+        if topic_id:
+            result[topic_id] = _get_activity(item)
+
+    return result
 
 
 def adapt_plan(
     previous_analysis: dict[str, Any],
     new_analysis: dict[str, Any],
 ) -> dict[str, Any]:
-    """Adapt the study plan and describe changes in recommendations."""
+    """
+    Compare the previous and updated learner data.
 
-    old_norm = normalize_analysis(previous_analysis)
-    new_norm = normalize_analysis(new_analysis)
+    Returns:
+        {
+            "plan": updated study plan,
+            "changes": list of detected changes
+        }
+    """
 
-    old_plan = build_plan(previous_analysis)
-    new_plan = build_plan(new_analysis)
+    if not isinstance(previous_analysis, dict):
+        raise TypeError("previous_analysis must be a dictionary.")
 
-    old_recs = recommend_topics(previous_analysis)
-    new_recs = recommend_topics(new_analysis)
+    if not isinstance(new_analysis, dict):
+        raise TypeError("new_analysis must be a dictionary.")
 
-    old_activities = {
-        item["topic_id"]: item["activity"]
-        for item in old_recs
-    }
+    previous_learner = normalize_analysis(previous_analysis)
+    updated_learner = normalize_analysis(new_analysis)
 
-    new_activities = {
-        item["topic_id"]: item["activity"]
-        for item in new_recs
-    }
+    # Generate the previous and updated study plans.
+    previous_plan = build_plan(previous_analysis)
+    updated_plan = build_plan(new_analysis)
 
-    old_topics_order = [
-        item["topic"]
-        for item in old_plan.get("recommended_topics", [])
-    ]
+    previous_activities = _activity_map(previous_plan)
+    updated_activities = _activity_map(updated_plan)
 
-    new_topics_order = [
-        item["topic"]
-        for item in new_plan.get("recommended_topics", [])
-    ]
+    changes: list[str] = []
 
-    changes = []
+    # Detect activity changes.
+    all_topics = set(previous_activities) | set(updated_activities)
 
-    # 1. Detect activity changes and additions/removals.
-    all_topics = set(old_activities) | set(new_activities)
+    for topic_id in sorted(all_topics):
+        old_activity = previous_activities.get(topic_id)
+        new_activity = updated_activities.get(topic_id)
 
-    for topic in sorted(all_topics):
-        old_activity = old_activities.get(topic)
-        new_activity = new_activities.get(topic)
-
-        if old_activity and new_activity and old_activity != new_activity:
-            changes.append(
-                f"Topic '{topic}' activity changed from "
-                f"'{old_activity}' to '{new_activity}'."
-            )
-
-        elif not old_activity and new_activity:
-            changes.append(
-                f"Topic '{topic}' was added to the plan "
-                f"with activity '{new_activity}'."
-            )
-
-        elif old_activity and not new_activity:
-            changes.append(
-                f"Topic '{topic}' was completed or removed "
-                "from the active recommendations."
-            )
-
-    # 2. Detect priority changes.
-    common_topics = [
-        topic for topic in new_topics_order
-        if topic in old_topics_order
-    ]
-
-    for topic in common_topics:
-        old_position = old_topics_order.index(topic) + 1
-        new_position = new_topics_order.index(topic) + 1
-
-        if new_position < old_position:
-            changes.append(
-                f"Topic '{topic}' moved up in priority "
-                f"from position {old_position} to {new_position}."
-            )
-
-        elif new_position > old_position:
-            changes.append(
-                f"Topic '{topic}' moved down in priority "
-                f"from position {old_position} to {new_position}."
-            )
-
-    # 3. Detect genuine prerequisite unlocking.
-    metadata = load_topics_metadata()
-
-    dependent_topics = {}
-
-    for item in metadata:
-        dependent_id = item["topic_id"]
-
-        for prerequisite in item.get("prerequisites", []):
-            dependent_topics.setdefault(prerequisite, []).append(
-                dependent_id
-            )
-
-    for topic, new_score in new_norm.topic_scores.items():
-        old_score = old_norm.topic_scores.get(topic)
-
-        old_level = get_mastery_level(old_score)
-        new_level = get_mastery_level(new_score)
-
-        newly_mastered = (
-            old_level not in (LEVEL_GOOD, LEVEL_STRONG)
-            and new_level in (LEVEL_GOOD, LEVEL_STRONG)
-        )
-
-        if not newly_mastered:
-            continue
-
-        for dependent in dependent_topics.get(topic, []):
-            if (
-                dependent in new_activities
-                and dependent not in old_activities
-            ):
+        if old_activity != new_activity:
+            if old_activity is None:
                 changes.append(
-                    f"Prerequisite '{topic}' reached '{new_level}' mastery, "
-                    f"and dependent topic '{dependent}' is now recommended."
+                    f"Topic '{topic_id}' added with activity '{new_activity}'."
+                )
+            elif new_activity is None:
+                changes.append(
+                    f"Topic '{topic_id}' removed from recommendations."
+                )
+            else:
+                changes.append(
+                    f"Topic '{topic_id}' activity changed "
+                    f"from '{old_activity}' to '{new_activity}'."
                 )
 
-    if not changes:
-        changes.append(
-            "No significant changes in topic priorities or activities."
-        )
+    # Detect mastery improvements.
+    all_scored_topics = (
+        set(previous_learner.topic_scores)
+        | set(updated_learner.topic_scores)
+    )
+
+    for topic_id in sorted(all_scored_topics):
+        old_score = _get_score(previous_learner, topic_id)
+        new_score = _get_score(updated_learner, topic_id)
+
+        if old_score is None and new_score is not None:
+            changes.append(
+                f"Topic '{topic_id}' received its first assessment "
+                f"score of {new_score:g}."
+            )
+            continue
+
+        if old_score is None or new_score is None:
+            continue
+
+        if new_score > old_score:
+            changes.append(
+                f"Topic '{topic_id}' mastery improved "
+                f"from {old_score:g} to {new_score:g}."
+            )
+        elif new_score < old_score:
+            changes.append(
+                f"Topic '{topic_id}' mastery decreased "
+                f"from {old_score:g} to {new_score:g}."
+            )
+
+    # Detect prerequisite improvements that may unlock dependent topics.
+    for topic_id in sorted(all_scored_topics):
+        old_score = _get_score(previous_learner, topic_id)
+        new_score = _get_score(updated_learner, topic_id)
+
+        if old_score is None and new_score is not None:
+            if new_score >= 60:
+                changes.append(
+                    f"Prerequisite '{topic_id}' achieved a good mastery level."
+                )
+        elif (
+            old_score is not None
+            and new_score is not None
+            and old_score < 60
+            and new_score >= 60
+        ):
+            changes.append(
+                f"Prerequisite '{topic_id}' achieved a good mastery level."
+            )
 
     return {
-        "plan": new_plan,
+        "plan": updated_plan,
         "changes": changes,
     }

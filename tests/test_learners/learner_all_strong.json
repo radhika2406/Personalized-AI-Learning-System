@@ -1,6 +1,20 @@
 {
   "learner_id": "learner_all_strong",
+  "course": "python",
+  "goal": "Advance in Python",
+  "level": "advanced",
   "daily_minutes": 60,
+  "mastery": {
+    "variables": 90,
+    "conditions": 95,
+    "loops": 88,
+    "functions": 85,
+    "lists": 92,
+    "dictionaries": 86
+  },
+  "weak_topics": [],
+  "strong_topics": ["variables", "conditions", "loops", "functions", "lists", "dictionaries"],
+  "not_assessed": [],
   "topics": {
     "variables": { "score": 92, "mastery_level": "strong" },
     "conditions": { "score": 95, "mastery_level": "strong" },

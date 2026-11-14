@@ -1,129 +1,105 @@
 
-"""Adaptive learning engine.
+"""Tests for the adaptive learning engine."""
 
-Dynamically adapts the personalized study plan when new learner
-performance data is received and tracks changes.
-"""
+import copy
+import json
+from pathlib import Path
+import unittest
 
-from typing import Any
-
-from ai_engine.recommendation.study_planner import build_plan
-from ai_engine.recommendation.topic_recommender import recommend_topics
-from ai_engine.recommendation.adapter import normalize_analysis
-from ai_engine.recommendation.config import (
-    get_mastery_level,
-    LEVEL_GOOD,
-    LEVEL_STRONG,
-)
+from ai_engine.recommendation.adaptive_learning import adapt_plan
 
 
-def adapt_plan(
-    previous_analysis: dict[str, Any],
-    new_analysis: dict[str, Any],
-) -> dict[str, Any]:
-    """Adapt the study plan and summarize recommendation changes."""
+def simulate_quiz_result(
+    analysis: dict,
+    topic_id: str,
+    new_score: float | int | None,
+) -> dict:
+    """Simulate a new quiz result using the existing mastery structure."""
+    updated = copy.deepcopy(analysis)
 
-    old_norm = normalize_analysis(previous_analysis)
-    new_norm = normalize_analysis(new_analysis)
+    if "mastery" not in updated or not isinstance(updated["mastery"], dict):
+        updated["mastery"] = {}
 
-    old_plan = build_plan(previous_analysis)
-    new_plan = build_plan(new_analysis)
+    updated["mastery"][topic_id] = new_score
+    return updated
 
-    old_recs = recommend_topics(previous_analysis)
-    new_recs = recommend_topics(new_analysis)
 
-    # Recommendations now contain dictionaries, not tuples.
-    old_activities = {
-        item["topic_id"]: item["activity"]
-        for item in old_recs
-    }
+class TestAdaptiveLearning(unittest.TestCase):
+    """Test adaptive plan updates after new quiz results."""
 
-    new_activities = {
-        item["topic_id"]: item["activity"]
-        for item in new_recs
-    }
+    @classmethod
+    def setUpClass(cls):
+        cls.learners_dir = Path(__file__).resolve().parent / "test_learners"
 
-    old_topics_order = [
-        item["topic"]
-        for item in old_plan.get("recommended_topics", [])
-    ]
+    def _load_learner(self, filename: str) -> dict:
+        filepath = self.learners_dir / filename
+        with open(filepath, mode="r", encoding="utf-8") as file:
+            return json.load(file)
 
-    new_topics_order = [
-        item["topic"]
-        for item in new_plan.get("recommended_topics", [])
-    ]
+    def test_case_1_weak_topic_becomes_strong(self):
+        """A weak topic should be updated after the learner improves."""
+        before = self._load_learner("learner_one_weak.json")
 
-    changes = []
+        self.assertEqual(before["mastery"]["loops"], 25)
 
-    # 1. Detect activity changes and topic additions/removals.
-    all_topics = set(old_activities) | set(new_activities)
+        after = simulate_quiz_result(before, "loops", 90)
+        result = adapt_plan(before, after)
 
-    for topic in sorted(all_topics):
-        old_activity = old_activities.get(topic)
-        new_activity = new_activities.get(topic)
+        self.assertIn("plan", result)
+        self.assertIn("changes", result)
+        self.assertIsInstance(result["plan"], dict)
+        self.assertIsInstance(result["changes"], list)
 
-        if old_activity and new_activity and old_activity != new_activity:
-            changes.append(
-                f"Topic '{topic}' activity changed from "
-                f"'{old_activity}' to '{new_activity}'."
-            )
+    def test_case_2_not_assessed_topic_gets_first_score(self):
+        """A topic should be updated when it receives its first score."""
+        before = self._load_learner("learner_nothing_assessed.json")
 
-        elif not old_activity and new_activity:
-            changes.append(
-                f"Topic '{topic}' was added to the plan "
-                f"with activity '{new_activity}'."
-            )
+        after = simulate_quiz_result(before, "variables", 65)
+        result = adapt_plan(before, after)
 
-        elif old_activity and not new_activity:
-            changes.append(
-                f"Topic '{topic}' was completed or removed "
-                "from the active daily plan."
-            )
+        self.assertIsInstance(result["plan"], dict)
+        self.assertIsInstance(result["changes"], list)
 
-    # 2. Detect topic priority changes.
-    common_topics = [
-        topic for topic in new_topics_order
-        if topic in old_topics_order
-    ]
-
-    for topic in common_topics:
-        old_position = old_topics_order.index(topic) + 1
-        new_position = new_topics_order.index(topic) + 1
-
-        if new_position < old_position:
-            changes.append(
-                f"Topic '{topic}' moved up in priority "
-                f"from position {old_position} to {new_position}."
-            )
-
-        elif new_position > old_position:
-            changes.append(
-                f"Topic '{topic}' moved down in priority "
-                f"from position {old_position} to {new_position}."
-            )
-
-    # 3. Detect mastery improvement to good or strong.
-    for topic, new_score in new_norm.topic_scores.items():
-        old_score = old_norm.topic_scores.get(topic)
-
-        old_level = get_mastery_level(old_score)
-        new_level = get_mastery_level(new_score)
-
-        if (
-            old_level not in (LEVEL_GOOD, LEVEL_STRONG)
-            and new_level in (LEVEL_GOOD, LEVEL_STRONG)
-        ):
-            changes.append(
-                f"Prerequisite '{topic}' achieved '{new_level}' "
-                "mastery, unlocking dependent advanced topics."
-            )
-
-    if not changes:
-        changes.append(
-            "No significant changes in topic priorities or activities."
+        self.assertTrue(
+            any("variables" in change for change in result["changes"])
         )
 
-    return {
-        "plan": new_plan,
-        "changes": changes,
-    }
+    def test_case_3_topic_performance_drops(self):
+        """A topic's recommendation should adapt when its score drops."""
+        before = self._load_learner("learner_mixed.json")
+
+        # In the canonical fixture, dictionaries has a score of 75.
+        self.assertEqual(before["mastery"]["dictionaries"], 75)
+
+        after = simulate_quiz_result(before, "dictionaries", 25)
+        result = adapt_plan(before, after)
+
+        self.assertIsInstance(result["plan"], dict)
+        self.assertIsInstance(result["changes"], list)
+
+        self.assertTrue(
+            any("dictionaries" in change for change in result["changes"])
+        )
+
+    def test_case_4_prerequisite_unlocks_next_topic(self):
+        """Improving a prerequisite should allow a dependent topic to be recommended."""
+        before = self._load_learner("learner_prereq_gap.json")
+
+        self.assertIsNone(before["mastery"]["conditions"])
+
+        after = simulate_quiz_result(before, "conditions", 78)
+        result = adapt_plan(before, after)
+
+        self.assertIsInstance(result["plan"], dict)
+        self.assertIsInstance(result["changes"], list)
+
+        self.assertTrue(
+            any(
+                "conditions" in change or "loops" in change
+                for change in result["changes"]
+            )
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()

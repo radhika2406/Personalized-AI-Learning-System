@@ -419,7 +419,6 @@ const handleLogout = () => {
                       </Link>
                     </div>
                   ) : (
-                    
                     <div className="home-course-grid category-card-grid">
                     {categories.map((category) => {
                     const Icon = category.icon;
@@ -435,7 +434,6 @@ const handleLogout = () => {
                     className="home-course-card category-card"
                     key={category.code}
                     >
-                    
                     <p style={{ color: "red" }}>
                     Image path: {category.image}
                     </p>
@@ -481,10 +479,8 @@ const handleLogout = () => {
               )}
             </section>
           )}
-
-         
                     {!isLoggedIn && (
-                    <section className="home-courses-section" id="courses">
+                   <section className="home-courses-section" id="courses">
                     <div className="home-section-heading">
                     <span>EXPLORE AND DISCOVER</span>
                     <h2>Find Your Learning Path</h2>

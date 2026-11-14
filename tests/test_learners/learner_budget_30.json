@@ -1,12 +1,45 @@
+
 {
   "learner_id": "learner_budget_30",
+  "course": "python",
+  "goal": "Daily 30 min Python practice",
+  "level": "beginner",
   "daily_minutes": 30,
+  "mastery": {
+    "variables": 85,
+    "conditions": 35,
+    "loops": null,
+    "functions": null,
+    "lists": null,
+    "dictionaries": 60
+  },
+  "weak_topics": ["conditions"],
+  "strong_topics": ["variables"],
+  "not_assessed": ["loops", "functions", "lists"],
   "topics": {
-    "variables": { "score": 85, "mastery_level": "strong" },
-    "conditions": { "score": 35, "mastery_level": "weak" },
-    "loops": { "score": null, "mastery_level": "not assessed" },
-    "functions": { "score": null, "mastery_level": "not assessed" },
-    "lists": { "score": null, "mastery_level": "not assessed" },
-    "dictionaries": { "score": 60, "mastery_level": "developing" }
+    "variables": {
+      "score": 85,
+      "mastery_level": "strong"
+    },
+    "conditions": {
+      "score": 35,
+      "mastery_level": "weak"
+    },
+    "loops": {
+      "score": null,
+      "mastery_level": "not assessed"
+    },
+    "functions": {
+      "score": null,
+      "mastery_level": "not assessed"
+    },
+    "lists": {
+      "score": null,
+      "mastery_level": "not assessed"
+    },
+    "dictionaries": {
+      "score": 60,
+      "mastery_level": "good"
+    }
   }
 }

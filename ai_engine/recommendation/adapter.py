@@ -1,5 +1,9 @@
 
-"""Adapter layer to normalize learner analysis and profile input."""
+"""Adapter layer to normalize learner analysis and profile input.
+
+Supports sample analysis, backend database fields, and custom learner
+dictionaries with topics, topic_mastery, or mastery data.
+"""
 
 from dataclasses import dataclass, field
 from typing import Any
@@ -70,6 +74,59 @@ def _extract_score(value: Any, topic_id: str) -> float | None:
     return _validate_score(value, topic_id)
 
 
+def _merge_topic_scores(
+    data: dict[str, Any],
+) -> dict[str, float | None]:
+    """Merge topic scores from all supported learner data structures."""
+
+    topic_scores: dict[str, float | None] = {}
+
+    for key in ("topics", "topic_mastery", "mastery"):
+        raw_topics = data.get(key)
+
+        if raw_topics is None:
+            continue
+
+        if isinstance(raw_topics, dict):
+            entries = raw_topics.items()
+
+        elif isinstance(raw_topics, list):
+            entries = []
+
+            for item in raw_topics:
+                if not isinstance(item, dict):
+                    raise ValueError(
+                        "Each topic entry must be a dictionary."
+                    )
+
+                topic_id = item.get("topic_id") or item.get("topic")
+
+                if not isinstance(topic_id, str) or not topic_id.strip():
+                    raise ValueError(
+                        "Each topic must have a valid topic_id."
+                    )
+
+                entries.append((topic_id, item))
+
+        else:
+            raise TypeError(
+                f"{key} must be a dictionary or a list."
+            )
+
+        for topic_id, value in entries:
+            if not isinstance(topic_id, str) or not topic_id.strip():
+                raise ValueError("Topic IDs must be non-empty strings.")
+
+            score = _extract_score(value, topic_id)
+
+            # Later sources take priority when they contain a valid score.
+            # A None value does not erase an existing valid score.
+            if score is not None or topic_id not in topic_scores:
+                topic_scores[topic_id] = score
+
+    return topic_scores
+
+
 def normalize_analysis(data: dict[str, Any]) -> NormalizedLearner:
     """Normalize supported learner-analysis and profile formats."""
 
@@ -92,47 +149,8 @@ def normalize_analysis(data: dict[str, Any]) -> NormalizedLearner:
 
     daily_minutes = _validate_daily_minutes(raw_minutes)
 
-    # Support both pipeline output and direct learner profile input.
-    raw_topics = None
+    topic_scores = _merge_topic_scores(data)
 
-    for key in ("topics", "topic_mastery", "mastery"):
-        if key in data and data[key] is not None:
-            raw_topics = data[key]
-            break
-
-    if raw_topics is None:
-        raw_topics = {}
-
-    topic_scores: dict[str, float | None] = {}
-
-    if isinstance(raw_topics, dict):
-        for topic_id, value in raw_topics.items():
-            if not isinstance(topic_id, str) or not topic_id.strip():
-                raise ValueError("Topic IDs must be non-empty strings.")
-
-            topic_scores[topic_id] = _extract_score(value, topic_id)
-
-    elif isinstance(raw_topics, list):
-        for item in raw_topics:
-            if not isinstance(item, dict):
-                raise ValueError("Each topic entry must be a dictionary.")
-
-            topic_id = item.get("topic_id") or item.get("topic")
-
-            if not isinstance(topic_id, str) or not topic_id.strip():
-                raise ValueError("Each topic must have a valid topic_id.")
-
-            score = item.get("score")
-
-            if score is None:
-                score = item.get("mastery_score")
-
-            topic_scores[topic_id] = _validate_score(score, topic_id)
-
-    else:
-        raise TypeError("Topics must be a dictionary or a list.")
-
-    # Optional learner profile information.
     course = data.get("course")
     goal = data.get("goal")
     level = data.get("level")

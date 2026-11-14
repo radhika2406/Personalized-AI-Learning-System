@@ -1,6 +1,20 @@
 {
   "learner_id": "learner_nothing_assessed",
+  "course": "python",
+  "goal": "Start learning Python",
+  "level": "beginner",
   "daily_minutes": 60,
+  "mastery": {
+    "variables": null,
+    "conditions": null,
+    "loops": null,
+    "functions": null,
+    "lists": null,
+    "dictionaries": null
+  },
+  "weak_topics": [],
+  "strong_topics": [],
+  "not_assessed": ["variables", "conditions", "loops", "functions", "lists", "dictionaries"],
   "topics": {
     "variables": { "score": null, "mastery_level": "not assessed" },
     "conditions": { "score": null, "mastery_level": "not assessed" },

@@ -1,6 +1,20 @@
 {
   "learner_id": "learner_budget_90",
+  "course": "python",
+  "goal": "Intensive Python study",
+  "level": "intermediate",
   "daily_minutes": 90,
+  "mastery": {
+    "variables": 90,
+    "conditions": 55,
+    "loops": 35,
+    "functions": 20,
+    "lists": 70,
+    "dictionaries": null
+  },
+  "weak_topics": ["loops", "functions"],
+  "strong_topics": ["variables"],
+  "not_assessed": ["dictionaries"],
   "topics": {
     "variables": { "score": 90, "mastery_level": "strong" },
     "conditions": { "score": 50, "mastery_level": "developing" },

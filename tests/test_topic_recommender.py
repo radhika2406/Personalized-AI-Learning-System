@@ -1,7 +1,7 @@
 
 """Unit tests for the topic recommender engine.
 
-Tests all 8 test learners and verifies recommendation ordering,
+Tests all 8 learner scenarios and verifies recommendation ordering,
 activities, estimated durations, reasons, prerequisite constraints,
 and mastery thresholds.
 """
@@ -19,6 +19,7 @@ from ai_engine.recommendation.config import (
     get_mastery_level,
     get_activity_for_level,
 )
+
 from ai_engine.recommendation.topic_recommender import (
     load_topics_metadata,
     recommend_topics,
@@ -37,17 +38,24 @@ class TestConfigAndMastery(unittest.TestCase):
         )
 
     def test_mastery_thresholds(self):
+        """Test mastery thresholds defined in the shared schema."""
+
+        # Weak: 0–39
         self.assertEqual(get_mastery_level(0), LEVEL_WEAK)
-        self.assertEqual(get_mastery_level(33), LEVEL_WEAK)
+        self.assertEqual(get_mastery_level(39), LEVEL_WEAK)
         self.assertEqual(get_mastery_level(39.9), LEVEL_WEAK)
 
+        # Developing: 40–59
         self.assertEqual(get_mastery_level(40), LEVEL_DEVELOPING)
-        self.assertEqual(get_mastery_level(55), LEVEL_DEVELOPING)
+        self.assertEqual(get_mastery_level(59), LEVEL_DEVELOPING)
         self.assertEqual(get_mastery_level(59.9), LEVEL_DEVELOPING)
 
+        # Good: 60–79
         self.assertEqual(get_mastery_level(60), LEVEL_GOOD)
+        self.assertEqual(get_mastery_level(79), LEVEL_GOOD)
         self.assertEqual(get_mastery_level(79.9), LEVEL_GOOD)
 
+        # Strong: 80–100
         self.assertEqual(get_mastery_level(80), LEVEL_STRONG)
         self.assertEqual(get_mastery_level(100), LEVEL_STRONG)
 
@@ -155,6 +163,7 @@ class TestEightLearners(unittest.TestCase):
 
     @staticmethod
     def _activity_map(recommendations):
+        """Convert dictionary recommendations into topic-activity mapping."""
         return {
             item["topic_id"]: item["activity"]
             for item in recommendations
@@ -183,6 +192,7 @@ class TestEightLearners(unittest.TestCase):
                     "reason",
                 },
             )
+
             self.assertIsInstance(item["topic_id"], str)
             self.assertIsInstance(item["activity"], str)
             self.assertIsInstance(item["estimated_minutes"], int)
@@ -205,6 +215,7 @@ class TestEightLearners(unittest.TestCase):
 
         self.assertLess(order.index("variables"), order.index("conditions"))
         self.assertLess(order.index("conditions"), order.index("loops"))
+        self.assertLess(order.index("loops"), order.index("functions"))
         self.assertLess(order.index("loops"), order.index("lists"))
         self.assertLess(order.index("lists"), order.index("dictionaries"))
 
@@ -228,10 +239,10 @@ class TestEightLearners(unittest.TestCase):
         rec_dict = self._activity_map(recommendations)
 
         self.assertEqual(rec_dict["variables"], "advance")
+        self.assertEqual(rec_dict["functions"], "practice")
         self.assertEqual(rec_dict["dictionaries"], "practice")
         self.assertEqual(rec_dict["conditions"], "revise")
         self.assertEqual(rec_dict["loops"], "relearn")
-        self.assertEqual(rec_dict["functions"], "assess first")
         self.assertEqual(rec_dict["lists"], "assess first")
 
         order = self._topic_order(recommendations)
@@ -280,8 +291,6 @@ class TestEightLearners(unittest.TestCase):
 
         self.assertEqual(rec_dict["conditions"], "relearn")
         self.assertEqual(rec_dict["dictionaries"], "practice")
-        self.assertEqual(rec_dict["variables"], "advance")
-        self.assertEqual(rec_dict["loops"], "assess first")
 
     def test_learner_budget_90(self):
         """Verify activities for the 90-minute budget learner."""

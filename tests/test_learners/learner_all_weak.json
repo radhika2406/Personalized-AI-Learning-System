@@ -1,12 +1,18 @@
 {
   "learner_id": "learner_all_weak",
+  "course": "python",
+  "goal": "Master Python fundamentals",
+  "level": "beginner",
   "daily_minutes": 60,
-  "topics": {
-    "variables": { "score": 25, "mastery_level": "weak" },
-    "conditions": { "score": 20, "mastery_level": "weak" },
-    "loops": { "score": 33, "mastery_level": "weak" },
-    "functions": { "score": 15, "mastery_level": "weak" },
-    "lists": { "score": 10, "mastery_level": "weak" },
-    "dictionaries": { "score": 30, "mastery_level": "weak" }
-  }
+  "mastery": {
+    "variables": 25,
+    "conditions": 20,
+    "loops": 33,
+    "functions": 15,
+    "lists": 10,
+    "dictionaries": 30
+  },
+  "weak_topics": ["variables", "conditions", "loops", "functions", "lists", "dictionaries"],
+  "strong_topics": [],
+  "not_assessed": []
 }

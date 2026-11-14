@@ -1,6 +1,20 @@
 {
   "learner_id": "learner_prereq_gap",
+  "course": "python",
+  "goal": "Fix prerequisite knowledge gap",
+  "level": "beginner",
   "daily_minutes": 60,
+  "mastery": {
+    "variables": 85,
+    "conditions": null,
+    "loops": 33,
+    "functions": null,
+    "lists": null,
+    "dictionaries": null
+  },
+  "weak_topics": ["loops"],
+  "strong_topics": ["variables"],
+  "not_assessed": ["conditions", "functions", "lists", "dictionaries"],
   "topics": {
     "variables": { "score": 85, "mastery_level": "strong" },
     "conditions": { "score": null, "mastery_level": "not assessed" },
