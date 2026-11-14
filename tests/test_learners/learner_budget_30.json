@@ -3,10 +3,10 @@
   "daily_minutes": 30,
   "topics": {
     "variables": { "score": 85, "mastery_level": "strong" },
-    "data_types": { "score": 60, "mastery_level": "developing" },
     "conditions": { "score": 35, "mastery_level": "weak" },
     "loops": { "score": null, "mastery_level": "not assessed" },
     "functions": { "score": null, "mastery_level": "not assessed" },
-    "lists": { "score": null, "mastery_level": "not assessed" }
+    "lists": { "score": null, "mastery_level": "not assessed" },
+    "dictionaries": { "score": 60, "mastery_level": "developing" }
   }
 }

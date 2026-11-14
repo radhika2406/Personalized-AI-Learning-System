@@ -1,7 +1,7 @@
-topic_id,course,order,prerequisites,est_minutes
-variables,python,1,,15
-data_types,python,2,variables,20
-conditions,python,3,variables;data_types,25
-loops,python,4,conditions,30
-functions,python,5,loops,30
-lists,python,6,loops;data_types,25
+topic_id,course,order,prerequisites,est_minutes,goals,level,interests
+variables,python,1,,15,python;programming,beginner,programming;coding
+conditions,python,2,variables,25,python;problem-solving,beginner,logic;problem-solving
+loops,python,3,conditions,30,python;problem-solving,beginner,logic;coding;problem-solving
+functions,python,4,loops,30,python;programming;project-development,beginner;intermediate,coding;code-organization
+lists,python,5,loops,25,python;problem-solving;data-structures,beginner;intermediate,coding;data-structures;problem-solving
+dictionaries,python,6,lists,25,python;programming;data-structures,beginner;intermediate,coding;data-structures

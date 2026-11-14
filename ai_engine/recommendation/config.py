@@ -1,19 +1,23 @@
-"""Configuration and temporary baseline settings for the recommendation engine.
 
-This file isolates provisional assumptions (topic list, thresholds, activity mappings).
-When Person A provides official schemas in ai_engine.common.schemas, this module
-can dynamically import them or be replaced without rewriting recommendation logic.
-"""
+"""Configuration and baseline settings for the recommendation engine."""
 
-# Default topic list in standard curriculum order
-DEFAULT_TOPICS = [
-    "variables",
-    "data_types",
-    "conditions",
-    "loops",
-    "functions",
-    "lists",
-]
+# Prefer the official shared topic list.
+try:
+    from ai_engine.common.schemas import TOPICS
+
+    DEFAULT_TOPICS = list(TOPICS)
+
+except ImportError:
+    # Fallback only when shared schemas are unavailable.
+    DEFAULT_TOPICS = [
+        "variables",
+        "data_types",
+        "conditions",
+        "loops",
+        "functions",
+        "lists",
+    ]
+
 
 # Mastery levels
 LEVEL_WEAK = "weak"
@@ -21,6 +25,7 @@ LEVEL_DEVELOPING = "developing"
 LEVEL_GOOD = "good"
 LEVEL_STRONG = "strong"
 LEVEL_NOT_ASSESSED = "not_assessed"
+
 
 # Activity mapping for each mastery level
 ACTIVITY_MAP = {
@@ -33,35 +38,29 @@ ACTIVITY_MAP = {
 
 
 def get_mastery_level(score: float | int | None) -> str:
-    """Determine the mastery level for a given percentage score.
+    """Use the official shared mastery thresholds."""
 
-    Rules:
-    - None (JSON null) means 'not assessed' (never treat as 0).
-    - score < 40: weak (e.g., 33% is weak)
-    - 40 <= score < 70: developing
-    - 70 <= score < 85: good
-    - score >= 85: strong
-    """
-    # If shared schemas module is provided by Person A later, prefer it
     try:
-        from ai_engine.common.schemas import mastery_level as official_mastery_level
-        return official_mastery_level(score)
+        from ai_engine.common.schemas import mastery_level
+
+        return mastery_level(score)
+
     except ImportError:
-        pass
+        # Temporary fallback if shared schemas are unavailable.
+        if score is None:
+            return LEVEL_NOT_ASSESSED
 
-    if score is None:
-        return LEVEL_NOT_ASSESSED
-
-    if score < 40:
-        return LEVEL_WEAK
-    elif score < 60:
-        return LEVEL_DEVELOPING
-    elif score < 80:
-        return LEVEL_GOOD
-    else:
-        return LEVEL_STRONG
+        if score < 40:
+            return LEVEL_WEAK
+        elif score < 60:
+            return LEVEL_DEVELOPING
+        elif score < 80:
+            return LEVEL_GOOD
+        else:
+            return LEVEL_STRONG
 
 
 def get_activity_for_level(level: str) -> str:
-    """Return the designated study activity for a mastery level."""
+    """Return the designated activity for a mastery level."""
+
     return ACTIVITY_MAP.get(level, "assess first")

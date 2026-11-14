@@ -1,5 +1,5 @@
 """
-profile.py  (Person A)
+profile.py
 
 Checks a new learner profile BEFORE anything else uses it.
 Returns a list of error messages. An empty list means the profile is valid.

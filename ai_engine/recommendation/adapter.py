@@ -1,65 +1,175 @@
-"""Adapter layer to normalize learner analysis input.
 
-This module converts various input shapes (provisional JSON, backend database fields,
-or future contracts from Person A) into a consistent internal format.
-"""
+"""Adapter layer to normalize learner analysis and profile input."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
 @dataclass
 class NormalizedLearner:
-    """Internal standardized representation of learner analysis."""
+    """Standardized learner representation."""
+
     learner_id: str
     daily_minutes: int
     topic_scores: dict[str, float | None]
+    course: str | None = None
+    goal: str | None = None
+    level: str | None = None
+    interests: list[str] = field(default_factory=list)
+
+
+def _validate_daily_minutes(value: Any) -> int:
+    """Validate and normalize daily study minutes."""
+
+    if isinstance(value, bool):
+        raise ValueError("daily_minutes must be a non-negative integer.")
+
+    if isinstance(value, int):
+        minutes = value
+    elif isinstance(value, str) and value.strip().isdigit():
+        minutes = int(value.strip())
+    else:
+        raise ValueError("daily_minutes must be a whole number.")
+
+    if minutes < 0:
+        raise ValueError("daily_minutes cannot be negative.")
+
+    return minutes
+
+
+def _validate_score(value: Any, topic_id: str) -> float | None:
+    """Validate a topic mastery score."""
+
+    if value is None:
+        return None
+
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise ValueError(f"Invalid mastery score for '{topic_id}'.")
+
+    score = float(value)
+
+    if not 0 <= score <= 100:
+        raise ValueError(
+            f"Mastery score for '{topic_id}' must be between 0 and 100."
+        )
+
+    return score
+
+
+def _extract_score(value: Any, topic_id: str) -> float | None:
+    """Extract score from a number or topic dictionary."""
+
+    if isinstance(value, dict):
+        score = value.get("score")
+
+        if score is None:
+            score = value.get("mastery_score")
+
+        return _validate_score(score, topic_id)
+
+    return _validate_score(value, topic_id)
 
 
 def normalize_analysis(data: dict[str, Any]) -> NormalizedLearner:
-    """Normalize a learner analysis dictionary into a standard NormalizedLearner.
+    """Normalize supported learner-analysis and profile formats."""
 
-    Supports:
-    - daily_minutes or daily_study_minutes
-    - topics as a dictionary of objects, dictionary of numbers, or list of objects
-    """
-    learner_id = str(data.get("learner_id") or data.get("user_id") or "anonymous_learner")
+    if not isinstance(data, dict):
+        raise TypeError("Learner analysis must be a dictionary.")
 
-    daily_minutes = int(
-        data.get("daily_minutes")
-        or data.get("daily_study_minutes")
-        or 60
+    learner_id = (
+        data.get("learner_id")
+        or data.get("user_id")
+        or "anonymous_learner"
     )
 
-    raw_topics = data.get("topics") or data.get("topic_mastery") or {}
+    if not isinstance(learner_id, str) or not learner_id.strip():
+        raise ValueError("learner_id must be a non-empty string.")
+
+    raw_minutes = data.get("daily_minutes")
+
+    if raw_minutes is None:
+        raw_minutes = data.get("daily_study_minutes", 60)
+
+    daily_minutes = _validate_daily_minutes(raw_minutes)
+
+    # Support both pipeline output and direct learner profile input.
+    raw_topics = None
+
+    for key in ("topics", "topic_mastery", "mastery"):
+        if key in data and data[key] is not None:
+            raw_topics = data[key]
+            break
+
+    if raw_topics is None:
+        raw_topics = {}
+
     topic_scores: dict[str, float | None] = {}
 
     if isinstance(raw_topics, dict):
-        for topic_id, val in raw_topics.items():
-            if val is None:
-                topic_scores[topic_id] = None
-            elif isinstance(val, (int, float)):
-                topic_scores[topic_id] = float(val)
-            elif isinstance(val, dict):
-                score_val = val.get("score")
-                if score_val is None:
-                    score_val = val.get("mastery_score")
-                topic_scores[topic_id] = float(score_val) if score_val is not None else None
-            else:
-                topic_scores[topic_id] = None
+        for topic_id, value in raw_topics.items():
+            if not isinstance(topic_id, str) or not topic_id.strip():
+                raise ValueError("Topic IDs must be non-empty strings.")
+
+            topic_scores[topic_id] = _extract_score(value, topic_id)
 
     elif isinstance(raw_topics, list):
         for item in raw_topics:
-            if isinstance(item, dict):
-                topic_id = str(item.get("topic_id") or item.get("topic") or "")
-                if topic_id:
-                    score_val = item.get("score")
-                    if score_val is None:
-                        score_val = item.get("mastery_score")
-                    topic_scores[topic_id] = float(score_val) if score_val is not None else None
+            if not isinstance(item, dict):
+                raise ValueError("Each topic entry must be a dictionary.")
+
+            topic_id = item.get("topic_id") or item.get("topic")
+
+            if not isinstance(topic_id, str) or not topic_id.strip():
+                raise ValueError("Each topic must have a valid topic_id.")
+
+            score = item.get("score")
+
+            if score is None:
+                score = item.get("mastery_score")
+
+            topic_scores[topic_id] = _validate_score(score, topic_id)
+
+    else:
+        raise TypeError("Topics must be a dictionary or a list.")
+
+    # Optional learner profile information.
+    course = data.get("course")
+    goal = data.get("goal")
+    level = data.get("level")
+    interests = data.get("interests", [])
+
+    if course is not None and (
+        not isinstance(course, str) or not course.strip()
+    ):
+        raise ValueError("course must be a non-empty string.")
+
+    if goal is not None and (
+        not isinstance(goal, str) or not goal.strip()
+    ):
+        raise ValueError("goal must be a non-empty string.")
+
+    if level is not None:
+        if not isinstance(level, str) or level not in (
+            "beginner",
+            "intermediate",
+            "advanced",
+        ):
+            raise ValueError(
+                "level must be beginner, intermediate or advanced."
+            )
+
+    if not isinstance(interests, list) or any(
+        not isinstance(item, str) or not item.strip()
+        for item in interests
+    ):
+        raise ValueError("interests must be a list of non-empty strings.")
 
     return NormalizedLearner(
-        learner_id=learner_id,
+        learner_id=learner_id.strip(),
         daily_minutes=daily_minutes,
         topic_scores=topic_scores,
+        course=course.strip() if course else None,
+        goal=goal.strip() if goal else None,
+        level=level,
+        interests=[item.strip() for item in interests],
     )
