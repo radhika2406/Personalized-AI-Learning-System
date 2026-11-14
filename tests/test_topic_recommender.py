@@ -33,7 +33,7 @@ class TestConfigAndMastery(unittest.TestCase):
         self.assertEqual(get_activity_for_level(LEVEL_NOT_ASSESSED), "assess first")
 
     def test_mastery_thresholds(self):
-        """Test threshold boundaries: weak < 40 <= developing < 70 <= good < 85 <= strong."""
+        """Test threshold boundaries: weak < 40 <= developing < 60 <= good < 80 <= strong."""
         # Weak (< 40)
         self.assertEqual(get_mastery_level(0), LEVEL_WEAK)
         self.assertEqual(get_mastery_level(33), LEVEL_WEAK)
@@ -42,14 +42,14 @@ class TestConfigAndMastery(unittest.TestCase):
         # Developing (40 to 69.9)
         self.assertEqual(get_mastery_level(40), LEVEL_DEVELOPING)
         self.assertEqual(get_mastery_level(55), LEVEL_DEVELOPING)
-        self.assertEqual(get_mastery_level(69.9), LEVEL_DEVELOPING)
+        self.assertEqual(get_mastery_level(59.9), LEVEL_DEVELOPING)
 
-        # Good (70 to 84.9)
-        self.assertEqual(get_mastery_level(70), LEVEL_GOOD)
-        self.assertEqual(get_mastery_level(84.9), LEVEL_GOOD)
+        # Good (60 to 79.9)
+        self.assertEqual(get_mastery_level(60), LEVEL_GOOD)
+        self.assertEqual(get_mastery_level(79.9), LEVEL_GOOD)
 
-        # Strong (>= 85)
-        self.assertEqual(get_mastery_level(85), LEVEL_STRONG)
+        # Strong (>= 80)
+        self.assertEqual(get_mastery_level(80), LEVEL_STRONG)
         self.assertEqual(get_mastery_level(100), LEVEL_STRONG)
 
     def test_activity_mapping(self):
@@ -153,7 +153,7 @@ class TestEightLearners(unittest.TestCase):
 
         rec_dict = dict(recommendations)
         self.assertEqual(rec_dict["conditions"], "relearn")
-        self.assertEqual(rec_dict["data_types"], "revise")
+        self.assertEqual(rec_dict["data_types"], "practice")
         self.assertEqual(rec_dict["variables"], "advance")
         self.assertEqual(rec_dict["loops"], "assess first")
 

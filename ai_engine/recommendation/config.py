@@ -20,7 +20,7 @@ LEVEL_WEAK = "weak"
 LEVEL_DEVELOPING = "developing"
 LEVEL_GOOD = "good"
 LEVEL_STRONG = "strong"
-LEVEL_NOT_ASSESSED = "not assessed"
+LEVEL_NOT_ASSESSED = "not_assessed"
 
 # Activity mapping for each mastery level
 ACTIVITY_MAP = {
@@ -54,9 +54,9 @@ def get_mastery_level(score: float | int | None) -> str:
 
     if score < 40:
         return LEVEL_WEAK
-    elif score < 70:
+    elif score < 60:
         return LEVEL_DEVELOPING
-    elif score < 85:
+    elif score < 80:
         return LEVEL_GOOD
     else:
         return LEVEL_STRONG
