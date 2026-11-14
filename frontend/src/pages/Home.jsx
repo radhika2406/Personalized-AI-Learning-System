@@ -13,8 +13,6 @@ import {
   Sun,
   Target,
   X,
-  Code2,
-  Network,
 } from "lucide-react";
 
 import { useTheme } from "../ThemeContext";
@@ -46,24 +44,24 @@ const handleLogout = () => {
   const isLoggedIn = Boolean(account);
   const categories = [
     {
-       code: "ai_ml_data_science",
-       title: "AI, ML & Data Science",
-       description: "Explore artificial intelligence, machine learning, deep learning, and data science.",
-       icon: Brain,
-       image: "/images/aiml.png",
+      code: "ai_ml_data_science",
+      title: "AI, ML & Data Science",
+      description:
+        "Explore artificial intelligence, machine learning, deep learning, and data science.",
+      image: "/images/aiml.png",
     },
     {
-       code: "computer_science",
-       title: "Computer Science",
-       description: "Build strong foundations in databases, operating systems, networks, and computer science.",
-       icon: Network,
-       image: "/images/cs.png",
+      code: "computer_science",
+      title: "Computer Science",
+      description:
+        "Build strong foundations in databases, operating systems, networks, and computer science.",
+      image: "/images/cs.png",
     },
     {
       code: "programming",
       title: "Programming",
-      description: "Develop programming skills through Python, Java, C++, and data structures.",
-      icon: Code2,
+      description:
+        "Develop programming skills through Python, Java, C++, and data structures.",
       image: "/images/programing.png",
     },
   ];
@@ -237,123 +235,114 @@ const handleLogout = () => {
         </nav>
 
         <main>
-          <section className="home-hero" id="home">
-            <div className="home-hero-frame">
-              <div className="home-window-controls">
-                <span />
-                <span />
-                <span />
+        <section className="home-hero" id="home">
+          <div className="home-hero-grid">
+            <div className="home-hero-content">
+              <div className="home-hero-badge">
+                <Brain size={15} />
+                AI-POWERED PERSONALIZED LEARNING
               </div>
 
-              <div className="home-hero-grid">
-                <div className="home-hero-content">
-                  <div className="home-hero-badge">
-                    <Brain size={15} />
-                    AI-POWERED PERSONALIZED LEARNING
-                  </div>
+              {isLoggedIn ? (
+                <>
+                  <h1>
+                    Welcome back,
+                    <br />
+                    <span>{firstName}.</span>
+                  </h1>
+                  <p className="home-hero-description">
+                    Your learning journey continues here.
+                    Explore your courses, track your progress,
+                    and take the next step toward your goals.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h1>
+                    A Personalized
+                    <br />
+                    Learning Experience
+                    <br />
+                    for <span>Every Learner</span>
+                  </h1>
+                  <p className="home-hero-description">
+                    Learnova uses AI to understand your progress,
+                    recommend the right learning materials, and
+                    help you master each topic at your own pace.
+                  </p>
+                </>
+              )}
 
-                  {isLoggedIn ? (
-                    <>
-                      <h1>
-                        Welcome back,
-                        <br />
-                        <span>{firstName}.</span>
-                      </h1>
-                      <p className="home-hero-description">
-                        Your learning journey continues here.
-                        Explore your courses, track your progress,
-                        and take the next step toward your goals.
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <h1>
-                        A Personalized
-                        <br />
-                        Learning Experience
-                        <br />
-                        for <span>Every Learner</span>
-                      </h1>
-                      <p className="home-hero-description">
-                        Learnova uses AI to understand your progress,
-                        recommend the right learning materials, and
-                        help you master each topic at your own pace.
-                      </p>
-                    </>
-                  )}
-
-                  <div className="home-hero-buttons">
-                    {isLoggedIn ? (
-                      <>
-                        <Link to="/dashboard" className="home-primary-button">
-                          Go to Dashboard <ArrowRight size={18} />
-                        </Link>
-                        <a href="#my-learning" className="home-secondary-button">
-                          Continue Learning
-                        </a>
-                      </>
-                    ) : (
-                      <>
-                        <Link to="/register" className="home-primary-button">
-                          Get Started <ArrowRight size={18} />
-                        </Link>
-                        <a href="#courses" className="home-secondary-button">
-                          <BookOpen size={18} /> Explore Courses
-                        </a>
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                <div className="home-hero-art">
-                  <div className="home-art-glow" />
-
-                    <img
-                    src={
-                    theme === "light"
-                    ? "/images/learnova-hero-light.png"
-                    : "/images/learnova-hero.png"
-                    }
-                    alt="Learnova personalized learning visual"
-                    className="home-spiral-image"
-                    />
-
-                </div>
-              </div>
-
-              <div className="home-hero-highlights">
-                <div className="home-highlight">
-                  <span className="home-highlight-icon">
-                    <Target size={22} />
-                  </span>
-                  <div>
-                    <strong>Personalized Paths</strong>
-                    <p>Learn based on your goals</p>
-                  </div>
-                </div>
-
-                <div className="home-highlight">
-                  <span className="home-highlight-icon">
-                    <ChartNoAxesCombined size={22} />
-                  </span>
-                  <div>
-                    <strong>AI Recommendations</strong>
-                    <p>Discover your next steps</p>
-                  </div>
-                </div>
-
-                <div className="home-highlight">
-                  <span className="home-highlight-icon">
-                    <Layers3 size={22} />
-                  </span>
-                  <div>
-                    <strong>Track Your Growth</strong>
-                    <p>Understand your progress</p>
-                  </div>
-                </div>
+              <div className="home-hero-buttons">
+                {isLoggedIn ? (
+                  <>
+                    <Link to="/dashboard" className="home-primary-button">
+                      Go to Dashboard <ArrowRight size={18} />
+                    </Link>
+                    <a href="#my-learning" className="home-secondary-button">
+                      Continue Learning
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/register" className="home-primary-button">
+                      Get Started <ArrowRight size={18} />
+                    </Link>
+                    <a href="#courses" className="home-secondary-button">
+                      <BookOpen size={18} /> Explore Courses
+                    </a>
+                  </>
+                )}
               </div>
             </div>
-          </section>
+
+            <div className="home-hero-art">
+              <div className="home-art-glow" />
+              <img
+                src={
+                  theme === "light"
+                    ? "/images/learnova-hero-light.png"
+                    : "/images/learnova-hero.png"
+                }
+                alt="Learnova personalized learning visual"
+                className="home-spiral-image"
+              />
+            </div>
+          </div>
+
+          <div className="home-hero-highlights">
+            <div className="home-highlight">
+              <span className="home-highlight-icon">
+                <Target size={22} />
+              </span>
+              <div>
+                <strong>Personalized Paths</strong>
+                <p>Learn based on your goals</p>
+              </div>
+            </div>
+
+            <div className="home-highlight">
+              <span className="home-highlight-icon">
+                <ChartNoAxesCombined size={22} />
+              </span>
+            <div>
+                <strong>AI Recommendations</strong>
+                <p>Discover your next steps</p>
+              </div>
+            </div>
+
+            <div className="home-highlight">
+              <span className="home-highlight-icon">
+                <Layers3 size={22} />
+              </span>
+              <div>
+                <strong>Track Your Growth</strong>
+                <p>Understand your progress</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
 
           {isLoggedIn && (
             <section className="home-personal-section" id="my-learning">
@@ -419,10 +408,10 @@ const handleLogout = () => {
                       </Link>
                     </div>
                   ) : (
-                    
+
                     <div className="home-course-grid category-card-grid">
                     {categories.map((category) => {
-                    const Icon = category.icon;
+
 
                     const courseCount = courses.filter(
                     (course) =>
@@ -435,19 +424,13 @@ const handleLogout = () => {
                     className="home-course-card category-card"
                     key={category.code}
                     >
-                    
-                    <p style={{ color: "red" }}>
-                    Image path: {category.image}
-                    </p>
+
                     <div className="category-card-image">
                     <img
                     src={category.image}
                     alt={category.title}
                     />
                     <div className="category-image-overlay" />
-                    <div className="category-card-icon">
-                    <Icon size={23} />
-                    </div>
                     </div>
 
                     <div className="category-card-content">
@@ -482,7 +465,7 @@ const handleLogout = () => {
             </section>
           )}
 
-         
+
                     {!isLoggedIn && (
                     <section className="home-courses-section" id="courses">
                     <div className="home-section-heading">
@@ -496,7 +479,6 @@ const handleLogout = () => {
 
                     <div className="home-course-grid category-card-grid">
                     {categories.map((category) => {
-                    const Icon = category.icon;
 
                     const courseCount = courses.filter(
                     (course) =>
@@ -516,10 +498,6 @@ const handleLogout = () => {
                     />
 
                     <div className="category-image-overlay" />
-
-                    <div className="category-card-icon">
-                    <Icon size={23} />
-                    </div>
                     </div>
 
                     <div className="category-card-content">

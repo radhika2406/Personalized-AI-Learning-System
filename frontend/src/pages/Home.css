@@ -27,6 +27,29 @@
   font-family: Inter, "Segoe UI", sans-serif;
   transition: background 0.35s ease, color 0.35s ease;
 }
+.home-page {
+  --home-bg: #0B0A18;
+  --home-surface: #151329;
+  --home-surface-2: #1C1938;
+
+  background:
+    radial-gradient(
+      ellipse at 15% 8%,
+      rgba(105, 65, 215, 0.20),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 85% 28%,
+      rgba(50, 79, 207, 0.16),
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      #0B0A18 0%,
+      #100F23 50%,
+      #15132C 100%
+    );
+}
 
 .home-page::before {
   content: "";
@@ -1242,8 +1265,147 @@
 
 /* Improve homepage text rendering */
 .home-hero-frame {
-  transform: none;
-  transform-style: flat;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(25, 24, 57, 0.68),
+      rgba(14, 17, 43, 0.58)
+    );
+
+  border: 1px solid rgba(185, 166, 255, 0.22);
+  border-radius: 25px;
+
+  backdrop-filter: blur(28px) saturate(155%);
+  -webkit-backdrop-filter: blur(28px) saturate(155%);
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.24),
+    0 0 55px rgba(112, 78, 220, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.16);
+}
+
+/* Faint background artwork */
+
+/* Subtle ambient colour shading — no background image */
+
+.home-hero-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 78% 28%,
+      rgba(112, 82, 230, 0.13),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 90% 65%,
+      rgba(65, 105, 240, 0.09),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 58% 85%,
+      rgba(211, 93, 220, 0.055),
+      transparent 35%
+    );
+
+  filter: blur(22px);
+}
+
+/* Light theme — subtle blush and mauve shading */
+
+.home-page[data-theme="light"] .home-hero-frame::before {
+  background:
+    radial-gradient(
+      ellipse at 78% 28%,
+      rgba(166, 79, 125, 0.09),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 90% 65%,
+      rgba(133, 91, 145, 0.07),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 58% 85%,
+      rgba(205, 130, 157, 0.045),
+      transparent 35%
+    );
+
+  filter: blur(22px);
+}
+
+
+/* Soft glass reflection */
+.home-hero-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.09),
+      transparent 28%,
+      transparent 72%,
+      rgba(151, 116, 255, 0.07)
+    );
+
+  border-radius: inherit;
+}
+
+/* =========================================
+   LIGHT THEME GLASS
+========================================= */
+
+.home-page[data-theme="light"] .home-hero-frame {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 249, 250, 0.78),
+      rgba(248, 235, 241, 0.70)
+    );
+
+  border-color: rgba(142, 49, 94, 0.20);
+
+  backdrop-filter: blur(28px) saturate(140%);
+  -webkit-backdrop-filter: blur(28px) saturate(140%);
+
+  box-shadow:
+    0 30px 85px rgba(85, 37, 54, 0.12),
+    0 0 55px rgba(151, 62, 91, 0.08),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.home-page[data-theme="light"] .home-hero-frame::before {
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(255, 247, 249, 0.78),
+      rgba(250, 237, 242, 0.62)
+    ),
+    url("/images/learnova-hero.png");
+
+  opacity: 0.25;
+}
+
+.home-page[data-theme="light"] .home-hero-frame::after {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.55),
+      transparent 35%,
+      rgba(174, 91, 126, 0.04)
+    );
 }
 
 /* =================================
@@ -1370,4 +1532,521 @@
   .category-card-image {
     height: 230px;
   }
+}
+
+
+/* ============================================
+   LEARNOVA HOMEPAGE — MIDNIGHT DARK THEME
+   Midnight Black + Pure White + Golden Yellow
+   ============================================ */
+
+.home-page:not([data-theme="light"]) {
+  --home-bg: #0B0A18;
+  --home-surface: #141414;
+  --home-surface-2: #1C1C1C;
+  --home-text: #FFFFFF;
+  --home-muted: #B8B8C2;
+  --home-primary: #FFC400;
+  --home-secondary: #E6AD00;
+  --home-accent: #FFC400;
+  --home-border: rgba(255, 255, 255, 0.10);
+  --home-card: rgba(23, 23, 23, 0.88);
+
+  color: var(--home-text);
+
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(255, 255, 255, 0.035),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 85% 35%,
+      rgba(255, 196, 0, 0.035),
+      transparent 38%
+    ),
+    #0B0A18;
+}
+
+/* Subtle background grid */
+.home-page:not([data-theme="light"])::before {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px
+    );
+}
+
+/* Ambient background glow */
+.home-page:not([data-theme="light"])::after {
+  background: rgba(255, 196, 0, 0.045);
+}
+
+/* Navigation */
+.home-page:not([data-theme="light"]) .home-navbar {
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.home-page:not([data-theme="light"]) .home-brand-icon {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.04);
+}
+
+.home-page:not([data-theme="light"]) .home-nav-links a:hover {
+  color: #FFC400;
+}
+
+.home-page:not([data-theme="light"]) .home-theme-toggle:hover {
+  color: #FFC400;
+  border-color: rgba(255, 196, 0, 0.55);
+}
+
+/* Primary action buttons */
+.home-page:not([data-theme="light"]) .home-signup-button,
+.home-page:not([data-theme="light"]) .home-primary-button {
+  color: #0B0A18;
+  background: #FFC400;
+  border: 1px solid #FFC400;
+
+  box-shadow:
+    0 5px 20px rgba(255, 196, 0, 0.12);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.home-page:not([data-theme="light"]) .home-signup-button:hover,
+.home-page:not([data-theme="light"]) .home-primary-button:hover {
+  color: #0B0A18;
+  background: #E6AD00;
+  border-color: #E6AD00;
+
+  box-shadow:
+    0 8px 28px rgba(255, 196, 0, 0.22);
+}
+
+/* Hero frame */
+.home-page:not([data-theme="light"]) .home-hero-frame {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(23, 23, 23, 0.97),
+      rgba(11, 10, 24, 0.98)
+    );
+
+  border-color: rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.42),
+    0 0 55px rgba(255, 196, 0, 0.035),
+    inset 0 1px rgba(255, 255, 255, 0.07);
+}
+
+/* Browser window details */
+.home-page:not([data-theme="light"]) .home-window-controls span,
+.home-page:not([data-theme="light"]) .home-window-controls span:nth-child(2),
+.home-page:not([data-theme="light"]) .home-window-controls span:nth-child(3) {
+  background: #B8B8C2;
+}
+
+/* Hero badge */
+.home-page:not([data-theme="light"]) .home-hero-badge {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+/* Hero heading */
+.home-page:not([data-theme="light"]) .home-hero-content h1 {
+  color: #FFFFFF;
+}
+
+.home-page:not([data-theme="light"]) .home-hero-content h1 span {
+  background: none;
+  color: #FFC400;
+  -webkit-text-fill-color: #FFC400;
+}
+
+/* Hero supporting text */
+.home-page:not([data-theme="light"]) .home-hero-description {
+  color: #B8B8C2;
+}
+
+/* Secondary action */
+.home-page:not([data-theme="light"]) .home-secondary-button {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.home-page:not([data-theme="light"]) .home-secondary-button:hover {
+  color: #FFC400;
+  background: rgba(255, 196, 0, 0.055);
+  border-color: rgba(255, 196, 0, 0.45);
+}
+
+/* Hero artwork glow */
+.home-page:not([data-theme="light"]) .home-art-glow {
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 196, 0, 0.30)
+  );
+  opacity: 0.12;
+}
+
+.home-page:not([data-theme="light"]) .home-spiral-image {
+  filter: drop-shadow(
+    0 25px 40px rgba(0, 0, 0, 0.30)
+  );
+}
+
+/* Hero highlights */
+.home-page:not([data-theme="light"]) .home-highlight-icon {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(255, 255, 255, 0.13);
+}
+
+/* Section headings */
+.home-page:not([data-theme="light"]) .home-section-heading > span {
+  color: #FFC400;
+}
+
+.home-page:not([data-theme="light"]) .home-section-heading h2 {
+  color: #FFFFFF;
+}
+
+.home-page:not([data-theme="light"]) .home-section-heading p {
+  color: #B8B8C2;
+}
+
+/* Feature cards */
+.home-page:not([data-theme="light"]) .home-feature-card {
+  background: #141414;
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.home-page:not([data-theme="light"]) .home-feature-card:hover {
+  border-color: rgba(255, 196, 0, 0.38);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.home-page:not([data-theme="light"]) .home-feature-card > svg {
+  color: #FFC400;
+}
+
+/* Category cards */
+.home-page:not([data-theme="light"]) .category-card {
+  background: #141414;
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+.home-page:not([data-theme="light"]) .category-card:hover {
+  border-color: rgba(255, 196, 0, 0.40);
+}
+
+.home-page:not([data-theme="light"]) .category-image-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(11, 10, 24, 0.48),
+    transparent 65%
+  );
+}
+
+.home-page:not([data-theme="light"]) .category-card-label {
+  color: #FFC400;
+}
+
+.home-page:not([data-theme="light"]) .category-card-content h3 {
+  color: #FFFFFF;
+}
+
+.home-page:not([data-theme="light"]) .category-card-content p {
+  color: #B8B8C2;
+}
+
+.home-page:not([data-theme="light"]) .category-explore {
+  color: #FFC400;
+}
+
+/* Course card hover */
+.home-page:not([data-theme="light"]) .home-course-card:hover {
+  border-color: rgba(255, 196, 0, 0.38);
+}
+
+/* How it works */
+.home-page:not([data-theme="light"]) .home-steps-grid article {
+  background: #141414;
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.home-page:not([data-theme="light"]) .home-steps-grid article:hover {
+  border-color: rgba(255, 196, 0, 0.38);
+}
+
+.home-page:not([data-theme="light"]) .home-steps-grid article > strong {
+  background: none;
+  color: #FFC400;
+  -webkit-text-fill-color: #FFC400;
+}
+
+/* Statistics */
+.home-page:not([data-theme="light"]) .home-stat-card {
+  background: #141414;
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.home-page:not([data-theme="light"]) .home-stat-card svg {
+  color: #FFC400;
+}
+
+.home-page:not([data-theme="light"]) .home-stat-card strong {
+  color: #FFFFFF;
+}
+
+/* Empty state and dashboard link */
+.home-page:not([data-theme="light"]) .home-empty-state > svg {
+  color: #FFC400;
+}
+
+.home-page:not([data-theme="light"]) .home-dashboard-link {
+  color: #FFC400;
+}
+
+/* Footer */
+.home-page:not([data-theme="light"]) .home-footer {
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.home-page:not([data-theme="light"]) .home-footer p {
+  color: #B8B8C2;
+}
+
+/* Keep yellow highlights restrained on hover */
+.home-page:not([data-theme="light"]) .home-course-card a:hover,
+.home-page:not([data-theme="light"]) .home-dashboard-link:hover {
+  color: #E6AD00;
+}
+
+/* ============================================
+   HOMEPAGE — NEUTRAL LOWER SECTIONS
+   Keep golden yellow in the hero section
+   ============================================ */
+
+/* Category labels and links */
+.home-page:not([data-theme="light"]) .category-card-label {
+  color: #FFFFFF;
+}
+
+.home-page:not([data-theme="light"]) .category-explore {
+  color: #FFFFFF;
+}
+
+.home-page:not([data-theme="light"]) .category-card:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Feature section icons */
+.home-page:not([data-theme="light"]) .home-feature-card > svg {
+  color: #FFFFFF;
+}
+
+/* Feature card hover */
+.home-page:not([data-theme="light"]) .home-feature-card:hover {
+  border-color: rgba(255, 255, 255, 0.20);
+}
+
+/* Journey section step numbers */
+.home-page:not([data-theme="light"]) .home-steps-grid article > strong {
+  background: none;
+  color: #FFFFFF;
+  -webkit-text-fill-color: #FFFFFF;
+}
+
+/* Journey card hover */
+.home-page:not([data-theme="light"]) .home-steps-grid article:hover {
+  border-color: rgba(255, 255, 255, 0.20);
+}
+
+/* Subtle neutral hover for category links */
+.home-page:not([data-theme="light"]) .category-explore:hover {
+  color: #D1D1D8;
+}
+
+/* ============================================
+   LEARNOVA — SEAMLESS MIDNIGHT HERO
+   Remove browser card and grid background
+   ============================================ */
+
+.home-page:not([data-theme="light"]) {
+  background:
+    radial-gradient(
+      ellipse at 18% 30%,
+      rgba(255, 255, 255, 0.035),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 78% 38%,
+      rgba(255, 196, 0, 0.045),
+      transparent 35%
+    ),
+    #0B0A18;
+}
+
+/* Remove the homepage grid */
+.home-page:not([data-theme="light"])::before {
+  background-image: none;
+}
+
+/* Remove the old ambient overlay */
+.home-page:not([data-theme="light"])::after {
+  display: none;
+}
+
+/* Remove the outer browser-window card */
+.home-page:not([data-theme="light"]) .home-hero-frame {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Remove browser window dots */
+.home-page:not([data-theme="light"]) .home-window-controls {
+  display: none;
+}
+
+/* Keep the hero artwork clean */
+.home-page:not([data-theme="light"]) .home-art-glow {
+  opacity: 0.08;
+}
+
+/* Neutral divider below hero content */
+.home-page:not([data-theme="light"]) .home-hero-frame hr {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================
+   LEARNOVA — FINAL HERO ALIGNMENT
+   ========================================= */
+
+.home-page:not([data-theme="light"]) .home-hero {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 55px 5% 25px;
+  box-sizing: border-box;
+}
+
+.home-page:not([data-theme="light"]) .home-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 50px;
+  width: 100%;
+  margin: 0;
+}
+
+.home-page:not([data-theme="light"]) .home-hero-content {
+  min-width: 0;
+}
+
+.home-page:not([data-theme="light"]) .home-hero-art {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.home-page:not([data-theme="light"]) .home-spiral-image {
+  width: 100%;
+  max-width: 490px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Three equally spaced feature items */
+.home-page:not([data-theme="light"]) .home-hero-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  width: 100%;
+  margin: 45px 0 0;
+  padding: 28px 0 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-sizing: border-box;
+}
+
+.home-page:not([data-theme="light"]) .home-highlight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-width: 0;
+  padding: 0 18px;
+}
+
+.home-page:not([data-theme="light"]) .home-highlight:nth-child(2) {
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+@media (max-width: 900px) {
+  .home-page:not([data-theme="light"]) .home-hero {
+    padding: 40px 5% 20px;
+  }
+
+  .home-page:not([data-theme="light"]) .home-hero-grid {
+    grid-template-columns: 1fr 0.8fr;
+    gap: 25px;
+  }
+}
+
+@media (max-width: 650px) {
+  .home-page:not([data-theme="light"]) .home-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-page:not([data-theme="light"]) .home-hero-art {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .home-page:not([data-theme="light"]) .home-hero-highlights {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .home-page:not([data-theme="light"]) .home-highlight:nth-child(2) {
+    border: none;
+  }
+
+  .home-page:not([data-theme="light"]) .home-highlight {
+    justify-content: flex-start;
+  }
+}
+/* Golden Learnova logo — dark theme */
+.home-page:not([data-theme="light"]) .home-brand-icon {
+  color: #FFC400;
+  background: rgba(255, 196, 0, 0.07);
+  border: 1px solid rgba(255, 196, 0, 0.28);
+  box-shadow: 0 0 18px rgba(255, 196, 0, 0.08);
+}
+
+.home-page:not([data-theme="light"]) .home-brand-icon svg {
+  color: #FFC400;
+  stroke: #FFC400;
 }

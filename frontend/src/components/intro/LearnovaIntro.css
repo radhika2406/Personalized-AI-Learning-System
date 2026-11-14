@@ -1,10 +1,10 @@
 
 .learnova-intro {
-  --intro-text: #f7f4ff;
-  --intro-muted: #b8b4d5;
-  --intro-accent: #a78bfa;
-  --intro-cyan: #67e8f9;
-  --intro-bg: #070817;
+  --intro-text: #FFFFFF;
+  --intro-muted: #B8B8C2;
+  --intro-accent: #FFC400;
+  --intro-cyan: #FFC400;
+  --intro-bg: #0B0A18;
 
   position: fixed;
   inset: 0;
@@ -18,8 +18,8 @@
   isolation: isolate;
   color: var(--intro-text);
   background:
-    radial-gradient(ellipse at 50% 45%, #19113e 0%, transparent 48%),
-    radial-gradient(ellipse at 15% 85%, #101c3b 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 45%, rgba(255, 255, 255, 0.035) 0%, transparent 48%),
+    radial-gradient(ellipse at 15% 85%, rgba(255, 196, 0, 0.025) 0%, transparent 40%),
     var(--intro-bg);
   font-family: Inter, system-ui, sans-serif;
 }
@@ -52,7 +52,7 @@
   min-height: 280px;
   border-radius: 50%;
   filter: blur(90px);
-  opacity: 0.2;
+  opacity: 0.045;
   pointer-events: none;
   animation: nebula-drift 12s ease-in-out infinite alternate;
 }
@@ -60,13 +60,13 @@
 .intro-nebula-one {
   top: -15%;
   left: -12%;
-  background: #7045d9;
+  background: #FFC400;
 }
 
 .intro-nebula-two {
   right: -12%;
   bottom: -20%;
-  background: #167ba8;
+  background: #FFC400;
   animation-delay: -5s;
 }
 
@@ -90,8 +90,8 @@
   gap: 9px;
   padding: 11px 17px;
   color: var(--intro-text);
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(180, 170, 255, 0.28);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 30px;
   backdrop-filter: blur(12px);
   font-size: 13px;
@@ -100,8 +100,8 @@
 }
 
 .intro-skip-button:hover {
-  border-color: var(--intro-accent);
-  background: rgba(139, 92, 246, 0.18);
+  border-color: rgba(255, 196, 0, 0.65);
+  background: rgba(255, 196, 0, 0.055);
   transform: translateY(-2px);
 }
 
@@ -135,15 +135,15 @@
   border-radius: 50%;
   background: conic-gradient(
     from 0deg,
-    transparent,
-    #8b5cf6,
-    #67e8f9,
-    #a78bfa,
-    transparent
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 196, 0, 0.82),
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.08)
   );
   box-shadow:
-    0 0 35px rgba(139, 92, 246, 0.6),
-    0 0 90px rgba(103, 232, 249, 0.22);
+    0 0 22px rgba(255, 196, 0, 0.10),
+    0 0 55px rgba(255, 196, 0, 0.045);
   animation: portal-rotate 14s linear infinite;
 }
 
@@ -154,8 +154,8 @@
   place-items: center;
   border-radius: 50%;
   background:
-    radial-gradient(circle, #35206b 0%, #15102f 58%, #080817 100%);
-  box-shadow: inset 0 0 28px rgba(139, 92, 246, 0.5);
+    radial-gradient(circle, #171622 0%, #10101A 58%, #0B0A18 100%);
+  box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.045);
 }
 
 .intro-light .portal-core {
@@ -164,8 +164,8 @@
 }
 
 .portal-core-inner {
-  color: #d9c9ff;
-  filter: drop-shadow(0 0 12px #a78bfa);
+  color: #FFFFFF;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.12));
   animation: core-pulse 3s ease-in-out infinite;
 }
 
@@ -175,7 +175,7 @@
 
 .intro-orbit {
   position: absolute;
-  border: 1px solid rgba(177, 157, 255, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.20);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -195,7 +195,7 @@
 .orbit-c {
   width: 290px;
   height: 290px;
-  border-color: rgba(103, 232, 249, 0.18);
+  border-color: rgba(255, 255, 255, 0.10);
   transform: rotate(-55deg) scaleY(0.35);
 }
 
@@ -205,11 +205,11 @@
   height: 48px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(190, 174, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.20);
   border-radius: 15px;
-  color: #d7c9ff;
-  background: rgba(25, 19, 57, 0.68);
-  box-shadow: 0 0 24px rgba(139, 92, 246, 0.18);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.20);
   backdrop-filter: blur(9px);
   animation: symbol-float 5s ease-in-out infinite;
 }
@@ -269,9 +269,10 @@
   display: grid;
   place-items: center;
   border-radius: 13px;
-  color: white;
-  background: linear-gradient(135deg, #8b5cf6, #22d3ee);
-  box-shadow: 0 0 28px rgba(139, 92, 246, 0.5);
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.045);
 }
 
 .intro-brand h1 {
@@ -280,12 +281,9 @@
   font-size: clamp(36px, 6vw, 58px);
   font-weight: 800;
   letter-spacing: 0.2em;
-  background: linear-gradient(100deg, #fff, #c4b5fd, #67e8f9, #fff);
-  background-size: 200% auto;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: brand-shine 5s linear infinite;
+  color: #FFFFFF;
+  background: none;
+  animation: brand-reveal 1s 0.35s both;
 }
 
 .intro-light .intro-brand h1 {
@@ -329,13 +327,13 @@
   min-width: 250px;
   padding: 17px 27px;
   overflow: hidden;
-  border: 1px solid rgba(196, 181, 253, 0.65);
+  border: 1px solid rgba(255, 196, 0, 0.9);
   border-radius: 50px;
-  color: white;
-  background: linear-gradient(110deg, #7043d7, #5543b8, #087e9e);
+  color: #0B0A18;
+  background: #FFC400;
   box-shadow:
-    0 0 22px rgba(139, 92, 246, 0.38),
-    inset 0 0 16px rgba(255, 255, 255, 0.12);
+    0 0 18px rgba(255, 196, 0, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
   font-size: 13px;
   font-weight: 750;
   letter-spacing: 1.5px;
@@ -358,8 +356,8 @@
 .intro-enter-button:hover {
   transform: translateY(-3px) scale(1.025);
   box-shadow:
-    0 0 35px rgba(139, 92, 246, 0.65),
-    0 0 60px rgba(34, 211, 238, 0.18);
+    0 0 24px rgba(255, 196, 0, 0.20),
+    0 0 42px rgba(255, 196, 0, 0.07);
 }
 
 .intro-enter-button:hover::before {
@@ -384,8 +382,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #67e8f9;
-  box-shadow: 0 0 12px #67e8f9;
+  background: #FFFFFF;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
 }
 
 .intro-exiting {
@@ -451,58 +449,51 @@
 }
 
 @media (max-width: 600px) {
+
+/* Subtle golden-white glass skip button */
+
   .intro-skip-button {
-    top: 18px;
-    right: 16px;
-    padding: 9px 13px;
-    font-size: 12px;
-  }
+    position: absolute;
+    top: 30px;
+    right: 38px;
+    z-index: 5;
 
-  .intro-content {
-    width: 95%;
-    padding-top: 30px;
-  }
-
-  .intro-orbit-scene {
-    transform: scale(0.82);
-    margin-top: -15px;
-    margin-bottom: -15px;
-  }
-
-  .intro-brand {
+    display: inline-flex;
+    align-items: center;
     gap: 9px;
+    padding: 11px 17px;
+
+    color: #FFFFFF;
+
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 30px;
+
+    backdrop-filter: blur(16px) saturate(145%);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+
+    box-shadow:
+      0 0 12px rgba(255, 196, 0, 0.045),
+      inset 0 1px 1px rgba(255, 255, 255, 0.12);
+
+    font-size: 13px;
+    letter-spacing: 0.4px;
+
+    transition: all 0.3s ease;
   }
 
-  .intro-brand-mark {
-    width: 35px;
-    height: 35px;
-  }
+  .intro-skip-button:hover {
+    color: #FFFFFF;
+    border-color: rgba(255, 196, 0, 0.65);
 
-  .intro-brand-mark svg {
-    width: 20px;
-  }
+    background: rgba(255, 196, 0, 0.075);
 
-  .intro-brand h1 {
-    letter-spacing: 0.13em;
-  }
+    box-shadow:
+      0 0 16px rgba(255, 196, 0, 0.12),
+      0 0 20px rgba(255, 255, 255, 0.055),
+      inset 0 1px 2px rgba(255, 255, 255, 0.18);
 
-  .intro-tagline {
-    min-height: 65px;
-    margin-top: 20px;
-  }
-
-  .intro-tagline p {
-    letter-spacing: 0.1em;
-  }
-
-  .intro-subtitle {
-    max-width: 280px;
-    line-height: 1.6;
-  }
-
-  .intro-enter-button {
-    min-width: 225px;
-    padding: 15px 20px;
+    transform: translateY(-2px);
   }
 }
 
@@ -526,4 +517,219 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+
+/* =========================================
+   LEARNOVA LIGHT THEME
+   Pearl Ivory + Red Wine + Champagne Gold
+   ========================================= */
+
+.learnova-intro.intro-light {
+  --intro-text: #722F45;
+  --intro-muted: #8C6672;
+  --intro-accent: #722F45;
+  --intro-cyan: #D9B77E;
+  --intro-bg: #FFF9F0;
+
+  color: var(--intro-text);
+
+  background-image:
+    linear-gradient(
+      rgba(255, 249, 240, 0.18),
+      rgba(255, 249, 240, 0.22)
+    ),
+    url("/images/learnova-light-universe.png");
+
+  background-color: #FFF9F0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Remove dark galaxy stars in light mode */
+.intro-light .learnova-galaxy-canvas {
+  display: none;
+}
+
+/* Soft champagne ambient lighting */
+.intro-light .intro-nebula-one {
+  background: #E9CDAA;
+  opacity: 0.22;
+}
+
+.intro-light .intro-nebula-two {
+  background: #E9B9C3;
+  opacity: 0.18;
+}
+
+/* Skip button - ivory glass */
+.intro-light .intro-skip-button {
+  color: #722F45;
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(114, 47, 69, 0.20);
+
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+
+  box-shadow:
+    0 5px 20px rgba(114, 47, 69, 0.06),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.intro-light .intro-skip-button:hover {
+  color: #722F45;
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(217, 183, 126, 0.8);
+
+  box-shadow:
+    0 0 18px rgba(217, 183, 126, 0.20),
+    0 5px 20px rgba(114, 47, 69, 0.08);
+
+  transform: translateY(-2px);
+}
+
+/* Pearl and champagne portal */
+.intro-light .intro-portal {
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(217, 183, 126, 0.95),
+    rgba(255, 255, 255, 0.95),
+    rgba(185, 130, 112, 0.55),
+    rgba(255, 255, 255, 0.85)
+  );
+
+  box-shadow:
+    0 0 22px rgba(217, 183, 126, 0.30),
+    0 0 55px rgba(217, 183, 126, 0.18),
+    0 0 85px rgba(255, 255, 255, 0.45);
+}
+
+/* Soft pearl portal centre */
+.intro-light .portal-core {
+  background:
+    radial-gradient(
+      circle,
+      #FFFFFF 0%,
+      #FFF9F0 58%,
+      #F4E6DC 100%
+    );
+
+  box-shadow:
+    inset 0 0 25px rgba(217, 183, 126, 0.18),
+    0 0 18px rgba(255, 255, 255, 0.7);
+}
+
+.intro-light .portal-core-inner {
+  color: #722F45;
+  filter: drop-shadow(0 0 7px rgba(217, 183, 126, 0.35));
+}
+
+/* Delicate champagne orbit rings */
+.intro-light .intro-orbit {
+  border-color: rgba(185, 130, 112, 0.32);
+}
+
+.intro-light .orbit-c {
+  border-color: rgba(217, 183, 126, 0.38);
+}
+
+/* Floating frosted-glass learning icons */
+.intro-light .intro-symbol {
+  color: #722F45;
+
+  background: rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(217, 183, 126, 0.42);
+
+  backdrop-filter: blur(14px) saturate(145%);
+  -webkit-backdrop-filter: blur(14px) saturate(145%);
+
+  box-shadow:
+    0 8px 25px rgba(114, 47, 69, 0.07),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* Learnova brand mark */
+.intro-light .intro-brand-mark {
+  color: #722F45;
+
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(217, 183, 126, 0.48);
+
+  box-shadow:
+    0 5px 20px rgba(114, 47, 69, 0.07),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* Red wine logo typography */
+.intro-light .intro-brand h1 {
+  color: #722F45;
+  background: none;
+  -webkit-text-fill-color: #722F45;
+}
+
+/* Tagline */
+.intro-light .intro-tagline p {
+  color: #722F45;
+}
+
+/* Supporting text */
+.intro-light .intro-subtitle {
+  color: #8C6672;
+}
+
+/* Red wine and champagne glass Enter button */
+.intro-light .intro-enter-button {
+  color: #722F45;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.78),
+    rgba(244, 230, 220, 0.72),
+    rgba(217, 183, 126, 0.28)
+  );
+
+  border: 1px solid rgba(185, 130, 112, 0.55);
+
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+
+  box-shadow:
+    0 0 18px rgba(217, 183, 126, 0.20),
+    0 8px 25px rgba(114, 47, 69, 0.08),
+    inset 0 1px 3px rgba(255, 255, 255, 0.95);
+}
+
+.intro-light .intro-enter-button::before {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.85),
+    rgba(217, 183, 126, 0.35),
+    transparent
+  );
+}
+
+.intro-light .intro-enter-button:hover {
+  color: #722F45;
+
+  border-color: rgba(217, 183, 126, 0.95);
+
+  box-shadow:
+    0 0 25px rgba(217, 183, 126, 0.30),
+    0 10px 30px rgba(114, 47, 69, 0.10),
+    inset 0 1px 3px rgba(255, 255, 255, 1);
+
+  transform: translateY(-3px) scale(1.025);
+}
+
+/* Bottom note */
+.intro-light .intro-bottom-note {
+  color: #8C6672;
+}
+
+.intro-light .intro-live-dot {
+  background: #D9B77E;
+  box-shadow: 0 0 9px rgba(217, 183, 126, 0.65);
 }

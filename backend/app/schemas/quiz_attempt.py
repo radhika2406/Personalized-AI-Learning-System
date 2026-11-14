@@ -20,8 +20,11 @@ class QuizAttemptResponse(BaseModel):
     started_at: datetime
     submitted_at: datetime | None
 
-    model_config = {"from_attributes": True}
+    quiz_title: str
+    topic_title: str
+    course_title: str
 
+    model_config = {"from_attributes": True}
 
 class QuestionReviewResponse(BaseModel):
     question_id: int

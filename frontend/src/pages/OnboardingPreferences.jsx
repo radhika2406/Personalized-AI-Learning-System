@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -187,6 +186,15 @@ function OnboardingPreferences() {
 
   const [studyDays, setStudyDays] = useState([]);
   const [studyDaysCustom, setStudyDaysCustom] = useState("");
+  const allStudyDaysSelected = options.studyDays.every((day) =>
+    studyDays.includes(day)
+  );
+
+  const handleAllStudyDaysChange = (event) => {
+    setStudyDays(
+      event.target.checked ? [...options.studyDays] : []
+    );
+  };
 
   const [studySchedule, setStudySchedule] = useState("");
 
@@ -704,16 +712,52 @@ useEffect(() => {
                 />
               )}
             </div>
-
             <div className="onboarding-field">
               <label>Which days are you available to study?</label>
-              <CheckboxGroup
-                items={options.studyDays}
-                selected={studyDays}
-                onChange={setStudyDays}
-              />
-            </div>
 
+              <div className="onboarding-checkbox-grid">
+                {options.studyDays.map((day) => (
+                  <label
+                    key={day}
+                    className={`onboarding-checkbox-option ${
+                      studyDays.includes(day) ? "selected" : ""
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={studyDays.includes(day)}
+                      onChange={() =>
+                        setStudyDays((previous) =>
+                          previous.includes(day)
+                            ? previous.filter((item) => item !== day)
+                            : [...previous, day]
+                        )
+                      }
+                    />
+                    <span>{day}</span>
+                    {studyDays.includes(day) && (
+                      <CheckCircle2 size={17} />
+                    )}
+                  </label>
+                ))}
+
+                <label
+                  className={`onboarding-checkbox-option ${
+                    allStudyDaysSelected ? "selected" : ""
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={allStudyDaysSelected}
+                    onChange={handleAllStudyDaysChange}
+                  />
+                  <span>All Days</span>
+                  {allStudyDaysSelected && (
+                    <CheckCircle2 size={17} />
+                  )}
+                </label>
+              </div>
+            </div>
             <div className="onboarding-field">
               <label>Any specific study schedule? (Optional)</label>
               <textarea

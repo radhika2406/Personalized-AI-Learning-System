@@ -17,7 +17,7 @@ import {
 
 import "./DashboardLayout.css";
 import { useTheme } from "../ThemeContext";
-import api from "../services/api";
+import { useUser } from "../UserContext";
 import GlobalSearch from "./GlobalSearch";
 import Logo from "./Logo";
 
@@ -27,7 +27,7 @@ function DashboardLayout({ title, subtitle, children }) {
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [account, setAccount] = useState(null);
+  const { account, refreshUser, setAccount } = useUser();
 
   const profileRef = useRef(null);
 
@@ -43,28 +43,10 @@ function DashboardLayout({ title, subtitle, children }) {
   ];
 
   useEffect(() => {
-    let active = true;
-
-    const fetchAccount = async () => {
-      try {
-        const response = await api.get("/users/me");
-
-        if (active) {
-          setAccount(response.data);
-        }
-      } catch (error) {
-        console.error("Unable to load student account:", error);
-      }
-    };
-
     if (localStorage.getItem("token")) {
-      fetchAccount();
+      refreshUser();
     }
-
-    return () => {
-      active = false;
-    };
-  }, []);
+  }, [refreshUser]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -116,6 +98,7 @@ function DashboardLayout({ title, subtitle, children }) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    setAccount(null);
     setProfileOpen(false);
     closeSidebar();
     navigate("/login");
@@ -132,6 +115,16 @@ function DashboardLayout({ title, subtitle, children }) {
     .join("")
     .toUpperCase();
 
+  const imageBaseUrl = (
+  import.meta.env.VITE_API_URL || "http://127.0.0.1:8000"
+  ).replace(/\/$/, "");
+
+  const profileImageUrl = account?.profile_image
+    ? account.profile_image.startsWith("http")
+      ? account.profile_image
+      : `${imageBaseUrl}${account.profile_image.startsWith("/") ? "" : "/"}${account.profile_image}`
+  :null;
+
   const ProfileControl = () => (
     <div className="student-profile-wrapper" ref={profileRef}>
       <button
@@ -142,7 +135,15 @@ function DashboardLayout({ title, subtitle, children }) {
         aria-label="Open student profile menu"
       >
         <span className="student-avatar">
-          {initials || "L"}
+          {profileImageUrl ? (
+            <img
+              src={profileImageUrl}
+              alt="Profile"
+              className="student-avatar-image"
+            />
+          ) : (
+            initials || "L"
+          )}
         </span>
 
         <span className="student-greeting">
@@ -160,7 +161,15 @@ function DashboardLayout({ title, subtitle, children }) {
         <div className="student-profile-dropdown">
           <div className="profile-dropdown-heading">
             <span className="student-avatar dropdown-avatar">
-              {initials || "L"}
+              {profileImageUrl ? (
+                <img
+                  src={profileImageUrl}
+                  alt="Profile"
+                  className="student-avatar-image"
+                />
+              ) : (
+                initials || "L"
+              )}
             </span>
             <span>
               <strong>{fullName}</strong>

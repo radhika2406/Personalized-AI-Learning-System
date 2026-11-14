@@ -6,3 +6,4 @@ alembic
 PyJWT
 google-auth==2.62.2
 httpx
+python-multipart

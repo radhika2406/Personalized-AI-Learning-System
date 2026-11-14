@@ -14,8 +14,17 @@ from app.routers import course_enrollment
 from app.routers import dashboard
 from app.routers import recommendation
 from app.routers import learning_path
+from pathlib import Path
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Personalized AI Learning System")
+UPLOADS_DIR = Path(__file__).resolve().parent.parent / "uploads"
+
+app.mount(
+    "/uploads",
+    StaticFiles(directory=str(UPLOADS_DIR)),
+    name="uploads",
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
