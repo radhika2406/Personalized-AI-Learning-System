@@ -1,7 +1,7 @@
 topic_id,course,order,prerequisites,est_minutes
 variables,python,1,,15
-data_types,python,2,variables,20
-conditions,python,3,variables;data_types,25
-loops,python,4,conditions,30
-functions,python,5,loops,30
-lists,python,6,loops;data_types,25
+conditions,python,2,variables,20
+loops,python,3,conditions,25
+functions,python,4,loops,30
+lists,python,5,loops,25
+dictionaries,python,6,lists,25

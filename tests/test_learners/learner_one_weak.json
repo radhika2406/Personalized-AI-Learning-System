@@ -1,12 +1,18 @@
 {
   "learner_id": "learner_one_weak",
+  "course": "python",
+  "goal": "Relearn weak area",
+  "level": "intermediate",
   "daily_minutes": 60,
-  "topics": {
-    "variables": { "score": 90, "mastery_level": "strong" },
-    "data_types": { "score": 92, "mastery_level": "strong" },
-    "conditions": { "score": 88, "mastery_level": "strong" },
-    "loops": { "score": 25, "mastery_level": "weak" },
-    "functions": { "score": 91, "mastery_level": "strong" },
-    "lists": { "score": 89, "mastery_level": "strong" }
-  }
+  "mastery": {
+    "variables": 90,
+    "conditions": 88,
+    "loops": 25,
+    "functions": 85,
+    "lists": 89,
+    "dictionaries": 87
+  },
+  "weak_topics": ["loops"],
+  "strong_topics": ["variables", "conditions", "functions", "lists", "dictionaries"],
+  "not_assessed": []
 }

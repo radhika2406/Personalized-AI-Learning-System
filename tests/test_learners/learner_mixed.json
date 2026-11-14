@@ -1,12 +1,18 @@
 {
   "learner_id": "learner_mixed",
+  "course": "python",
+  "goal": "Improve Python skills",
+  "level": "intermediate",
   "daily_minutes": 60,
-  "topics": {
-    "variables": { "score": 90, "mastery_level": "strong" },
-    "data_types": { "score": 75, "mastery_level": "good" },
-    "conditions": { "score": 55, "mastery_level": "developing" },
-    "loops": { "score": 30, "mastery_level": "weak" },
-    "functions": { "score": null, "mastery_level": "not assessed" },
-    "lists": { "score": null, "mastery_level": "not assessed" }
-  }
+  "mastery": {
+    "variables": 90,
+    "conditions": 55,
+    "loops": 30,
+    "functions": 70,
+    "lists": null,
+    "dictionaries": null
+  },
+  "weak_topics": ["loops"],
+  "strong_topics": ["variables"],
+  "not_assessed": ["lists", "dictionaries"]
 }

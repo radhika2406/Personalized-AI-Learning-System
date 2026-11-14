@@ -33,25 +33,25 @@ class TestConfigAndMastery(unittest.TestCase):
         self.assertEqual(get_activity_for_level(LEVEL_NOT_ASSESSED), "assess first")
 
     def test_mastery_thresholds(self):
-        """Test threshold boundaries: weak < 40 <= developing < 70 <= good < 85 <= strong."""
-        # Weak (< 40)
+        """Test mastery thresholds defined in the shared schema."""
+        # Weak: 0–39
         self.assertEqual(get_mastery_level(0), LEVEL_WEAK)
-        self.assertEqual(get_mastery_level(33), LEVEL_WEAK)
+        self.assertEqual(get_mastery_level(39), LEVEL_WEAK)
         self.assertEqual(get_mastery_level(39.9), LEVEL_WEAK)
 
-        # Developing (40 to 69.9)
+        # Developing: 40–59
         self.assertEqual(get_mastery_level(40), LEVEL_DEVELOPING)
-        self.assertEqual(get_mastery_level(55), LEVEL_DEVELOPING)
-        self.assertEqual(get_mastery_level(69.9), LEVEL_DEVELOPING)
+        self.assertEqual(get_mastery_level(59), LEVEL_DEVELOPING)
+        self.assertEqual(get_mastery_level(59.9), LEVEL_DEVELOPING)
 
-        # Good (70 to 84.9)
-        self.assertEqual(get_mastery_level(70), LEVEL_GOOD)
-        self.assertEqual(get_mastery_level(84.9), LEVEL_GOOD)
+        # Good: 60–79
+        self.assertEqual(get_mastery_level(60), LEVEL_GOOD)
+        self.assertEqual(get_mastery_level(79), LEVEL_GOOD)
+        self.assertEqual(get_mastery_level(79.9), LEVEL_GOOD)
 
-        # Strong (>= 85)
-        self.assertEqual(get_mastery_level(85), LEVEL_STRONG)
+        # Strong: 80–100
+        self.assertEqual(get_mastery_level(80), LEVEL_STRONG)
         self.assertEqual(get_mastery_level(100), LEVEL_STRONG)
-
     def test_activity_mapping(self):
         """Test designated activity for each mastery level."""
         self.assertEqual(get_activity_for_level(LEVEL_WEAK), "relearn")
@@ -69,7 +69,7 @@ class TestTopicsMetadata(unittest.TestCase):
         self.assertEqual(len(topics), 6)
 
         topic_ids = [t["topic_id"] for t in topics]
-        expected_ids = ["variables", "data_types", "conditions", "loops", "functions", "lists"]
+        expected_ids = ["variables", "conditions", "loops", "functions", "lists", "dictionaries"]
         self.assertEqual(topic_ids, expected_ids)
 
         # Check prerequisite for loops contains conditions
@@ -95,15 +95,16 @@ class TestEightLearners(unittest.TestCase):
         recommendations = recommend_topics(data)
 
         self.assertEqual(len(recommendations), 6)
-        # All activities must be 'relearn'
+
         for _, activity in recommendations:
             self.assertEqual(activity, "relearn")
 
-        # Variables must come before data_types, data_types before conditions, conditions before loops
         order = [tid for tid, _ in recommendations]
-        self.assertLess(order.index("variables"), order.index("data_types"))
-        self.assertLess(order.index("data_types"), order.index("conditions"))
+        self.assertLess(order.index("variables"), order.index("conditions"))
         self.assertLess(order.index("conditions"), order.index("loops"))
+        self.assertLess(order.index("loops"), order.index("functions"))
+        self.assertLess(order.index("loops"), order.index("lists"))
+        self.assertLess(order.index("lists"), order.index("dictionaries"))
 
     def test_learner_all_strong(self):
         """Learner 2: All strong topics should get 'advance'."""
@@ -121,11 +122,11 @@ class TestEightLearners(unittest.TestCase):
         rec_dict = dict(recommendations)
 
         self.assertEqual(rec_dict["variables"], "advance")
-        self.assertEqual(rec_dict["data_types"], "practice")
+        self.assertEqual(rec_dict["functions"], "practice")
         self.assertEqual(rec_dict["conditions"], "revise")
         self.assertEqual(rec_dict["loops"], "relearn")
-        self.assertEqual(rec_dict["functions"], "assess first")
         self.assertEqual(rec_dict["lists"], "assess first")
+        self.assertEqual(rec_dict["dictionaries"], "assess first")
 
         # Since conditions is at 'developing' (< 'good'), it must be recommended before loops
         order = [tid for tid, _ in recommendations]
@@ -138,11 +139,11 @@ class TestEightLearners(unittest.TestCase):
 
         expected = [
             ("variables", "assess first"),
-            ("data_types", "assess first"),
             ("conditions", "assess first"),
             ("loops", "assess first"),
             ("functions", "assess first"),
             ("lists", "assess first"),
+            ("dictionaries", "assess first"),
         ]
         self.assertEqual(recommendations, expected)
 
@@ -152,10 +153,9 @@ class TestEightLearners(unittest.TestCase):
         recommendations = recommend_topics(data)
 
         rec_dict = dict(recommendations)
-        self.assertEqual(rec_dict["conditions"], "relearn")
-        self.assertEqual(rec_dict["data_types"], "revise")
+        self.assertEqual(rec_dict["conditions"], "revise")
         self.assertEqual(rec_dict["variables"], "advance")
-        self.assertEqual(rec_dict["loops"], "assess first")
+        self.assertEqual(rec_dict["loops"], "relearn")
 
     def test_learner_budget_90(self):
         """Learner 6: 90-minute budget learner."""

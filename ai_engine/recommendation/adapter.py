@@ -1,7 +1,7 @@
 """Adapter layer to normalize learner analysis input.
 
-This module converts various input shapes (provisional JSON, backend database fields,
-or future contracts from Person A) into a consistent internal format.
+This module converts various input shapes (sample_analysis.json, backend database fields,
+or custom test dictionaries) into a consistent internal format.
 """
 
 from dataclasses import dataclass
@@ -20,18 +20,25 @@ def normalize_analysis(data: dict[str, Any]) -> NormalizedLearner:
     """Normalize a learner analysis dictionary into a standard NormalizedLearner.
 
     Supports:
+    - mastery dictionary from contracts/sample_analysis.json
+    - topics or topic_mastery dictionary or list
     - daily_minutes or daily_study_minutes
-    - topics as a dictionary of objects, dictionary of numbers, or list of objects
     """
     learner_id = str(data.get("learner_id") or data.get("user_id") or "anonymous_learner")
 
-    daily_minutes = int(
-        data.get("daily_minutes")
-        or data.get("daily_study_minutes")
-        or 60
-    )
+    daily_minutes_val = data.get("daily_minutes") or data.get("daily_study_minutes")
+    try:
+        daily_minutes = int(daily_minutes_val)
+        if daily_minutes <= 0:
+            daily_minutes = 60
+    except (TypeError, ValueError):
+        daily_minutes = 60
 
-    raw_topics = data.get("topics") or data.get("topic_mastery") or {}
+    # Look for 'mastery' (official sample_analysis.json key) first, then 'topics' or 'topic_mastery'
+    raw_topics = data.get("mastery")
+    if raw_topics is None:
+        raw_topics = data.get("topics") or data.get("topic_mastery") or {}
+
     topic_scores: dict[str, float | None] = {}
 
     if isinstance(raw_topics, dict):

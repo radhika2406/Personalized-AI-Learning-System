@@ -13,23 +13,18 @@ from pathlib import Path
 import unittest
 
 from ai_engine.recommendation.adaptive_learning import adapt_plan
-from ai_engine.recommendation.config import get_mastery_level
+
 
 
 def simulate_quiz_result(analysis: dict, topic_id: str, new_score: float | int | None) -> dict:
-    """Tiny test helper: fakes a new analysis without importing Person A's code."""
+    """Simulate a new quiz result using the existing mastery data structure."""
     updated = copy.deepcopy(analysis)
-    level = get_mastery_level(new_score)
 
-    if "topics" not in updated or not isinstance(updated["topics"], dict):
-        updated["topics"] = {}
+    if "mastery" not in updated or not isinstance(updated["mastery"], dict):
+        updated["mastery"] = {}
 
-    updated["topics"][topic_id] = {
-        "score": new_score,
-        "mastery_level": level,
-    }
+    updated["mastery"][topic_id] = new_score
     return updated
-
 
 class TestAdaptiveLearning(unittest.TestCase):
     """Test adaptive plan updating when a new quiz result arrives."""
@@ -47,7 +42,7 @@ class TestAdaptiveLearning(unittest.TestCase):
         """Case 1: Weak topic becomes strong. Activity changes to advance and next topic prioritizes."""
         before = self._load_learner("learner_one_weak.json")
         # In learner_one_weak, loops is at 25% (weak)
-        self.assertEqual(before["topics"]["loops"]["score"], 25)
+        self.assertEqual(before["mastery"]["loops"], 25)
 
         # Student passes loops quiz with 90% (strong)
         after = simulate_quiz_result(before, "loops", 90)
@@ -68,39 +63,39 @@ class TestAdaptiveLearning(unittest.TestCase):
         """Case 2: Not-assessed topic gets its first score."""
         before = self._load_learner("learner_nothing_assessed.json")
 
-        # Student takes diagnostic assessment on variables and scores 65% (developing)
+        # Student takes diagnostic assessment on variables and scores 65% (good)
         after = simulate_quiz_result(before, "variables", 65)
 
         result = adapt_plan(before, after)
         changes = result["changes"]
 
         # Variables activity should change from 'assess first' to 'revise'
-        self.assertTrue(any("Topic 'variables' activity changed from 'assess first' to 'revise'" in c for c in changes))
+        self.assertTrue(any("Topic 'variables' activity changed from 'assess first' to 'practice'" in c for c in changes))
 
     def test_case_3_quiz_makes_topic_worse(self):
         """Case 3: Quiz makes a topic worse (good -> weak)."""
         before = self._load_learner("learner_mixed.json")
-        # In learner_mixed, data_types is 75 (good)
-        self.assertEqual(before["topics"]["data_types"]["score"], 75)
+        # In learner_mixed, functions is 70 (good)
+        self.assertEqual(before["mastery"]["functions"], 70)
 
         # Retake quiz score drops to 25% (weak)
-        after = simulate_quiz_result(before, "data_types", 25)
+        after = simulate_quiz_result(before, "functions", 25)
 
         result = adapt_plan(before, after)
         new_plan = result["plan"]
         changes = result["changes"]
 
         # data_types should now have 'relearn' activity
-        data_types_item = next((t for t in new_plan["recommended_topics"] if t["topic"] == "data_types"), None)
-        self.assertIsNotNone(data_types_item)
-        self.assertEqual(data_types_item["activity"], "relearn")
-        self.assertTrue(any("Topic 'data_types' activity changed" in c for c in changes))
+        functions_item = next((t for t in new_plan["recommended_topics"] if t["topic"] == "functions"), None)
+        self.assertIsNotNone(functions_item)
+        self.assertEqual(functions_item["activity"], "relearn")
+        self.assertTrue(any("Topic 'functions' activity changed" in c for c in changes))
 
     def test_case_4_prerequisite_unlocks_next_topic(self):
         """Case 4: Prerequisite becomes 'good' and unlocks dependent topic directly."""
         before = self._load_learner("learner_prereq_gap.json")
         # In learner_prereq_gap: conditions is null, loops is 33% (weak)
-        self.assertIsNone(before["topics"]["conditions"]["score"])
+        self.assertIsNone(before["mastery"]["conditions"])
 
         # Student assesses conditions and scores 78% (good)
         after = simulate_quiz_result(before, "conditions", 78)

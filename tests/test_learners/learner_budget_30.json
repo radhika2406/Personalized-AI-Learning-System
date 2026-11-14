@@ -1,12 +1,18 @@
 {
   "learner_id": "learner_budget_30",
+  "course": "python",
+  "goal": "Daily 30 min Python practice",
+  "level": "beginner",
   "daily_minutes": 30,
-  "topics": {
-    "variables": { "score": 85, "mastery_level": "strong" },
-    "data_types": { "score": 60, "mastery_level": "developing" },
-    "conditions": { "score": 35, "mastery_level": "weak" },
-    "loops": { "score": null, "mastery_level": "not assessed" },
-    "functions": { "score": null, "mastery_level": "not assessed" },
-    "lists": { "score": null, "mastery_level": "not assessed" }
-  }
+  "mastery": {
+    "variables": 85,
+    "conditions": 50,
+    "loops": 35,
+    "functions": null,
+    "lists": null,
+    "dictionaries": null
+  },
+  "weak_topics": ["loops"],
+  "strong_topics": ["variables"],
+  "not_assessed": ["functions", "lists", "dictionaries"]
 }
