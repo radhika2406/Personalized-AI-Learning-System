@@ -1,7 +1,18 @@
+
 from sqlalchemy.orm import Session
 
 from app.models.course import Course
 from app.models.course_enrollment import CourseEnrollment
+
+
+def _enrollment_response(enrollment, course):
+    return {
+        "id": enrollment.id,
+        "user_id": enrollment.user_id,
+        "course_id": enrollment.course_id,
+        "course_title": course.title,
+        "enrolled_at": enrollment.enrolled_at,
+    }
 
 
 def enroll_user_in_course(
@@ -33,16 +44,28 @@ def enroll_user_in_course(
     db.commit()
     db.refresh(enrollment)
 
-    return enrollment, None
+    return _enrollment_response(enrollment, course), None
 
 
 def get_user_enrollments(
     db: Session,
     user_id: int
 ):
-    return db.query(CourseEnrollment).filter(
-        CourseEnrollment.user_id == user_id
-    ).order_by(CourseEnrollment.enrolled_at.desc()).all()
+    results = (
+        db.query(CourseEnrollment, Course)
+        .join(
+            Course,
+            Course.id == CourseEnrollment.course_id
+        )
+        .filter(CourseEnrollment.user_id == user_id)
+        .order_by(CourseEnrollment.enrolled_at.desc())
+        .all()
+    )
+
+    return [
+        _enrollment_response(enrollment, course)
+        for enrollment, course in results
+    ]
 
 
 def get_user_course_enrollment(
@@ -50,10 +73,25 @@ def get_user_course_enrollment(
     user_id: int,
     course_id: int
 ):
-    return db.query(CourseEnrollment).filter(
-        CourseEnrollment.user_id == user_id,
-        CourseEnrollment.course_id == course_id
-    ).first()
+    result = (
+        db.query(CourseEnrollment, Course)
+        .join(
+            Course,
+            Course.id == CourseEnrollment.course_id
+        )
+        .filter(
+            CourseEnrollment.user_id == user_id,
+            CourseEnrollment.course_id == course_id
+        )
+        .first()
+    )
+
+    if not result:
+        return None
+
+    enrollment, course = result
+
+    return _enrollment_response(enrollment, course)
 
 
 def unenroll_user_from_course(
@@ -61,11 +99,10 @@ def unenroll_user_from_course(
     user_id: int,
     course_id: int
 ):
-    enrollment = get_user_course_enrollment(
-        db=db,
-        user_id=user_id,
-        course_id=course_id
-    )
+    enrollment = db.query(CourseEnrollment).filter(
+        CourseEnrollment.user_id == user_id,
+        CourseEnrollment.course_id == course_id
+    ).first()
 
     if not enrollment:
         return False

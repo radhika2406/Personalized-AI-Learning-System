@@ -156,9 +156,7 @@ function LearningPath() {
                   key={course.course_id}
                   value={course.course_id}
                 >
-                  {course.course_title ||
-                    course.title ||
-                    `Course ${course.course_id}`}
+                  {course.course_title}
                 </option>
               ))}
             </select>

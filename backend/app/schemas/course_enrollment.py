@@ -7,6 +7,7 @@ class CourseEnrollmentResponse(BaseModel):
     id: int
     user_id: int
     course_id: int
+    course_title: str
     enrolled_at: datetime
 
     model_config = {"from_attributes": True}
