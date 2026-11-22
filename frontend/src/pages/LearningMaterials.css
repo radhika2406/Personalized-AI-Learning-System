@@ -634,3 +634,179 @@ html[data-theme="light"] .materials-group-empty {
     animation: none;
   }
 }
+
+
+/* =========================================================
+   LEARNOVA DARK THEME — BLACK / NAVY / ELECTRIC BLUE
+   UI-only overrides. Existing light theme and responsive
+   layouts are intentionally preserved.
+========================================================= */
+
+html[data-theme="dark"] .learning-materials-page {
+  color: #f5f7fc;
+}
+
+/* Glass hero */
+html[data-theme="dark"] .materials-hero {
+  background:
+    radial-gradient(ellipse at 88% 12%, rgba(30, 82, 205, 0.20), transparent 42%),
+    linear-gradient(120deg, rgba(7, 12, 25, 0.78), rgba(5, 9, 19, 0.68));
+  border: 1px solid rgba(105, 151, 255, 0.27);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+}
+
+html[data-theme="dark"] .materials-eyebrow,
+html[data-theme="dark"] .materials-section-eyebrow {
+  color: #e1e9f8;
+}
+
+html[data-theme="dark"] .materials-hero h2,
+html[data-theme="dark"] .materials-heading h2,
+html[data-theme="dark"] .materials-topic-heading h3,
+html[data-theme="dark"] .material-card h4,
+html[data-theme="dark"] .materials-state h3 {
+  color: #f7f9ff;
+}
+
+html[data-theme="dark"] .materials-hero p,
+html[data-theme="dark"] .materials-heading p,
+html[data-theme="dark"] .materials-topic-heading p,
+html[data-theme="dark"] .material-card > p,
+html[data-theme="dark"] .materials-state p,
+html[data-theme="dark"] .materials-summary-card > span,
+html[data-theme="dark"] .materials-summary-card > p {
+  color: #aebbd2;
+}
+
+html[data-theme="dark"] .materials-hero-icon,
+html[data-theme="dark"] .materials-summary-icon,
+html[data-theme="dark"] .materials-topic-heading-icon,
+html[data-theme="dark"] .material-file-icon,
+html[data-theme="dark"] .materials-empty-icon {
+  background: rgba(22, 53, 125, 0.38);
+  border: 1px solid rgba(105, 155, 255, 0.24);
+  color: #c9ddff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Summary cards */
+html[data-theme="dark"] .materials-summary-card {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(25, 70, 170, 0.15), transparent 52%),
+    linear-gradient(145deg, rgba(15, 24, 46, 0.70), rgba(5, 10, 22, 0.68));
+  border-color: rgba(105, 145, 220, 0.22);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  backdrop-filter: blur(16px) saturate(130%);
+}
+
+html[data-theme="dark"] .materials-summary-card:hover {
+  border-color: rgba(105, 160, 255, 0.48);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.26), 0 0 22px rgba(23, 71, 209, 0.10);
+}
+
+html[data-theme="dark"] .materials-summary-card > strong {
+  color: #e4edff;
+}
+
+/* Topic group surfaces */
+html[data-theme="dark"] .materials-topic-section {
+  background: linear-gradient(145deg, rgba(13, 21, 40, 0.76), rgba(5, 9, 20, 0.78));
+  border-color: rgba(105, 145, 220, 0.22);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+html[data-theme="dark"] .materials-topic-heading {
+  border-bottom-color: rgba(132, 157, 205, 0.16);
+}
+
+html[data-theme="dark"] .materials-course-name {
+  color: #c8dcff;
+}
+
+/* Material cards */
+html[data-theme="dark"] .material-card {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(25, 70, 170, 0.14), transparent 48%),
+    linear-gradient(145deg, rgba(16, 25, 47, 0.76), rgba(6, 11, 24, 0.78));
+  border-color: rgba(105, 145, 220, 0.21);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  -webkit-backdrop-filter: blur(14px) saturate(125%);
+  backdrop-filter: blur(14px) saturate(125%);
+}
+
+html[data-theme="dark"] .material-card:hover {
+  border-color: rgba(105, 160, 255, 0.48);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28), 0 0 20px rgba(23, 71, 209, 0.09);
+}
+
+html[data-theme="dark"] .material-card.is-completed {
+  border-color: rgba(57, 201, 154, 0.30);
+}
+
+html[data-theme="dark"] .material-type {
+  border-color: rgba(105, 155, 255, 0.24);
+  background: rgba(22, 53, 125, 0.30);
+  color: #c8dcff;
+}
+
+html[data-theme="dark"] .material-status.pending {
+  border-color: rgba(132, 157, 205, 0.20);
+  background: rgba(19, 29, 51, 0.62);
+  color: #aebbd2;
+}
+
+html[data-theme="dark"] .material-status.completed,
+html[data-theme="dark"] .material-completed-button {
+  border-color: rgba(57, 201, 154, 0.24);
+  background: rgba(57, 201, 154, 0.10);
+  color: #63dcb5;
+}
+
+html[data-theme="dark"] .material-card-footer {
+  border-top-color: rgba(132, 157, 205, 0.16);
+}
+
+/* Navy-blue primary action */
+html[data-theme="dark"] .material-complete-button {
+  background: linear-gradient(135deg, #1747b8, #0b2b78);
+  border: 1px solid rgba(117, 163, 255, 0.40);
+  color: #ffffff;
+  box-shadow: 0 7px 18px rgba(10, 42, 122, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.13);
+}
+
+html[data-theme="dark"] .material-complete-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2058d6, #10378f);
+  box-shadow: 0 9px 22px rgba(18, 65, 175, 0.32), 0 0 18px rgba(63, 123, 255, 0.12);
+}
+
+html[data-theme="dark"] .material-complete-button:focus-visible {
+  outline: 2px solid #75a7ff;
+  outline-offset: 3px;
+}
+
+/* Empty, loading and error states */
+html[data-theme="dark"] .materials-group-empty,
+html[data-theme="dark"] .materials-state {
+  background: linear-gradient(145deg, rgba(14, 22, 42, 0.72), rgba(5, 9, 20, 0.78));
+  border-color: rgba(105, 145, 220, 0.24);
+  color: #aebbd2;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+html[data-theme="dark"] .materials-spinner {
+  color: #75a7ff;
+}
+
+html[data-theme="dark"] .materials-error {
+  border-color: rgba(255, 116, 132, 0.25);
+  background: rgba(130, 35, 53, 0.14);
+  color: #ffabb5;
+}
+
+/* Keep the existing mobile/tablet breakpoints and motion rules. */

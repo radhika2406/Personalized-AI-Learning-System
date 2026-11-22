@@ -1134,3 +1134,186 @@ html[data-theme="dark"] .student-profile-trigger:hover {
   z-index: 5;
   background: var(--color-surface);
 }
+
+/* =========================================================
+   LEARNOVA DASHBOARD - BLACK / NAVY DARK THEME
+   Visual-only overrides. Layout, navigation behaviour,
+   tablet breakpoints and mobile drawer behaviour are preserved.
+   Light theme rules above remain unchanged.
+========================================================= */
+
+html[data-theme="dark"] .dashboard-layout {
+  background: #000000;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .dashboard-main {
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(0, 0, 128, 0.13), transparent 38%),
+    #000000;
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .dashboard-layout .dashboard-sidebar {
+  background: #05050d !important;
+  border-right: 1px solid rgba(0, 0, 128, 0.55) !important;
+  box-shadow: 8px 0 28px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .dashboard-sidebar .sidebar-brand,
+html[data-theme="dark"] .dashboard-layout .mobile-brand {
+  color: #ffffff !important;
+  text-shadow: 0 0 16px rgba(0, 0, 128, 0.45);
+}
+
+html[data-theme="dark"] .dashboard-sidebar .brand-icon,
+html[data-theme="dark"] .dashboard-layout .mobile-brand .brand-icon {
+  background: linear-gradient(145deg, #000080 0%, #000000 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(90, 110, 255, 0.42);
+  box-shadow: 0 5px 18px rgba(0, 0, 128, 0.35);
+}
+
+html[data-theme="dark"] .dashboard-sidebar .sidebar-label {
+  color: #aeb8d4 !important;
+}
+
+html[data-theme="dark"] .dashboard-sidebar .nav-item {
+  color: #e8eaf2 !important;
+  border: 1px solid transparent;
+}
+
+html[data-theme="dark"] .dashboard-sidebar .nav-item:hover,
+html[data-theme="dark"] .dashboard-sidebar .nav-item.active {
+  background: linear-gradient(100deg, rgba(0, 0, 128, 0.42), rgba(0, 0, 0, 0.72)) !important;
+  color: #ffffff !important;
+  border-color: rgba(72, 91, 210, 0.28);
+  box-shadow: inset 3px 0 0 #3434bd, 0 5px 16px rgba(0, 0, 0, 0.18);
+}
+
+html[data-theme="dark"] .dashboard-sidebar .nav-item.active {
+  font-weight: 700;
+}
+
+html[data-theme="dark"] .dashboard-sidebar .nav-item.active svg,
+html[data-theme="dark"] .dashboard-sidebar .nav-item:hover svg {
+  color: #9daaff !important;
+  stroke: #9daaff !important;
+}
+
+html[data-theme="dark"] .dashboard-sidebar .logout-button {
+  background: #05050d !important;
+  color: #c7ccdc !important;
+  border-top: 1px solid rgba(0, 0, 128, 0.24);
+}
+
+html[data-theme="dark"] .dashboard-sidebar .logout-button:hover {
+  background: rgba(0, 0, 128, 0.28) !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .dashboard-header h1,
+html[data-theme="dark"] .dashboard-heading h1 {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .dashboard-header p {
+  color: #b8bfd2;
+}
+
+html[data-theme="dark"] .dashboard-layout .theme-toggle,
+html[data-theme="dark"] .dashboard-layout .mobile-menu-button,
+html[data-theme="dark"] .dashboard-layout .sidebar-close-button {
+  background: #080812;
+  color: #ffffff;
+  border-color: rgba(0, 0, 128, 0.58);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+html[data-theme="dark"] .dashboard-layout .theme-toggle:hover,
+html[data-theme="dark"] .dashboard-layout .mobile-menu-button:hover,
+html[data-theme="dark"] .dashboard-layout .sidebar-close-button:hover {
+  background: #000080;
+  color: #ffffff;
+  border-color: #4545c8;
+}
+
+html[data-theme="dark"] .dashboard-layout .student-profile-trigger {
+  background: #070710;
+  color: #ffffff;
+  border-color: rgba(0, 0, 128, 0.52);
+}
+
+html[data-theme="dark"] .dashboard-layout .student-profile-trigger:hover {
+  background: #0b0b1b;
+  border-color: #4545c8;
+  box-shadow: 0 0 0 3px rgba(0, 0, 128, 0.16);
+}
+
+html[data-theme="dark"] .dashboard-layout .student-avatar {
+  background: rgba(0, 0, 128, 0.38);
+  color: #ffffff;
+  border-color: rgba(110, 125, 255, 0.42);
+}
+
+html[data-theme="dark"] .dashboard-layout .student-greeting strong,
+html[data-theme="dark"] .dashboard-layout .profile-dropdown-heading strong {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .dashboard-layout .student-greeting small,
+html[data-theme="dark"] .dashboard-layout .profile-dropdown-heading small,
+html[data-theme="dark"] .dashboard-layout .profile-chevron {
+  color: #aeb8d4;
+}
+
+html[data-theme="dark"] .dashboard-layout .student-profile-dropdown {
+  background: #080812;
+  border-color: rgba(0, 0, 128, 0.58);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55), 0 0 22px rgba(0, 0, 128, 0.12);
+}
+
+html[data-theme="dark"] .dashboard-layout .profile-dropdown-divider {
+  background: rgba(148, 158, 195, 0.18);
+}
+
+html[data-theme="dark"] .dashboard-layout .profile-dropdown-item {
+  color: #e8eaf2;
+}
+
+html[data-theme="dark"] .dashboard-layout .profile-dropdown-item:hover {
+  background: rgba(0, 0, 128, 0.34);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .dashboard-layout .profile-dropdown-logout:hover {
+  color: #ff8585;
+}
+
+html[data-theme="dark"] .dashboard-layout .sidebar-backdrop {
+  background: rgba(0, 0, 0, 0.72);
+}
+
+/* Keep focus indicators visible against the black/navy surfaces. */
+html[data-theme="dark"] .dashboard-layout .theme-toggle:focus-visible,
+html[data-theme="dark"] .dashboard-layout .mobile-menu-button:focus-visible,
+html[data-theme="dark"] .dashboard-layout .sidebar-close-button:focus-visible,
+html[data-theme="dark"] .dashboard-layout .nav-item:focus-visible,
+html[data-theme="dark"] .dashboard-layout .logout-button:focus-visible,
+html[data-theme="dark"] .dashboard-layout .student-profile-trigger:focus-visible,
+html[data-theme="dark"] .dashboard-layout .profile-dropdown-item:focus-visible {
+  outline: 2px solid #777fff;
+  outline-offset: 3px;
+}
+
+/* Mobile drawer uses the same dark palette without changing its slide-in behaviour. */
+@media (max-width: 768px) {
+  html[data-theme="dark"] .dashboard-layout .dashboard-sidebar {
+    background: #05050d !important;
+    box-shadow: 14px 0 38px rgba(0, 0, 0, 0.58);
+  }
+
+  html[data-theme="dark"] .dashboard-layout .mobile-topbar {
+    color: #ffffff;
+  }
+}

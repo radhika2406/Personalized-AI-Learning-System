@@ -181,6 +181,11 @@ const handleLogout = () => {
     Features
   </a>
 
+  <a href="#about" onClick={() => setMenuOpen(false)}>
+    About
+  </a>
+
+
   <a href="#how-it-works" onClick={() => setMenuOpen(false)}>
     How It Works
   </a>
@@ -551,6 +556,139 @@ const handleLogout = () => {
                 <h3>Learn at Your Pace</h3>
                 <p>Explore courses, materials, and quizzes at your own pace.</p>
               </article>
+            </div>
+          </section>
+          <section className="home-about-section" id="about">
+            <div className="about-intro">
+              <div className="about-intro-content">
+                <span className="about-eyebrow">
+                  <Brain size={16} /> GET TO KNOW LEARNOVA
+                </span>
+
+                <h2>
+                  Education should adapt
+                  <br />
+                  <span>to you, not the other way around.</span>
+                </h2>
+
+                <p>
+                  Every learner is different. Learnova brings together AI-powered
+                  recommendations, personalized learning paths, and progress tracking
+                  to create a learning experience that moves at your pace.
+                </p>
+
+                <a href="#how-it-works" className="about-explore-link">
+                  Discover how it works <ArrowRight size={18} />
+                </a>
+              </div>
+
+              <div className="about-visual">
+                <div className="about-visual-glow" />
+
+                <div className="about-visual-card">
+                  <div className="about-visual-heading">
+                    <span className="about-visual-icon">
+                      <Brain size={24} />
+                    </span>
+                    <div>
+                      <strong>Your Learning Journey</strong>
+                      <p>Designed around your growth</p>
+                    </div>
+                  </div>
+
+                  <div className="about-journey">
+                    <div className="about-journey-item">
+                      <span className="about-journey-icon">
+                        <Target size={19} />
+                      </span>
+                      <div>
+                        <strong>Set Your Goals</strong>
+                        <p>Define what you want to learn</p>
+                      </div>
+                      <CheckCircle2 size={19} className="about-check" />
+                    </div>
+
+                    <div className="about-journey-line" />
+
+                    <div className="about-journey-item">
+                      <span className="about-journey-icon">
+                        <BookOpen size={19} />
+                      </span>
+                      <div>
+                        <strong>Learn Your Way</strong>
+                        <p>Explore personalized materials</p>
+                      </div>
+                      <CheckCircle2 size={19} className="about-check" />
+                    </div>
+
+                    <div className="about-journey-line" />
+
+                    <div className="about-journey-item">
+                      <span className="about-journey-icon">
+                        <ChartNoAxesCombined size={19} />
+                      </span>
+                      <div>
+                        <strong>Track Your Growth</strong>
+                        <p>Understand your progress</p>
+                      </div>
+                      <CheckCircle2 size={19} className="about-check" />
+                    </div>
+                  </div>
+
+                  <div className="about-visual-footer">
+                    <span><Layers3 size={16} /> One journey, your own pace</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="about-pillars-heading">
+              <span>WHAT MAKES US DIFFERENT</span>
+              <h3>More than just learning.</h3>
+              <p>A smarter way to understand, learn, and grow.</p>
+            </div>
+
+            <div className="about-pillars">
+              <article className="about-pillar-card">
+                <span className="about-pillar-icon">
+                  <Brain size={25} />
+                </span>
+                <span className="about-card-number">01</span>
+                <h3>AI-Powered Intelligence</h3>
+                <p>
+                  Smart recommendations help connect your learning goals
+                  with relevant courses and learning resources.
+                </p>
+              </article>
+
+              <article className="about-pillar-card">
+                <span className="about-pillar-icon">
+                  <Target size={25} />
+                </span>
+                <span className="about-card-number">02</span>
+                <h3>Personalized Learning</h3>
+                <p>
+                  Follow a learning experience shaped around your interests,
+                  goals, and individual pace.
+                </p>
+              </article>
+
+              <article className="about-pillar-card">
+                <span className="about-pillar-icon">
+                  <ChartNoAxesCombined size={25} />
+                </span>
+                <span className="about-card-number">03</span>
+                <h3>Progress That Matters</h3>
+                <p>
+                  Track quiz performance and topic mastery to understand
+                  your strengths and areas for improvement.
+                </p>
+              </article>
+            </div>
+
+            <div className="about-bottom-message">
+              <span>YOUR GOALS. YOUR PACE. YOUR FUTURE.</span>
+              <h3>Every step forward is progress.</h3>
             </div>
           </section>
 

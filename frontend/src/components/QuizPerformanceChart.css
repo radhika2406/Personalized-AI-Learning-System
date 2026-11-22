@@ -811,3 +811,65 @@ html[data-theme="light"] .quiz-chart-latest-dot {
     font-size: 19px !important;
   }
 }
+
+
+/* FINAL DARK CHART PALETTE — force the SVG itself to blue */
+html[data-theme="dark"] .quiz-performance-card {
+  background:
+    radial-gradient(ellipse at 88% 0%, rgba(23, 71, 209, 0.16), transparent 43%),
+    linear-gradient(135deg, rgba(13, 20, 39, 0.78), rgba(3, 7, 17, 0.76)) !important;
+  border: 1px solid rgba(101, 169, 255, 0.25) !important;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255,255,255,0.07) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+}
+html[data-theme="dark"] .quiz-chart-eyebrow,
+html[data-theme="dark"] .quiz-average strong { color: #e8efff !important; }
+html[data-theme="dark"] .quiz-chart-heading h2,
+html[data-theme="dark"] .quiz-chart-summary strong,
+html[data-theme="dark"] .quiz-metric strong { color: #f7f9ff !important; }
+html[data-theme="dark"] .quiz-chart-heading p,
+html[data-theme="dark"] .quiz-average span,
+html[data-theme="dark"] .quiz-chart-summary,
+html[data-theme="dark"] .quiz-chart-footer,
+html[data-theme="dark"] .quiz-metric div span,
+html[data-theme="dark"] .quiz-chart-axis-label { color: #aebbd2 !important; }
+html[data-theme="dark"] .quiz-chart-gridline { stroke: rgba(158, 184, 225, 0.16) !important; }
+
+/* Explicit SVG gradient overrides prevent old purple stops from winning. */
+html[data-theme="dark"] #quizLineGradient stop { stop-color: #1747D1 !important; }
+html[data-theme="dark"] #quizLineGradient stop:last-child { stop-color: #65A9FF !important; }
+html[data-theme="dark"] #quizAreaGradient stop { stop-color: #1747D1 !important; }
+html[data-theme="dark"] .quiz-chart-line {
+  stroke: #4F8CFF !important;
+  filter: drop-shadow(0 0 5px rgba(65, 132, 255, 0.48)) !important;
+}
+html[data-theme="dark"] .quiz-chart-area { fill: rgba(23, 71, 209, 0.18) !important; }
+html[data-theme="dark"] .quiz-chart-point-glow,
+html[data-theme="dark"] .quiz-chart-pulse {
+  fill: rgba(42, 103, 235, 0.22) !important;
+  stroke: rgba(101, 169, 255, 0.58) !important;
+}
+html[data-theme="dark"] .quiz-chart-point-dot,
+html[data-theme="dark"] .quiz-chart-latest-dot {
+  fill: #A9D0FF !important;
+  stroke: #1747D1 !important;
+  filter: drop-shadow(0 0 5px rgba(101, 169, 255, 0.38));
+}
+html[data-theme="dark"] .quiz-chart-legend-dot {
+  background: #65A9FF !important;
+  box-shadow: 0 0 9px rgba(101, 169, 255, 0.42) !important;
+}
+html[data-theme="dark"] .quiz-metric {
+  background: rgba(18, 30, 58, 0.52) !important;
+  border-color: rgba(101, 145, 220, 0.20) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+html[data-theme="dark"] .metric-icon {
+  background: rgba(28, 65, 145, 0.42) !important;
+  color: #c6ddff !important;
+  border: 1px solid rgba(101, 169, 255, 0.25);
+}
+html[data-theme="dark"] .quiz-metric .metric-positive { color: #54d6ad !important; }
+html[data-theme="dark"] .quiz-metric .metric-negative { color: #ff9ca8 !important; }

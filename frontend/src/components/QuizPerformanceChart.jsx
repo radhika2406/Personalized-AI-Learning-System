@@ -261,8 +261,8 @@ function QuizPerformanceChart() {
                   x2="1"
                   y2="0"
                 >
-                  <stop offset="0%" stopColor="#7053D6" />
-                  <stop offset="100%" stopColor="#B7A7F5" />
+                  <stop offset="0%" stopColor="#1747D1" />
+                  <stop offset="100%" stopColor="#65A9FF" />
                 </linearGradient>
 
                 <linearGradient
@@ -274,12 +274,12 @@ function QuizPerformanceChart() {
                 >
                   <stop
                     offset="0%"
-                    stopColor="#9277E5"
+                    stopColor="#1747D1"
                     stopOpacity="0.32"
                   />
                   <stop
                     offset="100%"
-                    stopColor="#9277E5"
+                    stopColor="#1747D1"
                     stopOpacity="0.015"
                   />
                 </linearGradient>
@@ -338,12 +338,14 @@ function QuizPerformanceChart() {
                     cy={points[points.length - 1].y}
                     r="11"
                     className="quiz-chart-pulse"
+                    style={{ fill: "rgba(23, 71, 209, 0.24)", stroke: "rgba(101, 169, 255, 0.55)" }}
                     />
                     <circle
                     cx={points[points.length - 1].x}
                     cy={points[points.length - 1].y}
                     r="4"
                     className="quiz-chart-latest-dot"
+                    style={{ fill: "#A9D0FF", stroke: "#1747D1", strokeWidth: 2 }}
                     />
                     </g>
                     )}
@@ -359,12 +361,14 @@ function QuizPerformanceChart() {
                     cy={point.y}
                     r="10"
                     className="quiz-chart-point-glow"
+                    style={{ fill: "rgba(23, 71, 209, 0.24)", stroke: "rgba(101, 169, 255, 0.42)" }}
                   />
                   <circle
                     cx={point.x}
                     cy={point.y}
                     r="5"
                     className="quiz-chart-point-dot"
+                    style={{ fill: "#A9D0FF", stroke: "#1747D1", strokeWidth: 2 }}
                   />
                   <title>
                     Quiz #{point.quizId} |{" "}

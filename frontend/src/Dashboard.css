@@ -1411,3 +1411,263 @@ html[data-theme="light"] .dashboard-main .empty-courses-button {
   background: linear-gradient(135deg, #a83255, #7f1d3a) !important;
   border-color: #7f1d3a !important;
 }
+
+
+/* =========================================================
+   LEARNOVA DASHBOARD — PREMIUM BLACK / NAVY DARK THEME
+   UI-only overrides. Existing layout, breakpoints, content,
+   data bindings, interactions and animations are preserved.
+   The light wine/burgundy theme above is intentionally untouched.
+========================================================= */
+
+html[data-theme="dark"] .dashboard-main {
+  color: #f7f8ff;
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(0, 0, 128, 0.10), transparent 34%),
+    #000000;
+}
+
+html[data-theme="dark"] .dashboard-main .dashboard-section-heading .section-eyebrow,
+html[data-theme="dark"] .dashboard-main .section-eyebrow {
+  color: #aebcff !important;
+}
+
+html[data-theme="dark"] .dashboard-main .dashboard-section-heading h2,
+html[data-theme="dark"] .dashboard-main .dashboard-section-heading p {
+  color: #f4f6ff;
+}
+
+html[data-theme="dark"] .dashboard-main .dashboard-section-heading p {
+  color: #aeb7ce;
+}
+
+/* Welcome banner — restrained navy illumination */
+html[data-theme="dark"] .dashboard-main section.welcome-banner {
+  background:
+    radial-gradient(ellipse at 88% 12%, rgba(35, 48, 160, 0.34), transparent 38%),
+    linear-gradient(118deg, #050509 0%, #080d25 58%, #101747 100%) !important;
+  border: 1px solid rgba(83, 103, 220, 0.38);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255,255,255,0.035);
+}
+
+html[data-theme="dark"] .dashboard-main section.welcome-banner::before {
+  background: rgba(0, 0, 128, 0.34);
+}
+
+html[data-theme="dark"] .dashboard-main .welcome-eyebrow {
+  color: #aebcff;
+}
+
+html[data-theme="dark"] .dashboard-main .welcome-banner h2 {
+  color: #ffffff;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.25);
+}
+
+html[data-theme="dark"] .dashboard-main .welcome-banner p {
+  color: #c0c8df;
+}
+
+html[data-theme="dark"] .dashboard-main .welcome-button,
+html[data-theme="dark"] .dashboard-main .empty-courses-button {
+  background: linear-gradient(135deg, #171f67, #000080) !important;
+  color: #ffffff;
+  border: 1px solid rgba(132, 148, 255, 0.38);
+  box-shadow: 0 8px 22px rgba(0, 0, 128, 0.28);
+}
+
+html[data-theme="dark"] .dashboard-main .welcome-button:hover,
+html[data-theme="dark"] .dashboard-main .empty-courses-button:hover {
+  background: linear-gradient(135deg, #222d88, #08089b) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 128, 0.38);
+}
+
+html[data-theme="dark"] .dashboard-main .welcome-icon-circle {
+  color: #c7d0ff;
+  background: rgba(0, 0, 128, 0.18);
+  border-color: rgba(139, 153, 255, 0.34);
+  box-shadow: 0 0 36px rgba(0, 0, 128, 0.25);
+}
+
+html[data-theme="dark"] .dashboard-main .welcome-decoration {
+  border-color: rgba(118, 135, 240, 0.20);
+}
+
+/* Statistics cards */
+html[data-theme="dark"] .dashboard-main .stat-card {
+  --stat-accent: #9eafff;
+  --stat-tint: rgba(0, 0, 128, 0.20);
+  background: linear-gradient(145deg, #0b0d19 0%, #10152b 100%);
+  color: #ffffff;
+  border: 1px solid rgba(105, 119, 177, 0.20);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+html[data-theme="dark"] .dashboard-main .stat-card:hover {
+  border-color: rgba(111, 130, 255, 0.55);
+  box-shadow: 0 17px 38px rgba(0, 0, 0, 0.34), 0 0 24px rgba(0, 0, 128, 0.13);
+  transform: translateY(-4px);
+}
+
+html[data-theme="dark"] .dashboard-main .stat-card p {
+  color: #b7c0d8;
+}
+
+html[data-theme="dark"] .dashboard-main .stat-card h2 {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .dashboard-main .stat-icon,
+html[data-theme="dark"] .dashboard-main .stat-icon.red,
+html[data-theme="dark"] .dashboard-main .stat-icon.pink,
+html[data-theme="dark"] .dashboard-main .stat-icon.orange,
+html[data-theme="dark"] .dashboard-main .stat-icon.purple,
+html[data-theme="dark"] .dashboard-main .stat-icon.blue {
+  background: rgba(0, 0, 128, 0.28) !important;
+  color: #b7c5ff !important;
+  border: 1px solid rgba(112, 132, 255, 0.24);
+}
+
+html[data-theme="dark"] .dashboard-main .stat-card-accent {
+  color: #8296ff;
+}
+
+/* Learning overview cards */
+html[data-theme="dark"] .dashboard-main .overview-stat-card {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(0, 0, 128, 0.20), transparent 46%),
+    linear-gradient(145deg, #0b0d19, #10152b);
+  border: 1px solid rgba(105, 119, 177, 0.22);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+html[data-theme="dark"] .dashboard-main .overview-stat-card:hover {
+  border-color: rgba(111, 130, 255, 0.52);
+  box-shadow: 0 17px 38px rgba(0, 0, 0, 0.34), 0 0 24px rgba(0, 0, 128, 0.13);
+}
+
+html[data-theme="dark"] .dashboard-main .overview-icon {
+  background: rgba(0, 0, 128, 0.30) !important;
+  color: #b7c5ff !important;
+  border: 1px solid rgba(112, 132, 255, 0.24);
+}
+
+html[data-theme="dark"] .dashboard-main .overview-tag {
+  color: #aebcff !important;
+}
+
+html[data-theme="dark"] .dashboard-main .overview-details strong {
+  color: #a9b8ff !important;
+}
+
+html[data-theme="dark"] .dashboard-main .overview-details h3 {
+  color: #f7f8ff;
+}
+
+html[data-theme="dark"] .dashboard-main .overview-details p {
+  color: #aeb7ce;
+}
+
+html[data-theme="dark"] .dashboard-main .mastery-progress-track {
+  background: #242a43;
+}
+
+html[data-theme="dark"] .dashboard-main .mastery-progress-fill {
+  background: linear-gradient(90deg, #000080, #526bdb) !important;
+  box-shadow: 0 0 12px rgba(55, 76, 190, 0.30);
+}
+
+/* Course cards */
+html[data-theme="dark"] .dashboard-main .my-courses-section .view-all-link {
+  color: #aebcff !important;
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .view-all-link:hover {
+  color: #d1d9ff !important;
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .my-course-card {
+  --course-accent: #3346a8;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(0, 0, 128, 0.20), transparent 45%),
+    linear-gradient(145deg, #0b0d19 0%, #10152b 100%);
+  border: 1px solid rgba(105, 119, 177, 0.22);
+  color: #f7f8ff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255,255,255,0.025);
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .my-course-card:hover {
+  border-color: rgba(111, 130, 255, 0.58);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38), 0 0 25px rgba(0, 0, 128, 0.16);
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .course-card-icon,
+html[data-theme="dark"] .dashboard-main .my-courses-section .empty-courses-icon {
+  background: rgba(0, 0, 128, 0.30);
+  border-color: rgba(112, 132, 255, 0.28);
+  color: #b7c5ff;
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .course-code {
+  color: #aebcff;
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .course-card-content h3 {
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .course-card-content p,
+html[data-theme="dark"] .dashboard-main .my-courses-section .empty-courses p {
+  color: #b5bfd7;
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .course-open-link {
+  background: linear-gradient(135deg, #171f67, #000080) !important;
+  border: 1px solid rgba(132, 148, 255, 0.36);
+  color: #ffffff;
+  box-shadow: 0 7px 18px rgba(0, 0, 128, 0.25);
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .course-open-link:hover {
+  background: linear-gradient(135deg, #222d88, #08089b) !important;
+  box-shadow: 0 10px 23px rgba(0, 0, 128, 0.38);
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .empty-courses {
+  background: #0b0d19;
+  border-color: rgba(105, 119, 177, 0.28);
+}
+
+html[data-theme="dark"] .dashboard-main .my-courses-section .empty-courses h3 {
+  color: #ffffff;
+}
+
+/* Loading, empty and error states */
+html[data-theme="dark"] .dashboard-main .dashboard-state {
+  color: #c2cbe1;
+  background: #0b0d19;
+  border-color: rgba(105, 119, 177, 0.22);
+}
+
+html[data-theme="dark"] .dashboard-main .dashboard-error {
+  color: #ff929e;
+}
+
+/* Keyboard focus remains visible on dark surfaces */
+html[data-theme="dark"] .dashboard-main a:focus-visible,
+html[data-theme="dark"] .dashboard-main button:focus-visible {
+  outline: 2px solid #9aabff;
+  outline-offset: 3px;
+}
+
+/* Mobile/tablet sizing and existing responsive rules are retained. */
+@media (max-width: 900px) {
+  html[data-theme="dark"] .dashboard-main section.welcome-banner {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  html[data-theme="dark"] .dashboard-main section.welcome-banner {
+    padding: 25px 20px;
+  }
+}

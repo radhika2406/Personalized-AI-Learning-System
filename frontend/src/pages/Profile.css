@@ -586,3 +586,196 @@ html[data-theme="light"] .profile-avatar {
     flex-direction: column;
   }
 }
+
+
+/* =========================================
+   LEARNOVA - LATEST DARK THEME
+   Black / Deep Navy / Electric Blue
+   Light theme remains unchanged.
+========================================= */
+
+html[data-theme="dark"] .profile-page {
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] .profile-hero,
+html[data-theme="dark"] .profile-panel,
+html[data-theme="dark"] .profile-loading,
+html[data-theme="dark"] .profile-unavailable {
+  background:
+    radial-gradient(ellipse at top left, rgba(0, 0, 128, 0.16), transparent 58%),
+    linear-gradient(145deg, rgba(16, 21, 41, 0.96), rgba(5, 8, 18, 0.98));
+  border: 1px solid rgba(96, 165, 250, 0.16);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(14px);
+}
+
+html[data-theme="dark"] .profile-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-theme="dark"] .profile-hero::before,
+html[data-theme="dark"] .profile-panel::before {
+  content: "";
+  display: block;
+  height: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, transparent, #1d4ed8, #60a5fa, transparent);
+  opacity: 0.75;
+}
+
+html[data-theme="dark"] .profile-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-theme="dark"] .profile-avatar {
+  color: #ffffff;
+  background: linear-gradient(145deg, #000080, #102a63 62%, #2563eb);
+  border-color: rgba(96, 165, 250, 0.8);
+  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.22), 0 0 26px rgba(37, 99, 235, 0.2);
+}
+
+html[data-theme="dark"] .profile-hero-info h2,
+html[data-theme="dark"] .profile-panel-header h3,
+html[data-theme="dark"] .profile-info-value,
+html[data-theme="dark"] .profile-form-group label {
+  color: #f8fafc;
+}
+
+html[data-theme="dark"] .profile-hero-info p,
+html[data-theme="dark"] .profile-panel-header p,
+html[data-theme="dark"] .profile-info-label,
+html[data-theme="dark"] .profile-loading,
+html[data-theme="dark"] .profile-unavailable {
+  color: #aab5ca;
+}
+
+html[data-theme="dark"] .profile-hero-tag,
+html[data-theme="dark"] .profile-panel-icon {
+  color: #93c5fd;
+  background: linear-gradient(135deg, rgba(0, 0, 128, 0.42), rgba(30, 64, 175, 0.2));
+  border: 1px solid rgba(96, 165, 250, 0.24);
+}
+
+html[data-theme="dark"] .profile-panel-icon {
+  box-shadow: 0 5px 16px rgba(0, 0, 128, 0.18);
+}
+
+html[data-theme="dark"] .profile-panel-header {
+  border-bottom-color: rgba(148, 163, 184, 0.15);
+}
+
+html[data-theme="dark"] .profile-info-item {
+  background: linear-gradient(135deg, rgba(17, 27, 52, 0.88), rgba(10, 15, 30, 0.92));
+  border-color: rgba(148, 163, 184, 0.14);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+html[data-theme="dark"] .profile-info-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(96, 165, 250, 0.38);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+html[data-theme="dark"] .profile-preference-group-title {
+  color: #93c5fd;
+  border-bottom-color: rgba(96, 165, 250, 0.2);
+}
+
+html[data-theme="dark"] .profile-edit-button,
+html[data-theme="dark"] .profile-save-button,
+html[data-theme="dark"] .profile-photo-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #000080, #1d4ed8 72%, #2563eb);
+  border: 1px solid rgba(96, 165, 250, 0.36);
+  box-shadow: 0 7px 20px rgba(0, 0, 128, 0.28);
+}
+
+html[data-theme="dark"] .profile-edit-button:hover,
+html[data-theme="dark"] .profile-save-button:hover:not(:disabled),
+html[data-theme="dark"] .profile-photo-button:hover:not(:disabled) {
+  filter: brightness(1.16);
+  box-shadow: 0 9px 25px rgba(37, 99, 235, 0.3);
+}
+
+html[data-theme="dark"] .profile-form-group input,
+html[data-theme="dark"] .profile-form-group select,
+html[data-theme="dark"] .profile-form-group textarea {
+  color: #f8fafc;
+  background: rgba(7, 12, 27, 0.9);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+html[data-theme="dark"] .profile-form-group input::placeholder,
+html[data-theme="dark"] .profile-form-group textarea::placeholder {
+  color: #7f8ba3;
+}
+
+html[data-theme="dark"] .profile-form-group input:focus,
+html[data-theme="dark"] .profile-form-group select:focus,
+html[data-theme="dark"] .profile-form-group textarea:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.17), 0 0 18px rgba(37, 99, 235, 0.08);
+}
+
+html[data-theme="dark"] .profile-form-group select option {
+  color: #f8fafc;
+  background: #101529;
+}
+
+html[data-theme="dark"] .profile-cancel-button,
+html[data-theme="dark"] .profile-photo-remove {
+  color: #cbd5e1;
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(148, 163, 184, 0.22);
+}
+
+html[data-theme="dark"] .profile-cancel-button:hover,
+html[data-theme="dark"] .profile-photo-remove:hover {
+  color: #93c5fd;
+  border-color: #3b82f6;
+}
+
+html[data-theme="dark"] .profile-photo-remove:hover {
+  color: #fda4af;
+  border-color: #fb7185;
+}
+
+html[data-theme="dark"] .profile-photo-button:focus-visible,
+html[data-theme="dark"] .profile-photo-remove:focus-visible,
+html[data-theme="dark"] .profile-edit-button:focus-visible,
+html[data-theme="dark"] .profile-save-button:focus-visible,
+html[data-theme="dark"] .profile-cancel-button:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+html[data-theme="dark"] .profile-message {
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(52, 211, 153, 0.24);
+}
+
+html[data-theme="dark"] .profile-error {
+  color: #fda4af;
+  background: rgba(225, 29, 72, 0.1);
+  border-color: rgba(251, 113, 133, 0.24);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="dark"] .profile-info-item,
+  html[data-theme="dark"] .profile-edit-button,
+  html[data-theme="dark"] .profile-save-button,
+  html[data-theme="dark"] .profile-photo-button {
+    transition: none;
+  }
+
+  html[data-theme="dark"] .profile-info-item:hover {
+    transform: none;
+  }
+}

@@ -1682,3 +1682,1013 @@
   color: #FFC400;
   stroke: #FFC400;
 }
+
+
+/* =========================================
+   ABOUT SECTION
+========================================= */
+
+.home-about-section {
+  position: relative;
+  padding: 110px 7%;
+  overflow: hidden;
+}
+
+/* Introduction layout */
+
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 75px;
+  max-width: 1250px;
+  margin: 0 auto 110px;
+}
+
+.about-intro-content {
+  max-width: 590px;
+}
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 1.3px;
+  color: var(--about-accent);
+  background: var(--about-soft);
+  border: 1px solid var(--about-border);
+}
+
+.about-intro-content h2 {
+  margin: 25px 0 20px;
+  font-size: clamp(32px, 4vw, 53px);
+  line-height: 1.16;
+  letter-spacing: -1.8px;
+  color: var(--about-heading);
+}
+
+.about-intro-content h2 span {
+  color: var(--about-accent);
+}
+
+.about-intro-content > p {
+  max-width: 530px;
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--about-muted);
+}
+
+.about-explore-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  font-weight: 700;
+  color: var(--about-accent);
+  text-decoration: none;
+  transition: gap 0.25s ease;
+}
+
+.about-explore-link:hover {
+  gap: 16px;
+}
+
+/* Visual learning journey */
+
+.about-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 390px;
+}
+
+.about-visual-glow {
+  position: absolute;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: var(--about-glow);
+  filter: blur(65px);
+}
+
+.about-visual-card {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  padding: 30px;
+  border: 1px solid var(--about-border);
+  border-radius: 24px;
+  background: var(--about-card);
+  box-shadow: 0 25px 70px var(--about-shadow);
+}
+
+.about-visual-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--about-border);
+}
+
+.about-visual-icon,
+.about-journey-icon,
+.about-pillar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--about-accent);
+  background: var(--about-soft);
+  border: 1px solid var(--about-border);
+}
+
+.about-visual-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+}
+
+.about-visual-heading strong {
+  color: var(--about-heading);
+  font-size: 17px;
+}
+
+.about-visual-heading p,
+.about-journey-item p {
+  margin: 5px 0 0;
+  color: var(--about-muted);
+  font-size: 12px;
+}
+
+.about-journey {
+  padding-top: 24px;
+}
+
+.about-journey-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.about-journey-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+}
+
+.about-journey-item strong {
+  color: var(--about-heading);
+  font-size: 14px;
+}
+
+.about-check {
+  margin-left: auto;
+  color: var(--about-accent);
+}
+
+.about-journey-line {
+  height: 25px;
+  width: 1px;
+  margin-left: 20px;
+  border-left: 1px dashed var(--about-accent);
+  opacity: 0.65;
+}
+
+.about-visual-footer {
+  margin-top: 25px;
+  padding-top: 17px;
+  border-top: 1px solid var(--about-border);
+}
+
+.about-visual-footer span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--about-muted);
+}
+
+/* Three learning pillars */
+
+.about-pillars-heading {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.about-pillars-heading > span,
+.about-bottom-message > span {
+  color: var(--about-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.about-pillars-heading h3 {
+  margin: 13px 0 10px;
+  color: var(--about-heading);
+  font-size: clamp(26px, 3vw, 36px);
+}
+
+.about-pillars-heading p {
+  color: var(--about-muted);
+  font-size: 15px;
+}
+
+.about-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 1250px;
+  margin: auto;
+}
+
+.about-pillar-card {
+  position: relative;
+  padding: 30px;
+  min-height: 235px;
+  border-radius: 20px;
+  border: 1px solid var(--about-border);
+  background: var(--about-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-pillar-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 18px 40px var(--about-shadow);
+}
+
+.about-pillar-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+}
+
+.about-card-number {
+  position: absolute;
+  top: 32px;
+  right: 30px;
+  color: var(--about-muted);
+  opacity: 0.55;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.about-pillar-card h3 {
+  margin: 25px 0 12px;
+  color: var(--about-heading);
+  font-size: 19px;
+}
+
+.about-pillar-card p {
+  margin: 0;
+  color: var(--about-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* Closing message */
+
+.about-bottom-message {
+  max-width: 1250px;
+  margin: 75px auto 0;
+  padding: 42px 25px;
+  text-align: center;
+  border: 1px solid var(--about-border);
+  border-radius: 22px;
+  background: var(--about-soft);
+}
+
+.about-bottom-message h3 {
+  margin: 13px 0 0;
+  color: var(--about-heading);
+  font-size: clamp(23px, 3vw, 34px);
+}
+
+/* Dark theme */
+
+
+/* Dark theme - Learnova black and gold palette */
+
+.home-page[data-theme="dark"] {
+  --about-heading: #ffffff;
+  --about-muted: #b8b8c2;
+  --about-accent: #ffc400;
+  --about-soft: rgba(255, 196, 0, 0.08);
+  --about-card: #141414;
+  --about-border: rgba(255, 255, 255, 0.10);
+  --about-glow: rgba(255, 196, 0, 0.12);
+  --about-shadow: rgba(0, 0, 0, 0.35);
+}
+
+
+/* Light theme */
+
+.home-page[data-theme="light"] {
+  --about-heading: #321827;
+  --about-muted: #786572;
+  --about-accent: #8b3154;
+  --about-soft: rgba(139, 49, 84, 0.07);
+  --about-card: #fffafc;
+  --about-border: rgba(139, 49, 84, 0.15);
+  --about-glow: rgba(190, 95, 137, 0.22);
+  --about-shadow: rgba(90, 35, 60, 0.10);
+}
+
+/* Responsive layout */
+
+@media (max-width: 900px) {
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .about-intro-content {
+    max-width: 700px;
+  }
+
+  .about-visual {
+    min-height: 350px;
+  }
+
+  .about-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .home-about-section {
+    padding: 75px 6%;
+  }
+
+  .about-intro {
+    margin-bottom: 75px;
+  }
+
+  .about-intro-content h2 {
+    letter-spacing: -1px;
+  }
+
+  .about-visual-card {
+    padding: 22px 18px;
+  }
+
+  .about-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .about-pillar-card {
+    min-height: auto;
+  }
+
+  .about-bottom-message {
+    margin-top: 50px;
+    padding: 32px 18px;
+  }
+}
+
+/* ================================================================
+   LEARNOVA HOMEPAGE — REFINED DARK THEME
+   Midnight Navy • Electric Violet • Soft Cyan
+   This block intentionally targets dark mode only. The light theme
+   above remains unchanged.
+================================================================ */
+
+.home-page[data-theme="dark"] {
+  --home-bg: #0b1020;
+  --home-surface: #111a2e;
+  --home-surface-2: #17233b;
+  --home-text: #f4f7ff;
+  --home-muted: #a4b0c6;
+  --home-primary: #9b8cff;
+  --home-secondary: #6f8cff;
+  --home-accent: #62d6e8;
+  --home-border: rgba(164, 181, 218, 0.15);
+  --home-card: rgba(17, 26, 46, 0.88);
+  color: var(--home-text);
+  background:
+    radial-gradient(ellipse at 12% 5%, rgba(93, 83, 190, 0.19), transparent 34%),
+    radial-gradient(ellipse at 88% 28%, rgba(46, 139, 174, 0.12), transparent 32%),
+    linear-gradient(145deg, #0b1020 0%, #0d1528 48%, #0a1222 100%);
+}
+
+.home-page[data-theme="dark"]::before {
+  background-image:
+    linear-gradient(rgba(154, 169, 211, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(154, 169, 211, 0.035) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+.home-page[data-theme="dark"]::after {
+  display: block;
+  width: 720px;
+  height: 720px;
+  top: 320px;
+  right: -430px;
+  background: rgba(91, 91, 210, 0.13);
+  filter: blur(125px);
+}
+
+.home-page[data-theme="dark"] .home-navbar {
+  border-color: rgba(164, 181, 218, 0.13);
+}
+
+.home-page[data-theme="dark"] .home-brand {
+  color: #f4f7ff;
+}
+
+.home-page[data-theme="dark"] .home-brand-icon {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7668e8, #397fbd);
+  border: 1px solid rgba(187, 190, 255, 0.25);
+  box-shadow: 0 8px 26px rgba(91, 104, 220, 0.25);
+}
+
+.home-page[data-theme="dark"] .home-brand-icon svg {
+  color: #ffffff;
+  stroke: currentColor;
+}
+
+.home-page[data-theme="dark"] .home-nav-links a {
+  color: #aab6cc;
+  transition: color 0.2s ease;
+}
+
+.home-page[data-theme="dark"] .home-nav-links a:hover,
+.home-page[data-theme="dark"] .home-login-button:hover {
+  color: #a99cff;
+}
+
+.home-page[data-theme="dark"] .home-theme-toggle {
+  color: #dce5f7;
+  background: rgba(22, 34, 57, 0.82);
+  border-color: rgba(164, 181, 218, 0.19);
+}
+
+.home-page[data-theme="dark"] .home-theme-toggle:hover {
+  color: #a99cff;
+  border-color: rgba(155, 140, 255, 0.58);
+  background: rgba(91, 82, 170, 0.18);
+}
+
+.home-page[data-theme="dark"] .home-login-button {
+  color: #e6ecf8;
+}
+
+.home-page[data-theme="dark"] .home-signup-button,
+.home-page[data-theme="dark"] .home-primary-button {
+  color: #ffffff;
+  border: 1px solid rgba(176, 164, 255, 0.35);
+  background: linear-gradient(115deg, #7566df 0%, #557fe0 55%, #3d9bb6 100%);
+  box-shadow: 0 10px 28px rgba(82, 100, 204, 0.25);
+}
+
+.home-page[data-theme="dark"] .home-signup-button:hover,
+.home-page[data-theme="dark"] .home-primary-button:hover {
+  color: #ffffff;
+  background: linear-gradient(115deg, #8879ef 0%, #638fe9 55%, #4aabc4 100%);
+  border-color: rgba(194, 187, 255, 0.58);
+  box-shadow: 0 14px 34px rgba(82, 100, 204, 0.34);
+}
+
+.home-page[data-theme="dark"] .home-user-greeting {
+  color: #aebbd1;
+}
+
+.home-page[data-theme="dark"] .home-mobile-menu {
+  color: #eaf0ff;
+}
+
+.home-page[data-theme="dark"] .home-hero {
+  isolation: isolate;
+}
+
+.home-page[data-theme="dark"] .home-hero-content h1 {
+  color: #f5f7ff;
+}
+
+.home-page[data-theme="dark"] .home-hero-content h1 span {
+  background: linear-gradient(100deg, #b4a7ff 0%, #8299ff 52%, #69d8e8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-page[data-theme="dark"] .home-hero-badge {
+  color: #c9c3ff;
+  background: rgba(126, 111, 226, 0.12);
+  border-color: rgba(165, 151, 255, 0.24);
+}
+
+.home-page[data-theme="dark"] .home-hero-description {
+  color: #aab6cc;
+}
+
+.home-page[data-theme="dark"] .home-secondary-button {
+  color: #e8edfb;
+  background: rgba(20, 32, 54, 0.72);
+  border-color: rgba(164, 181, 218, 0.2);
+}
+
+.home-page[data-theme="dark"] .home-secondary-button:hover {
+  color: #c4bbff;
+  background: rgba(112, 99, 202, 0.14);
+  border-color: rgba(155, 140, 255, 0.48);
+}
+
+.home-page[data-theme="dark"] .home-art-glow {
+  background: linear-gradient(125deg, #6256d8, #397fbd, #48c2cf);
+  opacity: 0.22;
+  filter: blur(88px);
+}
+
+.home-page[data-theme="dark"] .home-spiral-image {
+  filter: drop-shadow(0 28px 48px rgba(42, 58, 130, 0.28));
+}
+
+.home-page[data-theme="dark"] .home-hero-highlights {
+  border-color: rgba(164, 181, 218, 0.15);
+}
+
+.home-page[data-theme="dark"] .home-highlight-icon {
+  color: #b8b0ff;
+  background: linear-gradient(145deg, rgba(112, 99, 202, 0.18), rgba(53, 137, 166, 0.12));
+  border-color: rgba(155, 140, 255, 0.22);
+}
+
+.home-page[data-theme="dark"] .home-highlight strong {
+  color: #edf1ff;
+}
+
+.home-page[data-theme="dark"] .home-highlight p {
+  color: #9eabc2;
+}
+
+.home-page[data-theme="dark"] .home-section-heading > span,
+.home-page[data-theme="dark"] .category-card-label {
+  color: #a99cff;
+}
+
+.home-page[data-theme="dark"] .home-section-heading h2 {
+  color: #f2f5ff;
+}
+
+.home-page[data-theme="dark"] .home-section-heading p {
+  color: #a4b0c6;
+}
+
+.home-page[data-theme="dark"] .home-feature-card,
+.home-page[data-theme="dark"] .home-course-card,
+.home-page[data-theme="dark"] .home-steps-grid article,
+.home-page[data-theme="dark"] .home-stat-card,
+.home-page[data-theme="dark"] .home-empty-state {
+  background: linear-gradient(145deg, rgba(20, 31, 53, 0.94), rgba(15, 25, 44, 0.94));
+  border-color: rgba(164, 181, 218, 0.15);
+  box-shadow: 0 14px 38px rgba(2, 8, 22, 0.16);
+}
+
+.home-page[data-theme="dark"] .home-feature-card:hover,
+.home-page[data-theme="dark"] .home-course-card:hover,
+.home-page[data-theme="dark"] .home-steps-grid article:hover,
+.home-page[data-theme="dark"] .about-pillar-card:hover {
+  border-color: rgba(155, 140, 255, 0.43);
+  box-shadow: 0 20px 46px rgba(2, 8, 22, 0.3), 0 0 24px rgba(112, 99, 202, 0.08);
+}
+
+.home-page[data-theme="dark"] .home-feature-card > svg,
+.home-page[data-theme="dark"] .home-stat-card svg,
+.home-page[data-theme="dark"] .home-empty-state > svg {
+  color: #a99cff;
+}
+
+.home-page[data-theme="dark"] .home-feature-card h3,
+.home-page[data-theme="dark"] .home-course-card h3,
+.home-page[data-theme="dark"] .home-steps-grid h3,
+.home-page[data-theme="dark"] .home-stat-card strong,
+.home-page[data-theme="dark"] .home-empty-state h3 {
+  color: #edf1ff;
+}
+
+.home-page[data-theme="dark"] .home-feature-card p,
+.home-page[data-theme="dark"] .home-course-card p,
+.home-page[data-theme="dark"] .home-steps-grid p,
+.home-page[data-theme="dark"] .home-stat-card span,
+.home-page[data-theme="dark"] .home-empty-state p {
+  color: #a4b0c6;
+}
+
+.home-page[data-theme="dark"] .home-steps-grid article > strong {
+  background: linear-gradient(120deg, #b4a7ff, #69d8e8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-page[data-theme="dark"] .home-dashboard-link,
+.home-page[data-theme="dark"] .home-course-card a,
+.home-page[data-theme="dark"] .category-explore,
+.home-page[data-theme="dark"] .about-explore-link {
+  color: #a99cff;
+}
+
+.home-page[data-theme="dark"] .home-dashboard-link:hover,
+.home-page[data-theme="dark"] .home-course-card a:hover,
+.home-page[data-theme="dark"] .category-explore:hover,
+.home-page[data-theme="dark"] .about-explore-link:hover {
+  color: #70d8e7;
+}
+
+.home-page[data-theme="dark"] .category-card {
+  background: linear-gradient(145deg, rgba(20, 31, 53, 0.97), rgba(14, 24, 43, 0.97));
+  border-color: rgba(164, 181, 218, 0.16);
+}
+
+.home-page[data-theme="dark"] .category-card:hover {
+  border-color: rgba(155, 140, 255, 0.45);
+}
+
+.home-page[data-theme="dark"] .category-image-overlay {
+  background: linear-gradient(to top, rgba(7, 13, 28, 0.66), transparent 70%);
+}
+
+.home-page[data-theme="dark"] .category-card-content h3 {
+  color: #f0f3ff;
+}
+
+.home-page[data-theme="dark"] .category-card-content p,
+.home-page[data-theme="dark"] .category-card-footer > span:first-child {
+  color: #a4b0c6;
+}
+
+.home-page[data-theme="dark"] .category-card-footer {
+  border-color: rgba(164, 181, 218, 0.14);
+}
+
+.home-page[data-theme="dark"] .home-footer {
+  border-color: rgba(164, 181, 218, 0.14);
+}
+
+.home-page[data-theme="dark"] .home-footer p {
+  color: #9eabc2;
+}
+
+/* About section — align its visual system with the new dark palette. */
+.home-page[data-theme="dark"] {
+  --about-heading: #f2f5ff;
+  --about-muted: #a4b0c6;
+  --about-accent: #a99cff;
+  --about-soft: rgba(126, 111, 226, 0.11);
+  --about-card: rgba(18, 29, 50, 0.94);
+  --about-border: rgba(164, 181, 218, 0.16);
+  --about-glow: rgba(91, 105, 218, 0.2);
+  --about-shadow: rgba(2, 8, 22, 0.34);
+}
+
+.home-page[data-theme="dark"] .about-intro-content h2 span {
+  color: #76d5e6;
+}
+
+.home-page[data-theme="dark"] .about-visual-card,
+.home-page[data-theme="dark"] .about-pillar-card {
+  background: linear-gradient(145deg, rgba(20, 31, 53, 0.96), rgba(14, 24, 43, 0.96));
+  border-color: rgba(164, 181, 218, 0.16);
+  box-shadow: 0 22px 58px rgba(2, 8, 22, 0.23);
+}
+
+.home-page[data-theme="dark"] .about-visual-icon,
+.home-page[data-theme="dark"] .about-journey-icon,
+.home-page[data-theme="dark"] .about-pillar-icon {
+  color: #b8b0ff;
+  background: rgba(126, 111, 226, 0.13);
+  border-color: rgba(155, 140, 255, 0.2);
+}
+
+.home-page[data-theme="dark"] .about-visual-heading strong,
+.home-page[data-theme="dark"] .about-journey-item strong,
+.home-page[data-theme="dark"] .about-pillar-card h3,
+.home-page[data-theme="dark"] .about-pillars-heading h3,
+.home-page[data-theme="dark"] .about-bottom-message h3 {
+  color: #edf1ff;
+}
+
+.home-page[data-theme="dark"] .about-check {
+  color: #69d8c5;
+}
+
+.home-page[data-theme="dark"] .about-journey-line {
+  border-left-color: rgba(105, 216, 197, 0.62);
+}
+
+.home-page[data-theme="dark"] .about-bottom-message {
+  background: linear-gradient(120deg, rgba(105, 91, 198, 0.13), rgba(48, 135, 159, 0.09));
+  border-color: rgba(164, 181, 218, 0.17);
+}
+
+.home-page[data-theme="dark"] .about-pillars-heading > span,
+.home-page[data-theme="dark"] .about-bottom-message > span {
+  color: #a99cff;
+}
+
+/* Mobile navigation panel */
+@media (max-width: 760px) {
+  .home-page[data-theme="dark"] .home-nav-links {
+    background: rgba(15, 25, 44, 0.98);
+    border-color: rgba(164, 181, 218, 0.18);
+    box-shadow: 0 18px 42px rgba(2, 8, 22, 0.35);
+    backdrop-filter: blur(18px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-page[data-theme="dark"] .home-feature-card,
+  .home-page[data-theme="dark"] .home-course-card,
+  .home-page[data-theme="dark"] .home-steps-grid article,
+  .home-page[data-theme="dark"] .home-stat-card,
+  .home-page[data-theme="dark"] .about-pillar-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+}
+
+
+/* =========================================================
+   LEANOVA DARK THEME — BLACK + NAVY BLUE
+   Restrained navy accents, deep black surfaces, white text.
+   This block is dark-theme-only; the light theme is untouched.
+========================================================= */
+.home-page[data-theme="dark"] {
+  --home-bg: #000000;
+  --home-surface: #080b14;
+  --home-surface-2: #0c1020;
+  --home-text: #ffffff;
+  --home-muted: #c1c8d6;
+  --home-primary: #000080;
+  --home-secondary: #2447a8;
+  --home-accent: #5d8dff;
+  --home-border: rgba(112, 145, 220, 0.22);
+  --home-card: rgba(8, 12, 25, 0.94);
+  color: #ffffff;
+  background: #000000;
+}
+
+.home-page[data-theme="dark"]::before {
+  background-image:
+    linear-gradient(rgba(76, 112, 190, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(76, 112, 190, 0.045) 1px, transparent 1px);
+  background-size: 54px 54px;
+  opacity: 0.72;
+}
+
+.home-page[data-theme="dark"]::after {
+  background: rgba(0, 0, 128, 0.23);
+  opacity: 0.8;
+  filter: blur(135px);
+}
+
+.home-page[data-theme="dark"] .home-navbar,
+.home-page[data-theme="dark"] .home-footer {
+  border-color: rgba(91, 132, 220, 0.25);
+}
+
+.home-page[data-theme="dark"] .home-navbar {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
+}
+
+.home-page[data-theme="dark"] .home-brand {
+  color: #ffffff;
+  text-shadow: 0 2px 18px rgba(40, 82, 180, 0.22);
+}
+
+/* A crisp blue edge and white brain mark keep the Learnova logo sharp. */
+.home-page[data-theme="dark"] .home-brand-icon {
+  color: #ffffff;
+  background: linear-gradient(145deg, #000080 0%, #071b55 58%, #000000 100%);
+  border: 1px solid rgba(120, 163, 255, 0.7);
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 128, 0.24),
+    0 7px 22px rgba(0, 0, 128, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.home-page[data-theme="dark"] .home-brand-icon svg {
+  color: #ffffff;
+  stroke: #ffffff;
+  filter: drop-shadow(0 0 5px rgba(120, 163, 255, 0.5));
+}
+
+.home-page[data-theme="dark"] .home-nav-links a,
+.home-page[data-theme="dark"] .home-login-button,
+.home-page[data-theme="dark"] .home-mobile-menu {
+  color: #f5f7ff;
+}
+
+.home-page[data-theme="dark"] .home-nav-links a:hover,
+.home-page[data-theme="dark"] .home-login-button:hover {
+  color: #78a6ff;
+}
+
+.home-page[data-theme="dark"] .home-theme-toggle,
+.home-page[data-theme="dark"] .home-secondary-button {
+  color: #ffffff;
+  background: linear-gradient(145deg, #090d18, #000000);
+  border: 1px solid rgba(105, 145, 230, 0.35);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.38);
+}
+
+.home-page[data-theme="dark"] .home-theme-toggle:hover,
+.home-page[data-theme="dark"] .home-secondary-button:hover {
+  color: #ffffff;
+  border-color: #527fe0;
+  background: linear-gradient(135deg, #000080, #080d1b 78%);
+  box-shadow: 0 8px 24px rgba(0, 0, 128, 0.38);
+}
+
+.home-page[data-theme="dark"] .home-signup-button,
+.home-page[data-theme="dark"] .home-primary-button {
+  color: #ffffff;
+  background: linear-gradient(115deg, #000080 0%, #102b70 58%, #000000 100%);
+  border: 1px solid rgba(116, 157, 255, 0.58);
+  box-shadow: 0 9px 26px rgba(0, 0, 128, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.home-page[data-theme="dark"] .home-signup-button:hover,
+.home-page[data-theme="dark"] .home-primary-button:hover {
+  color: #ffffff;
+  background: linear-gradient(115deg, #10108f 0%, #17419a 60%, #05070d 100%);
+  border-color: #8aafff;
+  box-shadow: 0 13px 32px rgba(0, 0, 128, 0.5), 0 0 18px rgba(68, 112, 220, 0.2);
+}
+
+.home-page[data-theme="dark"] .home-user-greeting,
+.home-page[data-theme="dark"] .home-hero-description,
+.home-page[data-theme="dark"] .home-section-heading p,
+.home-page[data-theme="dark"] .home-highlight p,
+.home-page[data-theme="dark"] .home-feature-card p,
+.home-page[data-theme="dark"] .home-course-card p,
+.home-page[data-theme="dark"] .home-steps-grid p,
+.home-page[data-theme="dark"] .home-stat-card span,
+.home-page[data-theme="dark"] .home-empty-state p,
+.home-page[data-theme="dark"] .category-card-content p,
+.home-page[data-theme="dark"] .category-card-footer > span:first-child,
+.home-page[data-theme="dark"] .home-footer p {
+  color: #c1c8d6;
+}
+
+.home-page[data-theme="dark"] .home-hero-content h1,
+.home-page[data-theme="dark"] .home-section-heading h2,
+.home-page[data-theme="dark"] .home-highlight strong,
+.home-page[data-theme="dark"] .home-feature-card h3,
+.home-page[data-theme="dark"] .home-course-card h3,
+.home-page[data-theme="dark"] .home-steps-grid h3,
+.home-page[data-theme="dark"] .home-stat-card strong,
+.home-page[data-theme="dark"] .home-empty-state h3,
+.home-page[data-theme="dark"] .category-card-content h3,
+.home-page[data-theme="dark"] .about-visual-heading strong,
+.home-page[data-theme="dark"] .about-journey-item strong,
+.home-page[data-theme="dark"] .about-pillar-card h3,
+.home-page[data-theme="dark"] .about-pillars-heading h3,
+.home-page[data-theme="dark"] .about-bottom-message h3 {
+  color: #ffffff;
+}
+
+.home-page[data-theme="dark"] .home-hero-content h1 span {
+  background: linear-gradient(100deg, #ffffff 0%, #9bbcff 48%, #4d78df 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-page[data-theme="dark"] .home-hero-badge,
+.home-page[data-theme="dark"] .home-section-heading > span,
+.home-page[data-theme="dark"] .category-card-label,
+.home-page[data-theme="dark"] .about-pillars-heading > span,
+.home-page[data-theme="dark"] .about-bottom-message > span {
+  color: #9bbcff;
+}
+
+.home-page[data-theme="dark"] .home-hero-badge {
+  background: rgba(0, 0, 128, 0.2);
+  border-color: rgba(115, 153, 235, 0.34);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.18);
+}
+
+.home-page[data-theme="dark"] .home-art-glow {
+  background: radial-gradient(circle, rgba(0, 0, 128, 0.7), rgba(34, 77, 165, 0.22) 48%, transparent 72%);
+  opacity: 0.3;
+  filter: blur(92px);
+}
+
+.home-page[data-theme="dark"] .home-spiral-image {
+  filter: drop-shadow(0 26px 42px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 22px rgba(0, 0, 128, 0.24));
+}
+
+.home-page[data-theme="dark"] .home-hero-highlights {
+  border-color: rgba(106, 145, 225, 0.25);
+  background: linear-gradient(110deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 128, 0.1), rgba(0, 0, 0, 0.48));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.24);
+}
+
+.home-page[data-theme="dark"] .home-highlight-icon,
+.home-page[data-theme="dark"] .home-feature-card > svg,
+.home-page[data-theme="dark"] .home-stat-card svg,
+.home-page[data-theme="dark"] .home-empty-state > svg,
+.home-page[data-theme="dark"] .about-visual-icon,
+.home-page[data-theme="dark"] .about-journey-icon,
+.home-page[data-theme="dark"] .about-pillar-icon {
+  color: #9bbcff;
+}
+
+.home-page[data-theme="dark"] .home-highlight-icon,
+.home-page[data-theme="dark"] .about-visual-icon,
+.home-page[data-theme="dark"] .about-journey-icon,
+.home-page[data-theme="dark"] .about-pillar-icon {
+  background: linear-gradient(145deg, rgba(0, 0, 128, 0.3), rgba(0, 0, 0, 0.76));
+  border: 1px solid rgba(110, 151, 238, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 7px 20px rgba(0, 0, 0, 0.25);
+}
+
+.home-page[data-theme="dark"] .home-feature-card,
+.home-page[data-theme="dark"] .home-course-card,
+.home-page[data-theme="dark"] .home-steps-grid article,
+.home-page[data-theme="dark"] .home-stat-card,
+.home-page[data-theme="dark"] .home-empty-state,
+.home-page[data-theme="dark"] .category-card,
+.home-page[data-theme="dark"] .about-visual-card,
+.home-page[data-theme="dark"] .about-pillar-card {
+  background: linear-gradient(145deg, #0b0d16 0%, #05060b 58%, #000000 100%);
+  border: 1px solid rgba(102, 139, 215, 0.23);
+  box-shadow: 0 15px 38px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.home-page[data-theme="dark"] .home-feature-card:hover,
+.home-page[data-theme="dark"] .home-course-card:hover,
+.home-page[data-theme="dark"] .home-steps-grid article:hover,
+.home-page[data-theme="dark"] .home-stat-card:hover,
+.home-page[data-theme="dark"] .category-card:hover,
+.home-page[data-theme="dark"] .about-pillar-card:hover {
+  border-color: rgba(112, 158, 255, 0.62);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.58), 0 0 26px rgba(0, 0, 128, 0.25);
+  transform: translateY(-4px);
+}
+
+.home-page[data-theme="dark"] .home-steps-grid article > strong {
+  background: linear-gradient(120deg, #ffffff, #8eafff 65%, #3d65c4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-page[data-theme="dark"] .home-dashboard-link,
+.home-page[data-theme="dark"] .home-course-card a,
+.home-page[data-theme="dark"] .category-explore,
+.home-page[data-theme="dark"] .about-explore-link {
+  color: #8fb0ff;
+}
+
+.home-page[data-theme="dark"] .home-dashboard-link:hover,
+.home-page[data-theme="dark"] .home-course-card a:hover,
+.home-page[data-theme="dark"] .category-explore:hover,
+.home-page[data-theme="dark"] .about-explore-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(91, 139, 255, 0.45);
+}
+
+.home-page[data-theme="dark"] .category-image-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.08) 72%);
+}
+
+.home-page[data-theme="dark"] .category-card-footer,
+.home-page[data-theme="dark"] .about-journey-line {
+  border-color: rgba(103, 143, 226, 0.25);
+}
+
+.home-page[data-theme="dark"] .about-intro-content h2 span {
+  color: #8fb0ff;
+}
+
+.home-page[data-theme="dark"] .about-bottom-message {
+  background: linear-gradient(115deg, rgba(0, 0, 128, 0.25), rgba(0, 0, 0, 0.88));
+  border: 1px solid rgba(105, 145, 230, 0.27);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.34);
+}
+
+.home-page[data-theme="dark"] .about-check {
+  color: #8fb0ff;
+}
+
+@media (max-width: 760px) {
+  .home-page[data-theme="dark"] .home-nav-links {
+    background: linear-gradient(150deg, #080b14, #000000 78%);
+    border: 1px solid rgba(105, 145, 230, 0.3);
+    box-shadow: 0 20px 46px rgba(0, 0, 0, 0.66), 0 0 22px rgba(0, 0, 128, 0.18);
+  }
+}

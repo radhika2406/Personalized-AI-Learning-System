@@ -541,3 +541,198 @@ html[data-theme="light"] .learning-path-selector select option {
   }
 }
 
+/* =========================================
+   LEARNOVA - PREMIUM DARK THEME
+   Black / Deep Navy / Electric Blue
+   Light theme remains unchanged above.
+========================================= */
+
+html[data-theme="dark"] .learning-path-page {
+  color: #f4f7fb;
+}
+
+html[data-theme="dark"] .learning-path-selector,
+html[data-theme="dark"] .course-progress,
+html[data-theme="dark"] .learning-path-topic,
+html[data-theme="dark"] .learning-path-loading,
+html[data-theme="dark"] .learning-path-empty {
+  background:
+    radial-gradient(ellipse at top right, rgba(0, 0, 128, 0.20), transparent 48%),
+    linear-gradient(145deg, rgba(13, 18, 32, 0.97), rgba(5, 8, 17, 0.98));
+  border: 1px solid rgba(76, 115, 190, 0.22);
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+html[data-theme="dark"] .learning-path-selector label,
+html[data-theme="dark"] .course-progress h3,
+html[data-theme="dark"] .learning-path-section-heading h2,
+html[data-theme="dark"] .topic-heading h3,
+html[data-theme="dark"] .topic-materials-heading,
+html[data-theme="dark"] .learning-path-empty h3 {
+  color: #f5f7fc;
+}
+
+html[data-theme="dark"] .learning-path-selector select {
+  color: #f3f6fc;
+  background: #080e1c;
+  border: 1px solid rgba(83, 126, 207, 0.34);
+  border-radius: 11px;
+}
+
+html[data-theme="dark"] .learning-path-selector select:focus {
+  border-color: #3985ff;
+  box-shadow: 0 0 0 3px rgba(57, 133, 255, 0.17);
+}
+
+html[data-theme="dark"] .learning-path-selector select option {
+  color: #f3f6fc;
+  background: #080e1c;
+}
+
+html[data-theme="dark"] .course-progress::before {
+  height: 3px;
+  background: linear-gradient(90deg, #000080, #1769ff, #62b4ff);
+}
+
+html[data-theme="dark"] .course-progress-percentage {
+  color: #70aaff;
+  text-shadow: 0 0 22px rgba(55, 130, 255, 0.24);
+}
+
+html[data-theme="dark"] .course-progress p,
+html[data-theme="dark"] .learning-path-section-heading p,
+html[data-theme="dark"] .topic-progress-info,
+html[data-theme="dark"] .material-status-text,
+html[data-theme="dark"] .learning-path-empty p {
+  color: #a7b1c3;
+}
+
+html[data-theme="dark"] .progress-bar,
+html[data-theme="dark"] .topic-progress-bar {
+  background: #080e1b;
+  border: 1px solid rgba(87, 119, 177, 0.20);
+}
+
+html[data-theme="dark"] .progress-fill,
+html[data-theme="dark"] .topic-progress-fill {
+  background: linear-gradient(90deg, #000080 0%, #1769ff 58%, #62b4ff 100%);
+  box-shadow: 0 0 12px rgba(38, 116, 255, 0.28);
+}
+
+html[data-theme="dark"] .learning-path-topic {
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+html[data-theme="dark"] .learning-path-topic:hover {
+  transform: translateY(-3px);
+  border-color: rgba(67, 135, 255, 0.58);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(45, 113, 255, 0.08),
+    0 0 24px rgba(0, 64, 180, 0.12);
+}
+
+html[data-theme="dark"] .topic-heading.current .topic-status-icon,
+html[data-theme="dark"] .topic-heading.current .topic-status-label {
+  color: #8bbaff;
+  background: rgba(0, 0, 128, 0.34);
+  border: 1px solid rgba(76, 139, 255, 0.34);
+}
+
+html[data-theme="dark"] .topic-heading.upcoming .topic-status-icon,
+html[data-theme="dark"] .topic-heading.upcoming .topic-status-label {
+  color: #9aa7bb;
+  background: rgba(16, 25, 43, 0.88);
+  border: 1px solid rgba(111, 133, 170, 0.20);
+}
+
+html[data-theme="dark"] .topic-heading.completed .topic-status-icon {
+  color: #55d6a5;
+  background: rgba(31, 160, 117, 0.13);
+  border: 1px solid rgba(65, 205, 153, 0.20);
+}
+
+html[data-theme="dark"] .topic-heading.completed .topic-status-label {
+  color: #65dcb0;
+  background: rgba(31, 160, 117, 0.11);
+  border: 1px solid rgba(65, 205, 153, 0.20);
+}
+
+html[data-theme="dark"] .topic-progress-info strong {
+  color: #e9effa;
+}
+
+html[data-theme="dark"] .learning-path-material {
+  background: linear-gradient(120deg, rgba(12, 20, 37, 0.96), rgba(8, 13, 25, 0.96));
+  border: 1px solid rgba(83, 119, 181, 0.20);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+html[data-theme="dark"] .learning-path-material:hover {
+  border-color: rgba(68, 130, 242, 0.42);
+  background: linear-gradient(120deg, rgba(13, 25, 49, 0.98), rgba(8, 15, 30, 0.98));
+}
+
+html[data-theme="dark"] .learning-path-material-info span:last-child {
+  color: #e8edf7;
+}
+
+html[data-theme="dark"] .material-status-dot {
+  background: #62718b;
+  box-shadow: 0 0 0 3px rgba(98, 113, 139, 0.10);
+}
+
+html[data-theme="dark"] .learning-path-material.completed .material-status-dot {
+  background: #43c995;
+  box-shadow: 0 0 0 3px rgba(67, 201, 149, 0.12);
+}
+
+html[data-theme="dark"] .learning-path-open-button {
+  color: #9bc2ff;
+  background: rgba(0, 0, 128, 0.24);
+  border: 1px solid rgba(74, 132, 235, 0.34) !important;
+}
+
+html[data-theme="dark"] .learning-path-open-button:hover:not(:disabled) {
+  color: #ffffff;
+  background: rgba(0, 0, 128, 0.48);
+  border-color: rgba(91, 155, 255, 0.68) !important;
+  box-shadow: 0 0 16px rgba(34, 105, 255, 0.16);
+}
+
+html[data-theme="dark"] .learning-path-complete-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #000080, #1769d2);
+  border: 1px solid rgba(104, 160, 255, 0.36);
+  box-shadow: 0 5px 14px rgba(0, 45, 150, 0.22);
+}
+
+html[data-theme="dark"] .learning-path-complete-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1010a8, #287eff);
+  box-shadow: 0 7px 18px rgba(26, 104, 255, 0.28);
+}
+
+html[data-theme="dark"] .learning-path-material-actions button:focus-visible {
+  outline: 2px solid #66a5ff;
+  outline-offset: 3px;
+}
+
+html[data-theme="dark"] .learning-path-error {
+  color: #ff9ca7;
+  background: rgba(133, 28, 47, 0.16);
+  border: 1px solid rgba(239, 91, 112, 0.26);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="dark"] .learning-path-topic,
+  html[data-theme="dark"] .learning-path-material,
+  html[data-theme="dark"] .learning-path-material-actions button,
+  html[data-theme="dark"] .progress-fill,
+  html[data-theme="dark"] .topic-progress-fill {
+    transition: none !important;
+  }
+}

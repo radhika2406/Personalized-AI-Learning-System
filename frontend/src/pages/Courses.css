@@ -566,3 +566,182 @@ html[data-theme="light"] .courses-state {
     animation: none;
   }
 }
+
+
+/* =========================================================
+   LEARNOVA DARK THEME — BLACK / NAVY / ELECTRIC BLUE
+   UI-only overrides. Light theme and responsive rules remain
+   unchanged; all course page behaviour stays in Courses.jsx.
+========================================================= */
+
+html[data-theme="dark"] .courses-page {
+  color: #f5f7fc;
+}
+
+/* Premium glass hero */
+html[data-theme="dark"] .courses-hero {
+  background:
+    radial-gradient(ellipse at 88% 12%, rgba(32, 76, 190, 0.22), transparent 40%),
+    linear-gradient(120deg, rgba(8, 13, 28, 0.88), rgba(5, 9, 20, 0.76));
+  border: 1px solid rgba(91, 132, 225, 0.30);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(20px) saturate(135%);
+  backdrop-filter: blur(20px) saturate(135%);
+}
+
+html[data-theme="dark"] .courses-eyebrow,
+html[data-theme="dark"] .courses-section-eyebrow {
+  color: #dce7ff;
+}
+
+html[data-theme="dark"] .courses-hero h2,
+html[data-theme="dark"] .courses-section-heading h2,
+html[data-theme="dark"] .catalog-course-content h3,
+html[data-theme="dark"] .courses-state h3 {
+  color: #f7f9ff;
+}
+
+html[data-theme="dark"] .courses-hero p,
+html[data-theme="dark"] .courses-section-heading p,
+html[data-theme="dark"] .catalog-course-content p,
+html[data-theme="dark"] .courses-state p {
+  color: #aebbd2;
+}
+
+html[data-theme="dark"] .courses-hero-icon {
+  border-color: rgba(105, 151, 255, 0.34);
+  background: rgba(18, 42, 100, 0.38);
+  color: #c7dcff;
+  box-shadow: 0 0 28px rgba(28, 76, 190, 0.12);
+}
+
+/* Catalog count and summary surfaces */
+html[data-theme="dark"] .courses-count {
+  color: #c8dcff;
+  border-color: rgba(105, 145, 220, 0.24);
+  background: rgba(13, 23, 48, 0.62);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+html[data-theme="dark"] .courses-summary-item {
+  border-color: rgba(105, 145, 220, 0.22);
+  background: linear-gradient(145deg, rgba(16, 26, 51, 0.78), rgba(7, 12, 26, 0.82));
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+html[data-theme="dark"] .courses-summary-item span {
+  color: #aebbd2;
+}
+
+html[data-theme="dark"] .courses-summary-item strong {
+  color: #e5efff;
+}
+
+/* Course cards */
+html[data-theme="dark"] .catalog-course-card {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(25, 66, 164, 0.16), transparent 43%),
+    linear-gradient(145deg, rgba(15, 23, 43, 0.88), rgba(6, 10, 22, 0.86));
+  border-color: rgba(105, 139, 205, 0.22);
+  color: #f5f7fc;
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+  backdrop-filter: blur(16px) saturate(130%);
+}
+
+html[data-theme="dark"] .catalog-course-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(91, 145, 255, 0.52);
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.30),
+    0 0 24px rgba(23, 71, 209, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+html[data-theme="dark"] .catalog-course-icon {
+  background: linear-gradient(145deg, rgba(22, 52, 120, 0.58), rgba(8, 20, 52, 0.72));
+  color: #c8ddff;
+  border: 1px solid rgba(105, 155, 255, 0.25);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.16);
+}
+
+html[data-theme="dark"] .enrolled-badge {
+  border-color: rgba(68, 207, 166, 0.24);
+  background: rgba(42, 173, 135, 0.12);
+  color: #66dfb9;
+}
+
+html[data-theme="dark"] .catalog-course-code {
+  color: #b9d1ff;
+}
+
+html[data-theme="dark"] .catalog-course-content h3 a:hover,
+html[data-theme="dark"] .course-details-link {
+  color: #8eb8ff;
+}
+
+html[data-theme="dark"] .course-details-link:focus-visible,
+html[data-theme="dark"] .course-enroll-button:focus-visible {
+  outline: 2px solid #75a7ff;
+  outline-offset: 3px;
+}
+
+/* Navy-blue primary action */
+html[data-theme="dark"] .course-enroll-button:not(.is-enrolled) {
+  background: linear-gradient(135deg, #1747b8, #0b2b78);
+  border: 1px solid rgba(117, 163, 255, 0.42);
+  color: #ffffff;
+  box-shadow:
+    0 7px 18px rgba(10, 42, 122, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+html[data-theme="dark"] .course-enroll-button:not(:disabled):hover {
+  background: linear-gradient(135deg, #2058d6, #10378f);
+  box-shadow:
+    0 9px 22px rgba(18, 65, 175, 0.34),
+    0 0 18px rgba(63, 123, 255, 0.12);
+}
+
+html[data-theme="dark"] .course-enroll-button.is-enrolled {
+  background: rgba(20, 34, 65, 0.72);
+  border-color: rgba(105, 145, 220, 0.25);
+  color: #b8c8e3;
+}
+
+/* Loading, empty and error states */
+html[data-theme="dark"] .courses-state {
+  border-color: rgba(105, 145, 220, 0.28);
+  background: linear-gradient(145deg, rgba(14, 22, 42, 0.78), rgba(5, 9, 20, 0.82));
+  color: #f5f7fc;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+html[data-theme="dark"] .courses-empty-icon {
+  background: rgba(22, 52, 120, 0.42);
+  color: #c8ddff;
+  border: 1px solid rgba(105, 155, 255, 0.22);
+}
+
+html[data-theme="dark"] .courses-spinner {
+  color: #75a7ff;
+}
+
+html[data-theme="dark"] .courses-error {
+  border-color: rgba(255, 116, 132, 0.25);
+  background: rgba(130, 35, 53, 0.14);
+  color: #ffabb5;
+}
+
+/* Respect reduced-motion preference; existing responsive rules
+   above remain active for desktop, tablet and mobile. */
