@@ -1,16 +1,21 @@
-
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sparkles } from "lucide-react";
 import DashboardLayout from "../components/DashboardLayout";
 import api from "../services/api";
+import { useUser } from "../UserContext";
 import "./Profile.css";
 
 function Profile() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [savedProfile, setSavedProfile] = useState(null);
-  const [account, setAccount] = useState(null);
+  const { account, setAccount } = useUser();
+  const photoInputRef = useRef(null);
+
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
+  const [photoMessage, setPhotoMessage] = useState("");
+  const [photoError, setPhotoError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,6 +64,75 @@ function Profile() {
       setLoading(false);
     }
   };
+
+
+  const handleProfileImageUpload = async (event) => {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    setPhotoMessage("");
+    setPhotoError("");
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    if (!allowedTypes.includes(file.type)) {
+      setPhotoError("Please select a JPG, PNG or WEBP image.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setPhotoError("Image size must not exceed 5 MB.");
+      event.target.value = "";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      setUploadingPhoto(true);
+
+      const response = await api.post(
+        "/users/me/profile-image",
+        formData
+      );
+
+      setAccount(response.data);
+      setPhotoMessage("Profile picture updated successfully.");
+    } catch (err) {
+      setPhotoError(
+        getErrorMessage(err, "Failed to upload profile picture.")
+      );
+    } finally {
+      setUploadingPhoto(false);
+      event.target.value = "";
+    }
+  };
+
+  const handleRemoveProfileImage = async () => {
+    if (!account?.profile_image) return;
+
+    setPhotoMessage("");
+    setPhotoError("");
+
+    try {
+      setUploadingPhoto(true);
+
+      const response = await api.delete("/users/me/profile-image");
+
+      setAccount(response.data);
+      setPhotoMessage("Profile picture removed successfully.");
+    } catch (err) {
+      setPhotoError(
+        getErrorMessage(err, "Failed to remove profile picture.")
+      );
+    } finally {
+      setUploadingPhoto(false);
+    }
+  };
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -135,6 +209,16 @@ function Profile() {
         .toUpperCase()
     : "L";
 
+    const imageBaseUrl = (
+  api.defaults.baseURL || "http://127.0.0.1:8000"
+  ).replace(/\/$/, "");
+
+  const profileImageUrl = account?.profile_image
+  ? account.profile_image.startsWith("http")
+    ? account.profile_image
+    : `${imageBaseUrl}${account.profile_image.startsWith("/") ? "" : "/"}${account.profile_image}`
+  : null;
+
   const selectedCourse = courses.find(
     (course) => course.id === profile?.course_id
   );
@@ -157,9 +241,53 @@ function Profile() {
           <>
             {/* Profile header */}
             <section className="profile-hero">
+              <div className="profile-avatar-wrapper">
               <div className="profile-avatar">
-                {initials}
+                {profileImageUrl ? (
+                  <img
+                    src={profileImageUrl}
+                    alt="Profile"
+                    className="profile-avatar-image"
+                  />
+                ) : (
+                  initials
+                )}
               </div>
+
+              <input
+                ref={photoInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                hidden
+                onChange={handleProfileImageUpload}
+              />
+
+              <div className="profile-photo-actions">
+                <button
+                  type="button"
+                  className="profile-photo-button"
+                  onClick={() => photoInputRef.current?.click()}
+                  disabled={uploadingPhoto}
+                >
+                  {uploadingPhoto
+                    ? "Uploading..."
+                    : profileImageUrl
+                      ? "Change Photo"
+                      : "Upload Photo"}
+                </button>
+
+                {profileImageUrl && (
+                  <button
+                    type="button"
+                    className="profile-photo-remove"
+                    onClick={handleRemoveProfileImage}
+                    disabled={uploadingPhoto}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            </div>
 
               <div className="profile-hero-info">
                 <h2>
@@ -178,6 +306,18 @@ function Profile() {
                 </span>
               </div>
             </section>
+
+            {photoMessage && (
+              <p className="profile-message" role="status">
+                {photoMessage}
+              </p>
+            )}
+
+            {photoError && (
+              <p className="profile-error" role="alert">
+                {photoError}
+              </p>
+            )}
 
             {message && (
               <p className="profile-message" role="status">
@@ -561,5 +701,21 @@ function Profile() {
     </DashboardLayout>
   );
 }
+
+const getErrorMessage = (error, fallback) => {
+  const detail = error.response?.data?.detail;
+
+  if (typeof detail === "string") {
+    return detail;
+  }
+
+  if (Array.isArray(detail)) {
+    return detail
+      .map((item) => item.msg || "Invalid request")
+      .join(", ");
+  }
+
+  return fallback;
+};
 
 export default Profile;

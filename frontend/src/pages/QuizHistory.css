@@ -537,3 +537,49 @@ html[data-theme="light"] .history-review-explanation {
     flex-direction: column;
   }
 }
+/* Quiz and course information */
+
+.quiz-history-title {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.quiz-history-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.quiz-history-meta p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary, #a5a5b5);
+}
+
+.quiz-history-meta strong {
+  color: var(--text-primary, #ffffff);
+  font-weight: 600;
+}
+
+/* Quiz History - Light Theme Text Contrast */
+
+[data-theme="light"] .quiz-history-meta p {
+  color: #705563 !important;
+}
+
+[data-theme="light"] .quiz-history-meta strong {
+  color: #722F45 !important;
+  font-weight: 700;
+}
+
+[data-theme="light"] .quiz-history-info > p {
+  color: #705563 !important;
+}
+
+[data-theme="light"] .quiz-history-title {
+  color: #292238 !important;
+}

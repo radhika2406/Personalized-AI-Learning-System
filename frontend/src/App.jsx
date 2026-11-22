@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import { UserProvider } from "./UserContext";
 
 import Dashboard from "./dashboard.jsx";
 import Courses from "./pages/Courses";
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <ThemeProvider>
+      <UserProvider>
       <BrowserRouter>
         <Routes>
           {/* Public routes */}
@@ -86,6 +88,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </UserProvider>
     </ThemeProvider>
   );
 }

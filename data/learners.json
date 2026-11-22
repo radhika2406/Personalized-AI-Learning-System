@@ -1,0 +1,222 @@
+[
+  {
+    "learner_id": "synthetic_001",
+    "course": "python",
+    "goal": "Learn Python programming fundamentals",
+    "level": "beginner",
+    "daily_minutes": 20,
+    "interests": [
+      "programming",
+      "problem-solving"
+    ]
+  },
+  {
+    "learner_id": "synthetic_002",
+    "course": "python",
+    "goal": "Prepare for Python coding interviews",
+    "level": "intermediate",
+    "daily_minutes": 30,
+    "interests": [
+      "data-science",
+      "python"
+    ]
+  },
+  {
+    "learner_id": "synthetic_003",
+    "course": "python",
+    "goal": "Build confidence solving programming problems",
+    "level": "advanced",
+    "daily_minutes": 45,
+    "interests": [
+      "automation",
+      "coding"
+    ]
+  },
+  {
+    "learner_id": "synthetic_004",
+    "course": "python",
+    "goal": "Learn Python for data analysis",
+    "level": "beginner",
+    "daily_minutes": 60,
+    "interests": [
+      "software-development",
+      "algorithms"
+    ]
+  },
+  {
+    "learner_id": "synthetic_005",
+    "course": "python",
+    "goal": "Strengthen problem-solving skills",
+    "level": "intermediate",
+    "daily_minutes": 90,
+    "interests": [
+      "beginner-projects",
+      "coding"
+    ]
+  },
+  {
+    "learner_id": "synthetic_006",
+    "course": "python",
+    "goal": "Learn Python programming fundamentals",
+    "level": "advanced",
+    "daily_minutes": 20,
+    "interests": [
+      "programming",
+      "problem-solving"
+    ]
+  },
+  {
+    "learner_id": "synthetic_007",
+    "course": "python",
+    "goal": "Prepare for Python coding interviews",
+    "level": "beginner",
+    "daily_minutes": 30,
+    "interests": [
+      "data-science",
+      "python"
+    ]
+  },
+  {
+    "learner_id": "synthetic_008",
+    "course": "python",
+    "goal": "Build confidence solving programming problems",
+    "level": "intermediate",
+    "daily_minutes": 45,
+    "interests": [
+      "automation",
+      "coding"
+    ]
+  },
+  {
+    "learner_id": "synthetic_009",
+    "course": "python",
+    "goal": "Learn Python for data analysis",
+    "level": "advanced",
+    "daily_minutes": 60,
+    "interests": [
+      "software-development",
+      "algorithms"
+    ]
+  },
+  {
+    "learner_id": "synthetic_010",
+    "course": "python",
+    "goal": "Strengthen problem-solving skills",
+    "level": "beginner",
+    "daily_minutes": 90,
+    "interests": [
+      "beginner-projects",
+      "coding"
+    ]
+  },
+  {
+    "learner_id": "synthetic_011",
+    "course": "python",
+    "goal": "Learn Python programming fundamentals",
+    "level": "intermediate",
+    "daily_minutes": 20,
+    "interests": [
+      "programming",
+      "problem-solving"
+    ]
+  },
+  {
+    "learner_id": "synthetic_012",
+    "course": "python",
+    "goal": "Prepare for Python coding interviews",
+    "level": "advanced",
+    "daily_minutes": 30,
+    "interests": [
+      "data-science",
+      "python"
+    ]
+  },
+  {
+    "learner_id": "synthetic_013",
+    "course": "python",
+    "goal": "Build confidence solving programming problems",
+    "level": "beginner",
+    "daily_minutes": 45,
+    "interests": [
+      "automation",
+      "coding"
+    ]
+  },
+  {
+    "learner_id": "synthetic_014",
+    "course": "python",
+    "goal": "Learn Python for data analysis",
+    "level": "intermediate",
+    "daily_minutes": 60,
+    "interests": [
+      "software-development",
+      "algorithms"
+    ]
+  },
+  {
+    "learner_id": "synthetic_015",
+    "course": "python",
+    "goal": "Strengthen problem-solving skills",
+    "level": "advanced",
+    "daily_minutes": 90,
+    "interests": [
+      "beginner-projects",
+      "coding"
+    ]
+  },
+  {
+    "learner_id": "synthetic_016",
+    "course": "python",
+    "goal": "Learn Python programming fundamentals",
+    "level": "beginner",
+    "daily_minutes": 20,
+    "interests": [
+      "programming",
+      "problem-solving"
+    ]
+  },
+  {
+    "learner_id": "synthetic_017",
+    "course": "python",
+    "goal": "Prepare for Python coding interviews",
+    "level": "intermediate",
+    "daily_minutes": 30,
+    "interests": [
+      "data-science",
+      "python"
+    ]
+  },
+  {
+    "learner_id": "synthetic_018",
+    "course": "python",
+    "goal": "Build confidence solving programming problems",
+    "level": "advanced",
+    "daily_minutes": 45,
+    "interests": [
+      "automation",
+      "coding"
+    ]
+  },
+  {
+    "learner_id": "synthetic_019",
+    "course": "python",
+    "goal": "Learn Python for data analysis",
+    "level": "beginner",
+    "daily_minutes": 60,
+    "interests": [
+      "software-development",
+      "algorithms"
+    ]
+  },
+  {
+    "learner_id": "synthetic_020",
+    "course": "python",
+    "goal": "Strengthen problem-solving skills",
+    "level": "intermediate",
+    "daily_minutes": 90,
+    "interests": [
+      "beginner-projects",
+      "coding"
+    ]
+  }
+]

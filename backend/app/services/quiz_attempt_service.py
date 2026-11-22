@@ -1,4 +1,3 @@
-
 from datetime import datetime, timezone
 
 from sqlalchemy.orm import Session
@@ -8,6 +7,8 @@ from app.models.quiz import Quiz
 from app.models.question import Question
 from app.models.quiz_attempt import QuizAttempt
 from app.models.quiz_answer import QuizAnswer
+from app.models.topic import Topic
+from app.models.course import Course
 
 
 def submit_quiz(db: Session, user_id: int, quiz_id: int, submission):
@@ -139,9 +140,53 @@ def get_attempt_by_id(db: Session, attempt_id: int, user_id: int):
 
 
 def get_attempts_by_user(db: Session, user_id: int):
-    return db.query(QuizAttempt).filter(
-        QuizAttempt.user_id == user_id
-    ).order_by(QuizAttempt.started_at.desc()).all()
+    attempts = (
+        db.query(
+            QuizAttempt,
+            Quiz.title.label("quiz_title"),
+            Topic.title.label("topic_title"),
+            Course.title.label("course_title"),
+        )
+        .join(
+            Quiz,
+            QuizAttempt.quiz_id == Quiz.id
+        )
+        .join(
+            Topic,
+            Quiz.topic_id == Topic.id
+        )
+        .join(
+            Course,
+            Topic.course_id == Course.id
+        )
+        .filter(
+            QuizAttempt.user_id == user_id
+        )
+        .order_by(
+            QuizAttempt.started_at.desc()
+        )
+        .all()
+    )
+
+    return [
+        {
+            "id": attempt.id,
+            "quiz_id": attempt.quiz_id,
+            "score": attempt.score,
+            "total_questions": attempt.total_questions,
+            "started_at": attempt.started_at,
+            "submitted_at": attempt.submitted_at,
+            "quiz_title": quiz_title,
+            "topic_title": topic_title,
+            "course_title": course_title,
+        }
+        for (
+            attempt,
+            quiz_title,
+            topic_title,
+            course_title,
+        ) in attempts
+    ]
 
 
 def get_attempt_review(db: Session, attempt_id: int, user_id: int):

@@ -46,3 +46,8 @@ class User(Base):
         default=lambda: datetime.now(timezone.utc),
         nullable=False,
     )
+
+    profile_image: Mapped[str | None] = mapped_column(
+    String(500),
+    nullable=True,
+    )

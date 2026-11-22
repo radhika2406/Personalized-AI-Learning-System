@@ -1,23 +1,25 @@
 
 """
-mastery.py 
+mastery.py
 
 Builds a learner's topic-wise mastery profile
 for any registered course.
 
+Supported strategies:
+- latest: Uses the latest attempt for each topic (default).
+- weighted: Uses the three most recent attempts with
+  greater importance given to recent performance.
+
 Each topic receives:
 - A score from 0 to 100, if assessed.
 - None, if not assessed yet.
-
-The latest attempt number is used when multiple
-quiz results exist for the same topic.
 """
 
 from ai_engine.common.course_config import get_course
 from assessment.question_management.loader import load_course_topics
 
 
-def build_mastery(quiz_results, course_id=None):
+def build_mastery(quiz_results, course_id=None, strategy="latest"):
     """
     Build a mastery dictionary for the selected course.
 
@@ -26,21 +28,16 @@ def build_mastery(quiz_results, course_id=None):
             List of quiz-result dictionaries (Contract 1).
 
         course_id:
-            Selected course identifier, such as:
-            python, java, cpp, machine_learning, dbms.
+            Selected course identifier.
+            If omitted, inferred from quiz results.
+            Defaults to Python for an empty result list.
 
-            If omitted, the course is inferred from quiz results.
-            For an empty result list, Python is retained as the
-            backward-compatible default. Production code should
-            always pass course_id explicitly.
+        strategy:
+            "latest"   - Uses the latest attempt (default).
+            "weighted" - Uses the three most recent attempts.
 
     Returns:
-        Dictionary:
-        {
-            "topic_1": 85,
-            "topic_2": None,
-            "topic_3": 45
-        }
+        Dictionary mapping topic IDs to scores or None.
     """
 
     # Validate input
@@ -88,13 +85,26 @@ def build_mastery(quiz_results, course_id=None):
         for topic in course_topics
     ]
 
-    # Every topic starts as not assessed
+    # Validate strategy
+    if strategy not in ("latest", "weighted"):
+        raise ValueError(
+            "strategy must be either 'latest' or 'weighted'"
+        )
+
+    # Use weighted recalibration when requested
+    if strategy == "weighted":
+        return _build_weighted_mastery(
+            quiz_results,
+            course_id,
+            topic_ids
+        )
+
+    # Default strategy: latest attempt
     mastery = {
         topic_id: None
         for topic_id in topic_ids
     }
 
-    # Track the latest attempt for each topic
     latest_attempts = {
         topic_id: None
         for topic_id in topic_ids
@@ -170,5 +180,140 @@ def build_mastery(quiz_results, course_id=None):
         elif attempt is not None and previous_attempt is None:
             latest_attempts[topic] = attempt
             mastery[topic] = score
+
+    return mastery
+
+
+def _build_weighted_mastery(quiz_results, course_id, topic_ids):
+    """
+    Calculate mastery using the three most recent attempts.
+
+    Weights:
+        1 attempt: 100%
+        2 attempts: 40%, 60%
+        3 or more attempts: 20%, 30%, 50%
+
+    If attempt numbers are unavailable, input order is used.
+
+    Mixed numbered and unnumbered attempts for the same
+    topic are rejected because their chronological order
+    cannot be determined reliably.
+    """
+
+    mastery = {
+        topic_id: None
+        for topic_id in topic_ids
+    }
+
+    grouped_results = {
+        topic_id: []
+        for topic_id in topic_ids
+    }
+
+    # Validate and group quiz results by topic
+    for index, result in enumerate(quiz_results):
+
+        result_course = result.get("course")
+
+        if (
+            result_course is not None
+            and result_course != course_id
+        ):
+            raise ValueError(
+                f"Quiz result belongs to '{result_course}', "
+                f"but selected course is '{course_id}'"
+            )
+
+        topic = result.get("topic")
+
+        if topic not in grouped_results:
+            raise ValueError(
+                f"Unknown topic '{topic}' for course '{course_id}'"
+            )
+
+        score = result.get("score_pct")
+        attempt = result.get("attempt")
+
+        # Validate score
+        if (
+            isinstance(score, bool)
+            or not isinstance(score, (int, float))
+            or not 0 <= score <= 100
+        ):
+            raise ValueError(
+                f"Invalid score for topic '{topic}': {score}"
+            )
+
+        # Validate attempt number
+        if attempt is not None:
+            if (
+                isinstance(attempt, bool)
+                or not isinstance(attempt, int)
+                or attempt < 1
+            ):
+                raise ValueError(
+                    f"Invalid attempt number for topic '{topic}'"
+                )
+
+        grouped_results[topic].append({
+            "score": score,
+            "attempt": attempt,
+            "index": index
+        })
+
+    # Calculate weighted mastery for each assessed topic
+    for topic, attempts in grouped_results.items():
+
+        if not attempts:
+            continue
+
+        has_numbered = any(
+            item["attempt"] is not None
+            for item in attempts
+        )
+
+        has_unnumbered = any(
+            item["attempt"] is None
+            for item in attempts
+        )
+
+        if has_numbered and has_unnumbered:
+            raise ValueError(
+                f"Topic '{topic}' contains mixed numbered "
+                "and unnumbered attempts"
+            )
+
+        # Determine chronological order
+        if has_numbered:
+            attempts.sort(
+                key=lambda item: (
+                    item["attempt"],
+                    item["index"]
+                )
+            )
+        else:
+            attempts.sort(
+                key=lambda item: item["index"]
+            )
+
+        # Keep only the three most recent attempts
+        recent_attempts = attempts[-3:]
+        count = len(recent_attempts)
+
+        # Assign weights
+        if count == 1:
+            weights = [1.0]
+        elif count == 2:
+            weights = [0.4, 0.6]
+        else:
+            weights = [0.2, 0.3, 0.5]
+
+        # Calculate weighted score
+        weighted_score = sum(
+            item["score"] * weight
+            for item, weight in zip(recent_attempts, weights)
+        )
+
+        mastery[topic] = round(weighted_score, 2)
 
     return mastery

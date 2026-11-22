@@ -1,0 +1,17 @@
+﻿Category,Course,Course_ID,Topic_id,Topic_Name,PDF_File_Link,YouTube_Video_Link
+Programming,Python,python,variables,Variables and Data Types,https://drive.google.com/file/d/1hjJ3v4n5l68pUbe9eulaMCfpQFkZxN-M/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc
+Programming,Python,python,conditions,Conditional Statements,https://drive.google.com/file/d/1Wd8kTCajaucx5Mq9oSbkBM78cgWf3wrI/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,loops,Loops and Iteration,https://drive.google.com/file/d/1SgzNcTVXo-cArEyn3O_JRASqoO9ZKmGS/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc
+Programming,Python,python,functions,Functions and Scope,https://drive.google.com/file/d/1nl1lpt-EMMkGGQu_YfbiFwD31yjyBWZc/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,lists,Lists and List Operations,https://drive.google.com/file/d/1NYlEhvdiMGyOLDn78zMG3g-y9GFQIXYU/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,dictionaries,Dictionaries and Key-Value Pairs,https://drive.google.com/file/d/1Nv3hpUnpGfDdBn4NC6TV8mWk8XFFp_7s/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,tuples_and_sets,Tuples and Sets,https://drive.google.com/file/d/1ZV21sjPNL6dGVoaRN-VTQkyptjTQUB1q/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,strings,String Manipulation and Formatting,https://drive.google.com/file/d/1VtUH0XovMZCfTReRlObwH1e1mrg-7v4R/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,file_handling,File Input and Output,https://drive.google.com/file/d/1TEapPenCa5yo7CUIGTR-wvD9ZvnSTj1r/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,exception_handling,Exceptions and Error Handling,https://drive.google.com/file/d/1vgfW_adSnZ-h06IiPlUGM1j2jZnSyqw5/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,oop_classes,"Classes, Objects and Encapsulation",https://drive.google.com/file/d/1fgfO6ZEVR-ePBE4HCAvxBsTGilnnpwIa/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,inheritance_polymorphism,Inheritance and Polymorphism,https://drive.google.com/file/d/1uQ3seSyaFfb5A8ckRT5V-LaySp_nClLZ/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,modules_and_packages,"Modules, Packages and Imports",https://drive.google.com/file/d/1lCqN9AyJEvziRXtqg4P3Bp5L6cb88ceJ/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,comprehensions,"List, Dict and Set Comprehensions",https://drive.google.com/file/d/1Udv1KJmycivTJ0TLl-kyLKp-Ak-rpTEc/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,iterators_and_generators,Iterators and Generators,https://drive.google.com/file/d/1du-a8Meb1JXXm5Gh4ffRTwIu-00dJv18/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 
+Programming,Python,python,decorators_and_closures,"Decorators, Closures and Advanced Python",https://drive.google.com/file/d/18RdDS5oTQIPyj55rOjZF0ZOpHFi2q-3x/view?usp=drive_link ,https://youtu.be/ERCMXc8x7mc 

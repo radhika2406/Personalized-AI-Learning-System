@@ -668,3 +668,146 @@ html[data-theme="light"] .quiz-chart-latest-dot {
   fill: #a83255 !important;
   stroke: #7f1d3a !important;
 }
+
+
+/* =========================================
+   COMPACT QUIZ PERFORMANCE CHART
+========================================= */
+
+/* Make the overall card more compact */
+.quiz-performance-card {
+  padding: 22px;
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+/* Smaller heading */
+.quiz-chart-heading {
+  margin-bottom: 16px;
+  gap: 14px;
+}
+
+.quiz-chart-heading h2 {
+  font-size: 20px;
+}
+
+.quiz-chart-heading p {
+  font-size: 12px;
+}
+
+.quiz-average strong {
+  font-size: 25px;
+}
+
+/* Compact metric cards */
+.quiz-chart-metrics {
+  gap: 10px;
+  margin: 14px 0 16px;
+}
+
+.quiz-metric {
+  padding: 11px 12px;
+  gap: 9px;
+  border-radius: 13px;
+}
+
+.metric-icon {
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+}
+
+.quiz-metric div {
+  gap: 3px;
+}
+
+.quiz-metric div span {
+  font-size: 10px;
+}
+
+.quiz-metric strong {
+  font-size: 16px;
+}
+
+/* Restrict graph width */
+.quiz-chart-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.quiz-performance-svg {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+}
+
+/* Smaller chart labels */
+.quiz-chart-axis-label {
+  font-size: 10px;
+}
+
+/* Compact footer */
+.quiz-chart-footer {
+  margin-top: 8px;
+  font-size: 11px;
+}
+
+/* Smaller empty/loading section */
+.quiz-chart-loading,
+.quiz-chart-empty {
+  min-height: 160px;
+}
+
+/* Responsive */
+@media (max-width: 650px) {
+  .quiz-performance-card {
+    padding: 17px 13px;
+  }
+
+  .quiz-chart-heading h2 {
+    font-size: 18px;
+  }
+
+  .quiz-average strong {
+    font-size: 21px;
+  }
+
+  .quiz-chart-container {
+    max-width: 100%;
+  }
+
+  .quiz-chart-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+/* Reduce the right-side average score size */
+.quiz-average {
+  gap: 3px;
+}
+
+.quiz-average span {
+  font-size: 11px !important;
+}
+
+.quiz-average strong {
+  font-size: 22px !important;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+/* Slightly smaller chart heading text */
+.quiz-chart-heading h2 {
+  font-size: 19px;
+}
+
+.quiz-chart-heading p {
+  font-size: 12px;
+}
+@media (max-width: 650px) {
+  .quiz-average strong {
+    font-size: 19px !important;
+  }
+}

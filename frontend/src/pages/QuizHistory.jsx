@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import DashboardLayout from "../components/DashboardLayout";
@@ -125,8 +124,22 @@ function QuizHistory() {
               return (
                 <div key={attempt.id}>
                   <div className="quiz-history-card">
-                    <div className="quiz-history-info">
-                      <h3>Quiz #{attempt.quiz_id}</h3>
+                   <div className="quiz-history-info">
+                      <h3 className="quiz-history-title">
+                        {attempt.quiz_title || `Quiz #${attempt.quiz_id}`}
+                      </h3>
+
+                      <div className="quiz-history-meta">
+                        <p>
+                          <strong>Course:</strong>{" "}
+                          {attempt.course_title || "Course not available"}
+                        </p>
+
+                        <p>
+                          <strong>Topic:</strong>{" "}
+                          {attempt.topic_title || "Topic not available"}
+                        </p>
+                      </div>
 
                       <p>Attempt ID: {attempt.id}</p>
 

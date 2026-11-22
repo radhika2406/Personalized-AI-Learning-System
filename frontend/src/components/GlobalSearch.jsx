@@ -1,6 +1,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Search,
   X,
@@ -31,6 +31,7 @@ const pages = [
 ];
 
 function GlobalSearch() {
+  const location = useLocation();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -97,6 +98,8 @@ function GlobalSearch() {
 
       const allTopics = topicGroups.flat();
 
+
+      // Add topics to search
       allTopics.forEach(({ course, topic }) => {
         results.push({
           id: `topic-${topic.topic_id}`,
@@ -108,6 +111,7 @@ function GlobalSearch() {
         });
       });
 
+      // Fetch learning materials
       const materialGroups = await Promise.all(
         allTopics.map(async ({ course, topic }) => {
           try {
@@ -140,6 +144,68 @@ function GlobalSearch() {
           icon: FileText,
         });
       });
+
+      // Fetch quizzes for enrolled topics
+      const quizGroups = await Promise.all(
+        allTopics.map(async ({ course, topic }) => {
+          try {
+            const response = await api.get(
+              `/quizzes/topic/${topic.topic_id}`
+            );
+
+            return (response.data || []).map((quiz) => ({
+              quiz,
+              course,
+              topic,
+            }));
+          } catch (error) {
+            console.error("Unable to load quizzes for search:", error);
+            return [];
+          }
+        })
+      );
+
+      quizGroups.flat().forEach(({ quiz, course, topic }) => {
+        results.push({
+          id: `quiz-${quiz.id}`,
+          title: quiz.title,
+          description: `${course.title} • ${topic.topic_title}`,
+          searchableText: quiz.description || "",
+          category: "Quizzes",
+          path: `/quizzes/${quiz.id}/attempt`,
+          icon: ClipboardList,
+        });
+      });
+
+      // Fetch previous quiz attempts
+      try {
+        const attemptsResponse = await api.get("/quiz-attempts/me");
+
+        (attemptsResponse.data || []).forEach((attempt) => {
+          results.push({
+            id: `attempt-${attempt.id}`,
+            title: attempt.quiz_title || `Quiz #${attempt.quiz_id}`,
+            description: `${attempt.course_title || ""} • ${
+              attempt.topic_title || ""
+            } • Score: ${attempt.score}/${attempt.total_questions}`,
+            searchableText: [
+              attempt.quiz_title,
+              attempt.course_title,
+              attempt.topic_title,
+              attempt.score,
+              attempt.total_questions,
+              `${attempt.score}/${attempt.total_questions}`,
+            ]
+              .filter(Boolean)
+              .join(" "),
+            category: "Quiz History",
+            path: "/quiz-history",
+            icon: ClipboardList,
+          });
+        });
+      } catch (error) {
+        console.error("Unable to load quiz history for search:", error);
+      }
 
       setSearchData(results);
       setLoaded(true);
@@ -177,15 +243,55 @@ function GlobalSearch() {
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
+
   const filteredResults = useMemo(() => {
     const value = query.trim().toLowerCase();
 
-    if (value.length < 2) return [];
+    if (value.length < 1) return [];
 
-    const searchableItems = [...pages, ...searchData];
+    const pathname = location.pathname;
+
+    let allowedCategories = [];
+
+    if (pathname === "/dashboard") {
+      // Dashboard searches everything
+      allowedCategories = [
+        "Pages",
+        "Courses",
+        "Topics",
+        "Learning Materials",
+        "Quizzes",
+        "Quiz History",
+      ];
+    } else if (pathname === "/courses") {
+      allowedCategories = ["Courses"];
+    } else if (
+      pathname === "/materials" ||
+      pathname.includes("/materials")
+    ) {
+      allowedCategories = ["Topics", "Learning Materials"];
+    } else if (
+      pathname === "/quizzes" ||
+      pathname.includes("/attempt")
+    ) {
+      allowedCategories = ["Quizzes"];
+    } else if (pathname === "/quiz-history") {
+      allowedCategories = ["Quiz History"];
+    } else {
+      allowedCategories = ["Pages"];
+    }
+
+    const searchableItems =
+      pathname === "/dashboard"
+        ? [...pages, ...searchData]
+        : searchData;
 
     return searchableItems
       .filter((item) => {
+        if (!allowedCategories.includes(item.category)) {
+          return false;
+        }
+
         const searchableText = [
           item.title,
           item.description,
@@ -199,7 +305,8 @@ function GlobalSearch() {
         return searchableText.includes(value);
       })
       .slice(0, 10);
-  }, [query, searchData]);
+  }, [query, searchData, location.pathname]);
+
 
   const handleKeyDown = (event) => {
     if (event.key === "ArrowDown" && filteredResults.length) {
@@ -236,7 +343,7 @@ function GlobalSearch() {
           ref={inputRef}
           type="text"
           value={query}
-          placeholder="Search courses, lessons, pages..."
+          placeholder="Search your learning content..."
           aria-label="Search Learnova"
           aria-expanded={open}
           onFocus={() => {
@@ -273,24 +380,18 @@ function GlobalSearch() {
             <div className="search-empty-state">
               <Search size={24} />
               <strong>Search Learnova</strong>
-              <p>Find courses, topics, materials, and pages.</p>
+              <p>Start typing to explore your learning library.</p>
             </div>
           )}
 
-          {query.trim().length === 1 && (
-            <div className="search-empty-state">
-              <p>Type at least 2 characters to search.</p>
-            </div>
-          )}
-
-          {query.trim().length >= 2 && loading && (
+          {query.trim().length >= 1 && loading && (
             <div className="search-loading">
               <LoaderCircle size={20} className="search-spinner" />
-              <span>Preparing your learning library...</span>
+              <span>Getting your search results...</span>
             </div>
           )}
 
-          {query.trim().length >= 2 &&
+          {query.trim().length >= 1 &&
             !loading &&
             filteredResults.length > 0 && (
               <div className="search-results">
@@ -332,7 +433,7 @@ function GlobalSearch() {
               </div>
             )}
 
-          {query.trim().length >= 2 &&
+          {query.trim().length >= 1 &&
             !loading &&
             loaded &&
             filteredResults.length === 0 && (
@@ -343,7 +444,7 @@ function GlobalSearch() {
               </div>
             )}
 
-          {query.trim().length >= 2 && !loaded && !loading && (
+          {query.trim().length >= 1 && !loaded && !loading && (
             <div className="search-empty-state">
               <p>Search data could not be loaded. Please try again.</p>
               <button type="button" onClick={loadSearchData}>
