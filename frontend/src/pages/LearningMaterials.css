@@ -353,6 +353,7 @@
   border-top: 1px solid var(--color-border);
 }
 
+
 .material-complete-button,
 .material-completed-button {
   width: 100%;
@@ -372,14 +373,15 @@
 }
 
 .material-complete-button {
-  background: linear-gradient(135deg, #8060df, #6243c1);
+  background: linear-gradient(135deg, #2563eb, #1e40af);
   color: #ffffff;
+  border-color: #3b82f6;
   cursor: pointer;
 }
 
 .material-complete-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 7px 18px rgba(112, 83, 214, 0.3);
+  box-shadow: 0 7px 18px rgba(37, 99, 235, 0.3);
 }
 
 .material-complete-button:disabled {
@@ -388,11 +390,108 @@
 }
 
 .material-completed-button {
-  border-color: rgba(57, 201, 154, 0.2);
-  background: rgba(57, 201, 154, 0.1);
-  color: #39c99a;
+  border-color: rgba(52, 211, 153, 0.22);
+  background: rgba(16, 185, 129, 0.10);
+  color: #34d399;
   cursor: default;
 }
+
+/* PDF and video resource links */
+.material-resource-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 16px;
+  border: 1px solid #29436f;
+  border-radius: 9px;
+  background: #102044;
+  color: #bfdbfe;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.material-resource-link:hover {
+  background: #1e40af;
+  border-color: #3b82f6;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+
+/* Light theme - Wine / Burgundy */
+
+[data-theme="light"] .material-complete-button,
+[data-theme="light"] .material-completed-button {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 650;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+[data-theme="light"] .material-complete-button {
+  background: linear-gradient(135deg, #8b2942, #641b32);
+  color: #ffffff;
+  border-color: #9f3652;
+  cursor: pointer;
+}
+
+[data-theme="light"] .material-complete-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(139, 41, 66, 0.25);
+}
+
+[data-theme="light"] .material-complete-button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+[data-theme="light"] .material-completed-button {
+  border-color: rgba(16, 145, 105, 0.2);
+  background: rgba(16, 145, 105, 0.09);
+  color: #108f69;
+  cursor: default;
+}
+
+/* PDF and video links */
+
+[data-theme="light"] .material-resource-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 16px;
+  border: 1px solid #e5bdc8;
+  border-radius: 9px;
+  background: #f8e9ed;
+  color: #76243c;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .material-resource-link:hover {
+  background: #76243c;
+  border-color: #76243c;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 
 .materials-group-empty {
   padding: 22px;
@@ -810,3 +909,120 @@ html[data-theme="dark"] .materials-error {
 }
 
 /* Keep the existing mobile/tablet breakpoints and motion rules. */
+
+/* =========================================================
+   MATERIAL PREVIEW BUTTON RESET + THEME-AWARE CARD CONTENT
+   Fixes browser-default white button backgrounds visible in
+   the lesson / PDF / video preview panels.
+========================================================= */
+
+.learning-materials-page .material-open-area {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: none;
+  outline-offset: 4px;
+}
+
+.learning-materials-page .material-open-area:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.learning-materials-page .material-open-area:focus-visible {
+  outline: 2px solid var(--color-primary);
+  border-radius: 10px;
+}
+
+.learning-materials-page .material-open-area .material-card-top {
+  width: 100%;
+}
+
+.learning-materials-page .material-open-area .material-type {
+  margin-top: 1px;
+}
+
+.learning-materials-page .material-open-area h4 {
+  width: 100%;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.learning-materials-page .material-open-area > p {
+  width: 100%;
+  flex: 1 1 auto;
+  color: var(--color-text-muted);
+  text-align: left;
+}
+
+.learning-materials-page .material-open-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 2px;
+  color: var(--color-primary);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.learning-materials-page .material-open-area:hover .material-open-label {
+  gap: 12px;
+}
+
+html[data-theme="dark"] .learning-materials-page .material-open-area {
+  background: transparent;
+  color: #f5f7fc;
+}
+
+html[data-theme="dark"] .learning-materials-page .material-open-area h4 {
+  color: #f7f9ff;
+}
+
+html[data-theme="dark"] .learning-materials-page .material-open-area > p {
+  color: #aebbd2;
+}
+
+html[data-theme="dark"] .learning-materials-page .material-open-label {
+  color: #a9c7ff;
+}
+
+html[data-theme="light"] .learning-materials-page .material-open-area {
+  background: transparent;
+  color: #38202a;
+}
+
+html[data-theme="light"] .learning-materials-page .material-open-area h4 {
+  color: #4d1b2c;
+}
+
+html[data-theme="light"] .learning-materials-page .material-open-area > p {
+  color: #765b65;
+}
+
+html[data-theme="light"] .learning-materials-page .material-open-label {
+  color: #842b46;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learning-materials-page .material-open-label {
+    transition: none;
+  }
+}
