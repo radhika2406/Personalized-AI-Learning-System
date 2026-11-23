@@ -29,6 +29,10 @@ def create_learning_material(
             if material_data.content_url
             else None
         ),
+        content_status=material_data.content_status,
+        resource_verification_status=(
+            material_data.resource_verification_status
+        ),
         topic_id=material_data.topic_id
     )
 
