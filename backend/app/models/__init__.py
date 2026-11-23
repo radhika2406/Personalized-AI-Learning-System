@@ -12,3 +12,5 @@ from app.models.quiz_answer import QuizAnswer
 from app.models.topic_mastery import TopicMastery
 from app.models.course_enrollment import CourseEnrollment
 from app.models.recommendation import Recommendation
+from app.models.ai_conversation import AIConversation
+from app.models.ai_message import AIMessage
