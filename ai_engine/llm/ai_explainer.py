@@ -1,30 +1,25 @@
-"""AI Explainer module using standard library HTTP calls.
+"""AI Explainer module using Gemini API.
 
-Provides LLM-assisted explanations for incorrect quiz answers with bulletproof
-fallback templates when the LLM is unavailable, offline, or times out.
+Generates learner-friendly explanations for incorrect quiz answers.
+Uses deterministic fallback explanations whenever the LLM is unavailable
+or returns an invalid response.
 """
 
 import json
 import os
 import urllib.request
-import urllib.error
-from typing import Any
 
 
-def call_llm(prompt: str, timeout: int = 5) -> str | None:
-    """Isolated LLM caller using standard library urllib.
+def call_llm(prompt: str, timeout: int = 10) -> str | None:
+    """Call Gemini and return generated text, or None on failure."""
 
-    Reads API key from LLM_API_KEY environment variable.
-    Returns the generated response string, or None on failure, timeout, or missing key.
-    """
     api_key = os.environ.get("LLM_API_KEY")
     if not api_key or not api_key.strip():
         return None
 
-    # Endpoint URL (configurable or standard Gemini API REST endpoint)
-    # Using Gemini v1beta REST API as specified in README Tech Stack
     endpoint = (
-        f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+        "https://generativelanguage.googleapis.com/v1beta/models/"
+        "gemini-3.6-flash:generateContent"
     )
 
     payload = {
@@ -34,36 +29,56 @@ def call_llm(prompt: str, timeout: int = 5) -> str | None:
             }
         ],
         "generationConfig": {
+            "thinkingConfig": {"thinkingLevel": "minimal"},
             "temperature": 0.3,
-            "maxOutputTokens": 200,
+            "maxOutputTokens": 512,
         },
     }
 
     try:
-        req_data = json.dumps(payload).encode("utf-8")
-        req = urllib.request.Request(
+        request = urllib.request.Request(
             endpoint,
-            data=req_data,
-            headers={"Content-Type": "application/json"},
+            data=json.dumps(payload).encode("utf-8"),
+            headers={
+                "Content-Type": "application/json",
+                "x-goog-api-key": api_key,
+            },
             method="POST",
         )
 
-        with urllib.request.urlopen(req, timeout=timeout) as response:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
             if response.status != 200:
                 return None
-            res_body = response.read().decode("utf-8")
-            data = json.loads(res_body)
-            # Extract candidate text
-            candidates = data.get("candidates", [])
-            if candidates:
-                parts = candidates[0].get("content", {}).get("parts", [])
-                if parts:
-                    text = parts[0].get("text", "").strip()
-                    return text if text else None
+
+            data = json.loads(response.read().decode("utf-8"))
+
+        candidates = data.get("candidates", [])
+        if not candidates:
             return None
 
-    except (urllib.error.URLError, TimeoutError, Exception):
-        # Network drop, invalid key, HTTP error, or timeout -> graceful None fallback
+        candidate = candidates[0]
+
+        # Do not accept truncated or blocked responses.
+        if candidate.get("finishReason") != "STOP":
+            return None
+
+        parts = candidate.get("content", {}).get("parts", [])
+
+        # Collect visible text, ignoring internal thought parts.
+        visible_text = [
+            part["text"].strip()
+            for part in parts
+            if isinstance(part, dict)
+            and isinstance(part.get("text"), str)
+            and part["text"].strip()
+            and not part.get("thought", False)
+        ]
+
+        result = "\n".join(visible_text).strip()
+        return result if result else None
+
+    except Exception:
+        # Network errors, invalid API responses, and timeouts use fallback.
         return None
 
 
@@ -73,28 +88,30 @@ def explain_wrong_answer(
     correct_answer: str,
     explanation: str,
 ) -> str:
-    """Provide a friendly explanation of why an answer was wrong.
+    """Explain an incorrect answer, falling back to the supplied explanation."""
 
-    Falls back to a structured template built from the question's explanation field
-    if the LLM is absent or unavailable.
-    """
-    # Deterministic fallback template
     fallback_text = (
-        f"You selected '{chosen_answer}', but the correct answer is '{correct_answer}'. "
-        f"Explanation: {explanation}"
+        f"You selected '{chosen_answer}', but the correct answer is "
+        f"'{correct_answer}'. Explanation: {explanation}"
     )
 
     prompt = (
-        f"You are a helpful Python tutor for beginners.\n"
+        "You are a helpful Python tutor for beginners.\n"
+        "Explain the learner's mistake accurately and kindly.\n"
+        "Use only the information supported by the question and key concept.\n"
+        "Do not invent facts or change the correct answer.\n"
+        "Keep the explanation to 2 or 3 simple sentences.\n\n"
         f"Question: {question}\n"
-        f"The student incorrectly chose: {chosen_answer}\n"
-        f"The correct answer is: {correct_answer}\n"
+        f"Learner's incorrect answer: {chosen_answer}\n"
+        f"Correct answer: {correct_answer}\n"
         f"Key concept: {explanation}\n\n"
-        f"Explain clearly in 2 friendly sentences why '{chosen_answer}' is wrong and why '{correct_answer}' is right."
+        "Explain why the selected answer is incorrect and why the correct "
+        "answer is right."
     )
 
     llm_result = call_llm(prompt)
-    if llm_result and len(llm_result.strip()) > 0:
+
+    if llm_result and llm_result.strip():
         return llm_result.strip()
 
     return fallback_text
