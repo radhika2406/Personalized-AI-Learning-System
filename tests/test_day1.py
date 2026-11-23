@@ -4,6 +4,7 @@ from pathlib import Path
 
 from ai_engine.common.schemas import TOPICS, mastery_level
 from ai_engine.learner_analysis.profile import validate_profile
+from ai_engine.common.course_config import list_courses
 
 CONTRACTS = Path(__file__).resolve().parent.parent / "contracts"
 
@@ -49,6 +50,28 @@ class TestProfile(unittest.TestCase):
     def test_not_a_dict(self):
         self.assertEqual(validate_profile(None), ["profile must be a dictionary"])
 
+    def test_all_registered_courses_are_valid(self):
+        for course in list_courses():
+            with self.subTest(course=course):
+                profile = good_profile()
+                profile["course"] = course
+                self.assertEqual(validate_profile(profile), [])
+
+    def test_unknown_course_is_invalid(self):
+        profile = good_profile()
+        profile["course"] = "unknown_course"
+
+        errors = validate_profile(profile)
+
+        self.assertTrue(any("course" in error for error in errors))
+
+    def test_empty_course_is_invalid(self):
+        profile = good_profile()
+        profile["course"] = ""
+
+        errors = validate_profile(profile)
+
+        self.assertTrue(any("course" in error for error in errors))
 
 class TestMastery(unittest.TestCase):
     def test_levels(self):

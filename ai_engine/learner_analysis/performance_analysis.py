@@ -3,23 +3,26 @@
 performance_analysis.py
 
 Analyzes a learner's quiz performance.
+
+Quiz results must be supplied in chronological order
+(oldest first, newest last) for score_trend and improvement.
 """
+
 
 def analyze_performance(quiz_results):
     """
-    Analyze quiz results and calculate overall and
-    topic-wise performance.
+    Calculate overall and topic-wise performance.
 
-    Expected input:
-    [
-        {
-            "topic": "loops",
-            "score_pct": 75,
-            "correct": 3,
-            "total": 4,
-            "attempt": 1
-        }
-    ]
+    Returns:
+        total_quizzes
+        average_score
+        overall_accuracy
+        total_correct
+        total_questions
+        total_incorrect
+        topic_performance
+        score_trend
+        improvement
     """
 
     if not isinstance(quiz_results, list):
@@ -29,6 +32,7 @@ def analyze_performance(quiz_results):
         return {
             "total_quizzes": 0,
             "average_score": None,
+            "overall_accuracy": None,
             "total_correct": 0,
             "total_questions": 0,
             "total_incorrect": 0,
@@ -61,7 +65,11 @@ def analyze_performance(quiz_results):
         if not isinstance(topic, str) or not topic.strip():
             raise ValueError("Invalid topic")
 
-        if isinstance(score, bool) or not isinstance(score, (int, float)) or not 0 <= score <= 100:
+        if (
+            isinstance(score, bool)
+            or not isinstance(score, (int, float))
+            or not 0 <= score <= 100
+        ):
             raise ValueError("Invalid score_pct")
 
         if (
@@ -74,6 +82,14 @@ def analyze_performance(quiz_results):
             or correct > total
         ):
             raise ValueError("Invalid correct or total value")
+
+        # Verify that the percentage matches the quiz result.
+        expected_score = round((correct / total) * 100)
+
+        if score != expected_score:
+            raise ValueError(
+            "score_pct does not match correct and total"
+        )
 
         total_correct += correct
         total_questions += total
@@ -97,6 +113,10 @@ def analyze_performance(quiz_results):
 
     average_score = round(sum(scores) / len(scores), 2)
 
+    overall_accuracy = round(
+        (total_correct / total_questions) * 100, 2
+    )
+
     improvement = (
         round(scores[-1] - scores[0], 2)
         if len(scores) > 1
@@ -106,6 +126,7 @@ def analyze_performance(quiz_results):
     return {
         "total_quizzes": len(quiz_results),
         "average_score": average_score,
+        "overall_accuracy": overall_accuracy,
         "total_correct": total_correct,
         "total_questions": total_questions,
         "total_incorrect": total_questions - total_correct,

@@ -1,3 +1,4 @@
+
 {
   "learner_id": "learner_nothing_assessed",
   "course": "python",
@@ -10,17 +11,26 @@
     "loops": null,
     "functions": null,
     "lists": null,
-    "dictionaries": null
+    "dictionaries": null,
+    "tuples_and_sets": null,
+    "strings": null,
+    "file_handling": null,
+    "exception_handling": null,
+    "oop_classes": null,
+    "inheritance_polymorphism": null,
+    "modules_and_packages": null,
+    "comprehensions": null,
+    "iterators_and_generators": null,
+    "decorators_and_closures": null
   },
   "weak_topics": [],
   "strong_topics": [],
-  "not_assessed": ["variables", "conditions", "loops", "functions", "lists", "dictionaries"],
-  "topics": {
-    "variables": { "score": null, "mastery_level": "not assessed" },
-    "conditions": { "score": null, "mastery_level": "not assessed" },
-    "loops": { "score": null, "mastery_level": "not assessed" },
-    "functions": { "score": null, "mastery_level": "not assessed" },
-    "lists": { "score": null, "mastery_level": "not assessed" },
-    "dictionaries": { "score": null, "mastery_level": "not assessed" }
-  }
+  "not_assessed": [
+    "variables", "conditions", "loops", "functions",
+    "lists", "dictionaries", "tuples_and_sets", "strings",
+    "file_handling", "exception_handling", "oop_classes",
+    "inheritance_polymorphism", "modules_and_packages",
+    "comprehensions", "iterators_and_generators",
+    "decorators_and_closures"
+  ]
 }

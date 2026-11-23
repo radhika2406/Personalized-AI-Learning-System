@@ -251,7 +251,7 @@
     ],
     "prerequisites": [
       "correlation_covariance",
-      "data_preprocessing"
+      "data_cleaning_transformation"
     ]
   }
 ]

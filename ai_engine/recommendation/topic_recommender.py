@@ -171,15 +171,16 @@ def load_topics_metadata(
     return topics
 
 
+
 def _validate_metadata(
     topics_metadata: list[dict[str, Any]],
 ) -> None:
-    """Validate metadata and reject invalid prerequisite dependencies."""
+    """Validate course-specific topic IDs and prerequisite dependencies."""
 
     if not isinstance(topics_metadata, list) or not topics_metadata:
         raise ValueError("Topics metadata must be a non-empty list.")
 
-    topic_ids = []
+    topic_keys = []
 
     for topic in topics_metadata:
         if not isinstance(topic, dict):
@@ -188,6 +189,7 @@ def _validate_metadata(
             )
 
         topic_id = topic.get("topic_id")
+        course = topic.get("course") or "python"
 
         if not isinstance(topic_id, str) or not topic_id.strip():
             raise ValueError("Every topic must have a valid topic_id.")
@@ -197,7 +199,14 @@ def _validate_metadata(
                 f"Topic ID '{topic_id}' cannot contain surrounding spaces."
             )
 
-        topic_ids.append(topic_id)
+        if not isinstance(course, str) or not course.strip():
+            raise ValueError(
+                f"Invalid course for topic '{topic_id}'."
+            )
+
+        course = course.strip().lower()
+        topic_key = (course, topic_id)
+        topic_keys.append(topic_key)
 
         order = topic.get("order")
         minutes = topic.get("est_minutes")
@@ -208,7 +217,9 @@ def _validate_metadata(
             or not isinstance(order, int)
             or order <= 0
         ):
-            raise ValueError(f"Invalid order for topic '{topic_id}'.")
+            raise ValueError(
+                f"Invalid order for topic '{course}/{topic_id}'."
+            )
 
         if (
             isinstance(minutes, bool)
@@ -216,12 +227,12 @@ def _validate_metadata(
             or minutes <= 0
         ):
             raise ValueError(
-                f"Invalid estimated minutes for topic '{topic_id}'."
+                f"Invalid estimated minutes for topic '{course}/{topic_id}'."
             )
 
         if not isinstance(prerequisites, list):
             raise ValueError(
-                f"Prerequisites for '{topic_id}' must be a list."
+                f"Prerequisites for '{course}/{topic_id}' must be a list."
             )
 
         if any(
@@ -229,49 +240,57 @@ def _validate_metadata(
             for item in prerequisites
         ):
             raise ValueError(
-                f"Invalid prerequisite entry for topic '{topic_id}'."
+                f"Invalid prerequisite entry for '{course}/{topic_id}'."
             )
 
         if len(prerequisites) != len(set(prerequisites)):
             raise ValueError(
-                f"Duplicate prerequisites found for topic '{topic_id}'."
+                f"Duplicate prerequisites found for '{course}/{topic_id}'."
             )
 
-    if len(topic_ids) != len(set(topic_ids)):
-        raise ValueError("Duplicate topic IDs found in metadata.")
+    if len(topic_keys) != len(set(topic_keys)):
+        raise ValueError(
+            "Duplicate topic IDs found within the same course."
+        )
 
-    known_topics = set(topic_ids)
+    known_topics = set(topic_keys)
 
     for topic in topics_metadata:
         topic_id = topic["topic_id"]
+        course = (topic.get("course") or "python").strip().lower()
+        topic_key = (course, topic_id)
 
         for prerequisite in topic["prerequisites"]:
-            if prerequisite not in known_topics:
+            prerequisite_key = (course, prerequisite)
+
+            if prerequisite_key not in known_topics:
                 raise ValueError(
                     f"Unknown prerequisite '{prerequisite}' "
-                    f"for topic '{topic_id}'."
+                    f"for topic '{course}/{topic_id}'."
                 )
 
             if prerequisite == topic_id:
                 raise ValueError(
-                    f"Topic '{topic_id}' cannot be its own prerequisite."
+                    f"Topic '{course}/{topic_id}' "
+                    "cannot be its own prerequisite."
                 )
 
-    # Detect circular dependencies using topological sorting.
-    indegree = {topic_id: 0 for topic_id in topic_ids}
-    dependents = {topic_id: [] for topic_id in topic_ids}
+    # Detect circular dependencies independently within each course.
+    indegree = {key: 0 for key in topic_keys}
+    dependents = {key: [] for key in topic_keys}
 
     for topic in topics_metadata:
-        topic_id = topic["topic_id"]
+        course = (topic.get("course") or "python").strip().lower()
+        topic_key = (course, topic["topic_id"])
 
         for prerequisite in topic["prerequisites"]:
-            indegree[topic_id] += 1
-            dependents[prerequisite].append(topic_id)
+            prerequisite_key = (course, prerequisite)
+            indegree[topic_key] += 1
+            dependents[prerequisite_key].append(topic_key)
 
     queue = [
-        topic_id
-        for topic_id in topic_ids
-        if indegree[topic_id] == 0
+        key for key in topic_keys
+        if indegree[key] == 0
     ]
 
     visited = 0
@@ -286,8 +305,10 @@ def _validate_metadata(
             if indegree[dependent] == 0:
                 queue.append(dependent)
 
-    if visited != len(topic_ids):
-        raise ValueError("Circular prerequisite dependency detected.")
+    if visited != len(topic_keys):
+        raise ValueError(
+            "Circular prerequisite dependency detected."
+        )
 
 
 def _urgency_key(

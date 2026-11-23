@@ -1,12 +1,14 @@
+
 """
 profile.py
 
-Checks a new learner profile BEFORE anything else uses it.
-Returns a list of error messages. An empty list means the profile is valid.
+Validates a learner profile before it is used by other modules.
+Supports all registered courses.
+Returns a list of error messages. An empty list means valid.
 """
 
+from ai_engine.common.course_config import get_course
 from ai_engine.common.schemas import (
-    COURSE,
     LEVELS,
     MIN_DAILY_MINUTES,
     MAX_DAILY_MINUTES,
@@ -14,28 +16,35 @@ from ai_engine.common.schemas import (
 
 
 def validate_profile(profile):
-    """Return a list of error strings. [] means the profile is valid."""
+    """Return a list of validation errors. [] means valid."""
+
     if not isinstance(profile, dict):
         return ["profile must be a dictionary"]
 
     errors = []
 
+    # Learner ID
     learner_id = profile.get("learner_id")
     if not isinstance(learner_id, str) or not learner_id.strip():
         errors.append("learner_id is missing")
 
-    if profile.get("course") != COURSE:
-        errors.append(f"course must be '{COURSE}'")
+    # Course: accept any registered course
+    course = profile.get("course")
+    if not isinstance(course, str) or not get_course(course):
+        errors.append("course must be a registered course")
 
+    # Learning goal
     goal = profile.get("goal")
     if not isinstance(goal, str) or not goal.strip():
         errors.append("goal is missing")
 
+    # Self-reported learner level
     if profile.get("level") not in LEVELS:
         errors.append("level must be beginner, intermediate or advanced")
 
+    # Daily study time
     minutes = profile.get("daily_minutes")
-    # bool is a subtype of int in Python, so True would sneak through without this check
+
     if (
         isinstance(minutes, bool)
         or not isinstance(minutes, int)
@@ -43,7 +52,8 @@ def validate_profile(profile):
         or minutes > MAX_DAILY_MINUTES
     ):
         errors.append(
-            f"daily_minutes must be a whole number from {MIN_DAILY_MINUTES} to {MAX_DAILY_MINUTES}"
+            f"daily_minutes must be a whole number from "
+            f"{MIN_DAILY_MINUTES} to {MAX_DAILY_MINUTES}"
         )
 
     return errors

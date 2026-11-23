@@ -1,3 +1,4 @@
+
 {
   "learner_id": "learner_all_weak",
   "course": "python",
@@ -10,9 +11,36 @@
     "loops": 33,
     "functions": 15,
     "lists": 10,
-    "dictionaries": 30
+    "dictionaries": 30,
+    "tuples_and_sets": 25,
+    "strings": 30,
+    "file_handling": 20,
+    "exception_handling": 25,
+    "oop_classes": 30,
+    "inheritance_polymorphism": 20,
+    "modules_and_packages": 25,
+    "comprehensions": 30,
+    "iterators_and_generators": 20,
+    "decorators_and_closures": 25
   },
-  "weak_topics": ["variables", "conditions", "loops", "functions", "lists", "dictionaries"],
+  "weak_topics": [
+    "variables",
+    "conditions",
+    "loops",
+    "functions",
+    "lists",
+    "dictionaries",
+    "tuples_and_sets",
+    "strings",
+    "file_handling",
+    "exception_handling",
+    "oop_classes",
+    "inheritance_polymorphism",
+    "modules_and_packages",
+    "comprehensions",
+    "iterators_and_generators",
+    "decorators_and_closures"
+  ],
   "strong_topics": [],
   "not_assessed": []
 }

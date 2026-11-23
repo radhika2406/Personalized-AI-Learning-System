@@ -1,7 +1,7 @@
 
 """Unit tests for the topic recommender engine.
 
-Tests all 8 learner scenarios and verifies recommendation ordering,
+Tests learner scenarios and verifies recommendation ordering,
 activities, estimated durations, reasons, prerequisite constraints,
 and mastery thresholds.
 """
@@ -27,6 +27,26 @@ from ai_engine.recommendation.topic_recommender import (
 )
 
 
+PYTHON_TOPIC_IDS = [
+    "variables",
+    "conditions",
+    "loops",
+    "functions",
+    "lists",
+    "dictionaries",
+    "tuples_and_sets",
+    "strings",
+    "file_handling",
+    "exception_handling",
+    "oop_classes",
+    "inheritance_polymorphism",
+    "modules_and_packages",
+    "comprehensions",
+    "iterators_and_generators",
+    "decorators_and_closures",
+]
+
+
 class TestConfigAndMastery(unittest.TestCase):
     """Test mastery level calculations and activity mappings."""
 
@@ -40,22 +60,18 @@ class TestConfigAndMastery(unittest.TestCase):
     def test_mastery_thresholds(self):
         """Test mastery thresholds defined in the shared schema."""
 
-        # Weak: 0–39
         self.assertEqual(get_mastery_level(0), LEVEL_WEAK)
         self.assertEqual(get_mastery_level(39), LEVEL_WEAK)
         self.assertEqual(get_mastery_level(39.9), LEVEL_WEAK)
 
-        # Developing: 40–59
         self.assertEqual(get_mastery_level(40), LEVEL_DEVELOPING)
         self.assertEqual(get_mastery_level(59), LEVEL_DEVELOPING)
         self.assertEqual(get_mastery_level(59.9), LEVEL_DEVELOPING)
 
-        # Good: 60–79
         self.assertEqual(get_mastery_level(60), LEVEL_GOOD)
         self.assertEqual(get_mastery_level(79), LEVEL_GOOD)
         self.assertEqual(get_mastery_level(79.9), LEVEL_GOOD)
 
-        # Strong: 80–100
         self.assertEqual(get_mastery_level(80), LEVEL_STRONG)
         self.assertEqual(get_mastery_level(100), LEVEL_STRONG)
 
@@ -76,28 +92,27 @@ class TestTopicsMetadata(unittest.TestCase):
     def test_topics_csv_structure(self):
         topics = load_topics_metadata()
 
-        expected_ids = [
-            "variables",
-            "conditions",
-            "loops",
-            "functions",
-            "lists",
-            "dictionaries",
+        python_topics = [
+            topic for topic in topics
+            if topic.get("course") == "python"
         ]
 
-        topic_ids = [topic["topic_id"] for topic in topics]
+        python_topic_ids = [
+            topic["topic_id"] for topic in python_topics
+        ]
 
-        self.assertEqual(len(topics), 6)
-        self.assertEqual(topic_ids, expected_ids)
+        self.assertEqual(len(topics), 192)
+        self.assertEqual(len(python_topics), 16)
+        self.assertEqual(python_topic_ids, PYTHON_TOPIC_IDS)
 
         loops_info = next(
-            topic for topic in topics
+            topic for topic in python_topics
             if topic["topic_id"] == "loops"
         )
         self.assertIn("conditions", loops_info["prerequisites"])
 
         dictionaries_info = next(
-            topic for topic in topics
+            topic for topic in python_topics
             if topic["topic_id"] == "dictionaries"
         )
         self.assertIn("lists", dictionaries_info["prerequisites"])
@@ -147,9 +162,50 @@ class TestTopicsMetadata(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "own prerequisite"):
             _validate_metadata(topics)
 
+    def test_duplicate_topic_ids_within_same_course_rejected(self):
+        topics = [
+            {
+                "topic_id": "variables",
+                "course": "python",
+                "order": 1,
+                "prerequisites": [],
+                "est_minutes": 20,
+            },
+            {
+                "topic_id": "variables",
+                "course": "python",
+                "order": 2,
+                "prerequisites": [],
+                "est_minutes": 20,
+            },
+        ]
+
+        with self.assertRaisesRegex(ValueError, "Duplicate"):
+            _validate_metadata(topics)
+
+    def test_same_topic_id_allowed_in_different_courses(self):
+        topics = [
+            {
+                "topic_id": "loops",
+                "course": "python",
+                "order": 1,
+                "prerequisites": [],
+                "est_minutes": 20,
+            },
+            {
+                "topic_id": "loops",
+                "course": "java",
+                "order": 1,
+                "prerequisites": [],
+                "est_minutes": 20,
+            },
+        ]
+
+        _validate_metadata(topics)
+
 
 class TestEightLearners(unittest.TestCase):
-    """Test recommendations for all 8 learner scenarios."""
+    """Test recommendations for learner scenarios."""
 
     @classmethod
     def setUpClass(cls):
@@ -163,7 +219,7 @@ class TestEightLearners(unittest.TestCase):
 
     @staticmethod
     def _activity_map(recommendations):
-        """Convert dictionary recommendations into topic-activity mapping."""
+        """Convert recommendations into topic-activity mapping."""
         return {
             item["topic_id"]: item["activity"]
             for item in recommendations
@@ -206,7 +262,7 @@ class TestEightLearners(unittest.TestCase):
         data = self._load_learner("learner_all_weak.json")
         recommendations = recommend_topics(data)
 
-        self.assertEqual(len(recommendations), 6)
+        self.assertEqual(len(recommendations), 16)
 
         for item in recommendations:
             self.assertEqual(item["activity"], "relearn")
@@ -225,7 +281,7 @@ class TestEightLearners(unittest.TestCase):
         data = self._load_learner("learner_all_strong.json")
         recommendations = recommend_topics(data)
 
-        self.assertEqual(len(recommendations), 6)
+        self.assertEqual(len(recommendations), 16)
 
         for item in recommendations:
             self.assertEqual(item["activity"], "advance")
@@ -253,24 +309,16 @@ class TestEightLearners(unittest.TestCase):
         )
 
     def test_learner_nothing_assessed(self):
-        """All topics should be assessed in prerequisite order."""
+        """All Python topics should be assessed in prerequisite order."""
 
         data = self._load_learner("learner_nothing_assessed.json")
         recommendations = recommend_topics(data)
 
-        expected_topics = {
-            "variables",
-            "conditions",
-            "loops",
-            "functions",
-            "lists",
-            "dictionaries",
-        }
-
+        expected_topics = set(PYTHON_TOPIC_IDS)
         order = self._topic_order(recommendations)
 
         self.assertEqual(set(order), expected_topics)
-        self.assertEqual(len(order), 6)
+        self.assertEqual(len(order), 16)
 
         self.assertLess(order.index("variables"), order.index("conditions"))
         self.assertLess(order.index("conditions"), order.index("loops"))
@@ -305,7 +353,7 @@ class TestEightLearners(unittest.TestCase):
         self.assertEqual(rec_dict["conditions"], "revise")
 
     def test_learner_one_weak(self):
-        """A weak loops topic should be recommended first when prerequisites are mastered."""
+        """A weak loops topic should be recommended first."""
 
         data = self._load_learner("learner_one_weak.json")
         recommendations = recommend_topics(data)
@@ -317,7 +365,7 @@ class TestEightLearners(unittest.TestCase):
             self.assertEqual(item["activity"], "advance")
 
     def test_learner_prereq_gap(self):
-        """An unassessed prerequisite must be scheduled before a weak dependent topic."""
+        """An unassessed prerequisite must precede a weak dependent topic."""
 
         data = self._load_learner("learner_prereq_gap.json")
         recommendations = recommend_topics(data)

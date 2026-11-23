@@ -1,3 +1,4 @@
+
 {
   "learner_id": "learner_one_weak",
   "course": "python",
@@ -10,17 +11,26 @@
     "loops": 25,
     "functions": 85,
     "lists": 89,
-    "dictionaries": 87
+    "dictionaries": 87,
+    "tuples_and_sets": 90,
+    "strings": 88,
+    "file_handling": 85,
+    "exception_handling": 90,
+    "oop_classes": 92,
+    "inheritance_polymorphism": 89,
+    "modules_and_packages": 90,
+    "comprehensions": 88,
+    "iterators_and_generators": 86,
+    "decorators_and_closures": 85
   },
   "weak_topics": ["loops"],
-  "strong_topics": ["variables", "conditions", "functions", "lists", "dictionaries"],
-  "not_assessed": [],
-  "topics": {
-    "variables": { "score": 90, "mastery_level": "strong" },
-    "conditions": { "score": 88, "mastery_level": "strong" },
-    "loops": { "score": 25, "mastery_level": "weak" },
-    "functions": { "score": 91, "mastery_level": "strong" },
-    "lists": { "score": 89, "mastery_level": "strong" },
-    "dictionaries": { "score": 92, "mastery_level": "strong" }
-  }
+  "strong_topics": [
+    "variables", "conditions", "functions", "lists",
+    "dictionaries", "tuples_and_sets", "strings",
+    "file_handling", "exception_handling", "oop_classes",
+    "inheritance_polymorphism", "modules_and_packages",
+    "comprehensions", "iterators_and_generators",
+    "decorators_and_closures"
+  ],
+  "not_assessed": []
 }
