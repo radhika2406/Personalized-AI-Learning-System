@@ -69,6 +69,208 @@ class TestAiExplainer(unittest.TestCase):
             with patch("urllib.request.urlopen", side_effect=TimeoutError("Connection timed out")):
                 result = call_llm("test prompt")
                 self.assertIsNone(result)
+    def test_call_llm_parses_valid_gemini_response(self):
+        """A valid Gemini response should return its generated text."""
+        mock_response = {
+            "candidates": [
+                {
+                    "finishReason": "STOP",
+                    "content": {
+                        "parts": [{"text": "Python uses def to define functions."}]
+                    }
+                }
+            ]
+        }
+
+        class MockHttpResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def read(self):
+                import json
+                return json.dumps(mock_response).encode("utf-8")
+
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake_key"}):
+            with patch("urllib.request.urlopen", return_value=MockHttpResponse()):
+                result = call_llm("Explain Python functions.")
+
+        self.assertEqual(result, "Python uses def to define functions.")
+
+    def test_call_llm_handles_malformed_json(self):
+        """Malformed JSON from Gemini should return None safely."""
+
+        class MockHttpResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def read(self):
+                return b"not valid json"
+
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake_key"}):
+            with patch("urllib.request.urlopen", return_value=MockHttpResponse()):
+                result = call_llm("Test prompt")
+
+        self.assertIsNone(result)
+
+    def test_call_llm_handles_empty_candidates(self):
+        """An empty Gemini candidates list should return None."""
+
+        class MockHttpResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def read(self):
+                return b'{"candidates": []}'
+
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake_key"}):
+            with patch("urllib.request.urlopen", return_value=MockHttpResponse()):
+                result = call_llm("Test prompt")
+
+        self.assertIsNone(result)
+
+
+    def test_call_llm_handles_multiple_text_parts(self):
+        """Multiple visible Gemini text parts should be combined."""
+        mock_response = {
+            "candidates": [{
+                "finishReason": "STOP",
+                "content": {
+                    "parts": [
+                        {"text": "Python uses def"},
+                        {"text": " to define functions."}
+                    ]
+                }
+            }]
+        }
+
+        class MockHttpResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def read(self):
+                import json
+                return json.dumps(mock_response).encode("utf-8")
+
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake_key"}):
+            with patch("urllib.request.urlopen", return_value=MockHttpResponse()):
+                result = call_llm("Explain Python functions.")
+
+        self.assertEqual(result, "Python uses def\nto define functions.")
+
+    def test_call_llm_ignores_thought_parts(self):
+        """Internal thought parts should not appear in the returned answer."""
+        mock_response = {
+            "candidates": [{
+                "finishReason": "STOP",
+                "content": {
+                    "parts": [
+                        {"text": "Internal reasoning", "thought": True},
+                        {"text": "Python uses def to define functions."}
+                    ]
+                }
+            }]
+        }
+
+        class MockHttpResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def read(self):
+                import json
+                return json.dumps(mock_response).encode("utf-8")
+
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake_key"}):
+            with patch("urllib.request.urlopen", return_value=MockHttpResponse()):
+                result = call_llm("Explain Python functions.")
+
+        self.assertEqual(result, "Python uses def to define functions.")
+
+    def test_call_llm_rejects_truncated_response(self):
+        """A response stopped by the token limit should return None."""
+        mock_response = {
+            "candidates": [{
+                "finishReason": "MAX_TOKENS",
+                "content": {
+                    "parts": [{"text": "Incomplete explanation"}]
+                }
+            }]
+        }
+
+        class MockHttpResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def read(self):
+                import json
+                return json.dumps(mock_response).encode("utf-8")
+
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake_key"}):
+            with patch("urllib.request.urlopen", return_value=MockHttpResponse()):
+                result = call_llm("Explain Python functions.")
+
+        self.assertIsNone(result)
+
+    def test_call_llm_rejects_thought_only_response(self):
+        """A response containing only internal thoughts should return None."""
+        mock_response = {
+            "candidates": [{
+                "finishReason": "STOP",
+                "content": {
+                    "parts": [
+                        {"text": "Internal reasoning", "thought": True}
+                    ]
+                }
+            }]
+        }
+
+        class MockHttpResponse:
+            status = 200
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def read(self):
+                import json
+                return json.dumps(mock_response).encode("utf-8")
+
+        with patch.dict(os.environ, {"LLM_API_KEY": "fake_key"}):
+            with patch("urllib.request.urlopen", return_value=MockHttpResponse()):
+                result = call_llm("Explain Python functions.")
+
+        self.assertIsNone(result)
 
 
 if __name__ == "__main__":

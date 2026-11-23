@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from sqlalchemy.orm import Session
 
 from app.services import topic_mastery_service
+from ai_engine.llm.ai_explainer import explain_wrong_answer
 from app.models.quiz import Quiz
 from app.models.question import Question
 from app.models.quiz_attempt import QuizAttempt
@@ -94,7 +95,11 @@ def submit_quiz(db: Session, user_id: int, quiz_id: int, submission):
     return attempt
 
 
-def build_attempt_review(db: Session, attempt: QuizAttempt):
+def build_attempt_review(
+    db: Session,
+    attempt: QuizAttempt,
+    include_ai_explanations: bool = False,
+):
     answers = db.query(QuizAnswer).filter(
         QuizAnswer.attempt_id == attempt.id
     ).all()
@@ -114,6 +119,45 @@ def build_attempt_review(db: Session, attempt: QuizAttempt):
         if not question:
             continue
 
+        is_correct = (
+            answer.selected_option == question.correct_option
+        )
+
+        fallback_explanation = (
+            question.explanation
+            or "Compare your selected answer with the correct answer "
+               "to understand the concept."
+        )
+        review_explanation = fallback_explanation
+
+        if include_ai_explanations and not is_correct:
+            options = {
+                "A": question.option_a,
+                "B": question.option_b,
+                "C": question.option_c,
+                "D": question.option_d,
+            }
+
+            chosen_answer = options.get(
+                answer.selected_option,
+                answer.selected_option,
+            )
+
+            correct_answer = options.get(
+                question.correct_option,
+                question.correct_option,
+            )
+
+            try:
+                review_explanation = explain_wrong_answer(
+                    question=question.question_text,
+                    chosen_answer=chosen_answer,
+                    correct_answer=correct_answer,
+                    explanation=fallback_explanation,
+                )
+            except Exception:
+                review_explanation = fallback_explanation
+
         review.append({
             "question_id": question.id,
             "question_text": question.question_text,
@@ -123,14 +167,11 @@ def build_attempt_review(db: Session, attempt: QuizAttempt):
             "option_d": question.option_d,
             "selected_option": answer.selected_option,
             "correct_option": question.correct_option,
-            "is_correct": (
-                answer.selected_option == question.correct_option
-            ),
-            "explanation": question.explanation,
+            "is_correct": is_correct,
+            "explanation": review_explanation,
         })
 
     return review
-
 
 def get_attempt_by_id(db: Session, attempt_id: int, user_id: int):
     return db.query(QuizAttempt).filter(
@@ -201,5 +242,9 @@ def get_attempt_review(db: Session, attempt_id: int, user_id: int):
 
     return {
         "attempt": attempt,
-        "review": build_attempt_review(db, attempt),
+        "review": build_attempt_review(
+            db,
+            attempt,
+            include_ai_explanations=True,
+        ),
     }
