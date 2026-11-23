@@ -64,6 +64,10 @@ def get_learning_path(
                 "material_id": material.id,
                 "title": material.title,
                 "material_type": material.material_type,
+                "content_status": material.content_status,
+                "resource_verification_status": (
+                    material.resource_verification_status
+                ),
                 "status": status
             })
 

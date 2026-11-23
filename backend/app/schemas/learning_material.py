@@ -12,6 +12,16 @@ class LearningMaterialCreate(BaseModel):
     content_text: str | None = None
     content_url: HttpUrl | None = None
 
+    content_status: str = Field(
+        default="Needs lesson content",
+        max_length=50
+    )
+
+    resource_verification_status: str = Field(
+        default="Needs link verification",
+        max_length=50
+    )
+
     topic_id: int = Field(gt=0)
 
 
@@ -22,6 +32,8 @@ class LearningMaterialResponse(BaseModel):
     material_type: str
     content_text: str | None
     content_url: str | None
+    content_status: str
+    resource_verification_status: str
     topic_id: int
 
     model_config = {"from_attributes": True}

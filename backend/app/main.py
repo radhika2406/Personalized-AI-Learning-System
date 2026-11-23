@@ -14,6 +14,7 @@ from app.routers import course_enrollment
 from app.routers import dashboard
 from app.routers import recommendation
 from app.routers import learning_path
+from app.routers import ai_tutor
 from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 
@@ -50,6 +51,7 @@ app.include_router(course_enrollment.router)
 app.include_router(dashboard.router)
 app.include_router(recommendation.router)
 app.include_router(learning_path.router)
+app.include_router(ai_tutor.router)
 
 @app.get("/")
 def root():

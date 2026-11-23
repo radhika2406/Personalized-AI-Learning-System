@@ -21,6 +21,18 @@ class LearningMaterial(Base):
 
     content_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
 
+    content_status: Mapped[str] = mapped_column(
+        String(50),
+        default="Needs lesson content",
+        nullable=False
+    )
+
+    resource_verification_status: Mapped[str] = mapped_column(
+        String(50),
+        default="Needs link verification",
+        nullable=False
+    )
+
     topic_id: Mapped[int] = mapped_column(
         ForeignKey("topics.id"),
         nullable=False
