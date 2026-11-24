@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import {
   LayoutDashboard,
+  Bot,
   BookOpen,
   FileText,
   ClipboardList,
@@ -35,6 +36,7 @@ function DashboardLayout({ title, subtitle, children }) {
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { name: "My Courses", path: "/courses", icon: BookOpen },
     { name: "Learning Materials", path: "/materials", icon: FileText },
+    { name: "AI Tutor", path: "/ai-tutor", icon: Bot },
     { name: "Quizzes", path: "/quizzes", icon: ClipboardList },
     { name: "Quiz History", path: "/quiz-history", icon: ClipboardList },
     { name: "Recommendations", path: "/recommendations", icon: Lightbulb },

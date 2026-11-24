@@ -17,6 +17,7 @@ import QuizHistory from "./pages/QuizHistory";
 import Recommendations from "./pages/Recommendations";
 import Profile from "./pages/Profile";
 import LearningPath from "./pages/LearningPath";
+import AITutor from "./pages/AITutor";
 import CategoryCourses from "./pages/CategoryCourses";
 
 import { ThemeProvider } from "./ThemeContext";
@@ -87,6 +88,7 @@ function App() {
               <Route path="/recommendations" element={<Recommendations />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/learning-path" element={<LearningPath />} />
+              <Route path="/ai-tutor" element={<AITutor />} />
             </Route>
           </Routes>
         </BrowserRouter>
